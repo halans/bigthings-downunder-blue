@@ -547,8 +547,8 @@ function buildFilters() {
   const g = document.createElement('div'); g.className = 'fgroup';
   g.innerHTML = '<p class="flabel"><span>Honesty settings</span></p>';
   const opts = [
-    ['hideGone','Hide the dead ones — demolished, removed, or gone from their spot'],
-    ['exactOnly','Only pinpointed pins — hide the ones placed at their town’s centre'],
+    ['hideGone','Hide the dead ones (demolished, removed, or gone from their spot)'],
+    ['exactOnly','Only pinpointed pins (hide the ones placed at their town’s centre)'],
   ];
   for (const [key, text] of opts) {
     const lab = document.createElement('label'); lab.className = 'switch';
