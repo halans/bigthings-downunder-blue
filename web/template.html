@@ -114,6 +114,16 @@ a{color:var(--sky)}
   font-variant-numeric:tabular-nums;box-shadow:0 3px 7px rgba(0,0,0,.3);
 }
 .leaflet-bar a{border-radius:0}
+/* Place-name labels: opt in (labels-on) and only past a zoom worth reading
+   at (labels-zoom) — 477 permanent tooltips at the continent view would be
+   unreadable clutter, not a feature. */
+.pinlabel{
+  background:var(--paper);border:1.5px solid var(--ink);border-radius:7px;
+  padding:1px 7px;font-size:11.5px;font-weight:700;color:var(--ink);
+  box-shadow:0 1px 0 var(--ink);white-space:nowrap;
+}
+.pinlabel::before{border-top-color:var(--ink)}
+#map:not(.labels-on) .pinlabel,#map.labels-on:not(.labels-zoom) .pinlabel{display:none}
 #mapnote{
   position:absolute;left:10px;bottom:10px;z-index:400;background:rgba(255,253,247,.93);
   border:1.5px solid var(--ink);border-radius:9px;padding:5px 9px;font-size:11px;font-weight:600;
@@ -391,6 +401,17 @@ requestAnimationFrame(() => {
 if (!PHONE) L.control.zoom({ position:'bottomright' }).addTo(map);
 const attribution = L.control.attribution({ position:'bottomright', prefix:false }).addTo(map);
 
+/**
+ * Place-name labels are opt-in (see the "Show place names" switch) and, even
+ * then, only past a zoom worth reading one at — at the continent view every
+ * one of 477 towns overlapping is worse than the map they're meant to help.
+ */
+const LABEL_ZOOM = 8;
+const mapEl = document.getElementById('map');
+const syncLabelZoom = () => mapEl.classList.toggle('labels-zoom', map.getZoom() >= LABEL_ZOOM);
+map.on('zoomend', syncLabelZoom);
+syncLabelZoom();
+
 if (MODE === 'offline') {
   // Basemap tiles are fetched per view, so no bundle can contain them. The
   // simplified Natural Earth outline keeps the page legible as a map of
@@ -435,11 +456,17 @@ function iconFor(t) {
   });
 }
 
+/** Short place name for the on-map label — the town, not the full address. */
+function placeLabel(t) {
+  return t.town || String(t.location || '').split(',')[0].trim() || t.stateName;
+}
+
 const markers = new Map();
 for (const t of THINGS) {
   if (t.lat == null) continue;
   const m = L.marker([t.lat, t.lng], { icon:iconFor(t), title:t.name, riseOnHover:true, keyboard:true });
   m.on('click', () => openDetail(t.id, false));
+  m.bindTooltip(esc(placeLabel(t)), { permanent:true, direction:'top', offset:[0,-30], className:'pinlabel', interactive:false });
   markers.set(t.id, m);
 }
 
@@ -556,6 +583,14 @@ function buildFilters() {
   mk('State / territory', 'state', STATES, (s) => ({ label:s }), F.states);
   mk('What is it', 'cat', Object.keys(CATS), (c) => ({ label:CATS[c].label, emoji:CATS[c].emoji, dot:CATS[c].colour }), F.cats);
   mk('When it went up', 'era', ERAS, (e) => ({ label:e.replace(/ \(.*\)/,'') + (e === 'unknown' ? '' : ' · ' + (e.match(/\((.*)\)/)||[])[1]) }), F.eras);
+
+  const dg = document.createElement('div'); dg.className = 'fgroup';
+  dg.innerHTML = '<p class="flabel"><span>Map display</span></p>';
+  const dlab = document.createElement('label'); dlab.className = 'switch';
+  const dcb = document.createElement('input'); dcb.type = 'checkbox';
+  dcb.addEventListener('change', () => mapEl.classList.toggle('labels-on', dcb.checked));
+  dlab.appendChild(dcb); dlab.appendChild(document.createTextNode('🏷️ Show place names — appear once you zoom into an area'));
+  dg.appendChild(dlab); wrap.appendChild(dg);
 
   const g = document.createElement('div'); g.className = 'fgroup';
   g.innerHTML = '<p class="flabel"><span>Honesty settings</span></p>';

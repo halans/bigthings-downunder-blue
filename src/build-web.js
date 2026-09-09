@@ -98,10 +98,10 @@ const inlineJson = (value) => JSON.stringify(value)
 /**
  * The Dataset/WebSite/ItemList structured data that makes the 477 individual
  * things machine-readable without needing a per-item page: a crawler that
- * never runs the app's JS still sees every name, location and description in
- * the raw HTML. Facts only — no url is fabricated for an item, since the app
- * has no per-item deep link (address bar never changes), and claiming one
- * would misdirect anything that followed it.
+ * never runs the app's JS still sees every name, location, description and
+ * url in the raw HTML. Each item's url is the real #thing=<id> deep link the
+ * app itself understands (see the "direct links" block in template.html) —
+ * not a fabricated one, so anything that follows it lands on that card.
  */
 function buildJsonLd(dataset, offline) {
   const { siteUrl } = SEO.loadSite();
@@ -139,6 +139,7 @@ function buildJsonLd(dataset, offline) {
       item: {
         '@type': 'Place',
         name: t.name,
+        url: `${siteUrl}/#thing=${t.id}`,
         description: t.blurb || t.notes || undefined,
         geo: { '@type': 'GeoCoordinates', latitude: t.lat, longitude: t.lng },
         address: {

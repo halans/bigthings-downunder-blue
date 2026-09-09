@@ -102,8 +102,8 @@ Sapphire entries.
 
 | | Photos | Leaflet / fonts | Basemap | Size |
 |---|---|---|---|---|
-| **`web/index.html`** | hotlinked from Commons | CDN | OpenStreetMap tiles | 760 KB |
-| **`web/offline.html`** | local `img/` | local `vendor/` | vector Australia outline | 760 KB + 27 MB assets |
+| **`web/index.html`** | hotlinked from Commons | CDN | OpenStreetMap tiles | 780 KB |
+| **`web/offline.html`** | local `img/` | local `vendor/` | vector Australia outline | 790 KB + 24 MB assets |
 
 The offline build works with the network unplugged. A test asserts it loads **no** external
 asset — while still letting the attribution links point outward, which they must.
@@ -126,6 +126,11 @@ Generated from the dataset, no build step and no framework beyond Leaflet.
 - **Superlatives** — tallest, longest, oldest, newest, most-copied name, and which state has
   lost the most
 - **🎲 Spin & drive** — a random big thing from whatever is currently filtered
+- **Place-name labels** — an opt-in switch under Map display; labels stay off until you're
+  zoomed in far enough to read one without 477 towns overlapping
+- **Direct links** — the address bar always reflects what's on screen: open a card and the URL
+  becomes `#thing=<id>`, filter by state and it becomes `#state=NSW` (or `NSW,QLD`). Load either
+  and the map jumps straight there. No history entry per pin click — it replaces, not pushes.
 - Works on a phone: the sidebar and cards become bottom sheets, nothing is clipped, no
   functionality is desktop-only
 
