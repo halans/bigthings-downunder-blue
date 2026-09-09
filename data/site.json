@@ -1,5 +1,5 @@
 {
   "_readme": "Site-wide identity for canonical URLs, Open Graph/Twitter tags and JSON-LD, injected at build time by src/seo.js. Update siteUrl if the deployment domain ever changes.",
   "siteUrl": "https://bigthings.downunder.blue",
-  "shareImage": "img/bigbanana-0efa61.jpg"
+  "shareImage": "img/og_default.jpg"
 }

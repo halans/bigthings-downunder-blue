@@ -1,6 +1,6 @@
 # Photo credits
 
-284 photographs, vendored from Wikimedia Commons at 480px wide on 2026-09-08.
+284 photographs, vendored from Wikimedia Commons at 480px wide on 2026-09-09.
 
 Every one is reproduced under a free licence. Most require attribution, so the
 photographer and licence are named here, on each photo in the app, and in
