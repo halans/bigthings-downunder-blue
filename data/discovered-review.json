@@ -1,0 +1,16 @@
+{
+ "_readme": "Entries the community catalogues list that do NOT read as novelty big things — civic public art, memorials, gallery pieces. Held out of the dataset deliberately so the collection keeps its meaning. Promote one by moving it into overrides.json additions.",
+ "generated": "2026-09-08",
+ "heldBack": [
+  {
+   "name": "YININMADYEMI",
+   "town": "Sydney",
+   "state": "NSW",
+   "lat": -33.875327,
+   "lng": 151.20483,
+   "source": "https://landofthebigs.com/yininmadyemi-sydney-nsw/",
+   "sourceName": "Land of the Bigs",
+   "why": "The catalogue files this under australia, new-south-wales, sydney, uncategorized with tags australia, bullets, hyde-park, new-south-wales, sydney, the-big-bullets — not its big-things taxonomy."
+  }
+ ]
+}

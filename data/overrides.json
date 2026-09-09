@@ -1,0 +1,178 @@
+{
+  "_readme": "Hand-curated corrections applied on top of the harvested sources. Each entry must carry a `why` and, where it asserts a fact, a `source`. Keys match the `match` block against the built record; `set` fields overwrite. Keep this file small and defensible — it is the only place in the pipeline where a human overrides the open data.",
+  "corrections": [
+    {
+      "match": {
+        "name": "Big Triceratops",
+        "state": "NSW"
+      },
+      "set": {
+        "state": "QLD",
+        "stateName": "Queensland",
+        "location": "Ballandean",
+        "town": "Ballandean",
+        "lat": -28.8008,
+        "lng": 151.8427,
+        "precision": "town",
+        "coordSource": "https://en.wikipedia.org/wiki/Ballandean,_Queensland"
+      },
+      "why": "Wikipedia files the Big Triceratops in its New South Wales table and spells the town 'Ballendean'. Ballandean is in Queensland, in the Granite Belt near Stanthorpe — the article's own neighbouring rows (Big Apple, Thulimbah) are Queensland Granite Belt entries. Corrected state and spelling.",
+      "source": "https://en.wikipedia.org/wiki/Ballandean,_Queensland"
+    },
+    {
+      "match": {
+        "name": "The Big Humpty Dumpty",
+        "state": "WA"
+      },
+      "set": {
+        "location": "Carnarvon",
+        "town": "Carnarvon",
+        "lat": -24.8836,
+        "lng": 113.6614,
+        "precision": "town",
+        "coordSource": "https://en.wikipedia.org/wiki/Carnarvon,_Western_Australia"
+      },
+      "why": "Empty Location cell; the row's own notes place it at East Carnarvon and then on 'The Fruit Loop' road on Carnarvon's outskirts.",
+      "source": "https://en.wikipedia.org/wiki/Big_things_(Australia)"
+    },
+    {
+      "match": {
+        "location": "Sapphire",
+        "state": "QLD"
+      },
+      "set": {
+        "town": "Sapphire",
+        "lat": -23.4667,
+        "lng": 147.7167,
+        "precision": "town",
+        "coordSource": "https://en.wikipedia.org/wiki/Sapphire,_Queensland"
+      },
+      "why": "Sapphire is a gemfields township west of Emerald. The Wikipedia title redirects to 'Sapphire Central, Queensland', which carries no coordinates, so the town point is supplied here.",
+      "source": "https://en.wikipedia.org/wiki/Sapphire,_Queensland"
+    },
+    {
+      "match": {
+        "name": "The Big Lobster",
+        "state": "SA",
+        "location": "Rosetown"
+      },
+      "set": {
+        "location": "Kingston SE",
+        "town": "Kingston SE"
+      },
+      "why": "Wikipedia's Location cell reads 'Rosetown'. Larry the Lobster stands at Kingston SE on the Princes Highway; the district council's own page for the sculpture gives that location. Build year (1979) and 17 m height are confirmed by the same source.",
+      "source": "https://www.kingstondc.sa.gov.au/discover/things-to-see-and-do/the-big-lobster"
+    },
+    {
+      "match": {
+        "name": "Big Ned Kelly (Glenrowan)",
+        "state": "VIC"
+      },
+      "set": {
+        "builtYear": 1992,
+        "builtRaw": "1992",
+        "era": "late century (1985–1999)"
+      },
+      "why": "Wikipedia leaves the Built cell empty. The 6 m fibreglass Ned Kelly at Kate's Cottage, Glenrowan was unveiled on 14 April 1992, commissioned by Rod and Chris Gerret and built by Kevin Thomas.",
+      "source": "https://saltandcharcoal.co/ned-kelly-glenrowan/"
+    },
+    {
+      "match": {
+        "name": "The Big Oyster",
+        "state": "NSW",
+        "location": "Taree"
+      },
+      "set": {
+        "builtYear": 1990,
+        "builtRaw": "1990",
+        "era": "late century (1985–1999)"
+      },
+      "why": "Wikipedia leaves the Built cell empty. The Big Oyster was opened on 30 March 1990 by NSW Premier Nick Greiner, per the NSW Government's attraction page and contemporaneous Manning River Times reporting.",
+      "source": "https://www.nsw.gov.au/visiting-and-exploring-nsw/locations-and-attractions/big-oyster"
+    },
+    {
+      "match": {
+        "name": "The Anmatjere Man",
+        "state": "NT"
+      },
+      "set": {
+        "location": "Aileron",
+        "town": "Aileron",
+        "lat": -22.64366,
+        "lng": 133.342797,
+        "precision": "exact-osm",
+        "coordSource": "https://www.openstreetmap.org/node/1853027814"
+      },
+      "why": "The Location cell reads 'Anmatjere', a region rather than a settlement, which geocoded ~100 km north of the sculpture. The row's own notes place it at the Aileron Roadhouse on the Stuart Highway; OpenStreetMap maps the sculpture there.",
+      "source": "https://www.openstreetmap.org/node/1853027814"
+    },
+    {
+      "match": {
+        "name": "Anmatjere Woman and Child",
+        "state": "NT"
+      },
+      "set": {
+        "location": "Aileron",
+        "town": "Aileron",
+        "lat": -22.6497,
+        "lng": 133.3486,
+        "precision": "town",
+        "coordSource": "https://en.wikipedia.org/wiki/Aileron,_Northern_Territory"
+      },
+      "why": "Location cell reads 'Anmatjere', a region, which geocoded ~100 km north of the sculpture. The row's notes say Mark Egan added this family group to accompany his Anmatjere Man, which stands at the Aileron Roadhouse.",
+      "source": "https://en.wikipedia.org/wiki/Big_things_(Australia)"
+    },
+    {
+      "match": {
+        "name": "Fergus the Bull",
+        "state": "WA"
+      },
+      "set": {
+        "town": "Eaton",
+        "coordSource": "https://nominatim.openstreetmap.org/search?q=Forrest+Highway+Eaton+Western+Australia"
+      },
+      "why": "Was pinned on the Nullarbor Plain, ~1,200 km from where it stands. The Location cell reads 'Forrest Highway, just north of Bunbury'; the place geocoder stripped the road type and matched Forrest, Western Australia — a real locality near the South Australian border. Fergus stands beside the Forrest Highway at Eaton, just north of Bunbury, which Nominatim places at -33.3194, 115.7281. The geocoder now tries road-derived place names last, so this class of error cannot recur.",
+      "source": "https://nominatim.openstreetmap.org/search?q=Forrest+Highway+Eaton+Western+Australia"
+    }
+  ],
+  "additions": [
+    {
+      "name": "Big Lawnmower",
+      "state": "QLD",
+      "location": "Beerwah",
+      "lat": -26.8567,
+      "lng": 152.96,
+      "precision": "town",
+      "coordSource": "https://en.wikipedia.org/wiki/Beerwah,_Queensland",
+      "category": "machinery-and-transport",
+      "status": "standing",
+      "notes": "A giant lawnmower on the Steve Irwin Way at Beerwah, named by big-things researcher Amy Clarke among Australia's notable examples. Absent from the Wikipedia list.",
+      "source": "https://www.theguardian.com/artanddesign/2023/apr/16/big-things-australia-amy-clarke-research",
+      "why": "Named in reporting on Amy Clarke's big-things census but missing from both wiki lists."
+    },
+    {
+      "name": "Big Chainsaw",
+      "state": "QLD",
+      "location": "Beerwah",
+      "lat": -26.8567,
+      "lng": 152.96,
+      "precision": "town",
+      "coordSource": "https://en.wikipedia.org/wiki/Beerwah,_Queensland",
+      "category": "tools-and-industry",
+      "status": "standing",
+      "notes": "A giant chainsaw at Beerwah, cited alongside the Big Lawnmower in coverage of Australia's big-things census. Absent from the Wikipedia list.",
+      "source": "https://www.theguardian.com/artanddesign/2023/apr/16/big-things-australia-amy-clarke-research",
+      "why": "Named in reporting on Amy Clarke's big-things census but missing from both wiki lists."
+    }
+  ],
+  "removals": [
+    {
+      "match": {
+        "name": "Big Aboriginal Hunter",
+        "state": "NT"
+      },
+      "why": "Duplicate. This row came from Wikivoyage's 'Big Aboriginal Hunter' bullet, which is the same sculpture as Wikipedia's 'The Anmatjere Man' — Mark Egan's 2005 figure above the Aileron Roadhouse on the Stuart Highway. Dedup missed it because the two lists name it differently and Wikivoyage gave no address. Keeping the Wikipedia row, which carries the fuller notes.",
+      "source": "https://en.wikipedia.org/wiki/Big_things_(Australia)"
+    }
+  ]
+}

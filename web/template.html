@@ -1,0 +1,942 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>__TITLE__</title>
+<meta name="description" content="__DESCRIPTION__">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍌</text></svg>">
+__SEO_META__
+__HEAD_ASSETS__
+<style>
+:root{
+  --ink:#1b1a17; --ink-soft:#4a463e; --cream:#fdf6e8; --cream-2:#f6ebd6; --paper:#fffdf7;
+  --earth:#c8452b; --sun:#f0a71c; --euc:#2f7d52; --sky:#2a7fbf; --plum:#7c4dab;
+  --prawn:#e0567f; --steel:#5b6472; --brew:#b5651d; --void:#4b4a67;
+  --line:#e3d6bd; --shadow:0 2px 0 rgba(27,26,23,.14), 0 10px 30px -12px rgba(27,26,23,.4);
+  --sheet-h:52vh;
+}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;overflow:hidden}
+body{
+  font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;
+  color:var(--ink); background:var(--cream);
+  -webkit-font-smoothing:antialiased; overscroll-behavior:none;
+}
+h1,h2,h3,.display{font-family:Caprasimo,Inter,system-ui,sans-serif;font-weight:400;font-style:normal;letter-spacing:.2px}
+button{font:inherit;color:inherit;cursor:pointer;border:0;background:none}
+a{color:var(--sky)}
+
+/* ---------- shell ---------- */
+#app{display:grid;grid-template-columns:352px 1fr;height:100%;height:100dvh;overflow:hidden}
+#map{height:100%;width:100%;background:#dcd2bd;z-index:1}
+#mapwrap{position:relative;min-width:0}
+
+/* ---------- sidebar ---------- */
+#side{
+  background:var(--paper);border-right:3px solid var(--ink);
+  display:flex;flex-direction:column;min-height:0;z-index:5;
+}
+.brand{padding:16px 18px 12px;border-bottom:2px dashed var(--line);position:relative}
+.brand h1{margin:0;font-size:31px;line-height:.96;color:var(--earth);text-wrap:balance}
+.brand h1 em{font-style:normal;color:var(--ink);display:block;font-size:19px;margin-top:5px}
+.brand .tag{margin:9px 0 0;font-size:12.5px;line-height:1.45;color:var(--ink-soft)}
+.counts{display:flex;gap:6px;margin-top:11px;flex-wrap:wrap}
+.count{background:var(--cream-2);border:1.5px solid var(--ink);border-radius:999px;padding:3px 9px;font-size:11.5px;font-weight:600}
+.count b{font-variant-numeric:tabular-nums}
+
+.aboutlink{margin:10px 0 0;font-size:12px;font-weight:600}
+.aboutlink a{color:var(--earth);text-decoration:underline;text-underline-offset:2px}
+.searchrow{padding:12px 14px 10px;display:flex;gap:8px}
+#q{
+  flex:1;min-width:0;padding:10px 12px;border:2px solid var(--ink);border-radius:11px;
+  background:var(--cream);font-size:14.5px;font-weight:500;
+}
+#q:focus{outline:3px solid var(--sun);outline-offset:1px}
+.iconbtn{
+  border:2px solid var(--ink);border-radius:11px;background:var(--sun);
+  width:42px;display:grid;place-items:center;font-size:18px;box-shadow:0 2px 0 var(--ink);
+  transition:transform .08s;
+}
+.iconbtn:active{transform:translateY(2px);box-shadow:none}
+
+.filters{padding:0 14px 8px;overflow-y:auto;flex:1;min-height:0;-webkit-overflow-scrolling:touch}
+.fgroup{margin:0 0 14px}
+.flabel{
+  font-size:10.5px;font-weight:700;letter-spacing:.11em;text-transform:uppercase;
+  color:var(--ink-soft);margin:0 0 7px;display:flex;justify-content:space-between;align-items:baseline
+}
+.flabel button{font-size:10.5px;font-weight:700;color:var(--earth);text-decoration:underline}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{
+  border:1.5px solid var(--ink);border-radius:999px;padding:5px 10px;font-size:12.5px;font-weight:600;
+  background:var(--paper);display:inline-flex;align-items:center;gap:5px;line-height:1.15;
+  transition:background .12s,transform .08s;
+}
+.chip:hover{background:var(--cream-2)}
+.chip:active{transform:scale(.96)}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--cream);border-color:var(--ink)}
+.chip .n{font-size:10.5px;opacity:.62;font-variant-numeric:tabular-nums}
+.chip .dot{width:9px;height:9px;border-radius:50%;border:1px solid rgba(0,0,0,.35);flex:0 0 auto}
+.switch{display:flex;align-items:flex-start;gap:9px;font-size:12.5px;font-weight:500;line-height:1.35;cursor:pointer;color:var(--ink-soft)}
+.switch input{margin:1px 0 0;accent-color:var(--earth);width:16px;height:16px;flex:0 0 auto}
+
+.sidefoot{border-top:2px dashed var(--line);padding:10px 14px;display:flex;gap:7px;flex-wrap:wrap;background:var(--paper)}
+.pillbtn{
+  border:2px solid var(--ink);border-radius:11px;padding:7px 11px;font-size:12.5px;font-weight:700;
+  background:var(--cream);box-shadow:0 2px 0 var(--ink);transition:transform .08s;
+}
+.pillbtn:active{transform:translateY(2px);box-shadow:none}
+.pillbtn.hot{background:var(--sun)}
+.pillbtn.trip{background:var(--euc);color:#fff}
+.credits{font-size:10.5px;color:var(--ink-soft);padding:0 14px 12px;line-height:1.5}
+.credits a{color:var(--ink-soft)}
+
+/* ---------- map furniture ---------- */
+.leaflet-container{font-family:Inter,sans-serif;background:#dcd2bd}
+.pin{
+  width:34px;height:34px;border-radius:50% 50% 50% 6px;transform:rotate(-45deg);
+  border:2.5px solid var(--ink);display:grid;place-items:center;
+  box-shadow:0 3px 7px rgba(0,0,0,.38);
+}
+.pin span{transform:rotate(45deg);font-size:16px;line-height:1;filter:saturate(1.1)}
+.pin.fuzzy{border-style:dashed;opacity:.94}
+.pin.gone{filter:grayscale(.85);opacity:.72}
+.pin.sel{outline:3px solid var(--sun);outline-offset:2px;z-index:900!important}
+.clus{
+  background:var(--paper);border:2.5px solid var(--ink);border-radius:50%;
+  display:grid;place-items:center;font-weight:700;font-family:Caprasimo,Inter,sans-serif;
+  box-shadow:0 3px 8px rgba(0,0,0,.28);color:var(--ink);
+}
+.tripnum{
+  background:var(--euc);color:#fff;border:2.5px solid var(--ink);border-radius:50%;
+  width:28px;height:28px;display:grid;place-items:center;font-weight:700;font-size:13px;
+  font-variant-numeric:tabular-nums;box-shadow:0 3px 7px rgba(0,0,0,.3);
+}
+.leaflet-bar a{border-radius:0}
+#mapnote{
+  position:absolute;left:10px;bottom:10px;z-index:400;background:rgba(255,253,247,.93);
+  border:1.5px solid var(--ink);border-radius:9px;padding:5px 9px;font-size:11px;font-weight:600;
+  pointer-events:none;max-width:min(60%,320px)
+}
+
+/* ---------- detail panel ---------- */
+#detail{
+  position:absolute;top:0;right:0;width:370px;max-width:100%;height:100%;
+  background:var(--paper);border-left:3px solid var(--ink);z-index:600;
+  transform:translateX(101%);transition:transform .26s cubic-bezier(.4,0,.2,1);
+  display:flex;flex-direction:column;box-shadow:-14px 0 34px -18px rgba(27,26,23,.5)
+}
+#detail.open{transform:none}
+.dclose{
+  position:absolute;top:10px;right:10px;z-index:3;width:34px;height:34px;border-radius:50%;
+  background:var(--paper);border:2px solid var(--ink);font-size:17px;display:grid;place-items:center;
+  box-shadow:0 2px 0 var(--ink)
+}
+.dscroll{overflow-y:auto;flex:1;-webkit-overflow-scrolling:touch}
+.dhero{width:100%;aspect-ratio:4/3;object-fit:cover;background:var(--cream-2);display:block;border-bottom:2px solid var(--ink)}
+.dhero.ph{display:grid;place-items:center;font-size:62px;aspect-ratio:16/9}
+.dbody{padding:16px 18px 26px}
+.dbody h2{margin:0 0 3px;font-size:26px;line-height:1.05;color:var(--earth)}
+.photocredit{font-size:10.5px;line-height:1.45;color:var(--ink-soft);margin:0 0 10px}
+.photocredit a{color:var(--ink-soft)}
+.dwhere{font-size:13.5px;font-weight:600;color:var(--ink-soft);margin:0 0 12px}
+.badges{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 14px}
+.badge{border:1.5px solid var(--ink);border-radius:999px;padding:3px 9px;font-size:11px;font-weight:700;background:var(--cream-2)}
+.badge.warn{background:#ffe9c9}
+.badge.gone{background:#e9e6e0;color:#5f5b53}
+.facts{display:grid;grid-template-columns:auto 1fr;gap:6px 12px;font-size:13px;margin:0 0 14px}
+.facts dt{font-weight:700;color:var(--ink-soft)}
+.facts dd{margin:0;font-variant-numeric:tabular-nums}
+.prose{font-size:13.5px;line-height:1.55;margin:0 0 12px;color:var(--ink)}
+.prose.voice{
+  background:var(--cream-2);border-left:4px solid var(--sun);padding:10px 12px;border-radius:0 9px 9px 0;
+  font-size:13px
+}
+.dactions{display:flex;gap:7px;flex-wrap:wrap;margin:14px 0 12px}
+.srclist{font-size:11.5px;color:var(--ink-soft);line-height:1.6;border-top:2px dashed var(--line);padding-top:10px}
+.srclist b{display:block;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:4px}
+.corrected{background:#fff4d6;border:1.5px solid var(--sun);border-radius:9px;padding:9px 11px;font-size:12px;line-height:1.5;margin:0 0 12px}
+.howfound{font-size:11.5px;line-height:1.5;color:var(--ink-soft);margin:0 0 12px;padding-left:9px;border-left:2px solid var(--line)}
+
+/* ---------- sheets (trip / stats / list) ---------- */
+.sheet{
+  position:absolute;left:0;right:0;bottom:0;z-index:650;background:var(--paper);
+  border-top:3px solid var(--ink);border-radius:16px 16px 0 0;max-height:74%;
+  transform:translateY(101%);transition:transform .26s cubic-bezier(.4,0,.2,1);
+  display:flex;flex-direction:column;box-shadow:0 -14px 34px -18px rgba(27,26,23,.45)
+}
+.sheet.open{transform:none}
+.shead{display:flex;align-items:center;gap:10px;padding:13px 16px 10px;border-bottom:2px dashed var(--line)}
+.shead h3{margin:0;font-size:20px;flex:1}
+.sbody{overflow-y:auto;padding:14px 16px 22px;-webkit-overflow-scrolling:touch}
+.triprow{display:flex;gap:10px;align-items:flex-start;padding:9px 0;border-bottom:1px dotted var(--line);font-size:13.5px}
+.triprow .ord{background:var(--euc);color:#fff;border-radius:50%;width:23px;height:23px;display:grid;place-items:center;font-size:12px;font-weight:700;flex:0 0 auto}
+.triprow .leg{font-size:11.5px;color:var(--ink-soft);font-variant-numeric:tabular-nums}
+.tripsum{background:var(--cream-2);border:2px solid var(--ink);border-radius:11px;padding:11px 13px;margin:0 0 13px;font-size:13.5px;line-height:1.5}
+.tripsum b{font-size:21px;font-family:Caprasimo,Inter,sans-serif;font-weight:400}
+.statgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(148px,1fr));gap:11px}
+.statcard{border:2px solid var(--ink);border-radius:12px;padding:11px 12px;background:var(--cream)}
+.statcard .k{font-size:10.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft)}
+.statcard .v{font-family:Caprasimo,Inter,sans-serif;font-weight:400;font-size:22px;line-height:1.12;margin:3px 0 2px;color:var(--earth)}
+.statcard .m{font-size:11.5px;color:var(--ink-soft);line-height:1.4}
+.bars{margin-top:6px}
+.bar{display:grid;grid-template-columns:76px 1fr auto;gap:8px;align-items:center;font-size:12px;margin-bottom:5px}
+.bar .lbl{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:600}
+.bar .t{height:11px;background:var(--cream-2);border:1.5px solid var(--ink);border-radius:999px;overflow:hidden}
+/* The fill must be a block: a span stays inline, and width/height simply do
+   not apply to non-replaced inline elements — which rendered every bar as an
+   empty outline. The track is a plain block, so it does not blockify its
+   child the way the grid row above blockifies its own. */
+.bar .f{display:block;height:100%;background:var(--sun);border-radius:999px}
+.bar .n{font-variant-numeric:tabular-nums;font-weight:600;font-size:11.5px}
+.resultrow{
+  display:flex;gap:10px;align-items:center;width:100%;text-align:left;padding:9px 4px;
+  border-bottom:1px dotted var(--line);font-size:13.5px
+}
+.resultrow:hover{background:var(--cream-2)}
+.resultrow .em{font-size:19px;flex:0 0 auto}
+.resultrow .nm{font-weight:600;line-height:1.2}
+.resultrow .lc{font-size:11.5px;color:var(--ink-soft)}
+.empty{text-align:center;padding:26px 12px;color:var(--ink-soft);font-size:13.5px}
+
+/* ---------- mobile ---------- */
+#mobilebar{display:none}
+@media (max-width:860px){
+  #app{grid-template-columns:1fr;grid-template-rows:1fr}
+  #side{
+    position:absolute;left:0;right:0;bottom:0;top:auto;height:auto;max-height:82%;
+    border-right:0;border-top:3px solid var(--ink);border-radius:16px 16px 0 0;z-index:660;
+    transform:translateY(101%);transition:transform .26s cubic-bezier(.4,0,.2,1);
+  }
+  #side.open{transform:none}
+  .brand{padding:14px 16px 10px}
+  .brand h1{font-size:26px}
+  #mapwrap{grid-row:1}
+  #mobilebar{
+    display:flex;gap:8px;position:absolute;top:0;left:0;right:0;z-index:500;
+    padding:calc(env(safe-area-inset-top,0px) + 10px) 12px 10px;
+    background:linear-gradient(var(--cream) 62%,rgba(253,246,232,0))
+  }
+  #mobilebar .mtitle{
+    font-family:Caprasimo,Inter,sans-serif;font-weight:400;font-size:19px;color:var(--earth);
+    align-self:center;flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap
+  }
+  #fabs{
+    position:absolute;right:12px;bottom:calc(env(safe-area-inset-bottom,0px) + 14px);z-index:500;
+    display:flex;flex-direction:column;gap:9px
+  }
+  #fabs .iconbtn{width:48px;height:48px;border-radius:14px;font-size:20px;position:relative}
+  #fabs .iconbtn .cnt{
+    position:absolute;top:-6px;right:-6px;background:var(--earth);color:#fff;border:2px solid var(--ink);
+    border-radius:999px;min-width:21px;height:21px;font-size:11px;font-weight:700;display:grid;place-items:center;
+    font-family:Inter,sans-serif
+  }
+  #fabs .iconbtn .cnt[hidden]{display:none}
+  /* Pinch-zoom is the phone gesture; the buttons only collide with the FABs. */
+  .leaflet-control-zoom{display:none}
+  .leaflet-control-attribution{margin-right:74px!important;font-size:9.5px}
+  #detail{
+    width:100%;height:auto;max-height:86%;top:auto;bottom:0;border-left:0;
+    border-top:3px solid var(--ink);border-radius:16px 16px 0 0;
+    transform:translateY(101%)
+  }
+  #detail.open{transform:none}
+  .dhero{aspect-ratio:16/9}
+  #mapnote{bottom:auto;top:calc(env(safe-area-inset-top,0px) + 58px);left:12px;font-size:10.5px}
+  .sheet{max-height:82%}
+}
+@media (min-width:861px){ #grabber{display:none} }
+#grabber{width:42px;height:4px;border-radius:99px;background:var(--line);margin:7px auto 0}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+<div id="app">
+  <aside id="side" aria-label="Filters and search">
+    <div id="grabber"></div>
+    <div class="brand">
+      <h1>Big Things<em>a map of Australia's giant roadside sculptures</em></h1>
+      <p class="tag">Fibreglass fruit, enormous fauna and one 250-metre earthworm. Built from open data — every pin says how precisely it's placed.</p>
+      <div class="counts" id="counts"></div>
+      <p class="aboutlink"><a href="__ABOUT_HREF__">What is this, and how honest is it? →</a></p>
+    </div>
+    <div class="searchrow">
+      <input id="q" type="search" placeholder="Search a prawn, a town, a ute…" autocomplete="off" aria-label="Search big things">
+      <button class="iconbtn" id="listbtn" title="Show matching list" aria-label="Show matching list">☰</button>
+    </div>
+    <div class="filters" id="filters"></div>
+    <div class="sidefoot">
+      <button class="pillbtn hot" id="randombtn">🎲 Spin &amp; drive</button>
+      <button class="pillbtn trip" id="tripbtn">🚗 Road trip <span id="tripcount"></span></button>
+      <button class="pillbtn" id="statsbtn">📊 Superlatives</button>
+      <button class="pillbtn" id="resetbtn">↺ Reset</button>
+    </div>
+    <p class="credits" id="credits"></p>
+  </aside>
+
+  <div id="mapwrap">
+    <div id="map"></div>
+    <div id="mobilebar">
+      <span class="mtitle">Big Things</span>
+      <button class="iconbtn" id="msearch" aria-label="Search and filter">🔍</button>
+    </div>
+    <div id="fabs">
+      <button class="iconbtn" id="mtrip" aria-label="Road trip">🚗<span class="cnt" id="mtripcount" hidden>0</span></button>
+      <button class="iconbtn" id="mrandom" aria-label="Random big thing">🎲</button>
+      <button class="iconbtn" id="mfilter" aria-label="Filters">⚙️</button>
+    </div>
+    <div id="mapnote"></div>
+
+    <section id="detail" aria-live="polite" aria-label="Big thing details">
+      <button class="dclose" id="dclose" aria-label="Close details">✕</button>
+      <div class="dscroll" id="dscroll"></div>
+    </section>
+
+    <section class="sheet" id="tripsheet" aria-label="Road trip">
+      <div class="shead">
+        <h3>🚗 Your road trip</h3>
+        <button class="pillbtn" id="tripopt">Optimise</button>
+        <button class="pillbtn" id="tripclear">Clear</button>
+        <button class="iconbtn" data-close-sheet="tripsheet" aria-label="Close">✕</button>
+      </div>
+      <div class="sbody" id="tripbody"></div>
+    </section>
+
+    <section class="sheet" id="statsheet" aria-label="Superlatives">
+      <div class="shead">
+        <h3>📊 Superlatives</h3>
+        <button class="iconbtn" data-close-sheet="statsheet" aria-label="Close">✕</button>
+      </div>
+      <div class="sbody" id="statbody"></div>
+    </section>
+
+    <section class="sheet" id="listsheet" aria-label="Matching big things">
+      <div class="shead">
+        <h3 id="listtitle">Matches</h3>
+        <button class="iconbtn" data-close-sheet="listsheet" aria-label="Close">✕</button>
+      </div>
+      <div class="sbody" id="listbody"></div>
+    </section>
+  </div>
+</div>
+
+__SCRIPT_ASSETS__
+<script>
+/* eslint-disable */
+const DATA = __DATA__;
+/** 'online' hotlinks Commons and OSM tiles; 'offline' uses only local files. */
+const MODE = '__MODE__';
+/** Per-photo licence and photographer, keyed by Commons filename. */
+const CREDITS = __CREDITS__;
+/** Australia's coastline and state borders, for when there are no tiles. */
+const OUTLINE = __OUTLINE__;
+const THINGS = DATA.things;
+const META = DATA.meta;
+
+const CATS = {
+  'fruit-and-veg':          { label:'Fruit & veg',      short:'Fruit',    emoji:'🍌', colour:'#f0a71c' },
+  'fauna':                  { label:'Fauna',            short:'Fauna',    emoji:'🦘', colour:'#c8452b' },
+  'seafood':                { label:'Seafood',          short:'Seafood',  emoji:'🦐', colour:'#e0567f' },
+  'food-and-drink':         { label:'Food & drink',     short:'Food',     emoji:'🍺', colour:'#b5651d' },
+  'machinery-and-transport':{ label:'Machines',         short:'Machines', emoji:'🚜', colour:'#2a7fbf' },
+  'tools-and-industry':     { label:'Tools & industry', short:'Tools',    emoji:'🔨', colour:'#5b6472' },
+  'sport-and-leisure':      { label:'Sport & leisure',  short:'Sport',    emoji:'🎾', colour:'#2f7d52' },
+  'people-and-culture':     { label:'People & culture', short:'People',   emoji:'🎸', colour:'#7c4dab' },
+  'oddity':                 { label:'Pure oddity',      short:'Oddity',   emoji:'🛸', colour:'#4b4a67' },
+};
+const STATES = ['ACT','NSW','NT','QLD','SA','TAS','VIC','WA'];
+const ERAS = ['pioneer (pre-1970)','boom (1970s–early 80s)','late century (1985–1999)','revival (2000s–2014)','modern (2015+)','unknown'];
+const STATUS_LABEL = { standing:'Still standing', replaced:'Rebuilt or replaced', relocated:'Moved', removed:'Gone from its spot', demolished:'Demolished' };
+const cat = (c) => CATS[c] || CATS.oddity;
+const isGone = (t) => t.status === 'demolished' || t.status === 'removed';
+const isFuzzy = (t) => t.precision === 'town';
+
+/* ---------------- state ---------------- */
+const F = {
+  q:'', states:new Set(), cats:new Set(), eras:new Set(),
+  hideGone:false, exactOnly:false,
+};
+let trip = [];
+let selected = null;
+
+/* ---------------- map ---------------- */
+const PHONE = window.matchMedia('(max-width:860px)').matches;
+/** Continental Australia, incl. Tasmania — the frame every view starts from. */
+const AU_VIEW = L.latLngBounds([[-44.2, 112.0], [-9.5, 154.5]]);
+const map = L.map('map', {
+  zoomControl:false, minZoom:2.5, maxZoom:19,
+  // Fractional zoom lets fitBounds actually fill a narrow phone viewport
+  // instead of snapping down a whole level and stranding Australia in ocean.
+  zoomSnap:0.25, zoomDelta:0.5,
+  worldCopyJump:false, attributionControl:false,
+}).fitBounds(AU_VIEW, { padding:[4, 4] });
+// Re-frame once the grid has settled, and whenever the viewport changes shape.
+requestAnimationFrame(() => { map.invalidateSize(); map.fitBounds(AU_VIEW, { padding:[4, 4] }); });
+if (!PHONE) L.control.zoom({ position:'bottomright' }).addTo(map);
+const attribution = L.control.attribution({ position:'bottomright', prefix:false }).addTo(map);
+
+if (MODE === 'offline') {
+  // Basemap tiles are fetched per view, so no bundle can contain them. The
+  // simplified Natural Earth outline keeps the page legible as a map of
+  // Australia instead of leaving pins on blank grey.
+  attribution.addAttribution('Coastline © <a href="https://www.naturalearthdata.com/" target="_blank" rel="noopener noreferrer">Natural Earth</a> (public domain) · offline build, no tiles');
+  if (OUTLINE) {
+    L.geoJSON(OUTLINE, {
+      interactive:false,
+      style:{ color:'#8d8472', weight:1.25, fillColor:'#efe6d2', fillOpacity:1 },
+    }).addTo(map);
+  }
+} else {
+  attribution.addAttribution('© <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">OpenStreetMap</a> contributors');
+  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom:19, crossOrigin:true,
+  }).addTo(map);
+}
+
+const tripLine = L.polyline([], { color:'#2f7d52', weight:4, opacity:.85, dashArray:'1 9', lineCap:'round' }).addTo(map);
+const tripMarkers = L.layerGroup().addTo(map);
+
+const cluster = L.markerClusterGroup({
+  maxClusterRadius:(z) => (z < 6 ? 62 : z < 9 ? 44 : 26),
+  spiderfyOnMaxZoom:true, showCoverageOnHover:false, disableClusteringAtZoom:14,
+  iconCreateFunction(c) {
+    const n = c.getChildCount();
+    const s = n < 10 ? 36 : n < 50 ? 44 : 52;
+    return L.divIcon({
+      html:`<div class="clus" style="width:${s}px;height:${s}px;font-size:${n<100?15:13}px">${n}</div>`,
+      className:'', iconSize:[s,s],
+    });
+  },
+});
+map.addLayer(cluster);
+
+function iconFor(t) {
+  const c = cat(t.category);
+  const cls = ['pin', isFuzzy(t) ? 'fuzzy' : '', isGone(t) ? 'gone' : '', selected === t.id ? 'sel' : ''].filter(Boolean).join(' ');
+  return L.divIcon({
+    html:`<div class="${cls}" style="background:${c.colour}"><span>${c.emoji}</span></div>`,
+    className:'', iconSize:[34,34], iconAnchor:[17,32], popupAnchor:[0,-30],
+  });
+}
+
+const markers = new Map();
+for (const t of THINGS) {
+  if (t.lat == null) continue;
+  const m = L.marker([t.lat, t.lng], { icon:iconFor(t), title:t.name, riseOnHover:true, keyboard:true });
+  m.on('click', () => openDetail(t.id, false));
+  markers.set(t.id, m);
+}
+
+/* ---------------- filtering ---------------- */
+function matches(t) {
+  if (F.states.size && !F.states.has(t.state)) return false;
+  if (F.cats.size && !F.cats.has(t.category)) return false;
+  if (F.eras.size && !F.eras.has(t.era)) return false;
+  if (F.hideGone && isGone(t)) return false;
+  if (F.exactOnly && isFuzzy(t)) return false;
+  if (F.q) {
+    const q = F.q.toLowerCase();
+    const hay = [t.name, t.location, t.town, t.stateName, t.state, t.notes, t.blurb, cat(t.category).label]
+      .filter(Boolean).join(' ').toLowerCase();
+    if (!hay.includes(q)) return false;
+  }
+  return true;
+}
+
+let visible = [];
+function refresh(fit) {
+  visible = THINGS.filter(matches);
+  cluster.clearLayers();
+  const layers = [];
+  for (const t of visible) {
+    const m = markers.get(t.id);
+    if (m) { m.setIcon(iconFor(t)); layers.push(m); }
+  }
+  cluster.addLayers(layers);
+
+  const shown = layers.length;
+  const note = [];
+  note.push(`${shown} of ${THINGS.length} big things shown`);
+  const fuzzy = visible.filter(isFuzzy).length;
+  if (fuzzy) note.push(`${fuzzy} placed at town level`);
+  document.getElementById('mapnote').textContent = note.join(' · ');
+
+  document.querySelectorAll('.chip[data-kind]').forEach(renderChipCount);
+  if (fit && shown) {
+    const b = L.latLngBounds(visible.filter((t) => t.lat != null).map((t) => [t.lat, t.lng]));
+    if (b.isValid()) map.fitBounds(b.pad(0.14), { animate:true, maxZoom:12 });
+  }
+  if (document.getElementById('listsheet').classList.contains('open')) renderList();
+}
+
+/* ---------------- chips ---------------- */
+function chip(kind, value, label, extra) {
+  const el = document.createElement('button');
+  el.className = 'chip';
+  el.dataset.kind = kind; el.dataset.value = value;
+  el.setAttribute('aria-pressed','false');
+  el.innerHTML = (extra && extra.dot ? `<span class="dot" style="background:${extra.dot}"></span>` : '')
+    + (extra && extra.emoji ? extra.emoji + ' ' : '')
+    + `<span>${label}</span><span class="n"></span>`;
+  el.addEventListener('click', () => {
+    const set = kind === 'state' ? F.states : kind === 'cat' ? F.cats : F.eras;
+    if (set.has(value)) set.delete(value); else set.add(value);
+    el.setAttribute('aria-pressed', set.has(value) ? 'true' : 'false');
+    refresh(kind === 'state');
+  });
+  return el;
+}
+function renderChipCount(el) {
+  const kind = el.dataset.kind, value = el.dataset.value;
+  const probe = { ...F };
+  const n = THINGS.filter((t) => {
+    if (kind === 'state') return t.state === value && matchesExcept(t, 'states');
+    if (kind === 'cat') return t.category === value && matchesExcept(t, 'cats');
+    return t.era === value && matchesExcept(t, 'eras');
+  }).length;
+  el.querySelector('.n').textContent = n;
+  el.style.opacity = n ? 1 : .38;
+}
+function matchesExcept(t, skip) {
+  const saved = F[skip];
+  F[skip] = new Set();
+  const ok = matches(t);
+  F[skip] = saved;
+  return ok;
+}
+
+function buildFilters() {
+  const wrap = document.getElementById('filters');
+  const mk = (title, kind, values, extras, clearSet) => {
+    const g = document.createElement('div'); g.className = 'fgroup';
+    const l = document.createElement('p'); l.className = 'flabel';
+    l.innerHTML = `<span>${title}</span>`;
+    const clr = document.createElement('button'); clr.textContent = 'all';
+    clr.addEventListener('click', () => {
+      clearSet.clear();
+      g.querySelectorAll('.chip').forEach((c) => c.setAttribute('aria-pressed','false'));
+      refresh(kind === 'state');
+    });
+    l.appendChild(clr); g.appendChild(l);
+    const c = document.createElement('div'); c.className = 'chips';
+    for (const v of values) c.appendChild(chip(kind, v, extras(v).label, extras(v)));
+    g.appendChild(c); wrap.appendChild(g);
+  };
+
+  mk('State / territory', 'state', STATES, (s) => ({ label:s }), F.states);
+  mk('What is it', 'cat', Object.keys(CATS), (c) => ({ label:CATS[c].label, emoji:CATS[c].emoji, dot:CATS[c].colour }), F.cats);
+  mk('When it went up', 'era', ERAS, (e) => ({ label:e.replace(/ \(.*\)/,'') + (e === 'unknown' ? '' : ' · ' + (e.match(/\((.*)\)/)||[])[1]) }), F.eras);
+
+  const g = document.createElement('div'); g.className = 'fgroup';
+  g.innerHTML = '<p class="flabel"><span>Honesty settings</span></p>';
+  const opts = [
+    ['hideGone','Hide the dead ones — demolished, removed, or gone from their spot'],
+    ['exactOnly','Only pinpointed pins — hide the ones placed at their town’s centre'],
+  ];
+  for (const [key, text] of opts) {
+    const lab = document.createElement('label'); lab.className = 'switch';
+    const cb = document.createElement('input'); cb.type = 'checkbox';
+    cb.addEventListener('change', () => { F[key] = cb.checked; refresh(false); });
+    lab.appendChild(cb); lab.appendChild(document.createTextNode(text));
+    g.appendChild(lab);
+  }
+  wrap.appendChild(g);
+}
+
+/* ---------------- detail ---------------- */
+/**
+ * Where to load a photo from. Offline builds use the vendored copy and show
+ * nothing if it is absent, rather than silently reaching for the network.
+ */
+function photoUrl(file, w) {
+  const c = CREDITS[file];
+  if (MODE === 'offline') return c && c.f ? c.f : null;
+  return 'https://commons.wikimedia.org/wiki/Special:FilePath/' + encodeURIComponent(file) + '?width=' + w;
+}
+
+/**
+ * The photographer and licence for a photo.
+ *
+ * This is a licence obligation, not a courtesy: most of these files are CC BY
+ * or CC BY-SA, which require naming the author and the licence. The app
+ * displayed them bare for several versions, which was a breach.
+ */
+function photoCredit(file) {
+  const c = CREDITS[file];
+  if (!c) return '';
+  const author = c.a ? esc(c.a.length > 70 ? c.a.slice(0, 70) + '…' : c.a) : 'Unknown';
+  const authorHtml = c.p ? `<a href="${c.p}" target="_blank" rel="noopener noreferrer">${author}</a>` : author;
+  const licence = c.l ? esc(c.l) : 'see file page';
+  const licenceHtml = c.u ? `<a href="${c.u}" target="_blank" rel="noopener noreferrer">${licence}</a>` : licence;
+  return `<p class="photocredit">Photo: ${authorHtml} · ${licenceHtml} · via <a href="${c.p || 'https://commons.wikimedia.org/'}" target="_blank" rel="noopener noreferrer">Wikimedia Commons</a></p>`;
+}
+
+function fmtSize(t) {
+  if (!t.sizeRaw) return null;
+  if (t.sizeKind === 'height' && t.heightM) return `${t.heightM} m tall`;
+  if (t.sizeKind === 'length' && t.lengthM) return `${t.lengthM} m long`;
+  return t.sizeRaw;
+}
+/**
+ * Describe a pin's provenance in our own words. Researcher notes are working
+ * material and can contain scratch commentary, so they are summarised rather
+ * than echoed; the automated matcher's reasons are already user-safe.
+ */
+function howPlaced(t) {
+  const m = t.coordMatch;
+  if (!m) return '';
+  if (m.kind === 'researched') {
+    const host = t.coordSource ? (() => { try { return new URL(t.coordSource).hostname.replace('www.', ''); } catch (e) { return null; } })() : null;
+    const conf = m.confidence === 'high' ? 'located from a source naming the sculpture itself' : 'located from a street address or the venue it stands at';
+    return host ? `independently researched — ${conf}, via ${host}.` : `independently researched — ${conf}.`;
+  }
+  const matched = m.osmName ? ` Matched OpenStreetMap’s “${m.osmName}”.` : '';
+  return `${m.why || m.kind}.${matched}`;
+}
+
+function precisionBadge(t) {
+  if (t.precision === 'town') return { cls:'badge warn', text:'📍 town-level pin' };
+  if (t.precision === 'exact-verified') return { cls:'badge', text:'📍 pinpointed (verified)' };
+  if (t.precision === 'exact-osm') return { cls:'badge', text:'📍 pinpointed (OSM)' };
+  if (t.precision === 'exact-wikivoyage') return { cls:'badge', text:'📍 pinpointed (Wikivoyage)' };
+  if (t.precision === 'exact-article') return { cls:'badge', text:'📍 pinpointed (Wikipedia)' };
+  if (t.precision === 'exact-inline') return { cls:'badge', text:'📍 pinpointed' };
+  return { cls:'badge warn', text:'📍 not placed' };
+}
+
+function openDetail(id, pan) {
+  const t = THINGS.find((x) => x.id === id);
+  if (!t) return;
+  const prev = selected; selected = id;
+  for (const pid of [prev, id]) {
+    if (pid && markers.has(pid)) {
+      const th = THINGS.find((x) => x.id === pid);
+      if (th) markers.get(pid).setIcon(iconFor(th));
+    }
+  }
+
+  const c = cat(t.category);
+  const pb = precisionBadge(t);
+  const inTrip = trip.includes(t.id);
+  const size = fmtSize(t);
+  const heroSrc = t.image ? photoUrl(t.image, 640) : null;
+  const hero = heroSrc
+    ? `<img class="dhero" src="${heroSrc}" alt="${esc(t.name)}" loading="lazy"
+         onerror="this.outerHTML='<div class=\\'dhero ph\\' aria-hidden=\\'true\\'>${c.emoji}</div>'">`
+    : `<div class="dhero ph" aria-hidden="true">${c.emoji}</div>`;
+
+  const facts = [];
+  if (t.builtRaw) facts.push(['Built', esc(t.builtRaw) + (t.builtCirca ? ' (approx.)' : '')]);
+  if (size) facts.push(['Size', esc(size)]);
+  if (t.sizeRaw && size !== t.sizeRaw) facts.push(['Dimensions', esc(t.sizeRaw)]);
+  facts.push(['Category', c.emoji + ' ' + c.label]);
+  facts.push(['Status', esc(STATUS_LABEL[t.status] || t.status)]);
+
+  const maps = `https://www.google.com/maps/dir/?api=1&destination=${t.lat},${t.lng}`;
+
+  document.getElementById('dscroll').innerHTML = `
+    ${hero}
+    <div class="dbody">
+      ${heroSrc ? photoCredit(t.image) : ''}
+      <h2>${esc(t.name)}</h2>
+      <p class="dwhere">${esc(t.location || t.town || '')}${t.location ? ', ' : ''}${esc(t.stateName)}</p>
+      <div class="badges">
+        <span class="badge" style="background:${c.colour};color:#fff;border-color:#1b1a17">${c.emoji} ${esc(c.label)}</span>
+        ${isGone(t) ? `<span class="badge gone">💀 ${esc(STATUS_LABEL[t.status])}</span>` : ''}
+        ${t.status === 'relocated' ? '<span class="badge warn">🚚 moved</span>' : ''}
+        ${t.status === 'replaced' ? '<span class="badge warn">🔧 rebuilt</span>' : ''}
+        <span class="${pb.cls}">${pb.text}</span>
+      </div>
+      ${t.correction ? `<div class="corrected"><b>${t.addedManually ? 'Added from outside the wiki lists.' : 'We corrected the source.'}</b> ${esc(t.correction.why)}${t.correction.source ? ` <a href="${t.correction.source}" target="_blank" rel="noopener noreferrer">Source</a>` : ''}</div>` : ''}
+      ${t.coordMatch ? `<p class="howfound">How this pin was placed: ${esc(howPlaced(t))}</p>` : ''}
+      ${t.precision === 'town' ? `<p class="howfound">This pin sits at the centre of ${esc(t.town || t.location || 'the town')}, not on the sculpture — the sources give a town, not a point.</p>` : ''}
+      <dl class="facts">${facts.map(([k,v]) => `<dt>${k}</dt><dd>${v}</dd>`).join('')}</dl>
+      ${t.blurb ? `<p class="prose voice">${esc(t.blurb)}</p>` : ''}
+      ${t.notes ? `<p class="prose">${esc(t.notes)}</p>` : ''}
+      ${t.statusEvidence && !t.notes ? `<p class="prose">${esc(t.statusEvidence)}</p>` : ''}
+      <div class="dactions">
+        <button class="pillbtn ${inTrip ? '' : 'trip'}" id="addtrip">${inTrip ? '− Remove from trip' : '+ Add to road trip'}</button>
+        <a class="pillbtn" href="${maps}" target="_blank" rel="noopener noreferrer">🧭 Directions</a>
+        ${t.wikipediaArticle ? `<a class="pillbtn" href="https://en.wikipedia.org/wiki/${encodeURIComponent(t.wikipediaArticle.replace(/ /g,'_'))}" target="_blank" rel="noopener noreferrer">📖 Wikipedia</a>` : ''}
+      </div>
+      <div class="srclist">
+        <b>Where this came from</b>
+        ${t.sources.map((s) => s.url ? `<a href="${s.url}" target="_blank" rel="noopener noreferrer">${esc(s.source)}</a>` : esc(s.source)).join(' · ')}
+        ${t.coordSource ? `<br>Coordinates: <a href="${t.coordSource}" target="_blank" rel="noopener noreferrer">${esc(new URL(t.coordSource).hostname.replace('www.',''))}</a>` : ''}
+        ${t.lat != null ? `<br>${t.lat.toFixed(5)}, ${t.lng.toFixed(5)}` : ''}
+      </div>
+    </div>`;
+
+  document.getElementById('addtrip').addEventListener('click', () => { toggleTrip(t.id); openDetail(t.id, false); });
+  document.getElementById('detail').classList.add('open');
+  closeSheets();
+  if (window.innerWidth <= 860) document.getElementById('side').classList.remove('open');
+  if (pan !== false && t.lat != null) map.setView([t.lat, t.lng], Math.max(map.getZoom(), 13), { animate:true });
+}
+document.getElementById('dclose').addEventListener('click', () => {
+  document.getElementById('detail').classList.remove('open');
+  const prev = selected; selected = null;
+  if (prev && markers.has(prev)) {
+    const th = THINGS.find((x) => x.id === prev);
+    if (th) markers.get(prev).setIcon(iconFor(th));
+  }
+});
+
+/* ---------------- road trip ---------------- */
+function toggleTrip(id) {
+  const i = trip.indexOf(id);
+  if (i >= 0) trip.splice(i, 1); else trip.push(id);
+  drawTrip(); renderTrip(); updateTripCounts();
+}
+function haversine(a, b) {
+  const R = 6371, dLat = (b[0]-a[0]) * Math.PI/180, dLng = (b[1]-a[1]) * Math.PI/180;
+  const la1 = a[0]*Math.PI/180, la2 = b[0]*Math.PI/180;
+  const h = Math.sin(dLat/2)**2 + Math.cos(la1)*Math.cos(la2)*Math.sin(dLng/2)**2;
+  return 2*R*Math.asin(Math.sqrt(h));
+}
+const tripThings = () => trip.map((id) => THINGS.find((t) => t.id === id)).filter((t) => t && t.lat != null);
+function tripLegs() {
+  const ts = tripThings(); const legs = [];
+  for (let i = 1; i < ts.length; i++) legs.push(haversine([ts[i-1].lat, ts[i-1].lng], [ts[i].lat, ts[i].lng]));
+  return legs;
+}
+function drawTrip() {
+  const ts = tripThings();
+  tripLine.setLatLngs(ts.map((t) => [t.lat, t.lng]));
+  tripMarkers.clearLayers();
+  ts.forEach((t, i) => {
+    L.marker([t.lat, t.lng], {
+      icon:L.divIcon({ html:`<div class="tripnum">${i+1}</div>`, className:'', iconSize:[28,28], iconAnchor:[14,14] }),
+      interactive:false, zIndexOffset:1000,
+    }).addTo(tripMarkers);
+  });
+}
+/** Nearest-neighbour ordering — a decent, instant approximation. */
+function optimiseTrip() {
+  const ts = tripThings();
+  if (ts.length < 3) return;
+  const remaining = ts.slice(1);
+  const order = [ts[0]];
+  while (remaining.length) {
+    const last = order[order.length-1];
+    let bi = 0, bd = Infinity;
+    remaining.forEach((t, i) => {
+      const d = haversine([last.lat,last.lng],[t.lat,t.lng]);
+      if (d < bd) { bd = d; bi = i; }
+    });
+    order.push(remaining.splice(bi,1)[0]);
+  }
+  trip = order.map((t) => t.id);
+  drawTrip(); renderTrip();
+}
+function renderTrip() {
+  const ts = tripThings();
+  const body = document.getElementById('tripbody');
+  if (!ts.length) {
+    body.innerHTML = `<p class="empty">No stops yet. Open any big thing and hit <b>“Add to road trip”</b>, then come back — we'll chain them up and total the distance.<br><br>Or hit <b>🎲 Spin &amp; drive</b> for a random one.</p>`;
+    return;
+  }
+  const legs = tripLegs();
+  const total = legs.reduce((a,b) => a+b, 0);
+  const hours = total / 80;
+  const gone = ts.filter(isGone).length;
+  const fuzzy = ts.filter(isFuzzy).length;
+  body.innerHTML = `
+    <div class="tripsum">
+      <b>${ts.length} stops · ${Math.round(total).toLocaleString()} km</b><br>
+      Roughly ${hours < 1 ? '<1' : Math.round(hours)} hour${Math.round(hours) === 1 ? '' : 's'} of driving as the crow drives —
+      straight-line distance at 80 km/h, so treat it as a lower bound on a real road route.
+      ${gone ? `<br>⚠️ ${gone} of these ${gone === 1 ? 'is' : 'are'} demolished or gone. Bold choice.` : ''}
+      ${fuzzy ? `<br>📍 ${fuzzy} ${fuzzy === 1 ? 'stop is' : 'stops are'} pinned to the town, not the sculpture.` : ''}
+    </div>
+    ${ts.map((t, i) => `
+      <div class="triprow">
+        <span class="ord">${i+1}</span>
+        <span style="flex:1;min-width:0">
+          <b>${cat(t.category).emoji} ${esc(t.name)}</b><br>
+          <span class="leg">${esc(t.location || '')}, ${t.state}${i ? ` · ${Math.round(legs[i-1]).toLocaleString()} km from stop ${i}` : ''}</span>
+        </span>
+        <button class="pillbtn" data-drop="${t.id}" aria-label="Remove ${esc(t.name)}">✕</button>
+      </div>`).join('')}
+    <p style="margin-top:14px"><a class="pillbtn" href="https://www.google.com/maps/dir/${ts.map((t) => `${t.lat},${t.lng}`).join('/')}" target="_blank" rel="noopener noreferrer">🧭 Open all ${ts.length} stops in Google Maps</a></p>`;
+  body.querySelectorAll('[data-drop]').forEach((b) => b.addEventListener('click', () => toggleTrip(b.dataset.drop)));
+}
+function updateTripCounts() {
+  document.getElementById('tripcount').textContent = trip.length ? `(${trip.length})` : '';
+  const m = document.getElementById('mtripcount');
+  m.hidden = !trip.length; m.textContent = trip.length;
+}
+
+/* ---------------- superlatives ---------------- */
+function renderStats() {
+  const standing = THINGS.filter((t) => !isGone(t));
+  const withSize = THINGS.filter((t) => t.sizeMaxM);
+  const tallest = [...THINGS].filter((t) => t.heightM).sort((a,b) => b.heightM - a.heightM)[0];
+  const longest = [...THINGS].filter((t) => t.lengthM).sort((a,b) => b.lengthM - a.lengthM)[0];
+  const biggest = [...withSize].sort((a,b) => b.sizeMaxM - a.sizeMaxM)[0];
+  const oldest = [...THINGS].filter((t) => t.builtYear).sort((a,b) => a.builtYear - b.builtYear)[0];
+  const newest = [...THINGS].filter((t) => t.builtYear).sort((a,b) => b.builtYear - a.builtYear)[0];
+  const dead = THINGS.filter(isGone);
+  const byState = {}; for (const t of THINGS) byState[t.state] = (byState[t.state]||0)+1;
+  const byCat = {}; for (const t of THINGS) byCat[t.category] = (byCat[t.category]||0)+1;
+  const deadByState = {}; for (const t of dead) deadByState[t.state] = (deadByState[t.state]||0)+1;
+  const topDead = Object.entries(deadByState).sort((a,b) => b[1]-a[1])[0];
+  const perCapita = Object.entries(byState).sort((a,b) => b[1]-a[1]);
+  const dupes = {};
+  for (const t of THINGS) { const k = t.name.toLowerCase().replace(/^the /,''); dupes[k] = (dupes[k]||0)+1; }
+  const topDupe = Object.entries(dupes).sort((a,b) => b[1]-a[1])[0];
+
+  const card = (k, v, m) => `<div class="statcard"><div class="k">${k}</div><div class="v">${v}</div><div class="m">${m}</div></div>`;
+  const bars = (obj, fmt) => {
+    const max = Math.max(...Object.values(obj));
+    return '<div class="bars">' + Object.entries(obj).sort((a,b) => b[1]-a[1]).map(([k,n]) =>
+      `<div class="bar" title="${esc(String(fmt(k)))}: ${n}"><span class="lbl">${fmt(k)}</span><span class="t"><span class="f" style="width:${Math.max(2, n / max * 100).toFixed(1)}%"></span></span><span class="n">${n}</span></div>`
+    ).join('') + '</div>';
+  };
+
+  document.getElementById('statbody').innerHTML = `
+    <div class="statgrid">
+      ${card('Mapped here', THINGS.length, `Every one placed on the map. Amy Clarke's census counted ${META.claimedNationalTotal.toLocaleString()} in Australia — this is the verifiable subset.`)}
+      ${card('Australia vs Canada', '1,075 : 1,250', 'The same census counted 1,250 Big Things in Canada, so Australia is not even the world leader at its own signature obsession.')}
+      ${card('Still standing', standing.length, `${dead.length} have been demolished or removed.`)}
+      ${biggest ? card('Biggest, any axis', `${biggest.sizeMaxM} m`, `${esc(biggest.name)}, ${esc(biggest.location||'')} — ${isGone(biggest) ? 'demolished' : 'still there'}. The source doesn't say which axis, so we don't call it a height.`) : ''}
+      ${tallest ? card('Tallest', `${tallest.heightM} m`, `${esc(tallest.name)}, ${esc(tallest.location||'')} (${tallest.state}) — measured as a height by the source.`) : ''}
+      ${longest ? card('Longest', `${longest.lengthM} m`, `${esc(longest.name)}, ${esc(longest.location||'')} — ${isGone(longest) ? 'now demolished' : 'still there'}`) : ''}
+      ${oldest ? card('Oldest', oldest.builtYear, `${esc(oldest.name)}, ${esc(oldest.location||'')} (${oldest.state})`) : ''}
+      ${newest ? card('Newest', newest.builtYear, `${esc(newest.name)}, ${esc(newest.location||'')} (${newest.state})`) : ''}
+      ${card('Biggest hoarder', perCapita[0][0], `${perCapita[0][1]} big things — ahead of ${perCapita[1][0]} on ${perCapita[1][1]}.`)}
+      ${topDead ? card('Most careless', topDead[0], `${topDead[1]} big things lost to demolition, fire or removal.`) : ''}
+      ${topDupe && topDupe[1] > 1 ? card('Most copied', `×${topDupe[1]}`, `Australia has ${topDupe[1]} things called “${esc(topDupe[0])}”.`) : ''}
+      ${card('Precisely placed', `${Math.round(THINGS.filter((t) => !isFuzzy(t)).length / THINGS.length * 100)}%`, `The rest sit at their town's centre — filter them out with “only pinpointed pins”.`)}
+    </div>
+    <h3 style="margin:22px 0 8px;font-size:17px">Big things by state</h3>
+    ${bars(byState, (k) => k)}
+    <h3 style="margin:20px 0 8px;font-size:17px">Big things by kind</h3>
+    ${bars(byCat, (k) => cat(k).emoji + ' ' + (cat(k).short || cat(k).label))}
+    <p style="font-size:12px;color:var(--ink-soft);margin-top:18px;line-height:1.55">
+      The national figure is Amy Clarke's, from
+      <a href="https://doi.org/10.1080/14443058.2022.2144928" target="_blank" rel="noopener noreferrer">“Making a Mark: Displays of Regional and National Identity in the Big Things of Australia and Canada”</a>,
+      <em>Journal of Australian Studies</em> 47(2), 2023 — published online in November 2022. It is a census of Australia alone — the paper's
+      companion count for Canada is 1,250 — and it is not a published list, which is why this map can show
+      ${THINGS.length} rather than all ${META.claimedNationalTotal.toLocaleString()}.
+    </p>
+    <p style="font-size:12px;color:var(--ink-soft);margin-top:12px;line-height:1.55">
+      Sizes are quoted as the source gives them, and the source is not consistently quoting a height:
+      ${biggest ? esc(biggest.name) : 'The Giant Worm'} measured ${biggest ? biggest.sizeMaxM : 250} m along its longest axis
+      because it was a walk-through tunnel, not a tower. Where the source is ambiguous, this map declines to claim a height.
+    </p>`;
+}
+
+/* ---------------- list ---------------- */
+function renderList() {
+  document.getElementById('listtitle').textContent = `${visible.length} match${visible.length === 1 ? '' : 'es'}`;
+  const body = document.getElementById('listbody');
+  if (!visible.length) { body.innerHTML = `<p class="empty">Nothing matches. Try clearing a filter.</p>`; return; }
+  body.innerHTML = visible.slice(0, 400).map((t) => `
+    <button class="resultrow" data-go="${t.id}">
+      <span class="em">${cat(t.category).emoji}</span>
+      <span style="flex:1;min-width:0">
+        <span class="nm">${esc(t.name)}${isGone(t) ? ' 💀' : ''}</span><br>
+        <span class="lc">${esc(t.location || t.town || '')}, ${t.state}${t.builtYear ? ` · ${t.builtYear}` : ''}${isFuzzy(t) ? ' · town-level pin' : ''}</span>
+      </span>
+    </button>`).join('') + (visible.length > 400 ? `<p class="empty">…and ${visible.length-400} more. Narrow the filters to see them.</p>` : '');
+  body.querySelectorAll('[data-go]').forEach((b) => b.addEventListener('click', () => openDetail(b.dataset.go, true)));
+}
+
+/* ---------------- sheets & chrome ---------------- */
+function closeSheets() {
+  document.querySelectorAll('.sheet').forEach((s) => s.classList.remove('open'));
+}
+function openSheet(id) {
+  const wasOpen = document.getElementById(id).classList.contains('open');
+  closeSheets();
+  document.getElementById('detail').classList.remove('open');
+  if (!wasOpen) document.getElementById(id).classList.add('open');
+  if (window.innerWidth <= 860) document.getElementById('side').classList.remove('open');
+}
+document.querySelectorAll('[data-close-sheet]').forEach((b) =>
+  b.addEventListener('click', () => document.getElementById(b.dataset.closeSheet).classList.remove('open')));
+
+document.getElementById('q').addEventListener('input', (e) => {
+  F.q = e.target.value.trim();
+  refresh(false);
+  if (F.q.length > 1) { renderList(); document.getElementById('listsheet').classList.add('open'); }
+  else if (!F.q) document.getElementById('listsheet').classList.remove('open');
+});
+document.getElementById('listbtn').addEventListener('click', () => { renderList(); openSheet('listsheet'); });
+document.getElementById('tripbtn').addEventListener('click', () => { renderTrip(); openSheet('tripsheet'); });
+document.getElementById('statsbtn').addEventListener('click', () => { renderStats(); openSheet('statsheet'); });
+document.getElementById('mtrip').addEventListener('click', () => { renderTrip(); openSheet('tripsheet'); });
+document.getElementById('tripopt').addEventListener('click', optimiseTrip);
+document.getElementById('tripclear').addEventListener('click', () => { trip = []; drawTrip(); renderTrip(); updateTripCounts(); });
+
+function spin() {
+  const pool = visible.length ? visible : THINGS;
+  const t = pool[Math.floor(Math.random() * pool.length)];
+  openDetail(t.id, true);
+}
+document.getElementById('randombtn').addEventListener('click', spin);
+document.getElementById('mrandom').addEventListener('click', spin);
+
+document.getElementById('resetbtn').addEventListener('click', () => {
+  F.q = ''; F.states.clear(); F.cats.clear(); F.eras.clear(); F.hideGone = false; F.exactOnly = false;
+  document.getElementById('q').value = '';
+  document.querySelectorAll('.chip').forEach((c) => c.setAttribute('aria-pressed','false'));
+  document.querySelectorAll('.switch input').forEach((c) => { c.checked = false; });
+  closeSheets();
+  refresh(false);
+  map.fitBounds(AU_VIEW, { padding:[4, 4], animate:true });
+});
+
+const side = document.getElementById('side');
+document.getElementById('mfilter').addEventListener('click', () => {
+  closeSheets(); document.getElementById('detail').classList.remove('open');
+  side.classList.toggle('open');
+});
+document.getElementById('msearch').addEventListener('click', () => {
+  closeSheets(); document.getElementById('detail').classList.remove('open');
+  side.classList.add('open');
+  setTimeout(() => document.getElementById('q').focus(), 260);
+});
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') {
+    closeSheets();
+    document.getElementById('detail').classList.remove('open');
+    if (window.innerWidth <= 860) side.classList.remove('open');
+  }
+  if (e.key === '/' && document.activeElement.id !== 'q') { e.preventDefault(); document.getElementById('q').focus(); }
+});
+
+function esc(s) {
+  return String(s == null ? '' : s).replace(/[&<>"']/g, (c) => ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c]));
+}
+
+/* ---------------- boot ---------------- */
+document.getElementById('credits').innerHTML = [
+  `<a href="__ABOUT_HREF__">About this project</a> ·`,
+  'Data from <a href="https://en.wikipedia.org/wiki/Big_things_(Australia)" target="_blank" rel="noopener noreferrer">Wikipedia</a>,',
+  '<a href="https://en.wikivoyage.org/wiki/Australia%27s_big_things" target="_blank" rel="noopener noreferrer">Wikivoyage</a> (CC BY-SA),',
+  '<a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">OpenStreetMap</a> (ODbL),',
+  '<a href="https://landofthebigs.com/" target="_blank" rel="noopener noreferrer">Land of the Bigs</a> and',
+  '<a href="https://www.aussiebigthings.com.au/" target="_blank" rel="noopener noreferrer">Aussie Big Things</a>.',
+  'Photographs from <a href="https://commons.wikimedia.org/" target="_blank" rel="noopener noreferrer">Wikimedia Commons</a>,',
+  'each under its own free licence and credited on the card.',
+  MODE === 'offline'
+    ? 'Coastline from <a href="https://www.naturalearthdata.com/" target="_blank" rel="noopener noreferrer">Natural Earth</a> (public domain) — this is the offline build, so there are no basemap tiles.'
+    : 'Basemap © OpenStreetMap contributors.',
+].join(' ');
+
+const s = META.stats;
+document.getElementById('counts').innerHTML = [
+  `<span class="count"><b>${s.total}</b> mapped</span>`,
+  `<span class="count"><b>${s.exact}</b> pinpointed</span>`,
+  `<span class="count"><b>${(s.byStatus.demolished||0) + (s.byStatus.removed||0)}</b> lost</span>`,
+  `<span class="count" id="claimchip" title="Clarke (2023) counted ${META.claimedNationalTotal.toLocaleString()} Big Things in Australia — and 1,250 in Canada.">of <b>${META.claimedNationalTotal.toLocaleString()}</b> claimed</span>`,
+].join('');
+buildFilters();
+refresh(false);
+updateTripCounts();
+</script>
+</body>
+</html>

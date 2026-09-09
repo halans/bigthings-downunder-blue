@@ -1,0 +1,54 @@
+{
+  "name": "australian-big-things",
+  "version": "1.0.0",
+  "description": "A dataset and interactive map of Australia's Big Things \u2014 giant novelty roadside sculptures \u2014 built from open data with honest per-pin coordinate precision.",
+  "keywords": [
+    "australia",
+    "big things",
+    "roadside attractions",
+    "open data",
+    "map",
+    "leaflet",
+    "wikipedia",
+    "openstreetmap"
+  ],
+  "license": "CC-BY-SA-4.0",
+  "bin": {
+    "bigthings": "src/cli.js"
+  },
+  "main": "src/query.js",
+  "files": [
+    "src/",
+    "data/",
+    "web/",
+    "docs/",
+    "README.md"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {},
+  "scripts": {
+    "fetch": "node src/fetch-coords.js && node src/fetch-places.js && node src/fetch-osm-attractions.js",
+    "extract": "node src/extract-wikipedia.js && node src/extract-wikivoyage.js",
+    "build": "npm run extract && node src/build.js && node src/build-web.js && node src/build-about.js",
+    "build:offline": "npm run build",
+    "rebuild": "npm run fetch && npm run build",
+    "test": "node test/run.js",
+    "serve": "node src/serve.js",
+    "checksums": "node src/checksums.js",
+    "verify": "node src/checksums.js --verify && npm test",
+    "match": "node src/build.js && node src/run-osm-match.js && node src/build.js && node src/build-web.js && node src/build-about.js",
+    "match:report": "node src/run-osm-match.js --report",
+    "discover": "node src/fetch-discovery.js all && node src/extract-discovery.js && node src/build.js && node src/build-web.js && node src/build-about.js",
+    "discover:report": "node src/extract-discovery.js --report",
+    "images": "node src/fetch-images.js",
+    "vendor": "node src/fetch-vendor.js",
+    "standalone": "npm run images && npm run vendor && node src/build-web.js && node src/build-about.js",
+    "serve:offline": "node src/serve.js --offline",
+    "about": "node src/build-about.js",
+    "serve:about": "node src/serve.js --about",
+    "build:public": "node src/build-public.js",
+    "serve:public": "node src/serve.js --public"
+  }
+}

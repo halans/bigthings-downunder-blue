@@ -1,0 +1,26 @@
+# OS
+.DS_Store
+Thumbs.db
+
+# Editors
+.vscode/
+.idea/
+*.swp
+
+# Node
+node_modules/
+npm-debug.log*
+*.log
+
+# Env
+.env
+.env.local
+
+# Cloudflare Pages deploy bundle — regenerate with `npm run build:public`
+public/
+
+# Misc
+coverage/
+*.tmp
+cache/
+.serena/

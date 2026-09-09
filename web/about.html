@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Big Things — what this is, and how honest it is</title>
+<meta name="description" content="A mapped dataset of Australia's giant novelty roadside sculptures, built from open data — including where it is uncertain, what it gets wrong, and what we corrected.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍌</text></svg>">
+<link rel="canonical" href="https://bigthings.downunder.blue/about.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Big Things">
+<meta property="og:title" content="Big Things — what this is, and how honest it is">
+<meta property="og:description" content="A mapped dataset of Australia's giant novelty roadside sculptures, built from open data — including where it is uncertain, what it gets wrong, and what we corrected.">
+<meta property="og:url" content="https://bigthings.downunder.blue/about.html">
+<meta property="og:image" content="https://bigthings.downunder.blue/img/bigbanana-0efa61.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Big Things — what this is, and how honest it is">
+<meta name="twitter:description" content="A mapped dataset of Australia's giant novelty roadside sculptures, built from open data — including where it is uncertain, what it gets wrong, and what we corrected.">
+<meta name="twitter:image" content="https://bigthings.downunder.blue/img/bigbanana-0efa61.jpg">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How many big things are in Australia?","acceptedAnswer":{"@type":"Answer","text":"A 2023 academic census counted 1,075 big things in Australia, but that figure comes from a census, not a published list — nobody has ever named all of them in one place."}},{"@type":"Question","name":"How many big things does this map show, and how accurate are the locations?","acceptedAnswer":{"@type":"Answer","text":"This map shows 477 of the claimed 1,075. 313 (66%) are placed at the sculpture itself; the rest sit at their town's centre because that is all the sources give."}},{"@type":"Question","name":"What is the oldest big thing in Australia?","acceptedAnswer":{"@type":"Answer","text":"The oldest is Big Mouth at St Kilda, built in 1912."}},{"@type":"Question","name":"What is the newest big thing in Australia?","acceptedAnswer":{"@type":"Answer","text":"The newest is The Big Beer Can at Newcastle NSW, built in 2026."}},{"@type":"Question","name":"What is the biggest big thing in Australia?","acceptedAnswer":{"@type":"Answer","text":"The largest along any single axis is The Giant Worm at Bass, at 250 m."}},{"@type":"Question","name":"What is the tallest big thing in Australia?","acceptedAnswer":{"@type":"Answer","text":"The tallest, measured as a height by its own source, is The Big Rig at Roma, at 30 m."}},{"@type":"Question","name":"How many big things have been demolished or removed?","acceptedAnswer":{"@type":"Answer","text":"26 of the 477 mapped here are recorded as demolished or removed, and are kept on the map rather than deleted."}},{"@type":"Question","name":"Is there an official list of Australia's big things?","acceptedAnswer":{"@type":"Answer","text":"No. There is no official register. This dataset is assembled from Wikipedia, Wikivoyage, OpenStreetMap and two independent community catalogues, cross-checked against each other, with every correction recorded and cited."}}]},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Big Things","item":"https://bigthings.downunder.blue/"},{"@type":"ListItem","position":2,"name":"About"}]}]}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caprasimo&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#1b1a17; --ink-soft:#4a463e; --cream:#fdf6e8; --cream-2:#f6ebd6; --paper:#fffdf7;
+  --earth:#c8452b; --sun:#f0a71c; --euc:#2f7d52; --sky:#2a7fbf; --plum:#7c4dab;
+  --line:#e3d6bd;
+}
+*{box-sizing:border-box}
+/* <figure> carries a UA margin of 1em 40px, which silently ate 80px out of
+   every 170px grid track and shrank the photos to a third of their size. */
+figure,figcaption,blockquote{margin:0}
+html{scroll-behavior:smooth}
+body{
+  margin:0; background:var(--cream); color:var(--ink);
+  font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;
+  -webkit-font-smoothing:antialiased; line-height:1.6;
+}
+h1,h2,h3,.display{font-family:Caprasimo,Inter,system-ui,sans-serif;font-weight:400;font-style:normal;letter-spacing:.2px}
+a{color:var(--earth)}
+img{max-width:100%;display:block}
+
+/* Every section gets a real gutter — nothing touches the viewport edge. */
+.wrap{max-width:820px;margin:0 auto;padding:0 24px}
+.wide{max-width:1120px;margin:0 auto;padding:0 24px}
+
+/* ---------- top bar ---------- */
+.topbar{
+  position:sticky;top:0;z-index:50;background:rgba(253,246,232,.94);
+  backdrop-filter:blur(6px);border-bottom:2px solid var(--ink);
+}
+.topbar .inner{max-width:1120px;margin:0 auto;padding:9px 24px;display:flex;align-items:center;gap:14px}
+.topbar .mark{
+  font-family:Caprasimo,Inter,sans-serif;font-weight:400;font-size:19px;color:var(--earth);
+  flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis
+}
+.btn{
+  display:inline-block;border:2px solid var(--ink);border-radius:11px;padding:7px 13px;
+  font-size:13.5px;font-weight:700;text-decoration:none;color:var(--ink);background:var(--cream);
+  box-shadow:0 2px 0 var(--ink);transition:transform .08s;white-space:nowrap;
+}
+.btn:active{transform:translateY(2px);box-shadow:none}
+.btn.hot{background:var(--sun)}
+.btn.big{font-size:16px;padding:12px 20px;border-radius:13px}
+
+/* ---------- hero ---------- */
+.hero{padding:44px 0 32px;border-bottom:2px dashed var(--line)}
+.hero h1{margin:0;font-size:clamp(38px,8vw,68px);line-height:.94;color:var(--earth);text-wrap:balance}
+.hero .sub{
+  font-family:Caprasimo,Inter,sans-serif;font-size:clamp(19px,3.4vw,27px);
+  line-height:1.15;margin:12px 0 0;color:var(--ink)
+}
+.hero p.lede{font-size:clamp(16px,2.4vw,18.5px);line-height:1.6;margin:18px 0 0;max-width:62ch}
+.cta{display:flex;gap:10px;flex-wrap:wrap;margin:26px 0 0}
+
+.figures{display:flex;flex-wrap:wrap;gap:8px;margin:26px 0 0}
+.fig{
+  background:var(--paper);border:2px solid var(--ink);border-radius:12px;
+  padding:10px 14px;min-width:104px;box-shadow:0 2px 0 var(--ink)
+}
+.fig b{display:block;font-family:Caprasimo,Inter,sans-serif;font-weight:400;font-size:26px;line-height:1.05;color:var(--earth);font-variant-numeric:tabular-nums}
+.fig span{font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft)}
+
+/* ---------- photo strip ---------- */
+.strip{padding:26px 0;border-bottom:2px dashed var(--line);background:var(--cream-2)}
+.striprow{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px}
+.shot{border:2px solid var(--ink);border-radius:12px;overflow:hidden;background:var(--paper);display:flex;flex-direction:column}
+.shot img{aspect-ratio:4/3;object-fit:cover;width:100%}
+.shot figcaption{padding:8px 10px 9px;font-size:11.5px;line-height:1.3}
+/* Each part on its own line, or the place runs straight into "Photo:". */
+.shot figcaption b{display:block;font-size:13px;line-height:1.2;margin-bottom:2px}
+.shot figcaption .place{display:block;color:var(--ink-soft);margin-bottom:4px}
+.shot figcaption .by{display:block;color:var(--ink-soft);font-size:10px;line-height:1.35}
+.shot figcaption .by a{color:var(--ink-soft)}
+
+/* ---------- sections ---------- */
+section{padding:40px 0;scroll-margin-top:58px}
+section + section{border-top:2px dashed var(--line)}
+h2{font-size:clamp(26px,4.6vw,36px);line-height:1.05;margin:0 0 6px;color:var(--earth)}
+h2 + .standfirst{font-size:16.5px;color:var(--ink-soft);margin:0 0 20px;max-width:60ch}
+h3{font-size:19px;margin:26px 0 8px}
+p{margin:0 0 14px;max-width:66ch}
+ul{margin:0 0 14px;padding-left:20px;max-width:66ch}
+li{margin-bottom:7px}
+strong{font-weight:700}
+
+.pullquote{
+  border-left:5px solid var(--sun);padding:4px 0 4px 16px;margin:22px 0;
+  font-family:Caprasimo,Inter,sans-serif;font-size:clamp(19px,3vw,25px);line-height:1.25;max-width:34ch
+}
+
+/* precision table */
+.tbl{width:100%;border-collapse:collapse;font-size:14px;margin:0 0 16px}
+.tbl th,.tbl td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+.tbl th{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft);border-bottom:2px solid var(--ink)}
+.tbl td.num{text-align:right;font-variant-numeric:tabular-nums;font-weight:700;white-space:nowrap}
+.tbl tr.total td{border-top:2px solid var(--ink);border-bottom:none;font-weight:700}
+
+/* bars — the fill must be a block; width does not apply to inline elements */
+.bars{margin:14px 0 20px}
+.bar{display:grid;grid-template-columns:88px 1fr auto;gap:9px;align-items:center;font-size:13px;margin-bottom:6px}
+.bar .lbl{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:600}
+.bar .t{height:12px;background:var(--cream-2);border:1.5px solid var(--ink);border-radius:999px;overflow:hidden}
+.bar .f{display:block;height:100%;background:var(--sun);border-radius:999px}
+.bar .n{font-variant-numeric:tabular-nums;font-weight:700;font-size:12px}
+
+/* correction cards */
+.fixes{display:grid;grid-template-columns:repeat(auto-fit,minmax(268px,1fr));gap:12px;margin:18px 0 0}
+.fix{background:var(--paper);border:2px solid var(--ink);border-radius:13px;padding:14px 15px;box-shadow:0 2px 0 var(--ink)}
+.fix h4{margin:0 0 6px;font-family:Caprasimo,Inter,sans-serif;font-weight:400;font-size:17px;line-height:1.15;color:var(--earth)}
+.fix p{font-size:13px;line-height:1.5;margin:0 0 8px;max-width:none}
+.fix .src{font-size:11px}
+
+/* source cards */
+.sources{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;margin:18px 0 0}
+.src-card{background:var(--paper);border:2px solid var(--ink);border-radius:13px;padding:14px 15px}
+.src-card h4{margin:0 0 4px;font-size:15px;font-weight:700}
+.src-card p{font-size:12.5px;line-height:1.5;margin:0 0 6px;max-width:none;color:var(--ink-soft)}
+.src-card .lic{font-size:11px;font-weight:700;background:var(--cream-2);border:1.5px solid var(--ink);border-radius:999px;padding:2px 8px;display:inline-block}
+
+.grab{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin:18px 0 0}
+.grab a,.grab .grab-item{
+  display:block;background:var(--paper);border:2px solid var(--ink);border-radius:13px;padding:14px 15px;
+  text-decoration:none;color:var(--ink);box-shadow:0 2px 0 var(--ink)
+}
+.grab b,.grab .grab-item b{display:block}
+.grab b{display:block;font-size:15px;margin-bottom:3px}
+.grab span{font-size:12.5px;color:var(--ink-soft);line-height:1.45}
+code{
+  font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12.5px;
+  background:var(--cream-2);border:1px solid var(--line);border-radius:5px;padding:1px 5px
+}
+pre{
+  background:var(--ink);color:var(--cream);padding:14px 16px;border-radius:11px;
+  overflow-x:auto;font-size:12.5px;line-height:1.6;max-width:66ch
+}
+pre code{background:none;border:0;color:inherit;padding:0}
+
+footer{background:var(--ink);color:var(--cream);padding:34px 0 40px;font-size:13px;line-height:1.65}
+footer a{color:var(--sun)}
+footer .wrap > p{max-width:70ch}
+footer h3{font-family:Caprasimo,Inter,sans-serif;font-weight:400;color:var(--sun);margin:0 0 10px;font-size:20px}
+
+@media (max-width:600px){
+  /* Two buttons plus the wordmark do not fit 390px: the mark wrapped to two
+     lines and the buttons sat on top of it. The anchor link is redundant on a
+     phone, where the section is a short scroll away. */
+  .topbar .btn.secondary{display:none}
+  .topbar .mark{font-size:17px}
+  .hero{padding:30px 0 26px}
+  section{padding:30px 0}
+  .wrap,.wide{padding:0 18px}
+  .topbar .inner{padding:8px 18px}
+  .fig{min-width:88px;padding:9px 11px}
+  .fig b{font-size:22px}
+  .bar{grid-template-columns:76px 1fr auto}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<div class="topbar"><div class="inner">
+  <span class="mark">Big Things</span>
+  <a class="btn secondary" href="#honesty">How honest is it?</a>
+  <a class="btn hot" href="index.html">Open the map →</a>
+</div></div>
+
+<header class="hero"><div class="wrap">
+  <h1>Australia built<br>a thousand<br>giant things.</h1>
+  <p class="sub">This is a map of the ones we can actually prove.</p>
+  <p class="lede">
+    Fibreglass fruit on the highway. A ram the size of a house. A 250-metre earthworm you
+    could walk through, until termites got it. The Big Things are the country's most
+    democratic monuments — no committee, no marble, just a town deciding it should be known
+    for something and building it out of chicken wire and render.
+  </p>
+  <p class="lede">
+    There is no official register. So this project assembled one from open data, and it tells
+    you where it is guessing.
+  </p>
+  <div class="cta">
+    <a class="btn hot big" href="index.html">Open the map</a>
+    <a class="btn big" href="#data">Take the data</a>
+  </div>
+  <div class="figures"><div class="fig"><b>477</b><span>mapped</span></div><div class="fig"><b>313</b><span>pinpointed</span></div><div class="fig"><b>164</b><span>town-level</span></div><div class="fig"><b>26</b><span>lost</span></div><div class="fig"><b>1,075</b><span>claimed to exist</span></div></div>
+</div></header>
+
+<div class="strip"><div class="wide">
+  <div class="striprow"><figure class="shot">
+      <img src="https://commons.wikimedia.org/wiki/Special:FilePath/BigBanana.jpg?width=480" alt="Big Banana, Coffs Harbour" loading="lazy">
+      <figcaption>
+        <b>Big Banana</b>
+        <span class="place">Coffs Harbour, NSW</span>
+        <span class="by">Photo: <a href="https://commons.wikimedia.org/wiki/File:BigBanana.jpg" target="_blank" rel="noopener noreferrer">Cmb1908</a> · <a href="http://creativecommons.org/publicdomain/zero/1.0/deed.en" target="_blank" rel="noopener noreferrer">CC0</a></span>
+      </figcaption>
+    </figure><figure class="shot">
+      <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Big%20Merino.jpg?width=480" alt="The Big Merino, Goulburn" loading="lazy">
+      <figcaption>
+        <b>The Big Merino</b>
+        <span class="place">Goulburn, NSW</span>
+        <span class="by">Photo: <a href="https://commons.wikimedia.org/wiki/File:Big_Merino.jpg" target="_blank" rel="noopener noreferrer">C76mb</a> · <a href="https://creativecommons.org/licenses/by-sa/4.0" target="_blank" rel="noopener noreferrer">CC BY-SA 4.0</a></span>
+      </figcaption>
+    </figure><figure class="shot">
+      <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Kingston%20SE%20lobster.JPG?width=480" alt="The Big Lobster, Kingston SE" loading="lazy">
+      <figcaption>
+        <b>The Big Lobster</b>
+        <span class="place">Kingston SE, SA</span>
+        <span class="by">Photo: <a href="https://commons.wikimedia.org/wiki/File:Kingston_SE_lobster.JPG" target="_blank" rel="noopener noreferrer">riana_dzasta</a> · <a href="http://creativecommons.org/licenses/by-sa/3.0/" target="_blank" rel="noopener noreferrer">CC BY-SA 3.0</a></span>
+      </figcaption>
+    </figure><figure class="shot">
+      <img src="https://commons.wikimedia.org/wiki/Special:FilePath/GiantPineappleNambour.jpg?width=480" alt="The Big Pineapple, Woombye" loading="lazy">
+      <figcaption>
+        <b>The Big Pineapple</b>
+        <span class="place">Woombye, QLD</span>
+        <span class="by">Photo: <a href="https://commons.wikimedia.org/wiki/File:GiantPineappleNambour.jpg" target="_blank" rel="noopener noreferrer">Moondyne</a> · <a href="http://creativecommons.org/licenses/by-sa/3.0/" target="_blank" rel="noopener noreferrer">CC BY-SA 3.0</a></span>
+      </figcaption>
+    </figure><figure class="shot">
+      <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Jay%20Seeney%20and%20Jake%20Gilroy%20in%20Tamworth.jpg?width=480" alt="The Big Golden Guitar, Tamworth" loading="lazy">
+      <figcaption>
+        <b>The Big Golden Guitar</b>
+        <span class="place">Tamworth, NSW</span>
+        <span class="by">Photo: <a href="https://commons.wikimedia.org/wiki/File:Jay_Seeney_and_Jake_Gilroy_in_Tamworth.jpg" target="_blank" rel="noopener noreferrer">Seeneyj</a> · <a href="https://creativecommons.org/licenses/by-sa/3.0" target="_blank" rel="noopener noreferrer">CC BY-SA 3.0</a></span>
+      </figcaption>
+    </figure><figure class="shot">
+      <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Giant%20Koala.jpg?width=480" alt="The Giant Koala, Dadswells Bridge" loading="lazy">
+      <figcaption>
+        <b>The Giant Koala</b>
+        <span class="place">Dadswells Bridge, VIC</span>
+        <span class="by">Photo: <a href="https://commons.wikimedia.org/wiki/File:Giant_Koala.jpg" target="_blank" rel="noopener noreferrer">Bilby</a> · Public domain</span>
+      </figcaption>
+    </figure></div>
+</div></div>
+
+<section id="what"><div class="wrap">
+  <h2>What counts as a Big Thing</h2>
+  <p class="standfirst">Giant, roadside, and slightly absurd on purpose.</p>
+  <p>
+    The tradition starts with the <strong>Big Scotsman</strong> in Adelaide in 1963 and the
+    <strong>Big Banana</strong> at Coffs Harbour a year later, and runs through six decades of
+    towns advertising themselves at scale: a prawn, a merino, a mango, a bogan. Emerging at the
+    same time as America's roadside giants, but with a different accent — where the United
+    States built to sell, Australia built substantially to amuse itself.
+  </p>
+  <p class="pullquote">The joke is the point. That is why the country has so many.</p>
+  <p>
+    They are also fragile. These things are render over frame, exposed to weather, dependent on
+    a business that may not outlast them. This dataset records
+    <strong>26 that have been demolished or removed</strong>, and keeps them on the map
+    rather than quietly deleting them, because the ghosts are half the story.
+  </p>
+  <h3>About that famous number</h3>
+  <p>
+    You will see "more than 1,000" everywhere. It comes from Amy Clarke's census, published in
+    <a href="https://doi.org/10.1080/14443058.2022.2144928" target="_blank" rel="noopener noreferrer">“Making a Mark: Displays of Regional and National Identity in the Big Things of Australia and Canada”</a>
+    (<em>Journal of Australian Studies</em> 47(2), 2023; online November 2022), which counted
+    <strong>1,075 in Australia</strong>.
+  </p>
+  <p>
+    Two things worth knowing. The title mentions Canada because the same paper counts
+    <strong>1,250 there</strong> — Australia is not even the world leader at its own signature
+    obsession. And the figure is a <em>census</em>, not a published list: nobody hands you the
+    1,075 rows. Which is exactly why this map shows 477 and says so on the front.
+  </p>
+</div></section>
+
+<section id="honesty"><div class="wrap">
+  <h2>How honest is it?</h2>
+  <p class="standfirst">Every pin tells you how precisely it is placed, because most sources give a town, not a point.</p>
+  <p>
+    This is the central problem of mapping Big Things. Wikipedia's tables name the town — "Robertson",
+    "Ballina" — not the sculpture's position. A map that silently drops a few hundred town centroids
+    onto the continent looks authoritative and is lying to you about where the Big Potato is.
+  </p>
+  <p>So instead, each record carries a precision tier, and the map shows it in plain words on the card:</p>
+  <table class="tbl">
+    <thead><tr><th>How the pin was placed</th><th style="text-align:right">Count</th></tr></thead>
+    <tbody><tr><td>The sculpture has its own Wikipedia article, with coordinates</td><td class="num">20</td></tr><tr><td>A Wikivoyage travel marker for this name, in this state</td><td class="num">27</td></tr><tr><td>Matched to an OpenStreetMap feature near the right town</td><td class="num">79</td></tr><tr><td>Researched individually against councils, operators and OSM</td><td class="num">181</td></tr><tr><td>A coordinate written inline in the source table</td><td class="num">6</td></tr><tr><td>The town’s centre — <strong>not</strong> the sculpture</td><td class="num">164</td></tr><tr class="total"><td>Total</td><td class="num">477</td></tr></tbody>
+  </table>
+  <p>
+    <strong>313 of 477 (66%)</strong> sit on the sculpture itself. The rest sit at
+    their town's centre, drawn with a dashed outline, labelled as such, and hideable with one switch.
+    The map would look more impressive if it pretended otherwise. It would also be worse.
+  </p>
+  <h3>What the map won't do</h3>
+  <ul>
+    <li>It won't invent a coordinate. If a source couldn't place something, it stays at town level.</li>
+    <li>It won't claim a height the source didn't give. The Giant Worm was 250 m <em>long</em> — a
+        walk-through tunnel, not a tower — so it is filed under "biggest, any axis", never "tallest".</li>
+    <li>It won't guess between two candidates. Where a name matched two different objects more than
+        500 m apart, the matcher refuses and the pin stays honest.</li>
+  </ul>
+</div></section>
+
+<section id="fixes"><div class="wrap">
+  <h2>Where the sources were wrong</h2>
+  <p class="standfirst">Open data is not the same as correct data. 11 corrections, each with a reason and a source.</p>
+  <div class="fixes"><div class="fix"><h4>Fergus the Bull <span style="font-size:12px;color:var(--ink-soft)">WA</span></h4><p>Was pinned on the Nullarbor Plain, ~1,200 km from where it stands. The Location cell reads &#39;Forrest Highway, just north of Bunbury&#39;; the place geocoder stripped the road type and matched Forrest, Western Australia — a real locality near the South Australian border. Fergus stands beside the Forrest H…</p><p class="src"><a href="https://nominatim.openstreetmap.org/search?q=Forrest+Highway+Eaton+Western+Australia" target="_blank" rel="noopener noreferrer">Source</a></p></div><div class="fix"><h4>Big Triceratops <span style="font-size:12px;color:var(--ink-soft)">QLD</span></h4><p>Wikipedia files the Big Triceratops in its New South Wales table and spells the town &#39;Ballendean&#39;. Ballandean is in Queensland, in the Granite Belt near Stanthorpe — the article&#39;s own neighbouring rows (Big Apple, Thulimbah) are Queensland Granite Belt entries. Corrected state and spelling.</p><p class="src"><a href="https://en.wikipedia.org/wiki/Ballandean,_Queensland" target="_blank" rel="noopener noreferrer">Source</a></p></div><div class="fix"><h4>The Big Lobster <span style="font-size:12px;color:var(--ink-soft)">SA</span></h4><p>Wikipedia&#39;s Location cell reads &#39;Rosetown&#39;. Larry the Lobster stands at Kingston SE on the Princes Highway; the district council&#39;s own page for the sculpture gives that location. Build year (1979) and 17 m height are confirmed by the same source.</p><p class="src"><a href="https://www.kingstondc.sa.gov.au/discover/things-to-see-and-do/the-big-lobster" target="_blank" rel="noopener noreferrer">Source</a></p></div><div class="fix"><h4>The Anmatjere Man <span style="font-size:12px;color:var(--ink-soft)">NT</span></h4><p>The Location cell reads &#39;Anmatjere&#39;, a region rather than a settlement, which geocoded ~100 km north of the sculpture. The row&#39;s own notes place it at the Aileron Roadhouse on the Stuart Highway; OpenStreetMap maps the sculpture there.</p><p class="src"><a href="https://www.openstreetmap.org/node/1853027814" target="_blank" rel="noopener noreferrer">Source</a></p></div><div class="fix"><h4>Anmatjere Woman and Child <span style="font-size:12px;color:var(--ink-soft)">NT</span></h4><p>Location cell reads &#39;Anmatjere&#39;, a region, which geocoded ~100 km north of the sculpture. The row&#39;s notes say Mark Egan added this family group to accompany his Anmatjere Man, which stands at the Aileron Roadhouse.</p><p class="src"><a href="https://en.wikipedia.org/wiki/Big_things_(Australia)" target="_blank" rel="noopener noreferrer">Source</a></p></div><div class="fix"><h4>The Big Oyster <span style="font-size:12px;color:var(--ink-soft)">NSW</span></h4><p>Wikipedia leaves the Built cell empty. The Big Oyster was opened on 30 March 1990 by NSW Premier Nick Greiner, per the NSW Government&#39;s attraction page and contemporaneous Manning River Times reporting.</p><p class="src"><a href="https://www.nsw.gov.au/visiting-and-exploring-nsw/locations-and-attractions/big-oyster" target="_blank" rel="noopener noreferrer">Source</a></p></div></div>
+  <p style="margin-top:20px">
+    Every one is recorded in <code>data/overrides.json</code> and surfaced on the affected card in the
+    map, so you can see what was changed and disagree with it.
+  </p>
+</div></section>
+
+<section id="shape"><div class="wrap">
+  <h2>The shape of the collection</h2>
+  <p class="standfirst">Queensland and New South Wales dominate. Fauna beats fruit, comfortably.</p>
+  <h3>By state and territory</h3>
+  <div class="bars"><div class="bar" title="NSW: 138"><span class="lbl">NSW</span><span class="t"><span class="f" style="width:100.0%"></span></span><span class="n">138</span></div><div class="bar" title="QLD: 116"><span class="lbl">QLD</span><span class="t"><span class="f" style="width:84.1%"></span></span><span class="n">116</span></div><div class="bar" title="VIC: 87"><span class="lbl">VIC</span><span class="t"><span class="f" style="width:63.0%"></span></span><span class="n">87</span></div><div class="bar" title="SA: 42"><span class="lbl">SA</span><span class="t"><span class="f" style="width:30.4%"></span></span><span class="n">42</span></div><div class="bar" title="WA: 30"><span class="lbl">WA</span><span class="t"><span class="f" style="width:21.7%"></span></span><span class="n">30</span></div><div class="bar" title="TAS: 27"><span class="lbl">TAS</span><span class="t"><span class="f" style="width:19.6%"></span></span><span class="n">27</span></div><div class="bar" title="NT: 24"><span class="lbl">NT</span><span class="t"><span class="f" style="width:17.4%"></span></span><span class="n">24</span></div><div class="bar" title="ACT: 13"><span class="lbl">ACT</span><span class="t"><span class="f" style="width:9.4%"></span></span><span class="n">13</span></div></div>
+  <h3>By what it actually is</h3>
+  <div class="bars"><div class="bar" title="🦘 Fauna: 151"><span class="lbl">🦘 Fauna</span><span class="t"><span class="f" style="width:100.0%"></span></span><span class="n">151</span></div><div class="bar" title="🛸 Oddity: 68"><span class="lbl">🛸 Oddity</span><span class="t"><span class="f" style="width:45.0%"></span></span><span class="n">68</span></div><div class="bar" title="🍌 Fruit &amp; veg: 63"><span class="lbl">🍌 Fruit &amp; veg</span><span class="t"><span class="f" style="width:41.7%"></span></span><span class="n">63</span></div><div class="bar" title="🎸 People: 53"><span class="lbl">🎸 People</span><span class="t"><span class="f" style="width:35.1%"></span></span><span class="n">53</span></div><div class="bar" title="🦐 Seafood: 39"><span class="lbl">🦐 Seafood</span><span class="t"><span class="f" style="width:25.8%"></span></span><span class="n">39</span></div><div class="bar" title="🍺 Food &amp; drink: 36"><span class="lbl">🍺 Food &amp; drink</span><span class="t"><span class="f" style="width:23.8%"></span></span><span class="n">36</span></div><div class="bar" title="🔨 Tools: 26"><span class="lbl">🔨 Tools</span><span class="t"><span class="f" style="width:17.2%"></span></span><span class="n">26</span></div><div class="bar" title="🎾 Sport: 22"><span class="lbl">🎾 Sport</span><span class="t"><span class="f" style="width:14.6%"></span></span><span class="n">22</span></div><div class="bar" title="🚜 Machines: 19"><span class="lbl">🚜 Machines</span><span class="t"><span class="f" style="width:12.6%"></span></span><span class="n">19</span></div></div>
+  <p>
+    The oldest here is <strong>Big Mouth</strong> at St Kilda, 1912. The newest is <strong>The Big Beer Can</strong> at Newcastle NSW, 2026. The largest along any axis is
+    <strong>The Giant Worm</strong> at Bass at 250 m — and the tallest, measured as a height by its own source, is <strong>The Big Rig</strong> at Roma at 30 m.
+  </p>
+</div></section>
+
+<section id="sources"><div class="wrap">
+  <h2>Where it all comes from</h2>
+  <p class="standfirst">Five openly-licensed sources, cited per row.</p>
+  <div class="sources"><div class="src-card">
+      <h4><a href="https://en.wikipedia.org/wiki/Big_things_(Australia)" target="_blank" rel="noopener noreferrer">Wikipedia — Big things (Australia)</a></h4>
+      <p>The spine of the dataset: names, towns, years, dimensions and notes, state by state.</p>
+      <span class="lic">CC BY-SA 4.0</span>
+    </div><div class="src-card">
+      <h4><a href="https://en.wikivoyage.org/wiki/Australia%27s_big_things" target="_blank" rel="noopener noreferrer">Wikivoyage — Australia&#39;s big things</a></h4>
+      <p>Surveyed marker coordinates, travel-guide voice, and entries Wikipedia omits.</p>
+      <span class="lic">CC BY-SA 4.0</span>
+    </div><div class="src-card">
+      <h4><a href="https://www.openstreetmap.org/" target="_blank" rel="noopener noreferrer">OpenStreetMap via Overpass API</a></h4>
+      <p>An independent coordinate cross-check, and the basemap tiles on the online map.</p>
+      <span class="lic">ODbL 1.0</span>
+    </div><div class="src-card">
+      <h4><a href="https://commons.wikimedia.org/" target="_blank" rel="noopener noreferrer">Wikimedia Commons (images)</a></h4>
+      <p>The photographs, each under its own free licence and credited to its photographer.</p>
+      <span class="lic">various free licences</span>
+    </div><div class="src-card">
+      <h4><a href="https://landofthebigs.com/" target="_blank" rel="noopener noreferrer">Land of the Bigs</a> &amp; <a href="https://www.aussiebigthings.com.au/" target="_blank" rel="noopener noreferrer">Aussie Big Things</a></h4>
+      <p>Community catalogues that enumerate far more than the wikis do. Facts only — a name, a place, a coordinate — cited per row.</p>
+      <span class="lic">facts only, cited</span>
+    </div></div>
+  <h3>The photographs</h3>
+  <p>
+    284 photographs come from Wikimedia Commons, each under its own free licence and each
+    credited to its photographer on the card. That is a licence condition for the CC BY and CC BY-SA
+    files, which are most of them — and for several versions of this app it wasn't being met, which
+    was a breach rather than an oversight.
+  </p>
+  <p>
+    The photographs are <strong>not</strong> covered by this project's licence. Each stays under the
+    licence its author chose. The full list is in <code>docs/IMAGE-CREDITS.md</code>.
+  </p>
+</div></section>
+
+<section id="data"><div class="wrap">
+  <h2>Take the data</h2>
+  <p class="standfirst">It is yours. CC BY-SA 4.0, matching the wikis it came from.</p>
+  <div class="grab"><a href="https://pub.hyperagent.com/api/published/pbf01M21H2A62_SKTBJCQ5TMVMP4E1/bigthings.json" target="_blank" rel="noopener noreferrer"><b>bigthings.json</b><span>The whole dataset — every record with its coordinates, precision tier, per-row sources and any correction applied to it.</span></a><a href="https://pub.hyperagent.com/api/published/pbf01M21H2RJ0_NC65QAB14J2KS5N1/bigthings-au.geojson" target="_blank" rel="noopener noreferrer"><b>bigthings-au.geojson</b><span>GeoJSON, for dropping straight into QGIS, Felt, or any other map.</span></a><a href="https://pub.hyperagent.com/api/published/pbf01M21H2X39_H8W6ZCZ6XV820CRX/australian-big-things.zip" target="_blank" rel="noopener noreferrer"><b>australian-big-things.zip</b><span>The offline-complete bundle: cached upstream sources with checksums, both web builds, all 284 photographs, the tests and the docs. About 28 MB.</span></a></div>
+  <h3>Or query it from a terminal</h3>
+  <pre><code>$ bigthings prawn
+$ bigthings --state QLD --category seafood
+$ bigthings --near -33.87,151.21 --within 300 --sort distance
+$ bigthings --gone --format csv &gt; lost-big-things.csv
+$ bigthings --stats</code></pre>
+  <p>
+    The map and the command line share one query engine, and a test diffs their output for the same
+    inputs so they cannot drift apart. The whole thing is zero-dependency Node: the bundle rebuilds
+    from cached sources with no network, and 284 photographs, the fonts and a vector Australia
+    coastline ship inside it so the offline build genuinely works unplugged.
+  </p>
+</div></section>
+
+<footer><div class="wrap">
+  <h3>Big Things</h3>
+  <p>
+    477 giant Australian sculptures, mapped from open data with their uncertainty intact.
+    Dataset generated 2026-09-08 and published under
+    <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener noreferrer">CC BY-SA 4.0</a>.
+    Photographs remain under their own licences and are credited individually.
+  </p>
+  <p><a href="https://en.wikipedia.org/wiki/Big_things_(Australia)" target="_blank" rel="noopener noreferrer">Wikipedia</a> · <a href="https://en.wikivoyage.org/wiki/Australia%27s_big_things" target="_blank" rel="noopener noreferrer">Wikivoyage</a> · <a href="https://www.openstreetmap.org/" target="_blank" rel="noopener noreferrer">OpenStreetMap via Overpass API</a> · <a href="https://commons.wikimedia.org/" target="_blank" rel="noopener noreferrer">Wikimedia Commons (images)</a></p>
+  <p style="margin-top:18px"><a class="btn hot" href="index.html">Open the map →</a></p>
+</div></footer>
+
+</body>
+</html>
