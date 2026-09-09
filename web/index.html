@@ -350,6 +350,16 @@ const OUTLINE = null;
 const THINGS = DATA.things;
 const META = DATA.meta;
 
+/**
+ * Direct links: #thing=<id> opens one card, #state=NSW or #state=NSW,QLD
+ * pre-applies the state filter. Read once at load — nothing here listens for
+ * hashchange, since every in-app navigation already updates F/selected
+ * directly and syncHash() below keeps the address bar in step with it.
+ */
+const initialHash = new URLSearchParams(location.hash.slice(1));
+const hashThing = initialHash.get('thing');
+const hashStates = (initialHash.get('state') || '').split(',').map((s) => s.trim().toUpperCase()).filter(Boolean);
+
 const CATS = {
   'fruit-and-veg':          { label:'Fruit & veg',      short:'Fruit',    emoji:'🍌', colour:'#f0a71c' },
   'fauna':                  { label:'Fauna',            short:'Fauna',    emoji:'🦘', colour:'#c8452b' },
@@ -387,8 +397,13 @@ const map = L.map('map', {
   zoomSnap:0.25, zoomDelta:0.5,
   worldCopyJump:false, attributionControl:false,
 }).fitBounds(AU_VIEW, { padding:[4, 4] });
-// Re-frame once the grid has settled, and whenever the viewport changes shape.
-requestAnimationFrame(() => { map.invalidateSize(); map.fitBounds(AU_VIEW, { padding:[4, 4] }); });
+// Re-frame once the grid has settled, and whenever the viewport changes shape
+// — unless a direct link already asked for a specific thing or state, which
+// is applied synchronously below and would otherwise be undone by this.
+requestAnimationFrame(() => {
+  map.invalidateSize();
+  if (!hashThing && !hashStates.length) map.fitBounds(AU_VIEW, { padding:[4, 4] });
+});
 if (!PHONE) L.control.zoom({ position:'bottomright' }).addTo(map);
 const attribution = L.control.attribution({ position:'bottomright', prefix:false }).addTo(map);
 
@@ -484,6 +499,20 @@ function refresh(fit) {
     if (b.isValid()) map.fitBounds(b.pad(0.14), { animate:true, maxZoom:12 });
   }
   if (document.getElementById('listsheet').classList.contains('open')) renderList();
+  syncHash();
+}
+
+/**
+ * Keep the address bar a shareable link to whatever's on screen: an open
+ * card wins over a state filter, which wins over nothing. Uses
+ * replaceState rather than location.hash so clicking around the map
+ * doesn't fill up the back button with one entry per pin.
+ */
+function syncHash() {
+  const base = location.pathname + location.search;
+  if (selected) { history.replaceState(null, '', `${base}#thing=${selected}`); return; }
+  if (F.states.size) { history.replaceState(null, '', `${base}#state=${[...F.states].join(',')}`); return; }
+  if (location.hash) history.replaceState(null, '', base);
 }
 
 /* ---------------- chips ---------------- */
@@ -689,6 +718,7 @@ function openDetail(id, pan) {
   closeSheets();
   if (window.innerWidth <= 860) document.getElementById('side').classList.remove('open');
   if (pan !== false && t.lat != null) map.setView([t.lat, t.lng], Math.max(map.getZoom(), 13), { animate:true });
+  syncHash();
 }
 document.getElementById('dclose').addEventListener('click', () => {
   document.getElementById('detail').classList.remove('open');
@@ -697,6 +727,7 @@ document.getElementById('dclose').addEventListener('click', () => {
     const th = THINGS.find((x) => x.id === prev);
     if (th) markers.get(prev).setIcon(iconFor(th));
   }
+  syncHash();
 });
 
 /* ---------------- road trip ---------------- */
@@ -953,6 +984,20 @@ document.getElementById('counts').innerHTML = [
 buildFilters();
 refresh(false);
 updateTripCounts();
+
+/* ---------------- apply a direct link, if the URL asked for one ---------------- */
+if (hashThing && THINGS.some((t) => t.id === hashThing)) {
+  openDetail(hashThing, true);
+} else if (hashStates.length) {
+  const validStates = hashStates.filter((s) => STATES.includes(s));
+  if (validStates.length) {
+    validStates.forEach((s) => F.states.add(s));
+    document.querySelectorAll('.chip[data-kind="state"]').forEach((c) => {
+      if (F.states.has(c.dataset.value)) c.setAttribute('aria-pressed', 'true');
+    });
+    refresh(true);
+  }
+}
 </script>
 </body>
 </html>
