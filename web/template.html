@@ -391,12 +391,20 @@ const map = L.map('map', {
   zoomSnap:0.25, zoomDelta:0.5,
   worldCopyJump:false, attributionControl:false,
 }).fitBounds(AU_VIEW, { padding:[4, 4] });
+// A backgrounded tab can defer requestAnimationFrame far longer than one
+// frame — long enough for a direct link, a search or a filter to have
+// already moved the map for a real reason by the time this fires. Without
+// tracking that, the "re-frame once the grid has settled" correction below
+// would silently stomp back to the continent view over whatever the user (or
+// a direct link) had already navigated to.
+let mapMovedSinceInit = false;
+map.on('zoomend moveend', () => { mapMovedSinceInit = true; });
 // Re-frame once the grid has settled, and whenever the viewport changes shape
-// — unless a direct link already asked for a specific thing or state, which
-// is applied synchronously below and would otherwise be undone by this.
+// — unless the view already moved for a real reason in the meantime.
 requestAnimationFrame(() => {
+  const alreadyMoved = mapMovedSinceInit;
   map.invalidateSize();
-  if (!hashThing && !hashStates.length) map.fitBounds(AU_VIEW, { padding:[4, 4] });
+  if (!alreadyMoved) map.fitBounds(AU_VIEW, { padding:[4, 4] });
 });
 if (!PHONE) L.control.zoom({ position:'bottomright' }).addTo(map);
 const attribution = L.control.attribution({ position:'bottomright', prefix:false }).addTo(map);
@@ -489,15 +497,26 @@ function matches(t) {
 let visible = [];
 function refresh(fit) {
   visible = THINGS.filter(matches);
-  cluster.clearLayers();
-  const layers = [];
+  // Diff against what's currently on the map rather than clearLayers() +
+  // addLayers(): Leaflet.markercluster's bulk addLayers() can silently fail
+  // to populate the on-screen feature group after a clearLayers() reset —
+  // reproducible by narrowing a search down to a small result set, which
+  // left a real match with nothing shown for it on the map. addLayer() /
+  // removeLayer(), called singly, don't have that bug.
+  const wanted = new Set();
+  let shown = 0;
   for (const t of visible) {
     const m = markers.get(t.id);
-    if (m) { m.setIcon(iconFor(t)); layers.push(m); }
+    if (!m) continue;
+    wanted.add(t.id);
+    m.setIcon(iconFor(t));
+    if (!cluster.hasLayer(m)) cluster.addLayer(m);
+    shown++;
   }
-  cluster.addLayers(layers);
+  for (const [id, m] of markers) {
+    if (!wanted.has(id) && cluster.hasLayer(m)) cluster.removeLayer(m);
+  }
 
-  const shown = layers.length;
   const note = [];
   note.push(`${shown} of ${THINGS.length} big things shown`);
   const fuzzy = visible.filter(isFuzzy).length;
@@ -505,11 +524,26 @@ function refresh(fit) {
   document.getElementById('mapnote').textContent = note.join(' · ');
 
   document.querySelectorAll('.chip[data-kind]').forEach(renderChipCount);
+  // Re-render the list (if open) before measuring anything below — its
+  // height depends on its content, and the fit block needs the real,
+  // up-to-date height, not whatever was on screen before this refresh.
+  if (document.getElementById('listsheet').classList.contains('open')) renderList();
   if (fit && shown) {
     const b = L.latLngBounds(visible.filter((t) => t.lat != null).map((t) => [t.lat, t.lng]));
-    if (b.isValid()) map.fitBounds(b.pad(0.14), { animate:true, maxZoom:12 });
+    // A bottom sheet (the results list, most often) can be sitting over the
+    // lower part of the map at this exact moment — a single narrowed-down
+    // result centred in the *full* map box then lands right underneath it,
+    // looking exactly like the pin never appeared. Padding the fit by the
+    // open sheet's actual height keeps the result above it instead.
+    const openSheet = document.querySelector('.sheet.open');
+    const sheetPad = openSheet ? openSheet.getBoundingClientRect().height + 16 : 16;
+    if (b.isValid()) {
+      map.fitBounds(b.pad(0.14), {
+        animate:true, maxZoom:12,
+        paddingTopLeft:[16, 16], paddingBottomRight:[16, sheetPad],
+      });
+    }
   }
-  if (document.getElementById('listsheet').classList.contains('open')) renderList();
   syncHash();
 }
 
@@ -926,9 +960,16 @@ document.querySelectorAll('[data-close-sheet]').forEach((b) =>
 
 document.getElementById('q').addEventListener('input', (e) => {
   F.q = e.target.value.trim();
-  refresh(false);
-  if (F.q.length > 1) { renderList(); document.getElementById('listsheet').classList.add('open'); }
+  // Open (or close) the results sheet *before* refresh() runs, so its fit
+  // logic measures the sheet's real on-screen height instead of the height
+  // from a moment ago. refresh() re-renders the list itself once it's open.
+  if (F.q.length > 1) document.getElementById('listsheet').classList.add('open');
   else if (!F.q) document.getElementById('listsheet').classList.remove('open');
+  // Fit whenever there's an active query — otherwise a match outside the
+  // current view (e.g. searching "Gosford" while looking at Perth) gets
+  // added to the map but stays off-screen, with only the sidebar count
+  // showing it exists.
+  refresh(F.q.length > 0);
 });
 document.getElementById('listbtn').addEventListener('click', () => { renderList(); openSheet('listsheet'); });
 document.getElementById('tripbtn').addEventListener('click', () => { renderTrip(); openSheet('tripsheet'); });
