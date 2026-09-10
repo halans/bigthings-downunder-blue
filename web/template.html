@@ -220,8 +220,18 @@ a{color:var(--sky)}
     transform:translateY(101%);transition:transform .26s cubic-bezier(.4,0,.2,1);
   }
   #side.open{transform:none}
-  .brand{padding:14px 16px 10px}
-  .brand h1{font-size:26px}
+  /* The sheet is opened specifically to search or filter — the full
+     marketing intro and footer attribution (both sized for a permanent
+     desktop sidebar) were otherwise eating most of its height, leaving
+     .filters a near-unusable sliver to scroll 477 things' worth of chips
+     in. The compact title in #mobilebar already covers the brand; the
+     about link stays, since it's the only route to the About page here. */
+  .brand{padding:10px 16px 8px}
+  .brand h1{font-size:22px}
+  .brand .tag,.brand .counts{display:none}
+  #credits{display:none}
+  /* Below 16px, iOS Safari zooms the whole page in when this gets focus. */
+  #q{font-size:16px}
   #mapwrap{grid-row:1}
   #mobilebar{
     display:flex;gap:8px;position:absolute;top:0;left:0;right:0;z-index:500;
