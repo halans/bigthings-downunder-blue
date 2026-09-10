@@ -76,7 +76,7 @@
    "withYear": 172,
    "withHeight": 43,
    "withAnySize": 141,
-   "withImage": 286
+   "withImage": 287
   }
  },
  "things": [
@@ -6846,14 +6846,14 @@
    "statusEvidence": null,
    "notes": "Yininmadyemi, Thou didst let fall, is a significant artwork by Aboriginal artist Tony Albert to acknowledge Aboriginal and Torres Strait Islander men and women who served in the nation’s military.",
    "blurb": null,
-   "image": null,
+   "image": "custom:yininmadyemi-88f5c1.jpeg",
    "wikipediaArticle": null,
    "wikidata": null,
    "osmId": null,
    "addedManually": true,
    "correction": {
-    "why": "Local visit",
-    "source": "https://www.cityofsydney.nsw.gov.au/monuments-and-memorials/yininmadyemi-thou-didst-let-fall"
+    "why": "Photo updated, replacing whatever (if anything) was there.",
+    "source": null
    },
    "sources": [
     {

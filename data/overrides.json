@@ -234,6 +234,16 @@
    },
    "why": "Photo updated, replacing whatever (if anything) was there.",
    "source": null
+  },
+  {
+   "match": {
+    "id": "944b985407"
+   },
+   "set": {
+    "image": "custom:yininmadyemi-88f5c1.jpeg"
+   },
+   "why": "Photo updated, replacing whatever (if anything) was there.",
+   "source": null
   }
  ],
  "additions": [
