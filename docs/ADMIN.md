@@ -112,6 +112,28 @@ record — so a rename or a fact you got wrong belongs on the existing card, not
 Matches and deletes the first row found — used for the rare case where the wiki lists name the
 same sculpture twice under different names.
 
+### Removing a record from the admin UI
+
+Open a record and use the "Remove this record" panel at the bottom — needs a `why`, same as every
+other write here, and confirms before it does anything since it rebuilds immediately.
+
+What it actually does depends on where the record came from:
+
+- **A record you added yourself** (via "＋ Add new thing") is deleted outright — its `additions[]`
+  entry is removed, so there's nothing left to ever recreate it.
+- **A harvested record** (from Wikipedia or Wikivoyage) can't be deleted at the source — the next
+  `npm run fetch` would just bring it straight back — so this writes a `removals[]` entry instead,
+  exactly the hand-written form above. To undo it, delete that entry from `data/overrides.json` and
+  rebuild; the record reappears with all its original data.
+
+Either way, a correction sitting on that same `id` is dropped too — it would otherwise "match
+nothing" on the very next build — and if the record had a custom photo nothing else uses, that's
+deleted along with it (the file under `web/img/custom/` and its `data/custom-photos.json` entry).
+
+This is what fixed the Wikipedia/Wikivoyage dedup occasionally missing a sculpture named
+differently in each list (e.g. "Big Redback Spider" vs "The Big Redback" for the same Eight Mile
+Plains sculpture) — remove the thinner duplicate, keep the one with the photo and notes.
+
 After hand-editing `data/overrides.json`, run `npm run build` (or just `node src/build.js` if you
 don't need the pages regenerated too) and watch its output: **`override matched nothing`** or
 **`removal matched nothing`** printed to the terminal means your `match` block didn't find the

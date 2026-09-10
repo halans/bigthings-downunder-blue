@@ -156,10 +156,22 @@ function render() {
       <button id="photo-btn" class="secondary" disabled>Upload &amp; rebuild</button>
     </fieldset>
 
+    <fieldset>
+      <legend>Remove this record</legend>
+      <p class="note">${t.addedManually
+        ? 'You added this by hand — removing it deletes it outright.'
+        : 'From Wikipedia/Wikivoyage — removing it here just drops it from the build (a `removals[]` entry); it survives the next harvest and can be brought back by deleting that entry from data/overrides.json.'}
+        A duplicate for the same real-world thing is the usual reason.</p>
+      <label for="f-remove-why">Why (required)</label>
+      <textarea id="f-remove-why" placeholder="e.g. duplicate of id ...— same sculpture, keeping the other record"></textarea>
+      <button id="remove-btn" class="secondary" style="background:#fbe4e0;color:var(--accent)">Remove &amp; rebuild</button>
+    </fieldset>
+
     <div id="log"></div>
   `;
 
   document.getElementById('save-btn').addEventListener('click', saveRecord);
+  document.getElementById('remove-btn').addEventListener('click', removeRecord);
 
   let photoData = null;
   const fileInput = document.getElementById('f-photofile');
@@ -274,6 +286,24 @@ async function saveRecord() {
     banner('Failed: ' + e.message, false);
   } finally {
     btn.disabled = false; btn.textContent = 'Save & rebuild';
+  }
+}
+
+async function removeRecord() {
+  const t = current.thing;
+  const why = document.getElementById('f-remove-why').value.trim();
+  if (!why) { banner('A reason is required.', false); return; }
+  if (!confirm(`Remove "${t.name}" (${t.state}) from the catalogue? This rebuilds immediately.`)) return;
+  const btn = document.getElementById('remove-btn');
+  btn.disabled = true; btn.textContent = 'Removing…';
+  try {
+    const res = await api('POST', `/api/things/${encodeURIComponent(t.id)}/remove`, { why });
+    document.getElementById('log').textContent = res.log;
+    document.getElementById('detail').innerHTML = '<div class="empty">Removed. Pick another thing on the left, or add a new one.</div>';
+    search(document.getElementById('search').value);
+  } catch (e) {
+    banner('Failed: ' + e.message, false);
+    btn.disabled = false; btn.textContent = 'Remove & rebuild';
   }
 }
 

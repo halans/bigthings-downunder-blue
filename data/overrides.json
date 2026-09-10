@@ -210,6 +210,22 @@
    "notes": "A giant chainsaw at Beerwah, cited alongside the Big Lawnmower in coverage of Australia's big-things census. Absent from the Wikipedia list.",
    "source": "https://www.theguardian.com/artanddesign/2023/apr/16/big-things-australia-amy-clarke-research",
    "why": "Named in reporting on Amy Clarke's big-things census but missing from both wiki lists."
+  },
+  {
+   "name": "Yininmadyemi",
+   "state": "NSW",
+   "why": "Local visit",
+   "source": "https://www.cityofsydney.nsw.gov.au/monuments-and-memorials/yininmadyemi-thou-didst-let-fall",
+   "location": "Sydney",
+   "town": "Sydney",
+   "lat": -33.875273,
+   "lng": 151.210048,
+   "precision": "exact-verified",
+   "coordSource": "https://www.openstreetmap.org/search?lat=-33.875273&lon=151.210048",
+   "builtYear": 2014,
+   "category": "oddity",
+   "status": "standing",
+   "notes": "Yininmadyemi, Thou didst let fall, is a significant artwork by Aboriginal artist Tony Albert to acknowledge Aboriginal and Torres Strait Islander men and women who served in the nation’s military."
   }
  ],
  "removals": [
@@ -220,6 +236,13 @@
    },
    "why": "Duplicate. This row came from Wikivoyage's 'Big Aboriginal Hunter' bullet, which is the same sculpture as Wikipedia's 'The Anmatjere Man' — Mark Egan's 2005 figure above the Aileron Roadhouse on the Stuart Highway. Dedup missed it because the two lists name it differently and Wikivoyage gave no address. Keeping the Wikipedia row, which carries the fuller notes.",
    "source": "https://en.wikipedia.org/wiki/Big_things_(Australia)"
+  },
+  {
+   "match": {
+    "id": "0a1d142f1a"
+   },
+   "why": "Duplicate of The Big Redback (id 9ccd7ad6e0) — same sculpture at Eight Mile Plains, Brisbane. This row is the bare Wikipedia entry with no photo or notes; the fuller, corrected record is kept.",
+   "source": null
   }
  ]
 }

@@ -28,20 +28,20 @@
   "stats": {
    "total": 477,
    "mapped": 477,
-   "exact": 313,
+   "exact": 314,
    "byPrecision": {
     "exact-osm": 79,
-    "town": 164,
-    "exact-verified": 181,
+    "town": 163,
+    "exact-verified": 182,
     "exact-article": 20,
     "exact-wikivoyage": 27,
     "exact-inline": 6
    },
    "byState": {
     "ACT": 13,
-    "NSW": 138,
+    "NSW": 139,
     "NT": 24,
-    "QLD": 116,
+    "QLD": 115,
     "SA": 42,
     "TAS": 27,
     "VIC": 87,
@@ -51,9 +51,9 @@
     "fruit-and-veg": 63,
     "food-and-drink": 36,
     "people-and-culture": 53,
-    "fauna": 151,
+    "fauna": 150,
     "sport-and-leisure": 22,
-    "oddity": 68,
+    "oddity": 69,
     "seafood": 39,
     "tools-and-industry": 26,
     "machinery-and-transport": 19
@@ -66,14 +66,14 @@
     "removed": 15
    },
    "byEra": {
-    "unknown": 306,
-    "revival (2000s–2014)": 44,
+    "unknown": 305,
+    "revival (2000s–2014)": 45,
     "late century (1985–1999)": 43,
     "modern (2015+)": 37,
     "boom (1970s–early 80s)": 39,
     "pioneer (pre-1970)": 8
    },
-   "withYear": 171,
+   "withYear": 172,
    "withHeight": 43,
    "withAnySize": 141,
    "withImage": 286
@@ -6859,6 +6859,49 @@
    }
   },
   {
+   "id": "944b985407",
+   "name": "Yininmadyemi",
+   "state": "NSW",
+   "stateName": "New South Wales",
+   "location": "Sydney",
+   "town": "Sydney",
+   "lat": -33.875273,
+   "lng": 151.210048,
+   "precision": "exact-verified",
+   "coordSource": "https://www.openstreetmap.org/search?lat=-33.875273&lon=151.210048",
+   "builtYear": 2014,
+   "builtCirca": false,
+   "builtRaw": null,
+   "era": "revival (2000s–2014)",
+   "heightM": null,
+   "lengthM": null,
+   "sizeMaxM": null,
+   "sizeKind": "unknown",
+   "dimsM": [],
+   "sizeRaw": null,
+   "category": "oddity",
+   "status": "standing",
+   "statusEvidence": null,
+   "notes": "Yininmadyemi, Thou didst let fall, is a significant artwork by Aboriginal artist Tony Albert to acknowledge Aboriginal and Torres Strait Islander men and women who served in the nation’s military.",
+   "blurb": null,
+   "image": null,
+   "wikipediaArticle": null,
+   "wikidata": null,
+   "osmId": null,
+   "addedManually": true,
+   "correction": {
+    "why": "Local visit",
+    "source": "https://www.cityofsydney.nsw.gov.au/monuments-and-memorials/yininmadyemi-thou-didst-let-fall"
+   },
+   "sources": [
+    {
+     "source": "independent reporting",
+     "page": "https://www.cityofsydney.nsw.gov.au/monuments-and-memorials/yininmadyemi-thou-didst-let-fall",
+     "url": "https://www.cityofsydney.nsw.gov.au/monuments-and-memorials/yininmadyemi-thou-didst-let-fall"
+    }
+   ]
+  },
+  {
    "id": "a06068d56c",
    "name": "Anmatjere Woman and Child",
    "state": "NT",
@@ -9468,44 +9511,6 @@
      "source": "Aussie Big Things Passport",
      "page": "https://www.aussiebigthings.com.au/explore/big-platypus",
      "url": "https://www.aussiebigthings.com.au/explore/big-platypus"
-    }
-   ]
-  },
-  {
-   "id": "0a1d142f1a",
-   "name": "Big Redback Spider",
-   "state": "QLD",
-   "stateName": "Queensland",
-   "location": "Eight Mile Plains",
-   "town": "Eight Mile Plains",
-   "lat": -27.5816,
-   "lng": 153.0952,
-   "precision": "town",
-   "coordSource": "https://en.wikipedia.org/wiki/Eight_Mile_Plains",
-   "builtYear": null,
-   "builtCirca": false,
-   "builtRaw": null,
-   "era": "unknown",
-   "heightM": null,
-   "lengthM": null,
-   "sizeMaxM": null,
-   "sizeKind": "unknown",
-   "dimsM": [],
-   "sizeRaw": null,
-   "category": "fauna",
-   "status": "standing",
-   "statusEvidence": null,
-   "notes": null,
-   "blurb": null,
-   "image": null,
-   "wikipediaArticle": null,
-   "wikidata": null,
-   "osmId": null,
-   "sources": [
-    {
-     "source": "wikivoyage",
-     "page": "Australia's big things",
-     "url": "https://en.wikivoyage.org/wiki/Australia%27s_big_things"
     }
    ]
   },
