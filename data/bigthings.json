@@ -26,11 +26,11 @@
    }
   ],
   "stats": {
-   "total": 477,
-   "mapped": 477,
-   "exact": 314,
+   "total": 476,
+   "mapped": 476,
+   "exact": 313,
    "byPrecision": {
-    "exact-osm": 79,
+    "exact-osm": 78,
     "town": 163,
     "exact-verified": 182,
     "exact-article": 20,
@@ -38,7 +38,7 @@
     "exact-inline": 6
    },
    "byState": {
-    "ACT": 13,
+    "ACT": 12,
     "NSW": 139,
     "NT": 24,
     "QLD": 115,
@@ -48,7 +48,7 @@
     "WA": 30
    },
    "byCategory": {
-    "fruit-and-veg": 63,
+    "fruit-and-veg": 62,
     "food-and-drink": 36,
     "people-and-culture": 53,
     "fauna": 150,
@@ -59,16 +59,16 @@
     "machinery-and-transport": 19
    },
    "byStatus": {
-    "standing": 437,
+    "standing": 436,
     "demolished": 11,
     "relocated": 12,
     "replaced": 2,
     "removed": 15
    },
    "byEra": {
-    "unknown": 305,
     "revival (2000s–2014)": 45,
     "late century (1985–1999)": 43,
+    "unknown": 304,
     "modern (2015+)": 37,
     "boom (1970s–early 80s)": 39,
     "pioneer (pre-1970)": 8
@@ -80,49 +80,6 @@
   }
  },
  "things": [
-  {
-   "id": "132f471f77",
-   "name": "Big Acorn",
-   "state": "ACT",
-   "stateName": "Australian Capital Territory",
-   "location": "National Arboretum, Molonglo Valley",
-   "town": null,
-   "lat": -35.262487,
-   "lng": 149.145522,
-   "precision": "exact-osm",
-   "coordSource": "https://www.openstreetmap.org/node/9034545018",
-   "builtYear": null,
-   "builtCirca": false,
-   "builtRaw": null,
-   "era": "unknown",
-   "heightM": null,
-   "lengthM": null,
-   "sizeMaxM": null,
-   "sizeKind": "unknown",
-   "dimsM": [],
-   "sizeRaw": null,
-   "category": "fruit-and-veg",
-   "status": "standing",
-   "statusEvidence": null,
-   "notes": null,
-   "blurb": null,
-   "image": null,
-   "wikipediaArticle": null,
-   "wikidata": null,
-   "osmId": "node/9034545018",
-   "sources": [
-    {
-     "source": "wikivoyage",
-     "page": "Australia's big things",
-     "url": "https://en.wikivoyage.org/wiki/Australia%27s_big_things"
-    },
-    {
-     "source": "openstreetmap",
-     "page": "node/9034545018",
-     "url": "https://www.openstreetmap.org/node/9034545018"
-    }
-   ]
-  },
   {
    "id": "9d83c3dee8",
    "name": "Big Acorns",
@@ -149,27 +106,20 @@
    "statusEvidence": null,
    "notes": "The giant acorns are children's play equipment at the playground. Often referred to as the 'Acorn Park'.",
    "blurb": null,
-   "image": "National Arboretum Canberra 13.jpg",
+   "image": "custom:big-acorns-4fa4d9.jpeg",
    "wikipediaArticle": null,
    "wikidata": null,
-   "osmId": "node/9034545018",
+   "osmId": null,
    "sources": [
     {
      "source": "wikipedia",
      "page": "Big things (Australia)",
      "url": "https://en.wikipedia.org/wiki/Big_things_(Australia)"
-    },
-    {
-     "source": "openstreetmap",
-     "page": "node/9034545018",
-     "url": "https://www.openstreetmap.org/node/9034545018"
     }
    ],
-   "coordMatch": {
-    "kind": "name-exact",
-    "confidence": "high",
-    "why": "core name \"acorn\" matches exactly, 7.5 km from the town point",
-    "osmName": "The Big Acorn"
+   "correction": {
+    "why": "Photo updated, replacing whatever (if anything) was there.",
+    "source": null
    }
   },
   {
@@ -387,7 +337,7 @@
    "statusEvidence": null,
    "notes": "Big Swoop depicts an Australian magpie pecking at a chip.",
    "blurb": null,
-   "image": "Big Swoop December 2022.jpg",
+   "image": "custom:big-swoop-cc05d4.jpeg",
    "wikipediaArticle": "Big Swoop",
    "wikidata": "Q116909515",
    "osmId": null,
@@ -403,6 +353,10 @@
      "url": "https://nominatim.openstreetmap.org/search?q=Garema+Place+Civic+ACT+Australia&format=json&limit=3"
     }
    ],
+   "correction": {
+    "why": "Photo updated, replacing whatever (if anything) was there.",
+    "source": null
+   },
    "coordMatch": {
     "kind": "researched",
     "confidence": "medium",
@@ -5600,7 +5554,7 @@
    "statusEvidence": null,
    "notes": "On 24 September 2009, Ballina Shire Council voted to allow the demolition of the Big Prawn; however, Bunnings purchased the site in 2011 and refurbished the Prawn as part of the redevelopment. The prawn now sits on a stand next to the entrance of the Bunnings Warehouse carpark.",
    "blurb": "Another genuinely impressive Big Thing, rendered and painted in exquisite 3D detail. Alas, the prosaic location in a suburban Bunnings parking lot rather detracts from the Prawn's majesty.",
-   "image": "Big Prawn.png",
+   "image": "custom:the-big-prawn-e61169.jpeg",
    "wikipediaArticle": null,
    "wikidata": null,
    "osmId": "node/2686773148",
@@ -5620,7 +5574,11 @@
      "page": "node/2686773148",
      "url": "https://www.openstreetmap.org/node/2686773148"
     }
-   ]
+   ],
+   "correction": {
+    "why": "Photo updated, replacing whatever (if anything) was there.",
+    "source": null
+   }
   },
   {
    "id": "15c186ceb3",

@@ -190,6 +190,50 @@
    },
    "why": "Photo updated, replacing whatever (if anything) was there.",
    "source": null
+  },
+  {
+   "match": {
+    "id": "21c345890a"
+   },
+   "set": {
+    "image": "custom:big-swoop-cc05d4.jpeg"
+   },
+   "why": "Photo updated, replacing whatever (if anything) was there.",
+   "source": null
+  },
+  {
+   "match": {
+    "id": "513e0feff3"
+   },
+   "set": {
+    "image": "custom:the-big-prawn-e61169.jpeg"
+   },
+   "why": "Photo updated, replacing whatever (if anything) was there.",
+   "source": null
+  },
+  {
+   "match": {
+    "id": "9d83c3dee8"
+   },
+   "set": {
+    "image": "custom:big-acorns-4fa4d9.jpeg",
+    "name": "Big Acorns",
+    "state": "ACT",
+    "location": "National Arboretum Canberra in Molonglo Valley",
+    "town": "National Arboretum Canberra",
+    "lat": -35.262487,
+    "lng": 149.145522,
+    "precision": "exact-osm",
+    "coordSource": "https://www.openstreetmap.org/node/9034545018",
+    "builtYear": 2013,
+    "builtRaw": "2013",
+    "category": "fruit-and-veg",
+    "status": "standing",
+    "notes": "The giant acorns are children's play equipment at the playground. Often referred to as the 'Acorn Park'.",
+    "stateName": "Australian Capital Territory"
+   },
+   "why": "Photo updated, replacing whatever (if anything) was there.",
+   "source": null
   }
  ],
  "additions": [
@@ -252,6 +296,13 @@
     "id": "0a1d142f1a"
    },
    "why": "Duplicate of The Big Redback (id 9ccd7ad6e0) — same sculpture at Eight Mile Plains, Brisbane. This row is the bare Wikipedia entry with no photo or notes; the fuller, corrected record is kept.",
+   "source": null
+  },
+  {
+   "match": {
+    "id": "132f471f77"
+   },
+   "why": "duplicate of other record",
    "source": null
   }
  ]

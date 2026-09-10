@@ -1,6 +1,6 @@
 # Photo credits
 
-283 photographs, vendored from Wikimedia Commons at 480px wide on 2026-09-09.
+280 photographs, vendored from Wikimedia Commons at 480px wide on 2026-09-09.
 
 Every one is reproduced under a free licence. Most require attribution, so the
 photographer and licence are named here, on each photo in the app, and in
@@ -11,7 +11,7 @@ under the licence its author chose; the dataset itself is CC BY-SA 4.0.
 
 ## Licences used
 
-- CC BY-SA 4.0 — 136 photos
+- CC BY-SA 4.0 — 133 photos
 - CC BY-SA 3.0 — 61 photos
 - Public domain — 31 photos
 - CC BY 3.0 — 16 photos
@@ -35,7 +35,6 @@ under the licence its author chose; the dataset itself is CC BY-SA 4.0.
 | Another Big Pelican (SA) | Whoop90 | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0) | [Big Pelican Meningie.jpg](https://commons.wikimedia.org/wiki/File:Big_Pelican_Meningie.jpg) |
 | Banana the Bullock (QLD) | BrisbanePom | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0) | [Banana Bullock.jpg](https://commons.wikimedia.org/wiki/File:Banana_Bullock.jpg) |
 | Bert Bolle Barometer (WA) | BaroBert | [CC BY-SA 3.0](http://creativecommons.org/licenses/by-sa/3.0/) | [Bert Bolle Barometer, Denmark WA (cr).jpg](https://commons.wikimedia.org/wiki/File:Bert_Bolle_Barometer,_Denmark_WA_(cr).jpg) |
-| Big Acorns (ACT) | Kgbo | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0) | [National Arboretum Canberra 13.jpg](https://commons.wikimedia.org/wiki/File:National_Arboretum_Canberra_13.jpg) |
 | Big Ant (NSW) | Bilby | [CC BY 3.0](https://creativecommons.org/licenses/by/3.0) | [Big Ant.jpg](https://commons.wikimedia.org/wiki/File:Big_Ant.jpg) |
 | Big Apple (NSW) | DemetersRest | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0) | [Tallong Big Apple.jpg](https://commons.wikimedia.org/wiki/File:Tallong_Big_Apple.jpg) |
 | Big Apple (NSW) | Mark Ollerenshaw from Australia | [CC BY 2.0](https://creativecommons.org/licenses/by/2.0) | [The Big Apple Yerrinbool.jpg](https://commons.wikimedia.org/wiki/File:The_Big_Apple_Yerrinbool.jpg) |
@@ -109,7 +108,6 @@ under the licence its author chose; the dataset itself is CC BY-SA 4.0.
 | Big Seat (VIC) | SteveEBear | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0) | [The big seat at arthurs seat.jpg](https://commons.wikimedia.org/wiki/File:The_big_seat_at_arthurs_seat.jpg) |
 | Big Strawberry (VIC) | Mattinbgn | [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0) | [KoonoomooBigStrawberry.JPG](https://commons.wikimedia.org/wiki/File:KoonoomooBigStrawberry.JPG) |
 | Big Swagman and Dog (NSW) | Krysti Giles | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0) | [The Big Dingo.jpg](https://commons.wikimedia.org/wiki/File:The_Big_Dingo.jpg) |
-| Big Swoop (ACT) | Nick-D | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0) | [Big Swoop December 2022.jpg](https://commons.wikimedia.org/wiki/File:Big_Swoop_December_2022.jpg) |
 | Big Tap (VIC) | Bilby | [CC BY 3.0](https://creativecommons.org/licenses/by/3.0) | [Big Tap wp.jpg](https://commons.wikimedia.org/wiki/File:Big_Tap_wp.jpg) |
 | Big Teepee (QLD) | Jennyleigh3 | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0) | [Big Teepee.png](https://commons.wikimedia.org/wiki/File:Big_Teepee.png) |
 | Big Tennis Racquet (NSW) | Elitism ( talk ) | [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0) | [Big Tennis Racquet Barellan 2009-10-03 (square).JPG](https://commons.wikimedia.org/wiki/File:Big_Tennis_Racquet_Barellan_2009-10-03_(square).JPG) |
@@ -250,7 +248,6 @@ under the licence its author chose; the dataset itself is CC BY-SA 4.0.
 | The Big Potato (NSW) | The original uploader was Celcom at English Wikipedia . | [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0) | [Big Potato in Robertson, NSW.jpg](https://commons.wikimedia.org/wiki/File:Big_Potato_in_Robertson,_NSW.jpg) |
 | The Big Powerful Owl (ACT) | giantowl | [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0) | [Giant Owl.jpg](https://commons.wikimedia.org/wiki/File:Giant_Owl.jpg) |
 | The Big Pram (VIC) | SteveEBear | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0) | [Big Pram Eaglehawk Vic.jpg](https://commons.wikimedia.org/wiki/File:Big_Pram_Eaglehawk_Vic.jpg) |
-| The Big Prawn (NSW) | Cmb1908 | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0) | [Big Prawn.png](https://commons.wikimedia.org/wiki/File:Big_Prawn.png) |
 | The Big Prawn (WA) | Aliceinthealice | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0) | [The Big Prawn in Exmouth, Western Australia, 2024.jpg](https://commons.wikimedia.org/wiki/File:The_Big_Prawn_in_Exmouth,_Western_Australia,_2024.jpg) |
 | The Big Pumpkin (QLD) | Stuart Edwards | Public domain | [Beaudesert BigPumpkin.jpg](https://commons.wikimedia.org/wiki/File:Beaudesert_BigPumpkin.jpg) |
 | The Big Pumpkin (QLD) | BrisbanePom | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0) | [Big Pumpkin1.jpg](https://commons.wikimedia.org/wiki/File:Big_Pumpkin1.jpg) |
