@@ -26,6 +26,7 @@ OPTIONS
   -c, --category <CAT>    fruit-and-veg fauna seafood food-and-drink
                           machinery-and-transport tools-and-industry
                           sport-and-leisure people-and-culture oddity
+                          sculpture
       --status <S>        standing demolished removed relocated replaced
       --era <E>           pioneer boom late-century revival modern unknown
       --exact-only        only pins located to the sculpture, not the town

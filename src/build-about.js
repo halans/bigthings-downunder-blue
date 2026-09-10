@@ -73,6 +73,7 @@ const CATEGORY_LABEL = {
   'sport-and-leisure': '🎾 Sport',
   'people-and-culture': '🎸 People',
   oddity: '🛸 Oddity',
+  sculpture: '🗿 Sculpture',
 };
 
 /** One photo tile, credited — the licence requires the photographer's name. */

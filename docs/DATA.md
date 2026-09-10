@@ -134,6 +134,13 @@ sport because "guitar" sat in the sport rule.
 `oddity` is the honest fallback, not a dumping ground: it holds the genuinely uncategorisable
 (Big Peg, Big Rubik's Cube, Big Sundial, Big Periodic Table).
 
+A tenth category, `sculpture`, exists outside this chain — no rule assigns it automatically, only
+a hand-written correction does (see docs/ADMIN.md). It's for commissioned or fine-art pieces that
+happen to be big, as distinct from roadside novelty advertising built to be a tourist drawcard —
+candidates raised so far include Tony Albert's *Yininmadyemi*, *Almost Once*, and The Big Poppies.
+Whether something is a "big thing" or a "sculpture" is a judgement call about intent, not
+something text-matching can make.
+
 ## Where the records come from
 
 | Origin | Rows | Notes |

@@ -42,7 +42,7 @@ const META = {
   states: ['ACT', 'NSW', 'NT', 'QLD', 'SA', 'TAS', 'VIC', 'WA'],
   categories: [
     'fruit-and-veg', 'fauna', 'seafood', 'food-and-drink', 'machinery-and-transport',
-    'tools-and-industry', 'sport-and-leisure', 'people-and-culture', 'oddity',
+    'tools-and-industry', 'sport-and-leisure', 'people-and-culture', 'oddity', 'sculpture',
   ],
   statuses: ['standing', 'demolished', 'removed', 'relocated', 'replaced'],
   precisions: ['exact-article', 'exact-wikivoyage', 'exact-osm', 'exact-verified', 'exact-inline', 'town', 'none'],

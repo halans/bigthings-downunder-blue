@@ -53,7 +53,8 @@
     "people-and-culture": 53,
     "fauna": 150,
     "sport-and-leisure": 22,
-    "oddity": 69,
+    "sculpture": 6,
+    "oddity": 63,
     "seafood": 39,
     "tools-and-industry": 26,
     "machinery-and-transport": 19
@@ -678,10 +679,10 @@
    "stateName": "New South Wales",
    "location": "Sydney",
    "town": "Sydney",
-   "lat": -33.869696,
-   "lng": 151.213162,
+   "lat": -33.8696909,
+   "lng": 151.2175375,
    "precision": "exact-verified",
-   "coordSource": "https://landofthebigs.com/almost-once-sydney-nsw/",
+   "coordSource": "https://www.openstreetmap.org/node/6789548804",
    "builtYear": null,
    "builtCirca": false,
    "builtRaw": null,
@@ -692,19 +693,19 @@
    "sizeKind": "unknown",
    "dimsM": [],
    "sizeRaw": null,
-   "category": "oddity",
+   "category": "sculpture",
    "status": "standing",
    "statusEvidence": null,
    "notes": null,
-   "blurb": null,
+   "blurb": "It takes one tree to make a 1000 matches, it takes 1 match to burn a 1000 trees.",
    "image": null,
    "wikipediaArticle": null,
    "wikidata": null,
    "osmId": null,
    "addedManually": true,
    "correction": {
-    "why": "Catalogued by Land of the Bigs, which publishes a mapped position for it.",
-    "source": "https://landofthebigs.com/almost-once-sydney-nsw/"
+    "why": "Brett Whiteley's sculpture (two giant matches, one burnt) at the Art Gallery of NSW forecourt — commissioned fine art, not roadside novelty advertising.",
+    "source": "https://www.artgallery.nsw.gov.au/art/watch-listen-read/read/once-again/"
    },
    "sources": [
     {
@@ -5452,7 +5453,7 @@
    "sizeKind": "unknown",
    "dimsM": [],
    "sizeRaw": null,
-   "category": "oddity",
+   "category": "sculpture",
    "status": "standing",
    "statusEvidence": null,
    "notes": null,
@@ -5463,7 +5464,7 @@
    "osmId": null,
    "addedManually": true,
    "correction": {
-    "why": "Photo updated, replacing whatever (if anything) was there.",
+    "why": "Margrete Erling's 2015 ANZAC Centenary commission, per its own blurb — commemorative fine art, not roadside novelty advertising.",
     "source": null
    },
    "sources": [
@@ -6835,24 +6836,24 @@
    "builtCirca": false,
    "builtRaw": null,
    "era": "revival (2000s–2014)",
-   "heightM": 7,
+   "heightM": null,
    "lengthM": null,
    "sizeMaxM": null,
    "sizeKind": "unknown",
    "dimsM": [],
    "sizeRaw": null,
-   "category": "oddity",
+   "category": "sculpture",
    "status": "standing",
    "statusEvidence": null,
    "notes": "Yininmadyemi, Thou didst let fall, is a significant artwork by Aboriginal artist Tony Albert to acknowledge Aboriginal and Torres Strait Islander men and women who served in the nation’s military.",
    "blurb": null,
    "image": "custom:yininmadyemi-88f5c1.jpeg",
-   "wikipediaArticle": "https://en.wikipedia.org/wiki/Yininmadyemi_-_Thou_didst_let_fall",
+   "wikipediaArticle": null,
    "wikidata": null,
    "osmId": null,
    "addedManually": true,
    "correction": {
-    "why": "Photo updated, replacing whatever (if anything) was there.",
+    "why": "Tony Albert's commissioned war memorial in Hyde Park, Sydney, honouring Aboriginal and Torres Strait Islander service personnel — fine/commemorative art, not roadside novelty advertising.",
     "source": null
    },
    "sources": [
@@ -11165,7 +11166,7 @@
     119
    ],
    "sizeRaw": "119 m long",
-   "category": "oddity",
+   "category": "sculpture",
    "status": "standing",
    "statusEvidence": null,
    "notes": "Created by artists Tony Albert and Nell",
@@ -11186,6 +11187,10 @@
      "url": "https://nominatim.openstreetmap.org/search?q=Gallery+of+Modern+Art+Brisbane&format=json"
     }
    ],
+   "correction": {
+    "why": "Created by artists Tony Albert and Nell, per its own notes — commissioned art, not roadside novelty advertising.",
+    "source": null
+   },
    "coordMatch": {
     "kind": "researched",
     "confidence": "medium",
@@ -14563,7 +14568,7 @@
    "sizeKind": "unknown",
    "dimsM": [],
    "sizeRaw": null,
-   "category": "oddity",
+   "category": "sculpture",
    "status": "standing",
    "statusEvidence": null,
    "notes": "The Big Pigeon is a mirrored stainless steel sculpture by South Australian artist Paul Sloan, installed in Rundle Mall Adelaide, on 6 November 2020. The pigeon is more than 2 metres tall, and cost $174,000.",
@@ -14584,6 +14589,10 @@
      "url": "https://www.openstreetmap.org/node/8956062045"
     }
    ],
+   "correction": {
+    "why": "A mirrored stainless-steel sculpture by South Australian artist Paul Sloan in Rundle Mall, per its own notes — commissioned public art, not roadside novelty advertising.",
+    "source": null
+   },
    "coordMatch": {
     "kind": "name-exact",
     "confidence": "high",
@@ -18338,7 +18347,7 @@
    "sizeKind": "unknown",
    "dimsM": [],
    "sizeRaw": null,
-   "category": "oddity",
+   "category": "sculpture",
    "status": "standing",
    "statusEvidence": null,
    "notes": "Located at the North-West end of the Bourke Street Mall outside the GPO.",
@@ -18359,6 +18368,10 @@
      "url": "https://www.openstreetmap.org/node/2162178792"
     }
    ],
+   "correction": {
+    "why": "A well-known piece of civic public art in Melbourne's Bourke Street Mall outside the GPO, not roadside novelty advertising.",
+    "source": null
+   },
    "coordMatch": {
     "kind": "name-exact",
     "confidence": "high",

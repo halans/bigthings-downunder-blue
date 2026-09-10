@@ -240,9 +240,71 @@
     "id": "944b985407"
    },
    "set": {
-    "image": "custom:yininmadyemi-88f5c1.jpeg"
+    "image": "custom:yininmadyemi-88f5c1.jpeg",
+    "category": "sculpture"
    },
-   "why": "Photo updated, replacing whatever (if anything) was there.",
+   "why": "Tony Albert's commissioned war memorial in Hyde Park, Sydney, honouring Aboriginal and Torres Strait Islander service personnel — fine/commemorative art, not roadside novelty advertising.",
+   "source": null
+  },
+  {
+   "match": {
+    "id": "8851926d80"
+   },
+   "set": {
+    "category": "sculpture",
+    "name": "Almost Once",
+    "state": "NSW",
+    "location": "Sydney",
+    "town": "Sydney",
+    "lat": -33.8696909,
+    "lng": 151.2175375,
+    "precision": "exact-verified",
+    "coordSource": "https://www.openstreetmap.org/node/6789548804",
+    "status": "standing",
+    "blurb": "It takes one tree to make a 1000 matches, it takes 1 match to burn a 1000 trees.",
+    "stateName": "New South Wales"
+   },
+   "why": "Brett Whiteley's sculpture (two giant matches, one burnt) at the Art Gallery of NSW forecourt — commissioned fine art, not roadside novelty advertising.",
+   "source": "https://www.artgallery.nsw.gov.au/art/watch-listen-read/read/once-again/"
+  },
+  {
+   "match": {
+    "id": "6da036626c"
+   },
+   "set": {
+    "category": "sculpture"
+   },
+   "why": "Margrete Erling's 2015 ANZAC Centenary commission, per its own blurb — commemorative fine art, not roadside novelty advertising.",
+   "source": null
+  },
+  {
+   "match": {
+    "id": "ce6c7e15be"
+   },
+   "set": {
+    "category": "sculpture"
+   },
+   "why": "Created by artists Tony Albert and Nell, per its own notes — commissioned art, not roadside novelty advertising.",
+   "source": null
+  },
+  {
+   "match": {
+    "id": "2931d89616"
+   },
+   "set": {
+    "category": "sculpture"
+   },
+   "why": "A mirrored stainless-steel sculpture by South Australian artist Paul Sloan in Rundle Mall, per its own notes — commissioned public art, not roadside novelty advertising.",
+   "source": null
+  },
+  {
+   "match": {
+    "id": "db1836deb8"
+   },
+   "set": {
+    "category": "sculpture"
+   },
+   "why": "A well-known piece of civic public art in Melbourne's Bourke Street Mall outside the GPO, not roadside novelty advertising.",
    "source": null
   }
  ],

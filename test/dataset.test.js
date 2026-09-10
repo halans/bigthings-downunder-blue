@@ -17,7 +17,7 @@ if (!fs.existsSync(DATASET)) {
 const dataset = JSON.parse(fs.readFileSync(DATASET, 'utf8'));
 const things = dataset.things;
 
-const CATEGORIES = new Set(['fruit-and-veg', 'fauna', 'seafood', 'food-and-drink', 'machinery-and-transport', 'tools-and-industry', 'sport-and-leisure', 'people-and-culture', 'oddity']);
+const CATEGORIES = new Set(['fruit-and-veg', 'fauna', 'seafood', 'food-and-drink', 'machinery-and-transport', 'tools-and-industry', 'sport-and-leisure', 'people-and-culture', 'oddity', 'sculpture']);
 const STATUSES = new Set(['standing', 'demolished', 'removed', 'relocated', 'replaced']);
 const PRECISIONS = new Set(['exact-article', 'exact-wikivoyage', 'exact-osm', 'exact-inline', 'exact-verified', 'town', 'none']);
 const REQUIRED = ['id', 'name', 'state', 'stateName', 'category', 'status', 'precision', 'era', 'sources'];

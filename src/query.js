@@ -26,6 +26,7 @@ const CATEGORY_LABELS = {
   'sport-and-leisure': 'Sport & leisure',
   'people-and-culture': 'People & culture',
   oddity: 'Pure oddity',
+  sculpture: 'Sculpture',
 };
 
 const isGone = (t) => t.status === 'demolished' || t.status === 'removed';
