@@ -262,7 +262,9 @@
     "coordSource": "https://www.openstreetmap.org/node/6789548804",
     "status": "standing",
     "blurb": "It takes one tree to make a 1000 matches, it takes 1 match to burn a 1000 trees.",
-    "stateName": "New South Wales"
+    "stateName": "New South Wales",
+    "builtYear": 1968,
+    "builtRaw": " 1968, 1991"
    },
    "why": "Brett Whiteley's sculpture (two giant matches, one burnt) at the Art Gallery of NSW forecourt — commissioned fine art, not roadside novelty advertising.",
    "source": "https://www.artgallery.nsw.gov.au/art/watch-listen-read/read/once-again/"
@@ -302,10 +304,23 @@
     "id": "db1836deb8"
    },
    "set": {
-    "category": "sculpture"
+    "category": "sculpture",
+    "name": "Public Purse",
+    "state": "VIC",
+    "location": "Melbourne",
+    "town": "Melbourne",
+    "lat": -37.8141,
+    "lng": 144.963393,
+    "precision": "exact-osm",
+    "coordSource": "https://www.openstreetmap.org/node/2162178792",
+    "builtYear": 1994,
+    "builtRaw": "1994",
+    "status": "standing",
+    "notes": "Located at the North-West end of the Bourke Street Mall outside the GPO. a unique and distinctive forms of street seating. ",
+    "stateName": "Victoria"
    },
    "why": "A well-known piece of civic public art in Melbourne's Bourke Street Mall outside the GPO, not roadside novelty advertising.",
-   "source": null
+   "source": "https://citycollection.melbourne.vic.gov.au/the-public-purse/"
   }
  ],
  "additions": [

@@ -68,13 +68,13 @@
    },
    "byEra": {
     "revival (2000s–2014)": 45,
-    "late century (1985–1999)": 43,
-    "unknown": 304,
+    "late century (1985–1999)": 44,
+    "unknown": 302,
     "modern (2015+)": 37,
-    "boom (1970s–early 80s)": 39,
-    "pioneer (pre-1970)": 8
+    "pioneer (pre-1970)": 9,
+    "boom (1970s–early 80s)": 39
    },
-   "withYear": 172,
+   "withYear": 174,
    "withHeight": 43,
    "withAnySize": 141,
    "withImage": 287
@@ -683,10 +683,10 @@
    "lng": 151.2175375,
    "precision": "exact-verified",
    "coordSource": "https://www.openstreetmap.org/node/6789548804",
-   "builtYear": null,
+   "builtYear": 1968,
    "builtCirca": false,
-   "builtRaw": null,
-   "era": "unknown",
+   "builtRaw": " 1968, 1991",
+   "era": "pioneer (pre-1970)",
    "heightM": null,
    "lengthM": null,
    "sizeMaxM": null,
@@ -18337,10 +18337,10 @@
    "lng": 144.963393,
    "precision": "exact-osm",
    "coordSource": "https://www.openstreetmap.org/node/2162178792",
-   "builtYear": null,
+   "builtYear": 1994,
    "builtCirca": false,
-   "builtRaw": null,
-   "era": "unknown",
+   "builtRaw": "1994",
+   "era": "late century (1985–1999)",
    "heightM": null,
    "lengthM": null,
    "sizeMaxM": null,
@@ -18350,33 +18350,22 @@
    "category": "sculpture",
    "status": "standing",
    "statusEvidence": null,
-   "notes": "Located at the North-West end of the Bourke Street Mall outside the GPO.",
+   "notes": "Located at the North-West end of the Bourke Street Mall outside the GPO. a unique and distinctive forms of street seating. ",
    "blurb": null,
    "image": "The Public Purse, Bourke Street Mall, Melbourne, November 2014.jpg",
    "wikipediaArticle": null,
    "wikidata": null,
-   "osmId": "node/2162178792",
+   "osmId": null,
    "sources": [
     {
      "source": "wikipedia",
      "page": "Big things (Australia)",
      "url": "https://en.wikipedia.org/wiki/Big_things_(Australia)"
-    },
-    {
-     "source": "openstreetmap",
-     "page": "node/2162178792",
-     "url": "https://www.openstreetmap.org/node/2162178792"
     }
    ],
    "correction": {
     "why": "A well-known piece of civic public art in Melbourne's Bourke Street Mall outside the GPO, not roadside novelty advertising.",
-    "source": null
-   },
-   "coordMatch": {
-    "kind": "name-exact",
-    "confidence": "high",
-    "why": "core name \"public purse\" matches exactly, 0.0 km from the town point",
-    "osmName": "The Public Purse"
+    "source": "https://citycollection.melbourne.vic.gov.au/the-public-purse/"
    }
   },
   {
