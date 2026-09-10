@@ -1,0 +1,12 @@
+{
+ "_readme": "Photos you added yourself rather than vendored from Wikimedia Commons — hand-maintained, normally via the local admin UI (npm run admin), never touched by src/fetch-images.js. Keyed by the same string a record's `image` field points at, always prefixed `custom:`. The file lives in web/img/custom/. See docs/ADMIN.md.",
+ "images": {
+  "custom:the-big-poppies-656556.jpeg": {
+   "local": "img/custom/the-big-poppies-656556.jpeg",
+   "author": "Halans Photography",
+   "licence": "CC BY-SA 3.0.",
+   "licenceUrl": "https://halansphotography.com",
+   "filePage": null
+  }
+ }
+}

@@ -73,10 +73,10 @@
     "boom (1970s–early 80s)": 39,
     "pioneer (pre-1970)": 8
    },
-   "withYear": 170,
+   "withYear": 171,
    "withHeight": 43,
    "withAnySize": 141,
-   "withImage": 284
+   "withImage": 285
   }
  },
  "things": [
@@ -5474,17 +5474,17 @@
    }
   },
   {
-   "id": "d9ec2c880c",
+   "id": "6da036626c",
    "name": "The Big Poppies",
    "state": "NSW",
    "stateName": "New South Wales",
-   "location": "Gosford",
+   "location": "Central Coast",
    "town": "Gosford",
    "lat": -33.431351,
    "lng": 151.340201,
    "precision": "exact-verified",
    "coordSource": "https://landofthebigs.com/big-poppies-gosford-nsw/",
-   "builtYear": null,
+   "builtYear": 2015,
    "builtCirca": false,
    "builtRaw": null,
    "era": "unknown",
@@ -5498,15 +5498,15 @@
    "status": "standing",
    "statusEvidence": null,
    "notes": null,
-   "blurb": null,
-   "image": null,
+   "blurb": "Margrete Erling: Never Forgetting the Sacrifices, 2015\nPoppy Sculpture: Aluminium, galvanised steel, sheet metal, fibreglass resin, paint\nThis temporary sculpture was commissioned as part of a community event for the 100 Year ANZAC Centenary in 2015",
+   "image": "custom:the-big-poppies-656556.jpeg",
    "wikipediaArticle": null,
    "wikidata": null,
    "osmId": null,
    "addedManually": true,
    "correction": {
-    "why": "Catalogued by Land of the Bigs, which publishes a mapped position for it.",
-    "source": "https://landofthebigs.com/big-poppies-gosford-nsw/"
+    "why": "Photo added by hand via the local admin UI, replacing whatever (if anything) was there.",
+    "source": null
    },
    "sources": [
     {
