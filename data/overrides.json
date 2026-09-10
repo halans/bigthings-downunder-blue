@@ -154,7 +154,7 @@
     "blurb": "Margrete Erling: Never Forgetting the Sacrifices, 2015\nPoppy Sculpture: Aluminium, galvanised steel, sheet metal, fibreglass resin, paint\nThis temporary sculpture was commissioned as part of a community event for the 100 Year ANZAC Centenary in 2015",
     "stateName": "New South Wales"
    },
-   "why": "Photo added by hand via the local admin UI, replacing whatever (if anything) was there.",
+   "why": "Photo updated, replacing whatever (if anything) was there.",
    "source": null
   },
   {
@@ -178,7 +178,17 @@
     "notes": "The Big Redback resided on the premises of Redback Landscaping at Eight Mile Plains. The business has since moved to Underwood and disassembled the Big Redback. Inquires have garnered that it is unlikely to be reassembled due to lack of space.",
     "stateName": "Queensland"
    },
-   "why": "Photo added by hand via the local admin UI, replacing whatever (if anything) was there.",
+   "why": "Photo updated, replacing whatever (if anything) was there.",
+   "source": null
+  },
+  {
+   "match": {
+    "id": "1fd8f0e9bb"
+   },
+   "set": {
+    "image": "custom:the-big-axe-9b70d6.jpeg"
+   },
+   "why": "Photo updated, replacing whatever (if anything) was there.",
    "source": null
   }
  ],

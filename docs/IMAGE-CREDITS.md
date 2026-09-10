@@ -1,6 +1,6 @@
 # Photo credits
 
-284 photographs, vendored from Wikimedia Commons at 480px wide on 2026-09-09.
+283 photographs, vendored from Wikimedia Commons at 480px wide on 2026-09-09.
 
 Every one is reproduced under a free licence. Most require attribution, so the
 photographer and licence are named here, on each photo in the app, and in
@@ -13,7 +13,7 @@ under the licence its author chose; the dataset itself is CC BY-SA 4.0.
 
 - CC BY-SA 4.0 — 136 photos
 - CC BY-SA 3.0 — 61 photos
-- Public domain — 32 photos
+- Public domain — 31 photos
 - CC BY 3.0 — 16 photos
 - CC0 — 12 photos
 - CC BY 4.0 — 6 photos
@@ -140,7 +140,6 @@ under the licence its author chose; the dataset itself is CC BY-SA 4.0.
 | The Big Ant (SA) | Unaimedplaya | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0) | [The Big Ant.JPG](https://commons.wikimedia.org/wiki/File:The_Big_Ant.JPG) |
 | The Big Apple (QLD) | Stuart Edwards | Public domain | [BigApple Thulimbah.jpg](https://commons.wikimedia.org/wiki/File:BigApple_Thulimbah.jpg) |
 | The Big Apple (VIC) | SteveEBear | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0) | [Big Apple Gladysdale.jpg](https://commons.wikimedia.org/wiki/File:Big_Apple_Gladysdale.jpg) |
-| The Big Axe (NSW) | Stuart Edwards | Public domain | [BigAxe Kew.jpg](https://commons.wikimedia.org/wiki/File:BigAxe_Kew.jpg) |
 | The Big Axe (TAS) | SteveEBear | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0) | [Big Axe.jpg](https://commons.wikimedia.org/wiki/File:Big_Axe.jpg) |
 | The Big Barramundi (QLD) | Kris Hamilton | Public domain | [Big Barra Normanton.JPG](https://commons.wikimedia.org/wiki/File:Big_Barra_Normanton.JPG) |
 | The Big Barramundi (QLD) | Andy & Anna Kelk from Melbourne, Australia | [CC BY 2.0](https://creativecommons.org/licenses/by/2.0) | [Big barra daintree.jpg](https://commons.wikimedia.org/wiki/File:Big_barra_daintree.jpg) |

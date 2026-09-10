@@ -252,7 +252,7 @@ function saveCustomPhoto(id, thing, { filename, dataBase64, author, licence, lic
   };
   writeJSON(path.join(DATA, 'custom-photos.json'), store);
 
-  upsertCorrection(id, { image: key }, `Photo added by hand via the local admin UI, replacing whatever (if anything) was there.`, null);
+  upsertCorrection(id, { image: key }, `Photo updated, replacing whatever (if anything) was there.`, null);
   return key;
 }
 

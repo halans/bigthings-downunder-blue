@@ -3612,7 +3612,7 @@
    "statusEvidence": "The original sculpture was replaced in 2002 as a result of ant induced damage.",
    "notes": "Located at the Kew Visitor Information Centre. The original sculpture was replaced in 2002 as a result of ant induced damage. The Axe was remodelled and a new one was displayed on 26 January 2017.",
    "blurb": null,
-   "image": "BigAxe Kew.jpg",
+   "image": "custom:the-big-axe-9b70d6.jpeg",
    "wikipediaArticle": null,
    "wikidata": null,
    "osmId": "node/6382156586",
@@ -3632,7 +3632,11 @@
      "page": "node/6382156586",
      "url": "https://www.openstreetmap.org/node/6382156586"
     }
-   ]
+   ],
+   "correction": {
+    "why": "Photo updated, replacing whatever (if anything) was there.",
+    "source": null
+   }
   },
   {
    "id": "9851fb3de5",
@@ -5505,7 +5509,7 @@
    "osmId": null,
    "addedManually": true,
    "correction": {
-    "why": "Photo added by hand via the local admin UI, replacing whatever (if anything) was there.",
+    "why": "Photo updated, replacing whatever (if anything) was there.",
     "source": null
    },
    "sources": [
@@ -12275,7 +12279,7 @@
     }
    ],
    "correction": {
-    "why": "Photo added by hand via the local admin UI, replacing whatever (if anything) was there.",
+    "why": "Photo updated, replacing whatever (if anything) was there.",
     "source": null
    }
   },
