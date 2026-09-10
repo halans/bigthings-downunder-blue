@@ -267,13 +267,17 @@ function build() {
     });
   }
 
-  // Order matters. Overrides and additions supply the town points that rows
+  // Order matters. Additions run before overrides so a correction can match
+  // and edit an added row by its id — corrections used to run first, which
+  // meant a correction targeting a discovered/added record (by id or by
+  // name+state) silently matched nothing, because that row didn't exist yet.
+  // Overrides and additions between them supply the town points that rows
   // with a blank Location cell would otherwise lack, and the OSM matcher was
   // run against the finished dataset — so it has to see those points too.
   // Human-verified coordinates are applied last because they outrank an
   // automated name match.
-  applyOverrides(out);
   applyAdditions(out);
+  applyOverrides(out);
   applyRemovals(out);
   applyOsmMatches(out);
   applyVerifiedCoords(out);

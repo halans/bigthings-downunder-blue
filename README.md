@@ -9,12 +9,13 @@ https://bigthings.downunder.blue
 Zero runtime dependencies. One canonical dataset. Every pin says how precisely it is placed.
 
 ```
-npm test          # 170 tests
+npm test          # 171 tests
 npm run build     # rebuild the dataset and the web app from the cached sources
 npm run serve     # open the map at http://localhost:8099
 npm run serve:about     # the About/landing page
 npm run build:public    # package the map into public/ for static hosting
 npm run serve:public    # preview public/ exactly as a static host would serve it
+npm run admin     # local-only admin UI for manual corrections — see docs/ADMIN.md
 node src/cli.js prawn
 ```
 
@@ -38,7 +39,7 @@ node src/cli.js prawn
 | `src/` | The pipeline: fetch → extract → normalise → build → generate. |
 | `cache/` | Unmodified snapshots of every upstream source, plus `CHECKSUMS.txt`. |
 | `test/` | The test suite, including a map-vs-CLI equivalence diff. |
-| `docs/` | [BUILDING.md](docs/BUILDING.md) · [DATA.md](docs/DATA.md) · [RECREATING.md](docs/RECREATING.md) |
+| `docs/` | [BUILDING.md](docs/BUILDING.md) · [DATA.md](docs/DATA.md) · [RECREATING.md](docs/RECREATING.md) · [ADMIN.md](docs/ADMIN.md) |
 
 ---
 
@@ -174,6 +175,12 @@ with a reason and a source, and surfaced in the app on the affected card:
 - **The Anmatjere Man** appeared twice, once under Wikivoyage's name for it ("Big Aboriginal
   Hunter"). The duplicate is removed and the survivor moved from the Anmatjere *region*
   centroid to the Aileron Roadhouse where it actually stands.
+
+Every one of those lives in `data/overrides.json`, applied after harvesting so it always wins
+and always survives the next rebuild — unlike `data/bigthings.json` itself, which is a build
+artifact and gets fully regenerated every time. `npm run admin` is a local-only web UI
+(`http://127.0.0.1:8098`, never deployed) for making your own: fix a field, pin a better
+coordinate, or attach a photo that isn't on Wikimedia Commons. See [docs/ADMIN.md](docs/ADMIN.md).
 
 ---
 

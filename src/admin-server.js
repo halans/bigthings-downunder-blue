@@ -1,0 +1,242 @@
+'use strict';
+/**
+ * Local-only admin UI for hand-editing records: fix a field, pin a better
+ * lat/lng, or attach your own photo — all in a way that survives the next
+ * `npm run build` instead of being silently overwritten by it.
+ *
+ * This is not part of the app. It never ships: nothing here is read by
+ * src/build-web.js, src/build-about.js or src/build-public.js, it isn't in
+ * web/ or public/, and it's deliberately bound to 127.0.0.1 so it isn't
+ * reachable from anything but this machine. See docs/ADMIN.md.
+ *
+ * Every write goes through the same mechanism a human editor already uses:
+ * data/overrides.json (see src/build.js's applyOverrides/applyAdditions) and,
+ * for photos, data/custom-photos.json (see src/image-credits.js). Nothing
+ * bypasses that — this UI just saves you hand-editing JSON and remembering
+ * the id.
+ *
+ *   node src/admin-server.js [--port 8098]
+ */
+
+const http = require('http');
+const fs = require('fs');
+const path = require('path');
+const crypto = require('crypto');
+const { spawnSync } = require('child_process');
+
+const ROOT = path.join(__dirname, '..');
+const DATA = path.join(ROOT, 'data');
+const WEB = path.join(ROOT, 'web');
+const CUSTOM_IMG_DIR = path.join(WEB, 'img', 'custom');
+const UI_PATH = path.join(__dirname, 'admin-ui.html');
+
+const port = (() => {
+  const i = process.argv.indexOf('--port');
+  return i >= 0 ? Number(process.argv[i + 1]) : 8098;
+})();
+
+/** Vocabularies the UI renders as dropdowns — one place, so they can't drift. */
+const META = {
+  states: ['ACT', 'NSW', 'NT', 'QLD', 'SA', 'TAS', 'VIC', 'WA'],
+  categories: [
+    'fruit-and-veg', 'fauna', 'seafood', 'food-and-drink', 'machinery-and-transport',
+    'tools-and-industry', 'sport-and-leisure', 'people-and-culture', 'oddity',
+  ],
+  statuses: ['standing', 'demolished', 'removed', 'relocated', 'replaced'],
+  precisions: ['exact-article', 'exact-wikivoyage', 'exact-osm', 'exact-verified', 'exact-inline', 'town', 'none'],
+  editableFields: [
+    'name', 'state', 'stateName', 'location', 'town', 'lat', 'lng', 'precision', 'coordSource',
+    'builtYear', 'builtRaw', 'category', 'status', 'notes', 'blurb',
+  ],
+};
+
+const STATE_NAMES = {
+  ACT: 'Australian Capital Territory', NSW: 'New South Wales', NT: 'Northern Territory',
+  QLD: 'Queensland', SA: 'South Australia', TAS: 'Tasmania', VIC: 'Victoria', WA: 'Western Australia',
+};
+
+const readJSON = (p, fallback) => (fs.existsSync(p) ? JSON.parse(fs.readFileSync(p, 'utf8')) : fallback);
+const writeJSON = (p, obj) => fs.writeFileSync(p, JSON.stringify(obj, null, 1));
+
+function loadDataset() {
+  return readJSON(path.join(DATA, 'bigthings.json'), { things: [] });
+}
+
+function searchThings(query) {
+  const dataset = loadDataset();
+  const q = (query || '').trim().toLowerCase();
+  const rows = q
+    ? dataset.things.filter((t) => [t.name, t.town, t.location, t.state, t.stateName]
+      .filter(Boolean).join(' ').toLowerCase().includes(q))
+    : dataset.things;
+  return rows.slice(0, 60).map((t) => ({
+    id: t.id, name: t.name, state: t.state, town: t.town, location: t.location,
+    lat: t.lat, lng: t.lng, precision: t.precision, status: t.status, image: t.image,
+    hasOverride: false,
+  }));
+}
+
+function findThing(id) {
+  return loadDataset().things.find((t) => t.id === id) || null;
+}
+
+function loadOverrides() {
+  return readJSON(path.join(DATA, 'overrides.json'), { _readme: '', corrections: [], additions: [], removals: [] });
+}
+
+function existingCorrection(id) {
+  const o = loadOverrides();
+  return (o.corrections || []).find((c) => c.match && c.match.id === id) || null;
+}
+
+/** Add or merge a correction for `id`. Every write needs a `why` — no exceptions. */
+function upsertCorrection(id, set, why, source) {
+  if (!why || !why.trim()) throw new Error('a reason ("why") is required for every manual correction');
+  const o = loadOverrides();
+  o.corrections = o.corrections || [];
+  const idx = o.corrections.findIndex((c) => c.match && c.match.id === id);
+  if (idx >= 0) {
+    o.corrections[idx].set = { ...o.corrections[idx].set, ...set };
+    o.corrections[idx].why = why;
+    if (source) o.corrections[idx].source = source;
+  } else {
+    o.corrections.push({ match: { id }, set, why, source: source || null });
+  }
+  writeJSON(path.join(DATA, 'overrides.json'), o);
+}
+
+/** A filesystem-safe, collision-resistant local name for an uploaded photo. */
+function customFileName(thingName, originalName) {
+  const ext = (path.extname(originalName || '') || '.jpg').toLowerCase().replace(/[^a-z0-9.]/g, '') || '.jpg';
+  const slug = String(thingName || 'photo').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 40);
+  const hash = crypto.randomBytes(3).toString('hex');
+  return `${slug}-${hash}${ext}`;
+}
+
+/**
+ * Save an uploaded photo: write the file, record it in custom-photos.json,
+ * and point the record's `image` field at it via the same correction
+ * mechanism as any other manual edit.
+ */
+function saveCustomPhoto(id, thing, { filename, dataBase64, author, licence, licenceUrl }) {
+  if (!dataBase64) throw new Error('no photo data received');
+  if (!author || !author.trim()) throw new Error('an author/credit is required — even for your own photo, name yourself');
+  fs.mkdirSync(CUSTOM_IMG_DIR, { recursive: true });
+  const local = customFileName(thing.name, filename);
+  const dest = path.join(CUSTOM_IMG_DIR, local);
+  fs.writeFileSync(dest, Buffer.from(dataBase64, 'base64'));
+
+  const key = `custom:${local}`;
+  const store = readJSON(path.join(DATA, 'custom-photos.json'), { _readme: '', images: {} });
+  store.images[key] = {
+    local: `img/custom/${local}`,
+    author: author.trim(),
+    licence: licence && licence.trim() ? licence.trim() : 'All rights reserved',
+    licenceUrl: licenceUrl && licenceUrl.trim() ? licenceUrl.trim() : null,
+    filePage: null,
+  };
+  writeJSON(path.join(DATA, 'custom-photos.json'), store);
+
+  upsertCorrection(id, { image: key }, `Photo added by hand via the local admin UI, replacing whatever (if anything) was there.`, null);
+  return key;
+}
+
+/** Regenerate the dataset and the two pages. Same three steps as `npm run build`, minus the network-touching extract stage. */
+function rebuild() {
+  const steps = ['src/build.js', 'src/build-web.js', 'src/build-about.js'];
+  const log = [];
+  for (const step of steps) {
+    log.push(`$ node ${step}`);
+    // stderr matters as much as stdout here: build.js warns to stderr (not
+    // an exception) when a correction's match hits nothing, which otherwise
+    // fails silently — a correction that's quietly never applied is worse
+    // than one that errors loudly. spawnSync (unlike execFileSync) hands
+    // back stderr even on a clean exit.
+    const r = spawnSync('node', [step], { cwd: ROOT, encoding: 'utf8' });
+    if (r.stdout) log.push(r.stdout.trim());
+    if (r.stderr) log.push(r.stderr.trim());
+    if (r.status !== 0) throw new Error(`${step} failed (exit ${r.status}):\n${log.join('\n')}`);
+    // "matched nothing" is the one failure mode this whole tool exists to
+    // prevent — a correction that silently never applies. Fail loudly.
+    if (/matched nothing/.test(r.stderr || '')) {
+      throw new Error(`the correction just saved didn't match anything and was NOT applied:\n${log.join('\n')}`);
+    }
+  }
+  return log.join('\n');
+}
+
+function send(res, status, body, contentType) {
+  const payload = typeof body === 'string' ? body : JSON.stringify(body);
+  res.writeHead(status, { 'Content-Type': contentType || 'application/json; charset=utf-8' });
+  res.end(payload);
+}
+
+function readBody(req) {
+  return new Promise((resolve, reject) => {
+    const chunks = [];
+    req.on('data', (c) => chunks.push(c));
+    req.on('end', () => resolve(Buffer.concat(chunks).toString('utf8')));
+    req.on('error', reject);
+  });
+}
+
+const server = http.createServer(async (req, res) => {
+  try {
+    const url = new URL(req.url, `http://${req.headers.host}`);
+
+    if (req.method === 'GET' && url.pathname === '/') {
+      return send(res, 200, fs.readFileSync(UI_PATH, 'utf8'), 'text/html; charset=utf-8');
+    }
+    if (req.method === 'GET' && url.pathname === '/api/meta') {
+      return send(res, 200, META);
+    }
+    if (req.method === 'GET' && url.pathname === '/api/things') {
+      return send(res, 200, searchThings(url.searchParams.get('q')));
+    }
+    if (req.method === 'GET' && url.pathname.startsWith('/api/things/')) {
+      const id = decodeURIComponent(url.pathname.slice('/api/things/'.length));
+      const thing = findThing(id);
+      if (!thing) return send(res, 404, { error: 'no such id' });
+      return send(res, 200, { thing, override: existingCorrection(id) });
+    }
+    if (req.method === 'PUT' && url.pathname.startsWith('/api/things/')) {
+      const id = decodeURIComponent(url.pathname.slice('/api/things/'.length));
+      const thing = findThing(id);
+      if (!thing) return send(res, 404, { error: 'no such id' });
+      const body = JSON.parse(await readBody(req));
+      const set = {};
+      for (const f of META.editableFields) {
+        if (body[f] === undefined || body[f] === '') continue;
+        set[f] = (f === 'lat' || f === 'lng' || f === 'builtYear') ? Number(body[f]) : body[f];
+      }
+      if (set.state && !set.stateName) set.stateName = STATE_NAMES[set.state];
+      upsertCorrection(id, set, body.why, body.source);
+      const log = rebuild();
+      return send(res, 200, { ok: true, log });
+    }
+    if (req.method === 'POST' && url.pathname.match(/^\/api\/things\/[^/]+\/photo$/)) {
+      const id = decodeURIComponent(url.pathname.split('/')[3]);
+      const thing = findThing(id);
+      if (!thing) return send(res, 404, { error: 'no such id' });
+      const body = JSON.parse(await readBody(req));
+      const key = saveCustomPhoto(id, thing, body);
+      const log = rebuild();
+      return send(res, 200, { ok: true, key, log });
+    }
+    if (req.method === 'GET' && url.pathname === '/api/overrides') {
+      return send(res, 200, loadOverrides().corrections || []);
+    }
+    if (req.method === 'POST' && url.pathname === '/api/rebuild') {
+      return send(res, 200, { ok: true, log: rebuild() });
+    }
+
+    send(res, 404, { error: 'not found' });
+  } catch (e) {
+    send(res, 500, { error: e.message });
+  }
+});
+
+server.listen(port, '127.0.0.1', () => {
+  console.log(`admin UI — http://127.0.0.1:${port}`);
+  console.log('Local only. This is not part of the app and is never deployed — see docs/ADMIN.md.');
+});

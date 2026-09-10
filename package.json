@@ -47,6 +47,7 @@
     "about": "node src/build-about.js",
     "serve:about": "node src/serve.js --about",
     "build:public": "node src/build-public.js",
-    "serve:public": "node src/serve.js --public"
+    "serve:public": "node src/serve.js --public",
+    "admin": "node src/admin-server.js"
   }
 }

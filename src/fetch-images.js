@@ -158,7 +158,9 @@ function localName(filename) {
 
 async function main() {
   const dataset = JSON.parse(fs.readFileSync(path.join(ROOT, 'data', 'bigthings.json'), 'utf8'));
-  const filenames = [...new Set(dataset.things.map((t) => t.image).filter(Boolean))];
+  // A `custom:`-prefixed image is one added by hand (see docs/ADMIN.md) —
+  // it isn't on Commons at all, so there's nothing here to fetch or check.
+  const filenames = [...new Set(dataset.things.map((t) => t.image).filter((f) => f && !f.startsWith('custom:')))];
   console.log(`${filenames.length} unique Commons files referenced`);
 
   fs.mkdirSync(IMG_DIR, { recursive: true });

@@ -19,12 +19,17 @@ const crypto = require('crypto');
 const { test, eq, ok } = require('./run');
 const B = require('../src/build-web');
 const FI = require('../src/fetch-images');
+const { loadImageCredits } = require('../src/image-credits');
 
 const ROOT = path.join(__dirname, '..');
 const WEB = path.join(ROOT, 'web');
 const CREDITS_PATH = path.join(ROOT, 'data', 'image-credits.json');
 const hasImages = fs.existsSync(CREDITS_PATH);
 const credits = hasImages ? JSON.parse(fs.readFileSync(CREDITS_PATH, 'utf8')) : { images: {}, skipped: [] };
+// Commons photos plus any added by hand (data/custom-photos.json) — what
+// creditMap() actually draws from, as opposed to `credits` above which is
+// only the Commons manifest fetch-images.js itself owns.
+const allImages = loadImageCredits();
 
 /** Assets the browser fetches on load, as opposed to links a user follows. */
 function loadedAssets(html) {
@@ -200,9 +205,21 @@ test('the credit shown in the app matches the manifest', () => {
   const used = new Set(dataset.things.map((t) => t.image).filter(Boolean));
   for (const [file, c] of Object.entries(map)) {
     ok(used.has(file), `${file} is actually referenced`);
-    eq(c.a, credits.images[file].author);
-    eq(c.l, credits.images[file].licence);
+    eq(c.a, allImages[file].author);
+    eq(c.l, allImages[file].licence);
   }
+});
+
+test('every custom photo is on disk, keyed and credited correctly', () => {
+  const custom = JSON.parse(fs.readFileSync(path.join(ROOT, 'data', 'custom-photos.json'), 'utf8')).images;
+  const bad = [];
+  for (const [key, meta] of Object.entries(custom)) {
+    if (!key.startsWith('custom:')) bad.push(`${key}: must be prefixed "custom:"`);
+    if (!meta.author) bad.push(`${key}: missing author`);
+    if (!meta.licence) bad.push(`${key}: missing licence`);
+    if (!meta.local || !fs.existsSync(path.join(WEB, meta.local))) bad.push(`${key}: missing file ${meta.local}`);
+  }
+  eq(bad, []);
 });
 
 test('the photo credits document lists every shipped photo', () => {

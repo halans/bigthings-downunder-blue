@@ -17,6 +17,7 @@
 const fs = require('fs');
 const path = require('path');
 const SEO = require('./seo');
+const { loadImageCredits } = require('./image-credits');
 
 const ROOT = path.join(__dirname, '..');
 
@@ -50,19 +51,19 @@ function slim(dataset) {
 }
 
 /**
- * Compact per-photo credit map, keyed by Commons filename. Short keys because
- * this ships inline for every photo in the dataset:
+ * Compact per-photo credit map, keyed by Commons filename (or a `custom:`
+ * key for a photo added by hand — see data/custom-photos.json and
+ * docs/ADMIN.md). Short keys because this ships inline for every photo in
+ * the dataset:
  *   a = author · l = licence · u = licence URL · p = file page · f = local file
  */
 function creditMap(dataset) {
-  const p = path.join(ROOT, 'data', 'image-credits.json');
-  if (!fs.existsSync(p)) return {};
-  const { images } = JSON.parse(fs.readFileSync(p, 'utf8'));
   const used = new Set(dataset.things.map((t) => t.image).filter(Boolean));
+  const images = loadImageCredits();
   const out = {};
-  for (const [file, meta] of Object.entries(images || {})) {
-    if (!used.has(file)) continue;
-    out[file] = {
+  for (const [key, meta] of Object.entries(images)) {
+    if (!used.has(key)) continue;
+    out[key] = {
       a: meta.author || null,
       l: meta.licence || null,
       u: meta.licenceUrl || null,
@@ -89,8 +90,7 @@ const inlineJson = (value) => JSON.stringify(value)
  */
 function buildJsonLd(dataset) {
   const { siteUrl } = SEO.loadSite();
-  const creditsPath = path.join(ROOT, 'data', 'image-credits.json');
-  const images = fs.existsSync(creditsPath) ? JSON.parse(fs.readFileSync(creditsPath, 'utf8')).images : {};
+  const images = loadImageCredits();
   const downloadsPath = path.join(ROOT, 'data', 'downloads.json');
   const downloads = fs.existsSync(downloadsPath) ? JSON.parse(fs.readFileSync(downloadsPath, 'utf8')).downloads || [] : [];
 

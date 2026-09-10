@@ -10,7 +10,7 @@ function over the files in `cache/`, so a rebuild from a shipped bundle needs no
 4. match     ──▶ cache/osm-matches.json       (town pins upgraded, for audit)
 5. build     ──▶ data/bigthings.json          (again, applying the matches)
 6. build-web ──▶ web/index.html               (generated from the dataset)
-7. test      ──▶ 170 assertions, incl. map-vs-CLI, self-hosted-asset and layout checks
+7. test      ──▶ 171 assertions, incl. map-vs-CLI, self-hosted-asset and layout checks
 ```
 
 Stage 4 needs a built dataset to read and feeds the next build, so the
@@ -81,15 +81,19 @@ text rather than index, so a reordered column will not silently corrupt the outp
 Merges everything into one array, resolving coordinates through the precision tiers documented
 in [DATA.md](DATA.md), then applies, **in this order**:
 
-1. `applyOverrides()` — curated corrections, which refuse to downgrade an exact pin
-2. `applyAdditions()` — big things documented elsewhere but absent from both wiki lists
+1. `applyAdditions()` — big things documented elsewhere but absent from both wiki lists
+2. `applyOverrides()` — curated corrections, which refuse to downgrade an exact pin
 3. `applyRemovals()` — rows that duplicate another row under a different name
 4. `applyOsmMatches()` — the audited OSM proximity upgrades
 5. `applyVerifiedCoords()` — human-researched points, which outrank an OSM name match
 
-The order is load-bearing. Overrides supply town points for rows whose Location cell was
-blank, and the matcher ran against the finished dataset — so it has to see those points.
-An earlier version ran the matcher first and silently skipped every such row.
+The order is load-bearing, twice over. Overrides and additions between them supply town points
+for rows whose Location cell was blank, and the matcher ran against the finished dataset — so it
+has to see those points. An earlier version ran the matcher first and silently skipped every such
+row. Additions also have to run *before* overrides, not after: a correction that targets an added
+or discovered record (by `id`, or by name+state) needs that record to already exist when
+`applyOverrides()` looks for it, or its `match` finds nothing and the correction is silently
+never applied — exactly the failure `npm run admin` (see [ADMIN.md](ADMIN.md)) exists to prevent.
 
 Every candidate coordinate is bounds-checked against its state's bounding box before being
 accepted, which is what catches a name collision like an OSM "Big Rock" in the wrong state.

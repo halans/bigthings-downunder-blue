@@ -15,6 +15,7 @@
 const fs = require('fs');
 const path = require('path');
 const SEO = require('./seo');
+const { loadImageCredits } = require('./image-credits');
 
 const ROOT = path.join(__dirname, '..');
 
@@ -113,8 +114,7 @@ function pickStrip(things) {
 function generate() {
   const dataset = JSON.parse(fs.readFileSync(path.join(ROOT, 'data', 'bigthings.json'), 'utf8'));
   const overrides = JSON.parse(fs.readFileSync(path.join(ROOT, 'data', 'overrides.json'), 'utf8'));
-  const creditsPath = path.join(ROOT, 'data', 'image-credits.json');
-  const credits = fs.existsSync(creditsPath) ? JSON.parse(fs.readFileSync(creditsPath, 'utf8')).images : {};
+  const credits = loadImageCredits();
 
   const template = fs.readFileSync(path.join(ROOT, 'web', 'about-template.html'), 'utf8');
   const things = dataset.things;

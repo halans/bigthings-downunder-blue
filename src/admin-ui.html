@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Big Things — local admin</title>
+<style>
+:root{ --ink:#1b1a17; --line:#d8d2c4; --paper:#fffdf7; --bg:#f6f3ea; --accent:#c8452b; --ok:#2f7d52; }
+*{box-sizing:border-box}
+body{margin:0;font-family:ui-sans-serif,system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--ink)}
+header{background:var(--ink);color:#fff;padding:10px 16px;font-weight:700;display:flex;align-items:center;gap:10px}
+header .warn{background:var(--accent);padding:2px 8px;border-radius:999px;font-size:12px;font-weight:700}
+#app{display:grid;grid-template-columns:340px 1fr;height:calc(100vh - 42px)}
+#list{border-right:1px solid var(--line);overflow-y:auto;background:var(--paper)}
+#search{width:100%;padding:10px;border:0;border-bottom:1px solid var(--line);font-size:14px;position:sticky;top:0;background:var(--paper)}
+.row{padding:9px 12px;border-bottom:1px solid var(--line);cursor:pointer;font-size:13px}
+.row:hover{background:var(--bg)}
+.row b{display:block}
+.row span{color:#77715f;font-size:12px}
+.row .flag{color:var(--accent);font-weight:700}
+#detail{overflow-y:auto;padding:18px 24px}
+.empty{color:#88816d;padding:40px;text-align:center}
+fieldset{border:1px solid var(--line);border-radius:8px;margin:0 0 16px;padding:12px 14px}
+legend{font-weight:700;font-size:13px;padding:0 6px}
+label{display:block;font-size:12px;font-weight:600;margin:8px 0 3px;color:#4a463e}
+input,select,textarea{width:100%;padding:7px 8px;border:1px solid var(--line);border-radius:6px;font-size:13.5px;font-family:inherit}
+textarea{min-height:60px;resize:vertical}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:0 12px}
+button{background:var(--ink);color:#fff;border:0;border-radius:7px;padding:9px 16px;font-size:13.5px;font-weight:700;cursor:pointer;margin-top:10px}
+button.secondary{background:#fff;color:var(--ink);border:1px solid var(--line)}
+button:disabled{opacity:.5;cursor:default}
+#log{white-space:pre-wrap;background:#161512;color:#d7d2c2;padding:10px;border-radius:8px;font-size:11.5px;max-height:220px;overflow:auto;margin-top:10px}
+.banner{padding:8px 12px;border-radius:7px;font-size:13px;font-weight:600;margin-bottom:14px}
+.banner.ok{background:#e4f2e9;color:var(--ok)}
+.banner.err{background:#fbe4e0;color:var(--accent)}
+.note{font-size:12px;color:#77715f;margin:2px 0 10px}
+.existing{background:#fff4d6;border:1px solid #e0b84a;border-radius:8px;padding:10px 12px;font-size:12.5px;margin-bottom:14px}
+img.preview{max-width:220px;display:block;margin-top:8px;border:1px solid var(--line);border-radius:6px}
+</style>
+</head>
+<body>
+<header>Big Things — local admin <span class="warn">localhost only, never deployed</span></header>
+<div id="app">
+  <div id="list">
+    <input id="search" placeholder="Search name, town, state…" autofocus>
+    <div id="rows"></div>
+  </div>
+  <div id="detail"><div class="empty">Pick a thing on the left to edit it.</div></div>
+</div>
+<script>
+let META = null;
+let current = null; // { thing, override }
+
+async function api(method, url, body) {
+  const res = await fetch(url, {
+    method,
+    headers: body ? { 'Content-Type': 'application/json' } : undefined,
+    body: body ? JSON.stringify(body) : undefined,
+  });
+  const data = await res.json();
+  if (!res.ok) throw new Error(data.error || res.statusText);
+  return data;
+}
+
+function esc(s) { return String(s == null ? '' : s).replace(/[&<>"]/g, (c) => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
+
+async function search(q) {
+  const rows = await api('GET', `/api/things?q=${encodeURIComponent(q || '')}`);
+  document.getElementById('rows').innerHTML = rows.map((t) => `
+    <div class="row" data-id="${esc(t.id)}">
+      <b>${esc(t.name)}</b>
+      <span>${esc(t.town || t.location || '')}, ${esc(t.state)} · ${esc(t.precision)}${t.image ? ' · 📷' : ''}</span>
+    </div>`).join('') || '<div class="empty">No matches.</div>';
+  document.querySelectorAll('.row').forEach((el) => el.addEventListener('click', () => load(el.dataset.id)));
+}
+
+async function load(id) {
+  current = await api('GET', `/api/things/${encodeURIComponent(id)}`);
+  render();
+}
+
+function field(id, label, value, type) {
+  return `<label for="f-${id}">${label}</label><input id="f-${id}" type="${type || 'text'}" value="${esc(value)}">`;
+}
+
+function select(id, label, value, options) {
+  return `<label for="f-${id}">${label}</label><select id="f-${id}">` +
+    options.map((o) => `<option value="${esc(o)}" ${o === value ? 'selected' : ''}>${esc(o)}</option>`).join('') +
+    `</select>`;
+}
+
+function render() {
+  const { thing: t, override } = current;
+  const detail = document.getElementById('detail');
+  const overrideNote = override
+    ? `<div class="existing"><b>Already manually edited.</b> ${esc(override.why)}${override.source ? ` — <a href="${esc(override.source)}" target="_blank">source</a>` : ''}<br>Saving below updates this same correction rather than adding another.</div>`
+    : '';
+
+  detail.innerHTML = `
+    <div id="banner"></div>
+    ${overrideNote}
+    <h2 style="margin:0 0 2px">${esc(t.name)}</h2>
+    <p class="note">id: ${esc(t.id)} · currently ${esc(t.precision)}${t.correction ? ' · has a correction' : ''}</p>
+
+    <fieldset>
+      <legend>Record</legend>
+      <div class="grid2">
+        ${field('name', 'Name', t.name)}
+        ${select('state', 'State', t.state, META.states)}
+        ${field('location', 'Location', t.location)}
+        ${field('town', 'Town', t.town)}
+        ${select('category', 'Category', t.category, META.categories)}
+        ${select('status', 'Status', t.status, META.statuses)}
+        ${field('builtYear', 'Built year', t.builtYear || '', 'number')}
+        ${field('builtRaw', 'Built (as text)', t.builtRaw)}
+      </div>
+      <label for="f-notes">Notes</label><textarea id="f-notes">${esc(t.notes)}</textarea>
+      <label for="f-blurb">Blurb</label><textarea id="f-blurb">${esc(t.blurb)}</textarea>
+    </fieldset>
+
+    <fieldset>
+      <legend>Location</legend>
+      <p class="note">Precision guard: if this is already an "exact-*" pin, setting precision to
+        "town" here is ignored to stop a good coordinate being downgraded by accident. To correct
+        an already-exact pin with your own better coordinate, keep precision as
+        <b>exact-verified</b>.</p>
+      <div class="grid2">
+        ${field('lat', 'Latitude', t.lat != null ? t.lat : '', 'number')}
+        ${field('lng', 'Longitude', t.lng != null ? t.lng : '', 'number')}
+        ${select('precision', 'Precision', t.precision, META.precisions)}
+        ${field('coordSource', 'Coordinate source (URL)', t.coordSource)}
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend>Save this correction</legend>
+      <label for="f-why">Why (required — every manual edit needs a reason)</label>
+      <textarea id="f-why">${esc(override ? override.why : '')}</textarea>
+      <label for="f-source">Source (optional URL)</label>
+      <input id="f-source" value="${esc(override ? override.source || '' : '')}">
+      <button id="save-btn">Save &amp; rebuild</button>
+    </fieldset>
+
+    <fieldset>
+      <legend>Photo</legend>
+      ${t.image ? `<p class="note">Current image key: <code>${esc(t.image)}</code></p>` : '<p class="note">No photo yet.</p>'}
+      <label for="f-photofile">Choose a photo from this computer</label>
+      <input id="f-photofile" type="file" accept="image/*">
+      <img id="photo-preview" class="preview" hidden>
+      <div class="grid2">
+        <div>${field('author', 'Your name / credit', '')}</div>
+        <div>${field('licence', 'Licence (default: All rights reserved)', '')}</div>
+      </div>
+      ${field('licenceUrl', 'Licence URL (optional)', '')}
+      <button id="photo-btn" class="secondary" disabled>Upload &amp; rebuild</button>
+    </fieldset>
+
+    <div id="log"></div>
+  `;
+
+  document.getElementById('save-btn').addEventListener('click', saveRecord);
+
+  let photoData = null;
+  const fileInput = document.getElementById('f-photofile');
+  fileInput.addEventListener('change', () => {
+    const file = fileInput.files[0];
+    document.getElementById('photo-btn').disabled = !file;
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = () => {
+      photoData = { filename: file.name, dataBase64: reader.result.split(',')[1] };
+      const img = document.getElementById('photo-preview');
+      img.src = reader.result;
+      img.hidden = false;
+    };
+    reader.readAsDataURL(file);
+  });
+  document.getElementById('photo-btn').addEventListener('click', () => uploadPhoto(photoData));
+}
+
+function banner(msg, ok) {
+  document.getElementById('banner').innerHTML = `<div class="banner ${ok ? 'ok' : 'err'}">${esc(msg)}</div>`;
+}
+
+async function saveRecord() {
+  const t = current.thing;
+  const why = document.getElementById('f-why').value.trim();
+  if (!why) { banner('A reason is required.', false); return; }
+  const body = { why, source: document.getElementById('f-source').value.trim() || null };
+  for (const f of META.editableFields) {
+    const el = document.getElementById('f-' + f);
+    if (el) body[f] = el.value;
+  }
+  const btn = document.getElementById('save-btn');
+  btn.disabled = true; btn.textContent = 'Saving…';
+  try {
+    const res = await api('PUT', `/api/things/${encodeURIComponent(t.id)}`, body);
+    document.getElementById('log').textContent = res.log;
+    banner('Saved and rebuilt. Refresh npm run serve to see it.', true);
+    await load(t.id);
+  } catch (e) {
+    banner('Failed: ' + e.message, false);
+  } finally {
+    btn.disabled = false; btn.textContent = 'Save & rebuild';
+  }
+}
+
+async function uploadPhoto(photoData) {
+  if (!photoData) return;
+  const t = current.thing;
+  const body = {
+    ...photoData,
+    author: document.getElementById('f-author').value.trim(),
+    licence: document.getElementById('f-licence').value.trim(),
+    licenceUrl: document.getElementById('f-licenceUrl').value.trim(),
+  };
+  if (!body.author) { banner('Name a photographer/credit, even if it\'s you.', false); return; }
+  const btn = document.getElementById('photo-btn');
+  btn.disabled = true; btn.textContent = 'Uploading…';
+  try {
+    const res = await api('POST', `/api/things/${encodeURIComponent(t.id)}/photo`, body);
+    document.getElementById('log').textContent = res.log;
+    banner('Photo saved and rebuilt.', true);
+    await load(t.id);
+  } catch (e) {
+    banner('Failed: ' + e.message, false);
+  } finally {
+    btn.disabled = false; btn.textContent = 'Upload & rebuild';
+  }
+}
+
+let searchTimer;
+document.getElementById('search').addEventListener('input', (e) => {
+  clearTimeout(searchTimer);
+  searchTimer = setTimeout(() => search(e.target.value), 150);
+});
+
+(async function init() {
+  META = await api('GET', '/api/meta');
+  search('');
+})();
+</script>
+</body>
+</html>
