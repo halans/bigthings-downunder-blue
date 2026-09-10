@@ -1,6 +1,6 @@
 # Photo credits
 
-280 photographs, vendored from Wikimedia Commons at 480px wide on 2026-09-09.
+279 photographs, vendored from Wikimedia Commons at 480px wide on 2026-09-09.
 
 Every one is reproduced under a free licence. Most require attribution, so the
 photographer and licence are named here, on each photo in the app, and in
@@ -15,7 +15,7 @@ under the licence its author chose; the dataset itself is CC BY-SA 4.0.
 - CC BY-SA 3.0 — 61 photos
 - Public domain — 31 photos
 - CC BY 3.0 — 16 photos
-- CC0 — 12 photos
+- CC0 — 11 photos
 - CC BY 4.0 — 6 photos
 - CC BY 2.0 — 5 photos
 - CC BY 2.5 au — 4 photos
@@ -43,7 +43,6 @@ under the licence its author chose; the dataset itself is CC BY-SA 4.0.
 | Big Apple (VIC) | Bilby | [CC BY 3.0](https://creativecommons.org/licenses/by/3.0) | [Big Apple.jpg](https://commons.wikimedia.org/wiki/File:Big_Apple.jpg) |
 | Big Avocado (NSW) | BrisbanePom | Public domain | [Big Avocado.jpg](https://commons.wikimedia.org/wiki/File:Big_Avocado.jpg) |
 | Big Ayers Rock (NSW) | TheBustopher | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0) | [2014-05-07 11-43-52 P1640117.jpg](https://commons.wikimedia.org/wiki/File:2014-05-07_11-43-52_P1640117.jpg) |
-| Big Banana (NSW) | Cmb1908 | [CC0](http://creativecommons.org/publicdomain/zero/1.0/deed.en) | [BigBanana.jpg](https://commons.wikimedia.org/wiki/File:BigBanana.jpg) |
 | Big Banana (QLD) | JamesMudkip | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0) | [NorthMackayBigBanana2023.jpg](https://commons.wikimedia.org/wiki/File:NorthMackayBigBanana2023.jpg) |
 | Big Barramundi (NT) | MEGutsell | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0) | [Katherine - BIG Barramundi.jpg](https://commons.wikimedia.org/wiki/File:Katherine_-_BIG_Barramundi.jpg) |
 | Big Barrel (QLD) | Fishieman15 | [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0) | [The Big Barrel.jpg](https://commons.wikimedia.org/wiki/File:The_Big_Barrel.jpg) |

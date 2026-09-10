@@ -322,6 +322,41 @@
    },
    "why": "A well-known piece of civic public art in Melbourne's Bourke Street Mall outside the GPO, not roadside novelty advertising.",
    "source": "https://citycollection.melbourne.vic.gov.au/the-public-purse/"
+  },
+  {
+   "match": {
+    "id": "d0577fb8cf"
+   },
+   "set": {
+    "image": "custom:big-banana-d3bb64.jpeg",
+    "name": "Big Banana",
+    "state": "NSW",
+    "location": "Coffs Harbour",
+    "town": "Coffs Harbour",
+    "lat": -30.274764,
+    "lng": 153.133797,
+    "precision": "exact-article",
+    "coordSource": "https://en.wikipedia.org/wiki/Big_Banana",
+    "builtYear": 1964,
+    "builtRaw": "1964",
+    "category": "fruit-and-veg",
+    "status": "standing",
+    "notes": "Sometimes incorrectly claimed to be the first Big Thing in Australia. (The Big Scotsman in Adelaide was built over a year earlier). The Big Banana tourist complex includes a banana-themed souvenir shop, tours of the surrounding plantation and an indoor ski slope.",
+    "blurb": "The most famous one, the Big Banana is conveniently about halfway between Sydney and Brisbane and has grown into a kitschy tourist empire with theme park rides, water slides and more. Stop by for a selfie and a banana split.",
+    "stateName": "New South Wales"
+   },
+   "why": "Photo updated, replacing whatever (if anything) was there.",
+   "source": null
+  },
+  {
+   "match": {
+    "id": "f8cebeb62b"
+   },
+   "set": {
+    "image": "custom:the-big-pencil-dd7917.jpeg"
+   },
+   "why": "Photo updated, replacing whatever (if anything) was there.",
+   "source": null
   }
  ],
  "additions": [
