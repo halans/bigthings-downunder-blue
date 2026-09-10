@@ -7,7 +7,7 @@
 <meta name="description" content="__DESCRIPTION__">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍌</text></svg>">
 __SEO_META__
-__HEAD_ASSETS__
+<link rel="stylesheet" href="vendor/fonts.css">
 <style>
 :root{
   --ink:#1b1a17; --ink-soft:#4a463e; --cream:#fdf6e8; --cream-2:#f6ebd6; --paper:#fffdf7;
@@ -127,11 +127,10 @@ strong{font-weight:700}
 .src-card .lic{font-size:11px;font-weight:700;background:var(--cream-2);border:1.5px solid var(--ink);border-radius:999px;padding:2px 8px;display:inline-block}
 
 .grab{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin:18px 0 0}
-.grab a,.grab .grab-item{
+.grab a{
   display:block;background:var(--paper);border:2px solid var(--ink);border-radius:13px;padding:14px 15px;
   text-decoration:none;color:var(--ink);box-shadow:0 2px 0 var(--ink)
 }
-.grab b,.grab .grab-item b{display:block}
 .grab b{display:block;font-size:15px;margin-bottom:3px}
 .grab span{font-size:12.5px;color:var(--ink-soft);line-height:1.45}
 code{
@@ -171,7 +170,7 @@ footer h3{font-family:Caprasimo,Inter,sans-serif;font-weight:400;color:var(--sun
 <div class="topbar"><div class="inner">
   <span class="mark">Big Things</span>
   <a class="btn secondary" href="#honesty">How honest is it?</a>
-  <a class="btn hot" href="__MAP_HREF__">Open the map →</a>
+  <a class="btn hot" href="index.html">Open the map →</a>
 </div></div>
 
 <header class="hero"><div class="wrap">
@@ -188,7 +187,7 @@ footer h3{font-family:Caprasimo,Inter,sans-serif;font-weight:400;color:var(--sun
     you where it is guessing.
   </p>
   <div class="cta">
-    <a class="btn hot big" href="__MAP_HREF__">Open the map</a>
+    <a class="btn hot big" href="index.html">Open the map</a>
     <a class="btn big" href="#data">Take the data</a>
   </div>
   <div class="figures">__FIGURES__</div>
@@ -311,8 +310,8 @@ $ bigthings --stats</code></pre>
   <p>
     The map and the command line share one query engine, and a test diffs their output for the same
     inputs so they cannot drift apart. The whole thing is zero-dependency Node: the bundle rebuilds
-    from cached sources with no network, and __PHOTOS__ photographs, the fonts and a vector Australia
-    coastline ship inside it so the offline build genuinely works unplugged.
+    from cached sources with no network, and __PHOTOS__ photographs, the fonts and Leaflet itself all
+    ship from this domain rather than someone else's.
   </p>
 </div></section>
 
@@ -325,7 +324,7 @@ $ bigthings --stats</code></pre>
     Photographs remain under their own licences and are credited individually.
   </p>
   <p>__FOOTER_SOURCES__</p>
-  <p style="margin-top:18px"><a class="btn hot" href="__MAP_HREF__">Open the map →</a></p>
+  <p style="margin-top:18px"><a class="btn hot" href="index.html">Open the map →</a></p>
 </div></footer>
 
 </body>

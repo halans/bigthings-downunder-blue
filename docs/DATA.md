@@ -44,7 +44,7 @@ this repository are derived from it.
 | `statusEvidence` | string \| null | The sentence that justified a non-standing status. |
 | `notes` | string \| null | The source's Notes prose, cleaned. |
 | `blurb` | string \| null | Wikivoyage's travel-guide voice, where it wrote one. |
-| `image` | string \| null | Wikimedia Commons filename. The online build resolves it via `Special:FilePath`; the offline build uses the vendored copy in `web/img/`. Licence and photographer live in `data/image-credits.json`. |
+| `image` | string \| null | Wikimedia Commons filename, used as the key into the vendored copy in `web/img/`. Licence and photographer live in `data/image-credits.json`. |
 | `wikipediaArticle` | string \| null | Its own article, when it has one (not a `#section` pointer). |
 | `wikidata` | string \| null | QID where known. |
 | `osmId` | string \| null | e.g. `way/1019373169`. |

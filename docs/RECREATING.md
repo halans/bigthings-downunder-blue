@@ -3,7 +3,7 @@
 Everything here is reproducible. Two paths: rebuild from the shipped cache with **no network**,
 or re-harvest every upstream source from the live web.
 
-## Path A — offline rebuild from the bundle (recommended)
+## Path A — rebuild from the bundle with no network (recommended)
 
 The bundle ships `cache/` with an unmodified snapshot of every upstream source. Nothing after the fetch stage
 touches the network.
@@ -14,19 +14,21 @@ unzip australian-big-things.zip && cd bigthings
 node --version          # needs >= 18. No npm install — there are no dependencies.
 
 npm run verify          # checksum the cached sources, then run the tests
-npm run build           # regenerate the dataset and both web builds
-npm run serve           # http://localhost:8099          (online build)
-npm run serve:offline   # http://localhost:8099/offline.html
+npm run build           # regenerate the dataset and the web app
+npm run serve           # http://localhost:8099
 npm run serve:about     # http://localhost:8099/about.html
 ```
 
-**To prove the offline claim:** start `npm run serve:offline`, then cut your network — pull the
-cable, disable Wi-Fi, or block the browser in your firewall. The map, all 284 photographs, the
-fonts and the Australia outline all keep working. The only thing you lose is the basemap
-*tiles*, which no bundle can contain; the vector coastline is there in their place.
+**To see the self-hosting:** start `npm run serve`, open the browser's network panel, and
+confirm every request but the page itself resolves to `localhost` — the 284 photographs, the
+fonts and Leaflet all come from `web/vendor/` and `web/img/`, not Wikimedia Commons or a CDN.
+Cut your network entirely (pull the cable, disable Wi-Fi) and the map, every photo, the fonts
+and the coastline at the continent view all keep working; the only thing that stops is real
+basemap tiles once you zoom in, which are fetched live by design (see the README's "basemap"
+section) rather than bundled.
 
 `npm run verify` is the important one. It hashes each file in `cache/` against
-`cache/CHECKSUMS.txt` and then runs all 172 tests, so a clean run proves that the inputs are
+`cache/CHECKSUMS.txt` and then runs all 170 tests, so a clean run proves that the inputs are
 the ones this dataset was built from **and** that the pipeline still reproduces it.
 
 Expected output, captured from a real run:
@@ -42,15 +44,15 @@ all 17 cached snapshots match cache/CHECKSUMS.txt
 > australian-big-things@1.0.0 test
 > node test/run.js
 
+about            ...................
 dataset          ........................
 discovery        ....................
 equivalence      ................................
 match            ...................
 parse            ......................................
-about            ....................
 standalone       ..................
 
-172 passed, 0 failed  (571 ms)
+170 passed, 0 failed  (421 ms)
 ```
 
 ```
@@ -82,11 +84,9 @@ with blurb: 7
   },
   ...
 }
-wrote web/index.html — 529 KB (online)
-wrote web/offline.html — 549 KB (offline)
+wrote web/index.html — 797 KB
 wrote docs/IMAGE-CREDITS.md
-wrote web/about.html — 30 KB (online)
-wrote web/about-offline.html — 29 KB (offline)
+wrote web/about.html — 33 KB
 ```
 
 The build is deterministic: same cache in, same `data/bigthings.json` out, byte for byte apart
@@ -239,29 +239,29 @@ cd .. && zip -r australian-big-things.zip bigthings \
   -x 'bigthings/.git/*' -x 'bigthings/node_modules/*'
 ```
 
-The zip is offline-complete on purpose: cached upstream sources with checksums, the built
-dataset, both generated web builds, the 284 vendored photographs with their licences, the
+The zip is network-complete on purpose: cached upstream sources with checksums, the built
+dataset, the generated web app, the 284 vendored photographs with their licences, the
 vendored libraries and fonts, the full source, the docs and the tests. A recipient with Node 18
 and no internet can verify, rebuild, serve and actually *look at* the whole thing.
 
-It is about 30 MB, nearly all of it photographs. That is the cost of not depending on someone
+It is about 27 MB, nearly all of it photographs. That is the cost of not depending on someone
 else's servers.
 
 ## Hosting the map
 
-`web/index.html` is a single self-contained file. Drop it on any static host.
+`web/index.html` needs its siblings — `img/` and `vendor/` — since every photo, font and
+library it loads is self-hosted rather than hotlinked. Upload the whole `web/` directory, or use
+`npm run build:public` to assemble `public/` (the same pages plus `_headers`, `robots.txt` and
+`sitemap.xml`) as a ready-to-deploy static site — see the README's "Deploying `public/`" section.
 
-`web/offline.html` needs its siblings — `img/` and `vendor/` — so upload the whole `web/`
-directory for that one.
+Photographs are vendored rather than hotlinked from Wikimedia Commons on purpose: inlining 27 MB
+of base64 would make a phone chew through it for no benefit, but a plain `img/` folder served
+from the same domain costs nothing extra and doesn't depend on Commons staying up or fast.
 
-The online build keeps three external dependencies by design: Leaflet + MarkerCluster (unpkg),
-the Caprasimo/Inter webfonts (Google Fonts), and photographs hotlinked from Wikimedia Commons.
-That is the right trade for a page served over the internet — hotlinking Commons with proper
-credit is exactly what Commons is for, and inlining 27 MB of base64 would make a phone chew
-through it for no benefit. If you want one genuinely self-contained file, the offline build is
-already that, minus the folder.
-
-Basemap tiles come from OpenStreetMap's public servers. That is fine for local use and light
-traffic, but read the [tile usage policy](https://operations.osmfoundation.org/policies/tiles/)
+Basemap tiles are the one asset that's fetched live rather than bundled — no static host can
+serve every tile at every zoom for the whole planet. They come from OpenStreetMap's public
+servers once you zoom in past the continent view (see the README's "basemap" section). That's
+fine for local use and light traffic, but read the
+[tile usage policy](https://operations.osmfoundation.org/policies/tiles/)
 before putting this anywhere busy — swap in a paid provider (Mapbox, MapTiler, Thunderforest)
 by changing the single `L.tileLayer` URL in `web/template.html`.

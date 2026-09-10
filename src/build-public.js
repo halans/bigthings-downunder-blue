@@ -1,16 +1,15 @@
 'use strict';
 /**
- * Assemble public/ — the offline build repackaged as a normal static site,
- * ready to deploy as-is to Cloudflare Pages (or any static host).
+ * Assemble public/ — web/index.html and web/about.html plus their assets,
+ * packaged as a normal static site ready to deploy as-is to Cloudflare Pages
+ * (or any static host).
  *
- * The offline build already loads zero external assets (see
- * standalone.test.js), so the only thing standing between it and a plain
- * static-site deploy is its filenames: offline.html / about-offline.html
- * exist to sit alongside the online build in web/. public/ has no online
- * build to disambiguate from, so this renames them to index.html / about.html
- * and rewrites the two cross-links the offline template bakes in between them.
- * img/ and vendor/ are copied verbatim — every path inside them is already
- * relative.
+ * The build already loads zero third-party assets (see standalone.test.js) —
+ * everything is self-hosted — so this step is just gathering the pieces:
+ * copy the two generated pages, copy img/ and vendor/ verbatim (every path
+ * inside them is already relative), and add the deploy-only extras that
+ * belong in a site root rather than in web/ (_headers, robots.txt,
+ * sitemap.xml).
  *
  *   node src/build-public.js
  */
@@ -56,10 +55,10 @@ function main() {
 
   fs.mkdirSync(PUBLIC, { recursive: true });
 
-  const map = W.generate('offline').replace(/about-offline\.html/g, 'about.html');
+  const map = W.generate();
   fs.writeFileSync(path.join(PUBLIC, 'index.html'), map);
 
-  const about = A.generate('offline').replace(/offline\.html/g, 'index.html');
+  const about = A.generate();
   fs.writeFileSync(path.join(PUBLIC, 'about.html'), about);
 
   copyDir(path.join(WEB, 'img'), path.join(PUBLIC, 'img'));

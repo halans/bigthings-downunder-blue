@@ -1,15 +1,15 @@
 'use strict';
 /**
- * Generate the About/landing page from the canonical dataset.
- *
- *   web/about.html          online build (hotlinked photos, Google Fonts)
- *   web/about-offline.html  offline build (local photos and fonts)
+ * Generate web/about.html from the canonical dataset.
  *
  * Every number, every correction and every photo credit on the page is read
  * out of data/ at build time. Nothing is typed twice: if the dataset gains a
  * row or an override gains a reason, the prose follows automatically. The
  * alternative — hand-written stats in marketing copy — goes stale silently and
  * then the landing page is quietly lying about the thing it is introducing.
+ *
+ * Fonts and photos are self-hosted (web/vendor/, web/img/) rather than
+ * hotlinked, same as the map — see src/build-web.js.
  */
 
 const fs = require('fs');
@@ -27,12 +27,6 @@ const esc = (s) => String(s == null ? '' : s)
 
 /** Plain text (no markup) version of a superlative, for JSON-LD answer text. */
 const describePlain = (t) => (t ? `${t.name} at ${t.location || t.stateName}` : 'unknown');
-
-const HEAD_ONLINE = `<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Caprasimo&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">`;
-
-const HEAD_OFFLINE = '<link rel="stylesheet" href="vendor/fonts.css">';
 
 /** Human labels for the precision tiers, in the order they should be read. */
 const PRECISION_COPY = [
@@ -81,10 +75,10 @@ const CATEGORY_LABEL = {
 };
 
 /** One photo tile, credited — the licence requires the photographer's name. */
-function shot(thing, credits, offline) {
+function shot(thing, credits) {
   const c = credits[thing.image];
   if (!c) return '';
-  const src = offline ? c.local : `https://commons.wikimedia.org/wiki/Special:FilePath/${encodeURIComponent(thing.image)}?width=480`;
+  const src = c.local;
   const author = c.author ? esc(c.author.length > 40 ? `${c.author.slice(0, 40)}…` : c.author) : 'Unknown';
   const licence = c.licenceUrl
     ? `<a href="${esc(c.licenceUrl)}" target="_blank" rel="noopener noreferrer">${esc(c.licence)}</a>`
@@ -116,10 +110,7 @@ function pickStrip(things) {
   return out.slice(0, 6);
 }
 
-function generate(mode = 'online') {
-  if (mode !== 'online' && mode !== 'offline') throw new Error(`unknown build mode: ${mode}`);
-  const offline = mode === 'offline';
-
+function generate() {
   const dataset = JSON.parse(fs.readFileSync(path.join(ROOT, 'data', 'bigthings.json'), 'utf8'));
   const overrides = JSON.parse(fs.readFileSync(path.join(ROOT, 'data', 'overrides.json'), 'utf8'));
   const creditsPath = path.join(ROOT, 'data', 'image-credits.json');
@@ -193,15 +184,11 @@ function generate(mode = 'online') {
     </div>`;
 
   // Download links come from data/downloads.json so they can be refreshed
-  // without touching code. The offline build has no business linking out for
-  // files it already contains, so it shows the in-bundle path instead.
+  // without touching code.
   const dlPath = path.join(ROOT, 'data', 'downloads.json');
   const dls = fs.existsSync(dlPath) ? JSON.parse(fs.readFileSync(dlPath, 'utf8')).downloads || [] : [];
   const downloads = dls.map((d) => {
     const body = `<b>${esc(d.file)}</b><span>${esc(d.blurb)}</span>`;
-    if (offline) {
-      return `<div class="grab-item">${body}<span style="margin-top:6px;display:block"><code>${esc(d.bundlePath)}</code></span></div>`;
-    }
     return `<a href="${esc(d.url)}" target="_blank" rel="noopener noreferrer">${body}</a>`;
   }).join('');
 
@@ -245,10 +232,8 @@ function generate(mode = 'online') {
     .replace('__TITLE__', SEO.escAttr(TITLE))
     .replace('__DESCRIPTION__', SEO.escAttr(DESCRIPTION))
     .replace('__SEO_META__', seoMeta)
-    .replace(/__HEAD_ASSETS__/g, offline ? HEAD_OFFLINE : HEAD_ONLINE)
-    .replace(/__MAP_HREF__/g, offline ? 'offline.html' : 'index.html')
     .replace(/__FIGURES__/g, figures)
-    .replace(/__STRIP__/g, pickStrip(things).map((t) => shot(t, credits, offline)).join(''))
+    .replace(/__STRIP__/g, pickStrip(things).map((t) => shot(t, credits)).join(''))
     .replace(/__PRECISION_ROWS__/g, precisionRows)
     .replace(/__FIXES__/g, fixes)
     .replace(/__FIXCOUNT__/g, String(curated.length))
@@ -273,23 +258,18 @@ function generate(mode = 'online') {
 function sourceBlurb(name) {
   if (/^Wikipedia/.test(name)) return 'The spine of the dataset: names, towns, years, dimensions and notes, state by state.';
   if (/^Wikivoyage/.test(name)) return 'Surveyed marker coordinates, travel-guide voice, and entries Wikipedia omits.';
-  if (/OpenStreetMap/.test(name)) return 'An independent coordinate cross-check, and the basemap tiles on the online map.';
+  if (/OpenStreetMap/.test(name)) return 'An independent coordinate cross-check, and the basemap tiles once you zoom in on the map.';
   if (/Commons/.test(name)) return 'The photographs, each under its own free licence and credited to its photographer.';
   return 'A contributing source, cited on every record that uses it.';
 }
 
 if (require.main === module) {
-  const outputs = [
-    ['online', path.join(ROOT, 'web', 'about.html')],
-    ['offline', path.join(ROOT, 'web', 'about-offline.html')],
-  ];
-  for (const [mode, dest] of outputs) {
-    const html = generate(mode);
-    const left = html.match(/__[A-Z_]+__/g);
-    if (left) throw new Error(`unfilled placeholders in the ${mode} about build: ${[...new Set(left)].join(', ')}`);
-    fs.writeFileSync(dest, html);
-    console.log(`wrote ${path.relative(ROOT, dest)} — ${(html.length / 1024).toFixed(0)} KB (${mode})`);
-  }
+  const dest = path.join(ROOT, 'web', 'about.html');
+  const html = generate();
+  const left = html.match(/__[A-Z_]+__/g);
+  if (left) throw new Error(`unfilled placeholders in the about build: ${[...new Set(left)].join(', ')}`);
+  fs.writeFileSync(dest, html);
+  console.log(`wrote ${path.relative(ROOT, dest)} — ${(html.length / 1024).toFixed(0)} KB`);
 }
 
-module.exports = { generate, bars, pickStrip, PRECISION_COPY, CATEGORY_LABEL, HEAD_OFFLINE };
+module.exports = { generate, bars, pickStrip, PRECISION_COPY, CATEGORY_LABEL };

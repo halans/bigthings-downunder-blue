@@ -7,7 +7,9 @@
 <meta name="description" content="__DESCRIPTION__">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍌</text></svg>">
 __SEO_META__
-__HEAD_ASSETS__
+<link rel="stylesheet" href="vendor/fonts.css">
+<link rel="stylesheet" href="vendor/leaflet.css">
+<link rel="stylesheet" href="vendor/MarkerCluster.css">
 <style>
 :root{
   --ink:#1b1a17; --ink-soft:#4a463e; --cream:#fdf6e8; --cream-2:#f6ebd6; --paper:#fffdf7;
@@ -288,7 +290,7 @@ a{color:var(--sky)}
       <h1>Big Things<em>a map of Australia's giant roadside sculptures</em></h1>
       <p class="tag">Fibreglass fruit, enormous fauna and one 250-metre earthworm. Built from open data: every pin says how precisely it's placed.</p>
       <div class="counts" id="counts"></div>
-      <p class="aboutlink"><a href="__ABOUT_HREF__">What is this, and how honest is it? →</a></p>
+      <p class="aboutlink"><a href="about.html">What is this, and how honest is it? →</a></p>
     </div>
     <div class="searchrow">
       <input id="q" type="search" placeholder="Search a prawn, a town, a ute…" autocomplete="off" aria-label="Search big things">
@@ -350,15 +352,14 @@ a{color:var(--sky)}
   </div>
 </div>
 
-__SCRIPT_ASSETS__
+<script src="vendor/leaflet.js"></script>
+<script src="vendor/leaflet.markercluster.js"></script>
 <script>
 /* eslint-disable */
 const DATA = __DATA__;
-/** 'online' hotlinks Commons and OSM tiles; 'offline' uses only local files. */
-const MODE = '__MODE__';
 /** Per-photo licence and photographer, keyed by Commons filename. */
 const CREDITS = __CREDITS__;
-/** Australia's coastline and state borders, for when there are no tiles. */
+/** Australia's coastline and state borders, for the continent-view basemap. */
 const OUTLINE = __OUTLINE__;
 const THINGS = DATA.things;
 const META = DATA.meta;
@@ -439,23 +440,33 @@ const syncLabelZoom = () => mapEl.classList.toggle('labels-zoom', map.getZoom() 
 map.on('zoomend', syncLabelZoom);
 syncLabelZoom();
 
-if (MODE === 'offline') {
-  // Basemap tiles are fetched per view, so no bundle can contain them. The
-  // simplified Natural Earth outline keeps the page legible as a map of
-  // Australia instead of leaving pins on blank grey.
-  attribution.addAttribution('Coastline © <a href="https://www.naturalearthdata.com/" target="_blank" rel="noopener noreferrer">Natural Earth</a> (public domain) · offline build, no tiles');
-  if (OUTLINE) {
-    L.geoJSON(OUTLINE, {
-      interactive:false,
-      style:{ color:'#8d8472', weight:1.25, fillColor:'#efe6d2', fillOpacity:1 },
-    }).addTo(map);
+/**
+ * Basemap: a vector coastline at the continent view, real OpenStreetMap
+ * tiles once you're zoomed in far enough for streets and town names to
+ * matter. Loading tile-server imagery for the whole of Australia at once is
+ * wasteful and, at that scale, looks worse than the app's own coastline —
+ * the swap is a legibility choice, not a network workaround, so it stays
+ * regardless of where this is hosted.
+ */
+attribution.addAttribution('Coastline © <a href="https://www.naturalearthdata.com/" target="_blank" rel="noopener noreferrer">Natural Earth</a> (public domain)');
+attribution.addAttribution('Map tiles © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">OpenStreetMap</a> contributors');
+const TILE_ZOOM = 7;
+const outlineLayer = OUTLINE ? L.geoJSON(OUTLINE, {
+  interactive:false,
+  style:{ color:'#8d8472', weight:1.25, fillColor:'#efe6d2', fillOpacity:1 },
+}) : null;
+const tileLayer = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom:19, crossOrigin:true });
+function syncBasemap() {
+  if (map.getZoom() >= TILE_ZOOM) {
+    if (!map.hasLayer(tileLayer)) tileLayer.addTo(map);
+    if (outlineLayer && map.hasLayer(outlineLayer)) map.removeLayer(outlineLayer);
+  } else {
+    if (outlineLayer && !map.hasLayer(outlineLayer)) outlineLayer.addTo(map);
+    if (map.hasLayer(tileLayer)) map.removeLayer(tileLayer);
   }
-} else {
-  attribution.addAttribution('© <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">OpenStreetMap</a> contributors');
-  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    maxZoom:19, crossOrigin:true,
-  }).addTo(map);
 }
+map.on('zoomend', syncBasemap);
+syncBasemap();
 
 const tripLine = L.polyline([], { color:'#2f7d52', weight:4, opacity:.85, dashArray:'1 9', lineCap:'round' }).addTo(map);
 const tripMarkers = L.layerGroup().addTo(map);
@@ -663,13 +674,12 @@ function buildFilters() {
 
 /* ---------------- detail ---------------- */
 /**
- * Where to load a photo from. Offline builds use the vendored copy and show
- * nothing if it is absent, rather than silently reaching for the network.
+ * Where to load a photo from — always the vendored local copy, showing
+ * nothing rather than reaching out to Commons for one that isn't.
  */
-function photoUrl(file, w) {
+function photoUrl(file) {
   const c = CREDITS[file];
-  if (MODE === 'offline') return c && c.f ? c.f : null;
-  return 'https://commons.wikimedia.org/wiki/Special:FilePath/' + encodeURIComponent(file) + '?width=' + w;
+  return c && c.f ? c.f : null;
 }
 
 /**
@@ -737,7 +747,7 @@ function openDetail(id, pan) {
   const pb = precisionBadge(t);
   const inTrip = trip.includes(t.id);
   const size = fmtSize(t);
-  const heroSrc = t.image ? photoUrl(t.image, 640) : null;
+  const heroSrc = t.image ? photoUrl(t.image) : null;
   const hero = heroSrc
     ? `<img class="dhero" src="${heroSrc}" alt="${esc(t.name)}" loading="lazy"
          onerror="this.outerHTML='<div class=\\'dhero ph\\' aria-hidden=\\'true\\'>${c.emoji}</div>'">`
@@ -1045,7 +1055,7 @@ function esc(s) {
 
 /* ---------------- boot ---------------- */
 document.getElementById('credits').innerHTML = [
-  `<a href="__ABOUT_HREF__">About this project</a> ·`,
+  `<a href="about.html">About this project</a> ·`,
   'Data from <a href="https://en.wikipedia.org/wiki/Big_things_(Australia)" target="_blank" rel="noopener noreferrer">Wikipedia</a>,',
   '<a href="https://en.wikivoyage.org/wiki/Australia%27s_big_things" target="_blank" rel="noopener noreferrer">Wikivoyage</a> (CC BY-SA),',
   '<a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">OpenStreetMap</a> (ODbL),',
@@ -1053,9 +1063,7 @@ document.getElementById('credits').innerHTML = [
   '<a href="https://www.aussiebigthings.com.au/" target="_blank" rel="noopener noreferrer">Aussie Big Things</a>.',
   'Photographs from <a href="https://commons.wikimedia.org/" target="_blank" rel="noopener noreferrer">Wikimedia Commons</a>,',
   'each under its own free licence and credited on the card.',
-  MODE === 'offline'
-    ? 'Coastline from <a href="https://www.naturalearthdata.com/" target="_blank" rel="noopener noreferrer">Natural Earth</a> (public domain) — this is the offline build, so there are no basemap tiles.'
-    : 'Basemap © OpenStreetMap contributors.',
+  'Basemap tiles © OpenStreetMap contributors once zoomed in; the continent view is a <a href="https://www.naturalearthdata.com/" target="_blank" rel="noopener noreferrer">Natural Earth</a> coastline (public domain).',
 ].join(' ');
 
 const s = META.stats;

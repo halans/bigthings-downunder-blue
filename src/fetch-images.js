@@ -4,8 +4,8 @@
  *
  * Two jobs, and the second is the important one:
  *
- *   1. Download a 480px-wide copy of each photo into web/img/ so the offline
- *      bundle actually works with the network unplugged.
+ *   1. Download a 480px-wide copy of each photo into web/img/ so the app
+ *      serves it from this domain instead of hotlinking Commons.
  *   2. Capture, per file, the licence and the photographer — because most of
  *      these are CC BY or CC BY-SA, which *require* naming both. The app
  *      previously displayed them bare, which was a licence breach.
@@ -15,8 +15,8 @@
  * better outcome than distributing a file we have no right to.
  *
  * Commons' own thumbnails are used as-is rather than re-encoded locally: that
- * keeps a rebuild a Node-only operation with no image toolchain, which the
- * repo's whole offline story depends on.
+ * keeps a rebuild a Node-only operation with no image toolchain, which is
+ * what makes it reproducible from cache/ with no network at all.
  */
 
 const fs = require('fs');

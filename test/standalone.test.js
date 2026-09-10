@@ -1,7 +1,10 @@
 'use strict';
 /**
- * The offline build's contract: it must render with the network unplugged, and
- * every photograph must carry its photographer and licence.
+ * The build's contract: every image, font and script must be self-hosted —
+ * no photo hotlinked from Wikimedia Commons, no library pulled from a CDN —
+ * and every photograph must carry its photographer and licence. Real
+ * OpenStreetMap tiles are the one intentional exception, loaded live once
+ * you zoom in; that's map data, not a bundle dependency.
  *
  * The distinction that matters here is between assets the browser *loads*
  * (which must all be local) and hyperlinks the user *clicks* (which must be
@@ -41,16 +44,16 @@ function loadedAssets(html) {
   return out.filter((u) => u && !u.startsWith('data:'));
 }
 
-/* ---------- the offline build ---------- */
+/* ---------- self-hosted assets ---------- */
 
-test('the offline build loads nothing from the network', () => {
-  const html = B.generate('offline');
+test('the build loads nothing from the network at page load', () => {
+  const html = B.generate();
   const external = loadedAssets(html).filter((u) => /^(https?:)?\/\//.test(u));
   eq(external, [], 'every loaded asset must be a local relative path');
 });
 
-test('every asset the offline build references exists on disk', () => {
-  const html = B.generate('offline');
+test('every asset the build references exists on disk', () => {
+  const html = B.generate();
   const missing = loadedAssets(html)
     .filter((u) => !/^(https?:)?\/\//.test(u))
     .filter((u) => !fs.existsSync(path.join(WEB, u.split('?')[0])));
@@ -74,11 +77,21 @@ test('the vendored stylesheets reference only local files', () => {
   eq(problems, []);
 });
 
-test('the offline build carries an Australia outline to stand in for tiles', () => {
-  const html = B.generate('offline');
-  // Basemap tiles can never be bundled; without the outline, pins float on grey.
-  ok(!/L\.tileLayer\([^)]*\)\.addTo\(map\)/.test(html.replace(/\s+/g, '')) || html.includes("MODE === 'offline'"),
-    'the tile layer must be gated on mode');
+test('the basemap is gated on zoom, not loaded unconditionally', () => {
+  const html = B.generate();
+  // The old contract was "gated on offline mode"; there is no mode any more,
+  // so a bare L.tileLayer(...).addTo(map) — added regardless of zoom — would
+  // load tiles for the whole continent at once, which is what the zoom gate
+  // exists to avoid.
+  ok(!/L\.tileLayer\([^)]*\)\.addTo\(map\)/.test(html.replace(/\s+/g, '')),
+    'the tile layer must not be added unconditionally');
+  ok(/const TILE_ZOOM\s*=\s*\d/.test(html), 'a zoom threshold decides which basemap shows');
+  ok(html.includes('tileLayer.addTo(map)') && html.includes('outlineLayer'),
+    'both the tile layer and the outline are added conditionally, not at init');
+});
+
+test('the outline covers every state and territory', () => {
+  const html = B.generate();
   const m = /const OUTLINE = (\{.*?\});\n/s.exec(html);
   ok(m, 'OUTLINE is injected');
   const outline = JSON.parse(m[1].replace(/\\u003c/g, '<'));
@@ -90,19 +103,11 @@ test('the offline build carries an Australia outline to stand in for tiles', () 
   }
 });
 
-test('the online build still hotlinks, and is not accidentally shipped local paths', () => {
-  const html = B.generate('online');
-  ok(html.includes('unpkg.com/leaflet'), 'CDN Leaflet');
-  ok(html.includes('tile.openstreetmap.org'), 'OSM tiles');
-  ok(!html.includes('src="vendor/'), 'no local vendor references in the published page');
-  eq(loadedAssets(html).filter((u) => u.startsWith('img/')), [], 'no local image paths in the published page');
-});
-
-/* ---------- photo resolution, per mode ---------- */
+/* ---------- photo resolution ---------- */
 
 /** Run the generated page's photo helpers without a DOM. */
-function loadPhotoHelpers(mode) {
-  const html = B.generate(mode);
+function loadPhotoHelpers() {
+  const html = B.generate();
   const script = html.slice(html.lastIndexOf('<script>') + 8, html.lastIndexOf('</script>'));
   const start = script.indexOf('const DATA =');
   const declsEnd = script.indexOf('/* ---------------- state ----------------');
@@ -112,40 +117,35 @@ function loadPhotoHelpers(mode) {
   // Declarations + photoUrl only; everything between them touches Leaflet.
   const src = script.slice(start, declsEnd)
     + script.slice(fnStart, fnEnd)
-    + '\nmodule.exports = { photoUrl, MODE, CREDITS, THINGS };';
+    + '\nmodule.exports = { photoUrl, CREDITS, THINGS };';
   const sandbox = { module: { exports: {} }, console };
   vm.createContext(sandbox);
-  vm.runInContext(src, sandbox, { filename: `generated-${mode}.js` });
+  vm.runInContext(src, sandbox, { filename: 'generated-app.js' });
   return sandbox.module.exports;
 }
 
-test('offline photo URLs are local; online ones point at Commons', () => {
+test('photo URLs are always local, never hotlinked', () => {
   if (!hasImages) return;
-  const off = loadPhotoHelpers('offline');
-  const on = loadPhotoHelpers('online');
-
-  const files = Object.keys(off.CREDITS);
+  const app = loadPhotoHelpers();
+  const files = Object.keys(app.CREDITS);
   ok(files.length > 100, `expected a real credit map, got ${files.length}`);
-
   for (const f of files) {
-    const local = off.photoUrl(f, 640);
-    ok(local && local.startsWith('img/'), `offline URL for ${f} should be local, got ${local}`);
-    const remote = on.photoUrl(f, 640);
-    ok(remote && remote.startsWith('https://'), `online URL for ${f} should be remote, got ${remote}`);
+    const local = app.photoUrl(f);
+    ok(local && local.startsWith('img/'), `URL for ${f} should be local, got ${local}`);
   }
 });
 
-test('an uncredited photo yields nothing offline rather than reaching out', () => {
-  const off = loadPhotoHelpers('offline');
-  eq(off.photoUrl('Definitely Not Vendored.jpg', 640), null);
+test('an uncredited photo yields nothing rather than reaching out', () => {
+  const app = loadPhotoHelpers();
+  eq(app.photoUrl('Definitely Not Vendored.jpg'), null);
 });
 
-test('every big thing with a photo can actually resolve it offline', () => {
+test('every big thing with a photo can actually resolve it', () => {
   if (!hasImages) return;
-  const off = loadPhotoHelpers('offline');
-  const unresolvable = off.THINGS
+  const app = loadPhotoHelpers();
+  const unresolvable = app.THINGS
     .filter((t) => t.image)
-    .filter((t) => !off.photoUrl(t.image, 640))
+    .filter((t) => !app.photoUrl(t.image))
     .map((t) => `${t.name}: ${t.image}`);
   // Anything not vendored must be recorded as skipped, with a reason.
   const skipped = new Set((credits.skipped || []).map((s) => s.file));
@@ -235,7 +235,7 @@ test('any element given an inline width is styled to accept one', () => {
   // elements. The Superlatives bar fills were spans inside a plain block, so
   // every bar rendered as an empty outline while the numbers beside them were
   // correct — invisible to data tests, and to a render health check.
-  const html = B.generate('online');
+  const html = B.generate();
   const style = html.slice(html.indexOf('<style>'), html.indexOf('</style>'));
 
   // Collect classes on spans that receive an inline width/height.
@@ -256,7 +256,7 @@ test('any element given an inline width is styled to accept one', () => {
 });
 
 test('the superlatives bars produce a non-zero fill width', () => {
-  const html = B.generate('online');
+  const html = B.generate();
   const m = /const bars = \(obj, fmt\) => \{[\s\S]*?\n  \};/.exec(html);
   ok(m, 'located the bars helper');
   // Rebuild the fill-width expression and check it never yields 0%, so a
@@ -270,7 +270,7 @@ test('the superlatives bars produce a non-zero fill width', () => {
 test('every category has a chart label that reads on its own', () => {
   // Deriving the chart label from the first word turned "Pure oddity" into
   // "Pure", which means nothing.
-  const html = B.generate('online');
+  const html = B.generate();
   const m = /const CATS = \{([\s\S]*?)\n\};/.exec(html);
   ok(m, 'located the category table');
   const shorts = [...m[1].matchAll(/short:\s*'([^']+)'/g)].map((x) => x[1]);

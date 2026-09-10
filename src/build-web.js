@@ -1,17 +1,17 @@
 'use strict';
 /**
- * Generate the web app from the canonical dataset — twice, from one template.
+ * Generate web/index.html from the canonical dataset.
  *
- *   web/index.html    online build: CDN Leaflet, Google Fonts, OSM tiles, and
- *                     photos hotlinked from Wikimedia Commons. This is what
- *                     gets published.
- *   web/offline.html  offline build: every asset local. Photos come from
- *                     web/img/, libraries and fonts from web/vendor/, and a
- *                     vector Australia outline stands in for the tiles that no
- *                     bundle can contain. Works with the network unplugged.
+ * One build: every asset is self-hosted (photos from web/img/, Leaflet and
+ * fonts from web/vendor/) rather than hotlinked from Wikimedia Commons or a
+ * CDN. The basemap is a vector Australia outline at the continent view and
+ * real OpenStreetMap tiles once zoomed in — see the "Basemap" block in
+ * web/template.html — which is a legibility choice, not a network one, so
+ * it doesn't depend on how or where this is deployed.
  *
- * The page is never hand-maintained: web/template.html holds the shell and the
- * placeholders, and a test asserts the offline build contains no external URLs.
+ * The page is never hand-maintained: web/template.html holds the shell and
+ * the placeholders, and standalone.test.js asserts every image, font and
+ * script loads from this domain.
  */
 
 const fs = require('fs');
@@ -31,22 +31,6 @@ const FIELDS = [
   'status', 'statusEvidence', 'notes', 'blurb', 'image', 'wikipediaArticle',
   'sources', 'correction', 'coordMatch', 'addedManually',
 ];
-
-const HEAD_ONLINE = `<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Caprasimo&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
-<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css">`;
-
-const HEAD_OFFLINE = `<link rel="stylesheet" href="vendor/fonts.css">
-<link rel="stylesheet" href="vendor/leaflet.css">
-<link rel="stylesheet" href="vendor/MarkerCluster.css">`;
-
-const SCRIPTS_ONLINE = `<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-<script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>`;
-
-const SCRIPTS_OFFLINE = `<script src="vendor/leaflet.js"></script>
-<script src="vendor/leaflet.markercluster.js"></script>`;
 
 function slim(dataset) {
   return {
@@ -103,7 +87,7 @@ const inlineJson = (value) => JSON.stringify(value)
  * app itself understands (see the "direct links" block in template.html) —
  * not a fabricated one, so anything that follows it lands on that card.
  */
-function buildJsonLd(dataset, offline) {
+function buildJsonLd(dataset) {
   const { siteUrl } = SEO.loadSite();
   const creditsPath = path.join(ROOT, 'data', 'image-credits.json');
   const images = fs.existsSync(creditsPath) ? JSON.parse(fs.readFileSync(creditsPath, 'utf8')).images : {};
@@ -132,7 +116,7 @@ function buildJsonLd(dataset, offline) {
 
   const itemListElement = dataset.things.map((t, i) => {
     const img = t.image ? images[t.image] : null;
-    const photo = img ? (offline ? `${siteUrl}/${img.local}` : img.remote) : undefined;
+    const photo = img ? `${siteUrl}/${img.local}` : undefined;
     return {
       '@type': 'ListItem',
       position: i + 1,
@@ -165,33 +149,24 @@ function buildJsonLd(dataset, offline) {
   return SEO.ldScript([website, datasetLd, itemList]);
 }
 
-function generate(mode = 'online') {
-  if (mode !== 'online' && mode !== 'offline') throw new Error(`unknown build mode: ${mode}`);
+function generate() {
   const dataset = JSON.parse(fs.readFileSync(path.join(ROOT, 'data', 'bigthings.json'), 'utf8'));
   const template = fs.readFileSync(path.join(ROOT, 'web', 'template.html'), 'utf8');
-  for (const token of ['__DATA__', '__MODE__', '__CREDITS__', '__OUTLINE__', '__HEAD_ASSETS__', '__SCRIPT_ASSETS__', '__ABOUT_HREF__', '__TITLE__', '__DESCRIPTION__', '__SEO_META__']) {
+  for (const token of ['__DATA__', '__CREDITS__', '__OUTLINE__', '__TITLE__', '__DESCRIPTION__', '__SEO_META__']) {
     if (!template.includes(token)) throw new Error(`template.html is missing the ${token} placeholder`);
   }
 
-  const offline = mode === 'offline';
-  let outline = 'null';
-  if (offline) {
-    const op = path.join(ROOT, 'web', 'vendor', 'australia-outline.geojson');
-    if (!fs.existsSync(op)) throw new Error('web/vendor/australia-outline.geojson missing — run `node src/fetch-vendor.js`');
-    outline = inlineJson(JSON.parse(fs.readFileSync(op, 'utf8')));
-  }
+  const op = path.join(ROOT, 'web', 'vendor', 'australia-outline.geojson');
+  if (!fs.existsSync(op)) throw new Error('web/vendor/australia-outline.geojson missing — run `node src/fetch-vendor.js`');
+  const outline = inlineJson(JSON.parse(fs.readFileSync(op, 'utf8')));
 
   const site = SEO.loadSite();
-  const seoMeta = `${SEO.metaTags({ siteUrl: site.siteUrl, pagePath: '/', title: TITLE, description: DESCRIPTION, image: site.shareImage })}\n${buildJsonLd(dataset, offline)}`;
+  const seoMeta = `${SEO.metaTags({ siteUrl: site.siteUrl, pagePath: '/', title: TITLE, description: DESCRIPTION, image: site.shareImage })}\n${buildJsonLd(dataset)}`;
 
   return template
-    .replace(/__ABOUT_HREF__/g, offline ? 'about-offline.html' : 'about.html')
     .replace('__TITLE__', SEO.escAttr(TITLE))
     .replace('__DESCRIPTION__', SEO.escAttr(DESCRIPTION))
     .replace('__SEO_META__', seoMeta)
-    .replace('__HEAD_ASSETS__', offline ? HEAD_OFFLINE : HEAD_ONLINE)
-    .replace('__SCRIPT_ASSETS__', offline ? SCRIPTS_OFFLINE : SCRIPTS_ONLINE)
-    .replace('__MODE__', mode)
     .replace('__DATA__', inlineJson(slim(dataset)))
     .replace('__CREDITS__', inlineJson(creditMap(dataset)))
     .replace('__OUTLINE__', outline);
@@ -251,20 +226,11 @@ function creditsMarkdown() {
 }
 
 if (require.main === module) {
-  const outputs = [
-    ['online', path.join(ROOT, 'web', 'index.html')],
-    ['offline', path.join(ROOT, 'web', 'offline.html')],
-  ];
-  for (const [mode, dest] of outputs) {
-    try {
-      const html = generate(mode);
-      fs.writeFileSync(dest, html);
-      console.log(`wrote ${path.relative(ROOT, dest)} — ${(html.length / 1024).toFixed(0)} KB (${mode})`);
-    } catch (e) {
-      if (mode === 'offline') { console.log(`skipped the offline build: ${e.message}`); continue; }
-      throw e;
-    }
-  }
+  const dest = path.join(ROOT, 'web', 'index.html');
+  const html = generate();
+  fs.writeFileSync(dest, html);
+  console.log(`wrote ${path.relative(ROOT, dest)} — ${(html.length / 1024).toFixed(0)} KB`);
+
   const md = creditsMarkdown();
   if (md) {
     fs.writeFileSync(path.join(ROOT, 'docs', 'IMAGE-CREDITS.md'), md);
@@ -272,4 +238,4 @@ if (require.main === module) {
   }
 }
 
-module.exports = { generate, slim, creditMap, creditsMarkdown, FIELDS, HEAD_OFFLINE, SCRIPTS_OFFLINE };
+module.exports = { generate, slim, creditMap, creditsMarkdown, FIELDS };

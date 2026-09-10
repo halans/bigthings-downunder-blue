@@ -10,7 +10,7 @@ function over the files in `cache/`, so a rebuild from a shipped bundle needs no
 4. match     ──▶ cache/osm-matches.json       (town pins upgraded, for audit)
 5. build     ──▶ data/bigthings.json          (again, applying the matches)
 6. build-web ──▶ web/index.html               (generated from the dataset)
-7. test      ──▶ 172 assertions, incl. map-vs-CLI, offline-asset and layout checks
+7. test      ──▶ 170 assertions, incl. map-vs-CLI, self-hosted-asset and layout checks
 ```
 
 Stage 4 needs a built dataset to read and feeds the next build, so the
@@ -200,8 +200,8 @@ Three things worth knowing:
 - **Some files live on English Wikipedia, not Commons.** Four did. The fetcher retries misses
   against `en.wikipedia.org` before giving up.
 - **Commons' own thumbnails are used as-is, never re-encoded.** WebP would save ~40%, but that
-  puts an image toolchain in the rebuild path, and a Node-only rebuild is the whole point of
-  the offline story.
+  puts an image toolchain in the rebuild path, and a Node-only, network-free rebuild is the
+  whole point.
 
 **`fetch-vendor.js`** takes Leaflet, MarkerCluster, their stylesheets and sprites, the two
 webfonts, and a simplified Australia outline into `web/vendor/`, with checksums in
@@ -217,50 +217,48 @@ Two traps it documents:
 
 ## Stage 5 — generate the pages (`src/build-web.js`, `src/build-about.js`)
 
-Four HTML files from two templates:
+Two HTML files from two templates, one each:
 
 | Generator | Template | Output |
 |---|---|---|
-| `build-web.js` | `web/template.html` | `web/index.html`, `web/offline.html` |
-| `build-about.js` | `web/about-template.html` | `web/about.html`, `web/about-offline.html` |
+| `build-web.js` | `web/template.html` | `web/index.html` |
+| `build-about.js` | `web/about-template.html` | `web/about.html` |
+
+Everything is self-hosted — photos from `web/img/`, Leaflet and the fonts from `web/vendor/` —
+rather than hotlinked from Wikimedia Commons or pulled from a CDN. There used to be a second,
+"offline" variant of each page for exactly this purpose; there's no reason to hand-maintain two
+builds when self-hosting can just be the only build, so that's what these generators produce now.
 
 `build-about.js` reads `data/bigthings.json`, `data/overrides.json`,
 `data/image-credits.json` and `data/downloads.json`, and injects every number on the landing
 page. Nothing on it is typed by hand — including the prose superlatives ("the largest along any
 axis is…"), which are computed and then asserted against the dataset in the tests.
 
-Two judgement calls worth knowing:
-
-- **Correction cards are ranked, not sliced.** Taking the first six alphabetically surfaced
-  three records that share one override about the Sapphire gemfields. The generator now dedupes
-  on the explanation text and ranks by how much explanation there is, which puts Fergus the Bull
-  and the misfiled Triceratops first.
-- **The offline build does not link out for files it contains.** Its download section prints the
-  in-bundle path instead of a URL, and `data/downloads.json` holds the public URLs so they can be
-  refreshed without touching code.
+A judgement call worth knowing: **correction cards are ranked, not sliced.** Taking the first
+six alphabetically surfaced three records that share one override about the Sapphire gemfields.
+The generator now dedupes on the explanation text and ranks by how much explanation there is,
+which puts Fergus the Bull and the misfiled Triceratops first.
 
 ## Stage 5b — generate the map (`src/build-web.js`)
 
-Both pages are **generated, not maintained**. The shell lives in `web/template.html`, and
-`generate(mode)` fills six placeholders:
+The page is **generated, not maintained**. The shell lives in `web/template.html`, and
+`generate()` fills three placeholders:
 
-| Placeholder | Online | Offline |
-|---|---|---|
-| `__HEAD_ASSETS__` | Google Fonts + CDN Leaflet CSS | `vendor/*.css` |
-| `__SCRIPT_ASSETS__` | CDN Leaflet JS | `vendor/*.js` |
-| `__MODE__` | `online` | `offline` |
-| `__DATA__` | the slimmed dataset (fields in `FIELDS`) | same |
-| `__CREDITS__` | per-photo author/licence/local path | same |
-| `__OUTLINE__` | `null` | the inlined Natural Earth outline |
+| Placeholder | Content |
+|---|---|
+| `__DATA__` | the slimmed dataset (fields in `FIELDS`) |
+| `__CREDITS__` | per-photo author/licence/local path |
+| `__OUTLINE__` | the inlined Natural Earth coastline |
 
-`MODE` then gates the two runtime differences: the basemap (tiles vs vector outline) and
-`photoUrl()` (Commons vs `img/`). Offline, `photoUrl()` returns `null` for anything not
-vendored rather than quietly reaching for the network.
+`photoUrl()` always resolves to the local vendored copy in `CREDITS`, returning `null` for
+anything not vendored rather than quietly reaching for Commons. The basemap itself — vector
+coastline vs real OpenStreetMap tiles — is decided at runtime by zoom, not at build time: see
+`TILE_ZOOM`/`syncBasemap()` in `web/template.html`.
 
 JSON payloads are escaped for `<`, U+2028 and U+2029 so they are safe to inline in a
 `<script>`.
 
-Edit `web/template.html`, never the generated pages — both are overwritten on every build.
+Edit `web/template.html`, never `web/index.html` — it's overwritten on every build.
 
 ## Stage 5c — SEO and AEO (`src/seo.js`)
 
@@ -273,12 +271,11 @@ citable. `src/seo.js` is the one shared module both generators use to close that
   the same `TITLE`/`DESCRIPTION` constants that fill `<title>` and `<meta name="description">`
   — one string per page, never typed twice.
 - **`WebSite` + `Dataset` + `ItemList` JSON-LD** on the map page (`buildJsonLd()` in
-  `build-web.js`): every thing's name, coordinates, address, photo and (if present) Wikipedia
-  link, sitting in the raw HTML independent of the app's own inline JSON. No item gets a
-  fabricated per-item `url` — the app has no deep link to point at, and claiming one would
-  misdirect anything that followed it. `additionalProperty` only appears for the things that
-  aren't `standing`, since misrepresenting a demolished sculpture as extant is exactly the kind
-  of error the rest of this project exists to avoid.
+  `build-web.js`): every thing's name, coordinates, address, photo, `#thing=<id>` deep link and
+  (if present) Wikipedia link, sitting in the raw HTML independent of the app's own inline JSON.
+  `additionalProperty` only appears for the things that aren't `standing`, since misrepresenting
+  a demolished sculpture as extant is exactly the kind of error the rest of this project exists
+  to avoid.
 - **`FAQPage` + `BreadcrumbList` JSON-LD** on the about page: the same superlatives already
   computed for the visible prose (oldest, newest, biggest, tallest, the lost count, the
   exact-placement percentage), reused as answer text rather than retyped — so an answer engine
@@ -289,16 +286,11 @@ so a `</script>` or a line-separator inside a name or blurb can't break out of t
 
 ## Stage 5d — package for deployment (`src/build-public.js`)
 
-`web/offline.html` and `web/about-offline.html` already load nothing from the network (that's
-the whole point of the offline build, and `standalone.test.js` enforces it) — but their names
-exist to sit alongside the *online* build in the same `web/` folder, which a standalone deploy
-doesn't have.
-
-`npm run build:public` regenerates the offline pages straight from `data/bigthings.json` (it
-doesn't just copy `web/`), renames them to `index.html` / `about.html`, rewrites the two
-cross-links the template bakes in between them, and copies `img/` and `vendor/` verbatim into
-`public/` — every path inside those two folders is already relative, so nothing else needs
-rewriting. It also writes:
+`web/index.html` and `web/about.html` already load nothing but self-hosted assets (that's the
+whole point of Stage 5, and `standalone.test.js` enforces it), so packaging `public/` is just
+gathering the pieces: regenerate both pages straight from `data/bigthings.json` (it doesn't just
+copy `web/`), and copy `img/` and `vendor/` verbatim — every path inside those two folders is
+already relative, so nothing needs rewriting. It also writes:
 
 - `public/_headers` — long-lived immutable caching for the content-hashed photos in `img/` and
   the unhashed libraries/fonts in `vendor/`; no explicit rule for the HTML, so Pages applies its
@@ -310,8 +302,7 @@ Requires `web/img/` and `web/vendor/` to already exist (`npm run standalone`, on
 afterwards). Preview it with `npm run serve:public` before deploying.
 
 `public/` is disposable — it's regenerated in full on every run, never hand-edited, and needs no
-separate test suite: it's the same offline build `standalone.test.js` already covers, just
-renamed and recopied.
+separate test suite: it's the same build `standalone.test.js` already covers, just copied.
 
 ## Stage 6 — test (`test/run.js`)
 
@@ -332,10 +323,12 @@ A 50-line zero-dependency runner. Seven suites:
   the dataset, the precision tiers must sum to the total, each correction card must be a real
   sourced override, and each photo must name its photographer. It also pins two layout traps that
   bit in review — the UA `figure` margin, and the phone header crowding the wordmark.
-- **`standalone.test.js`** — the offline build's contract: no asset loads from the network,
-  every local reference exists, every photo names its photographer and licence, and each
-  vendored file matches its recorded checksum. The key distinction it encodes is between
-  assets the browser *loads* (all local) and links the user *clicks* (necessarily external).
+- **`standalone.test.js`** — the build's self-hosting contract: no image, font or script loads
+  from anywhere but this domain (real map tiles, loaded live once you zoom in, are the one
+  intentional exception), every local reference exists, every photo names its photographer and
+  licence, and each vendored file matches its recorded checksum. The key distinction it encodes
+  is between assets the browser *loads* (all local, tiles excepted) and links the user *clicks*
+  (necessarily external).
   It also guards a layout trap: a `<span>` given an inline `width` is still an inline element,
   and width/height do not apply to those — which rendered every Superlatives bar as an empty
   outline while the numbers beside them stayed correct. Neither a data test nor a render

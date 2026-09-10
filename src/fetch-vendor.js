@@ -1,13 +1,13 @@
 'use strict';
 /**
- * Vendor the third-party front-end assets so the offline build has no external
+ * Vendor the third-party front-end assets so the app has no external
  * dependencies at all: Leaflet, its marker-cluster plugin, their stylesheets
  * and sprite images, and the two webfonts.
  *
  * Also fetches a simplified Australia + state-boundary outline. Basemap tiles
- * are fetched per view and can never be bundled, so without this the offline
- * page would show pins floating on blank grey. The outline is drawn underneath
- * them instead, which keeps the page legible as a map of Australia.
+ * are fetched per view and can never be bundled, so at the continent view —
+ * where loading tiles for the whole of Australia would be wasteful anyway —
+ * this outline is drawn instead, underneath the pins.
  */
 
 const fs = require('fs');

@@ -4,7 +4,7 @@
  * data/image-credits.json, from whatever is currently on disk in web/img/.
  *
  * Exists for exactly one case: a file was re-encoded locally (recompressed to
- * shrink the offline bundle) outside src/fetch-images.js, so its checksum no
+ * shrink the image bundle) outside src/fetch-images.js, so its checksum no
  * longer matches what's recorded. Without this, the next `npm run images`
  * would see that mismatch and silently re-download the original from Commons,
  * undoing the recompression. This script never touches web/img/ itself and

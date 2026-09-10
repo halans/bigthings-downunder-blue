@@ -1,10 +1,9 @@
 'use strict';
 /**
- * Static file server for web/, so the offline build can be opened the way a
- * browser expects rather than over file://.
+ * Static file server for web/, so the app can be opened the way a browser
+ * expects rather than over file://.
  *
- *   node src/serve.js            → http://localhost:8099/           (online build)
- *   node src/serve.js --offline  → http://localhost:8099/offline.html
+ *   node src/serve.js            → http://localhost:8099/           (the map)
  *   node src/serve.js --about    → http://localhost:8099/about.html
  *   node src/serve.js --public   → http://localhost:8099/ (the public/ deploy bundle)
  *   node src/serve.js --port 9000
@@ -44,9 +43,7 @@ const MIME = {
 const argv = process.argv.slice(2);
 const portFlag = argv.indexOf('--port');
 const port = portFlag >= 0 ? Number(argv[portFlag + 1]) : 8099;
-const landing = argv.includes('--about') ? '/about.html'
-  : argv.includes('--offline') ? '/offline.html'
-  : '/index.html';
+const landing = argv.includes('--about') ? '/about.html' : '/index.html';
 
 const server = http.createServer((req, res) => {
   let rel = decodeURIComponent((req.url || '/').split('?')[0]);
@@ -74,9 +71,6 @@ const server = http.createServer((req, res) => {
 
 server.listen(port, () => {
   console.log(`serving ${path.relative(process.cwd(), ROOT_DIR)} at http://localhost:${port}${landing}`);
-  if (landing === '/offline.html') {
-    console.log('This is the offline build: block your network and it should still work.');
-  }
   if (ROOT_DIR.endsWith(`${path.sep}public`)) {
     console.log('This is the public/ deploy bundle — what Cloudflare Pages would serve.');
   }

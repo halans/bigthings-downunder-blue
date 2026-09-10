@@ -1,23 +1,20 @@
 {
-  "_readme": "Public URLs for the published artefacts, used by the About page's download section. Kept as data so the links can be refreshed without touching src/. The offline build ignores the URLs and shows the in-bundle path instead.",
+  "_readme": "Public URLs for the published artefacts, used by the About page's download section. Kept as data so the links can be refreshed without touching src/.",
   "downloads": [
     {
       "file": "bigthings.json",
-      "bundlePath": "data/bigthings.json",
       "url": "https://pub.hyperagent.com/api/published/pbf01M21H2A62_SKTBJCQ5TMVMP4E1/bigthings.json",
       "blurb": "The whole dataset — every record with its coordinates, precision tier, per-row sources and any correction applied to it."
     },
     {
       "file": "bigthings-au.geojson",
-      "bundlePath": "generate with: node src/cli.js --limit 0 --format geojson",
       "url": "https://pub.hyperagent.com/api/published/pbf01M21H2RJ0_NC65QAB14J2KS5N1/bigthings-au.geojson",
       "blurb": "GeoJSON, for dropping straight into QGIS, Felt, or any other map."
     },
     {
       "file": "australian-big-things.zip",
-      "bundlePath": "you are already holding it",
       "url": "https://pub.hyperagent.com/api/published/pbf01M21H2X39_H8W6ZCZ6XV820CRX/australian-big-things.zip",
-      "blurb": "The offline-complete bundle: cached upstream sources with checksums, both web builds, all 284 photographs, the tests and the docs. About 28 MB."
+      "blurb": "The network-complete bundle: cached upstream sources with checksums, the built web app, all 284 photographs, the tests and the docs. About 27 MB."
     }
   ]
 }
