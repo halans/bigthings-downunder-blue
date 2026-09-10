@@ -156,6 +156,9 @@ a{color:var(--sky)}
   background:var(--paper);border:2px solid var(--ink);font-size:17px;display:grid;place-items:center;
   box-shadow:0 2px 0 var(--ink)
 }
+/* The permanent desktop sidebar has nothing to close; #sideclose only
+   exists for its mobile incarnation as a bottom sheet (see media query). */
+#sideclose{display:none}
 .dscroll{overflow-y:auto;flex:1;-webkit-overflow-scrolling:touch}
 .dhero{width:100%;aspect-ratio:4/3;object-fit:cover;background:var(--cream-2);display:block;border-bottom:2px solid var(--ink)}
 .dhero.ph{display:grid;place-items:center;font-size:62px;aspect-ratio:16/9}
@@ -233,6 +236,11 @@ a{color:var(--sky)}
     transform:translateY(101%);transition:transform .26s cubic-bezier(.4,0,.2,1);
   }
   #side.open{transform:none}
+  /* On mobile #side is a dismissable sheet, not the permanent sidebar —
+     unlike every other sheet, it had no close button at all. The grabber
+     looked tappable (it's the universal "drag to dismiss" affordance) but
+     did nothing; #sideclose gives it an unambiguous one. */
+  #sideclose{display:grid}
   /* The sheet is opened specifically to search or filter — the full
      marketing intro and footer attribution (both sized for a permanent
      desktop sidebar) were otherwise eating most of its height, leaving
@@ -287,6 +295,7 @@ a{color:var(--sky)}
 <body>
 <div id="app">
   <aside id="side" aria-label="Filters and search">
+    <button class="dclose" id="sideclose" aria-label="Close filters">✕</button>
     <div id="grabber"></div>
     <div class="brand">
       <h1>Big Things<em>a map of Australia's giant roadside sculptures</em></h1>
@@ -1026,10 +1035,15 @@ document.getElementById('mfilter').addEventListener('click', () => {
   side.classList.toggle('open');
 });
 document.getElementById('msearch').addEventListener('click', () => {
+  const willOpen = !side.classList.contains('open');
   closeSheets(); document.getElementById('detail').classList.remove('open');
-  side.classList.add('open');
-  setTimeout(() => document.getElementById('q').focus(), 260);
+  side.classList.toggle('open', willOpen);
+  if (willOpen) setTimeout(() => document.getElementById('q').focus(), 260);
 });
+// Mobile-only close affordances for #side: unlike every other sheet, it had
+// none at all — the grabber looked tappable but did nothing.
+document.getElementById('sideclose').addEventListener('click', () => side.classList.remove('open'));
+document.getElementById('grabber').addEventListener('click', () => side.classList.remove('open'));
 document.addEventListener('keydown', (e) => {
   if (e.key === 'Escape') {
     closeSheets();
