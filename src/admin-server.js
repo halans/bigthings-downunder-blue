@@ -24,6 +24,7 @@ const path = require('path');
 const crypto = require('crypto');
 const { spawnSync } = require('child_process');
 const N = require('./normalise');
+const { stableId } = require('./build');
 
 const ROOT = path.join(__dirname, '..');
 const DATA = path.join(ROOT, 'data');
@@ -157,6 +158,64 @@ function addNewThing(body) {
   return { thing: created, log };
 }
 
+/**
+ * Remove a record from the catalogue — the counterpart to addNewThing().
+ *
+ * A record you added yourself (`additions[]`) is deleted outright: there's
+ * nothing else that would ever recreate it. A harvested record (from
+ * Wikipedia or Wikivoyage) can't be deleted at the source — it'll just come
+ * back on the next fetch — so this adds a `removals[]` entry instead, same
+ * as the hand-written example in docs/ADMIN.md; `applyRemovals()` drops it
+ * on every build, and deleting that one entry brings it straight back. A
+ * correction sitting on this id is dropped either way, since it would
+ * otherwise "match nothing" on the very next build.
+ */
+function removeThing(id, why, source) {
+  if (!why || !why.trim()) throw new Error('a reason ("why") is required to remove a record');
+  const thing = findThing(id);
+  if (!thing) throw new Error(`no such id: ${id}`);
+
+  const o = loadOverrides();
+  o.corrections = o.corrections || [];
+  o.additions = o.additions || [];
+  o.removals = o.removals || [];
+
+  const additionIdx = thing.addedManually
+    ? o.additions.findIndex((a) => stableId(a.state, a.name, a.location) === id)
+    : -1;
+  if (additionIdx >= 0) {
+    o.additions.splice(additionIdx, 1);
+  } else {
+    o.removals.push({ match: { id }, why: why.trim(), source: source || null });
+  }
+  o.corrections = o.corrections.filter((c) => !(c.match && c.match.id === id));
+
+  // A custom photo only this record used is now orphaned — clean it up too,
+  // unless some other row still points at the same key.
+  if (thing.image && thing.image.startsWith('custom:')) {
+    const stillUsed = loadDataset().things.some((t) => t.id !== id && t.image === thing.image);
+    if (!stillUsed) {
+      const store = readJSON(path.join(DATA, 'custom-photos.json'), { images: {} });
+      const entry = store.images[thing.image];
+      if (entry) {
+        delete store.images[thing.image];
+        writeJSON(path.join(DATA, 'custom-photos.json'), store);
+        const file = path.join(WEB, entry.local);
+        if (fs.existsSync(file)) fs.unlinkSync(file);
+      }
+    }
+  }
+
+  writeJSON(path.join(DATA, 'overrides.json'), o);
+  const log = rebuild();
+  // Same "wrote it but it didn't take" check as addNewThing() — a removal
+  // that silently doesn't apply is worse than one that errors loudly.
+  if (loadDataset().things.some((t) => t.id === id)) {
+    throw new Error(`removed, but "${thing.name}" (${id}) is still in the dataset after rebuild:\n${log}`);
+  }
+  return log;
+}
+
 /** A filesystem-safe, collision-resistant local name for an uploaded photo. */
 function customFileName(thingName, originalName) {
   const ext = (path.extname(originalName || '') || '.jpg').toLowerCase().replace(/[^a-z0-9.]/g, '') || '.jpg';
@@ -223,7 +282,11 @@ function rebuild() {
 
 function send(res, status, body, contentType) {
   const payload = typeof body === 'string' ? body : JSON.stringify(body);
-  res.writeHead(status, { 'Content-Type': contentType || 'application/json; charset=utf-8' });
+  // No caching, anywhere: this page and its data change on every save, and a
+  // browser tab left open across an edit to admin-ui.html has no other way
+  // to notice it's running stale JS — a save that silently does nothing is
+  // a much worse failure than a page that never caches.
+  res.writeHead(status, { 'Content-Type': contentType || 'application/json; charset=utf-8', 'Cache-Control': 'no-store' });
   res.end(payload);
 }
 
@@ -283,6 +346,12 @@ const server = http.createServer(async (req, res) => {
       const key = saveCustomPhoto(id, thing, body);
       const log = rebuild();
       return send(res, 200, { ok: true, key, log });
+    }
+    if (req.method === 'POST' && url.pathname.match(/^\/api\/things\/[^/]+\/remove$/)) {
+      const id = decodeURIComponent(url.pathname.split('/')[3]);
+      const body = JSON.parse(await readBody(req));
+      const log = removeThing(id, body.why, body.source);
+      return send(res, 200, { ok: true, log });
     }
     if (req.method === 'GET' && url.pathname === '/api/overrides') {
       return send(res, 200, loadOverrides().corrections || []);

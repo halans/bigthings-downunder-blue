@@ -76,7 +76,7 @@
    "withYear": 171,
    "withHeight": 43,
    "withAnySize": 141,
-   "withImage": 285
+   "withImage": 286
   }
  },
  "things": [
@@ -12258,7 +12258,7 @@
    "statusEvidence": "The business has since moved to Underwood and disassembled the Big Redback.",
    "notes": "The Big Redback resided on the premises of Redback Landscaping at Eight Mile Plains. The business has since moved to Underwood and disassembled the Big Redback. Inquires have garnered that it is unlikely to be reassembled due to lack of space.",
    "blurb": null,
-   "image": null,
+   "image": "custom:the-big-redback-9cbc7b.jpeg",
    "wikipediaArticle": null,
    "wikidata": null,
    "osmId": null,
@@ -12268,7 +12268,11 @@
      "page": "Big things (Australia)",
      "url": "https://en.wikipedia.org/wiki/Big_things_(Australia)"
     }
-   ]
+   ],
+   "correction": {
+    "why": "Photo added by hand via the local admin UI, replacing whatever (if anything) was there.",
+    "source": null
+   }
   },
   {
    "id": "d63a3be31c",

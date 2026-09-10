@@ -156,6 +156,30 @@
    },
    "why": "Photo added by hand via the local admin UI, replacing whatever (if anything) was there.",
    "source": null
+  },
+  {
+   "match": {
+    "id": "9ccd7ad6e0"
+   },
+   "set": {
+    "image": "custom:the-big-redback-9cbc7b.jpeg",
+    "name": "The Big Redback",
+    "state": "QLD",
+    "location": "Eight Mile Plains, Brisbane",
+    "town": "Eight Mile Plains",
+    "lat": -27.5816,
+    "lng": 153.0952,
+    "precision": "town",
+    "coordSource": "https://en.wikipedia.org/wiki/Eight_Mile_Plains",
+    "builtYear": 1996,
+    "builtRaw": "1996",
+    "category": "fauna",
+    "status": "removed",
+    "notes": "The Big Redback resided on the premises of Redback Landscaping at Eight Mile Plains. The business has since moved to Underwood and disassembled the Big Redback. Inquires have garnered that it is unlikely to be reassembled due to lack of space.",
+    "stateName": "Queensland"
+   },
+   "why": "Photo added by hand via the local admin UI, replacing whatever (if anything) was there.",
+   "source": null
   }
  ],
  "additions": [

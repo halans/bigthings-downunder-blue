@@ -482,4 +482,4 @@ if (require.main === module) {
   console.log(JSON.stringify(s, null, 2));
 }
 
-module.exports = { build, stats, STATE_BBOX, AU_BBOX, STATE_NAMES, inState, buildOsmIndex };
+module.exports = { build, stats, STATE_BBOX, AU_BBOX, STATE_NAMES, inState, buildOsmIndex, stableId };
