@@ -145,6 +145,45 @@ test('an uncredited photo yields nothing rather than reaching out', () => {
   eq(app.photoUrl('Definitely Not Vendored.jpg'), null);
 });
 
+/** Run photoCredit() itself, with a synthetic CREDITS map, without a DOM. */
+function loadPhotoCredit(credits) {
+  const html = B.generate();
+  const script = html.slice(html.lastIndexOf('<script>') + 8, html.lastIndexOf('</script>'));
+  const fnStart = script.indexOf('function photoCredit(');
+  const fnEnd = script.indexOf('function fmtSize(');
+  const escStart = script.indexOf('function esc(');
+  const escEnd = script.indexOf('\n', script.indexOf('\n}', escStart) + 1);
+  ok(fnStart > 0 && fnEnd > fnStart && escStart > 0, 'could not locate photoCredit()/esc()');
+  const src = `const CREDITS = ${JSON.stringify(credits)};\n`
+    + script.slice(fnStart, fnEnd)
+    + script.slice(escStart, escEnd)
+    + '\nmodule.exports = { photoCredit };';
+  const sandbox = { module: { exports: {} }, console, URL };
+  vm.createContext(sandbox);
+  vm.runInContext(src, sandbox, { filename: 'generated-photocredit.js' });
+  return sandbox.module.exports.photoCredit;
+}
+
+test('a custom photo\'s credit never claims a Commons source', () => {
+  // photoCredit() always said "via Wikimedia Commons" regardless of where the
+  // photo actually came from — true for the other 284, false for one you took
+  // yourself.
+  const photoCredit = loadPhotoCredit({
+    'custom:no-source.jpg': { a: 'Me', l: 'All rights reserved', u: null, p: null, f: 'img/custom/no-source.jpg' },
+    'custom:with-source.jpg': { a: 'Me', l: 'CC BY-SA 4.0', u: null, p: 'https://example.com/photo', f: 'img/custom/with-source.jpg' },
+    'Commons File.jpg': { a: 'Someone', l: 'CC BY 4.0', u: null, p: 'https://commons.wikimedia.org/wiki/File:Commons_File.jpg', f: 'img/commons-file.jpg' },
+  });
+  const noSource = photoCredit('custom:no-source.jpg');
+  ok(!/commons\.wikimedia\.org|Wikimedia Commons/i.test(noSource), 'no source URL means no invented "via" clause');
+
+  const withSource = photoCredit('custom:with-source.jpg');
+  ok(/via <a href="https:\/\/example\.com\/photo"[^>]*>example\.com<\/a>/.test(withSource),
+    'a custom photo with its own source URL credits that site by name, not Commons');
+
+  const commons = photoCredit('Commons File.jpg');
+  ok(/via <a[^>]*>Wikimedia Commons<\/a>/.test(commons), 'a real Commons photo still says so');
+});
+
 test('every big thing with a photo can actually resolve it', () => {
   if (!hasImages) return;
   const app = loadPhotoHelpers();

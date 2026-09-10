@@ -81,6 +81,12 @@ function shot(thing, credits) {
   if (!c) return '';
   const src = c.local;
   const author = c.author ? esc(c.author.length > 40 ? `${c.author.slice(0, 40)}…` : c.author) : 'Unknown';
+  // A custom photo (see docs/ADMIN.md) has no Commons file page to link the
+  // photographer's name to — link it only when there's somewhere real to send
+  // a reader, rather than a broken href="" or an invented Commons link.
+  const authorHtml = c.filePage
+    ? `<a href="${esc(c.filePage)}" target="_blank" rel="noopener noreferrer">${author}</a>`
+    : author;
   const licence = c.licenceUrl
     ? `<a href="${esc(c.licenceUrl)}" target="_blank" rel="noopener noreferrer">${esc(c.licence)}</a>`
     : esc(c.licence || '');
@@ -92,7 +98,7 @@ function shot(thing, credits) {
       <figcaption>
         <b>${esc(thing.name)}</b>
         <span class="place">${esc(place)}, ${esc(thing.state)}</span>
-        <span class="by">Photo: <a href="${esc(c.filePage)}" target="_blank" rel="noopener noreferrer">${author}</a> · ${licence}</span>
+        <span class="by">Photo: ${authorHtml} · ${licence}</span>
       </figcaption>
     </figure>`;
 }

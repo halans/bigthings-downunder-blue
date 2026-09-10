@@ -696,7 +696,19 @@ function photoCredit(file) {
   const authorHtml = c.p ? `<a href="${c.p}" target="_blank" rel="noopener noreferrer">${author}</a>` : author;
   const licence = c.l ? esc(c.l) : 'see file page';
   const licenceHtml = c.u ? `<a href="${c.u}" target="_blank" rel="noopener noreferrer">${licence}</a>` : licence;
-  return `<p class="photocredit">Photo: ${authorHtml} · ${licenceHtml} · via <a href="${c.p || 'https://commons.wikimedia.org/'}" target="_blank" rel="noopener noreferrer">Wikimedia Commons</a></p>`;
+  // A custom photo (see docs/ADMIN.md) never came from Commons — saying it did
+  // would be exactly the kind of invented provenance this project exists to
+  // avoid. If you gave it its own source URL, name that site instead; if you
+  // didn't, there's nowhere honest to send "via" to, so the clause is dropped.
+  let via = '';
+  if (!file.startsWith('custom:')) {
+    via = ` · via <a href="${c.p || 'https://commons.wikimedia.org/'}" target="_blank" rel="noopener noreferrer">Wikimedia Commons</a>`;
+  } else if (c.p) {
+    let host = 'source';
+    try { host = new URL(c.p).hostname.replace(/^www\./, ''); } catch (e) { /* keep 'source' */ }
+    via = ` · via <a href="${c.p}" target="_blank" rel="noopener noreferrer">${esc(host)}</a>`;
+  }
+  return `<p class="photocredit">Photo: ${authorHtml} · ${licenceHtml}${via}</p>`;
 }
 
 function fmtSize(t) {

@@ -432,6 +432,12 @@ function applyOverrides(rows) {
       Object.assign(row, set);
       row.correction = { why: c.why, source: c.source || null };
       if (set.state) row.id = stableId(row.state, row.name, row.location);
+      // era is derived from builtYear, not stored independently — a
+      // correction that sets one without the other left `era` stuck at
+      // whatever it was computed as originally (often "unknown", for a
+      // discovered/added record with no year at harvest time), which is
+      // invisible in the data but silently breaks the era filter on the map.
+      if (set.builtYear !== undefined && set.era === undefined) row.era = N.era(row.builtYear);
     }
   }
 }

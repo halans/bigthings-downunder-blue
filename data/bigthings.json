@@ -66,10 +66,10 @@
     "removed": 15
    },
    "byEra": {
-    "unknown": 307,
+    "unknown": 306,
     "revival (2000s–2014)": 44,
     "late century (1985–1999)": 43,
-    "modern (2015+)": 36,
+    "modern (2015+)": 37,
     "boom (1970s–early 80s)": 39,
     "pioneer (pre-1970)": 8
    },
@@ -5487,7 +5487,7 @@
    "builtYear": 2015,
    "builtCirca": false,
    "builtRaw": null,
-   "era": "unknown",
+   "era": "modern (2015+)",
    "heightM": null,
    "lengthM": null,
    "sizeMaxM": null,

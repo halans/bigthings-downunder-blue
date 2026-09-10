@@ -136,6 +136,18 @@ test('the Gympie Big Pineapple is still correctly demolished', () => {
   eq(p.status, 'demolished');
 });
 
+test('every era matches its builtYear', () => {
+  // applyOverrides() sets fields directly; era is derived from builtYear, not
+  // stored independently, so a correction that sets builtYear without also
+  // setting era used to leave era stuck at whatever it was computed as when
+  // the row was first built — "unknown", for a discovered/added record with
+  // no year at harvest time. Invisible in the data, but silently breaks the
+  // era filter (a thing built in 2015 stopped showing under "modern 2015+").
+  const wrong = things.filter((t) => t.builtYear && t.era !== N.era(t.builtYear))
+    .map((t) => `${t.name}: builtYear ${t.builtYear} but era "${t.era}"`);
+  eq(wrong, []);
+});
+
 test('the Big Triceratops is in Queensland, at Ballandean', () => {
   const t = things.find((x) => x.name === 'Big Triceratops');
   ok(t, 'triceratops present');

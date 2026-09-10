@@ -115,8 +115,16 @@ test('every photo in the strip names its photographer and licence', () => {
   const shots = [...html.matchAll(/<figure class="shot">([\s\S]*?)<\/figure>/g)].map((m) => m[1]);
   ok(shots.length >= 4, `expected a photo strip, got ${shots.length}`);
   for (const s of shots) {
-    ok(/Photo: <a href="http/.test(s), 'photographer is named and linked');
-    ok(/commons\.wikimedia\.org|en\.wikipedia\.org/.test(s), 'links to the file page');
+    ok(/Photo: /.test(s), 'photographer is named');
+    // A Commons photo must link the photographer to its file page; a custom
+    // one (see docs/ADMIN.md) has no such page and must not claim one.
+    const isCustom = /src="img\/custom\//.test(s);
+    if (isCustom) {
+      ok(!/commons\.wikimedia\.org|en\.wikipedia\.org/.test(s), 'a custom photo must not claim a Commons/Wikipedia source');
+    } else {
+      ok(/Photo: <a href="http/.test(s), 'photographer is named and linked');
+      ok(/commons\.wikimedia\.org|en\.wikipedia\.org/.test(s), 'links to the file page');
+    }
     ok(/alt="[^"]+"/.test(s), 'has alt text');
   }
 });

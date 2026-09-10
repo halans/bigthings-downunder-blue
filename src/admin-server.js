@@ -23,6 +23,7 @@ const fs = require('fs');
 const path = require('path');
 const crypto = require('crypto');
 const { spawnSync } = require('child_process');
+const N = require('./normalise');
 
 const ROOT = path.join(__dirname, '..');
 const DATA = path.join(ROOT, 'data');
@@ -47,6 +48,13 @@ const META = {
   editableFields: [
     'name', 'state', 'stateName', 'location', 'town', 'lat', 'lng', 'precision', 'coordSource',
     'builtYear', 'builtRaw', 'category', 'status', 'notes', 'blurb',
+  ],
+  // additions[] (a brand-new record — see applyAdditions() in src/build.js)
+  // takes a slightly different shape than a correction's `set`: no id, no
+  // stateName/blurb, plus heightM/sizeRaw which a correction doesn't use.
+  additionFields: [
+    'name', 'state', 'location', 'town', 'lat', 'lng', 'precision', 'coordSource',
+    'builtYear', 'heightM', 'sizeRaw', 'category', 'status', 'notes',
   ],
 };
 
@@ -105,6 +113,50 @@ function upsertCorrection(id, set, why, source) {
   writeJSON(path.join(DATA, 'overrides.json'), o);
 }
 
+/** The same identity key applyAdditions() dedupes new rows against. */
+const dedupeKey = (state, name) => `${state}|${N.slugName(name)}`;
+
+/**
+ * Add a brand-new record — something in neither wiki list at all — via
+ * overrides.json's `additions` array (see applyAdditions() in src/build.js).
+ * Its id is generated at build time from state+name+location, the same way
+ * every other record's is, so it isn't known until after the rebuild below.
+ */
+function addNewThing(body) {
+  if (!body.name || !body.name.trim()) throw new Error('a name is required');
+  if (!META.states.includes(body.state)) throw new Error(`state must be one of ${META.states.join(', ')}`);
+  if (!body.why || !body.why.trim()) throw new Error('a reason ("why") is required for every manual addition');
+
+  const name = body.name.trim();
+  const state = body.state;
+  const key = dedupeKey(state, name);
+  const dataset = loadDataset();
+  if (dataset.things.some((t) => dedupeKey(t.state, t.name) === key)) {
+    throw new Error(`"${name}" already exists in ${state} — edit that record instead of adding a duplicate`);
+  }
+
+  const addition = { name, state, why: body.why.trim(), source: body.source || null };
+  for (const f of META.additionFields) {
+    if (f === 'name' || f === 'state' || body[f] === undefined || body[f] === '') continue;
+    addition[f] = (f === 'lat' || f === 'lng' || f === 'builtYear' || f === 'heightM') ? Number(body[f]) : body[f];
+  }
+
+  const o = loadOverrides();
+  o.additions = o.additions || [];
+  o.additions.push(addition);
+  writeJSON(path.join(DATA, 'overrides.json'), o);
+
+  const log = rebuild();
+  // applyAdditions() silently skips a name+state collision it finds at
+  // rebuild time (the guard above only catches one added moments ago) — the
+  // same "wrote it but it didn't take" failure mode upsertCorrection's
+  // "matched nothing" check exists for. Confirm it's actually there.
+  const after = loadDataset();
+  const created = after.things.find((t) => dedupeKey(t.state, t.name) === key);
+  if (!created) throw new Error(`added, but couldn't find "${name}" in ${state} after rebuild:\n${log}`);
+  return { thing: created, log };
+}
+
 /** A filesystem-safe, collision-resistant local name for an uploaded photo. */
 function customFileName(thingName, originalName) {
   const ext = (path.extname(originalName || '') || '.jpg').toLowerCase().replace(/[^a-z0-9.]/g, '') || '.jpg';
@@ -118,7 +170,7 @@ function customFileName(thingName, originalName) {
  * and point the record's `image` field at it via the same correction
  * mechanism as any other manual edit.
  */
-function saveCustomPhoto(id, thing, { filename, dataBase64, author, licence, licenceUrl }) {
+function saveCustomPhoto(id, thing, { filename, dataBase64, author, licence, licenceUrl, sourceUrl }) {
   if (!dataBase64) throw new Error('no photo data received');
   if (!author || !author.trim()) throw new Error('an author/credit is required — even for your own photo, name yourself');
   fs.mkdirSync(CUSTOM_IMG_DIR, { recursive: true });
@@ -133,7 +185,11 @@ function saveCustomPhoto(id, thing, { filename, dataBase64, author, licence, lic
     author: author.trim(),
     licence: licence && licence.trim() ? licence.trim() : 'All rights reserved',
     licenceUrl: licenceUrl && licenceUrl.trim() ? licenceUrl.trim() : null,
-    filePage: null,
+    // Where the card's "via <site>" link on the map points — your own
+    // portfolio, a gallery page, wherever the photo can actually be seen in
+    // context. Left blank, the card just names the photographer with no
+    // "via" clause; it never claims Wikimedia Commons for a photo that isn't.
+    filePage: sourceUrl && sourceUrl.trim() ? sourceUrl.trim() : null,
   };
   writeJSON(path.join(DATA, 'custom-photos.json'), store);
 
@@ -192,6 +248,11 @@ const server = http.createServer(async (req, res) => {
     }
     if (req.method === 'GET' && url.pathname === '/api/things') {
       return send(res, 200, searchThings(url.searchParams.get('q')));
+    }
+    if (req.method === 'POST' && url.pathname === '/api/things') {
+      const body = JSON.parse(await readBody(req));
+      const { thing, log } = addNewThing(body);
+      return send(res, 200, { ok: true, thing, log });
     }
     if (req.method === 'GET' && url.pathname.startsWith('/api/things/')) {
       const id = decodeURIComponent(url.pathname.slice('/api/things/'.length));

@@ -42,6 +42,7 @@ img.preview{max-width:220px;display:block;margin-top:8px;border:1px solid var(--
 <div id="app">
   <div id="list">
     <input id="search" placeholder="Search name, town, state…" autofocus>
+    <button id="new-btn" style="margin:8px 12px;width:calc(100% - 24px)">＋ Add new thing</button>
     <div id="rows"></div>
   </div>
   <div id="detail"><div class="empty">Pick a thing on the left to edit it.</div></div>
@@ -151,6 +152,7 @@ function render() {
         <div>${field('licence', 'Licence (default: All rights reserved)', '')}</div>
       </div>
       ${field('licenceUrl', 'Licence URL (optional)', '')}
+      ${field('sourceUrl', 'Photo\'s own page (optional) — your site, a gallery page, wherever it can be seen "via"', '')}
       <button id="photo-btn" class="secondary" disabled>Upload &amp; rebuild</button>
     </fieldset>
 
@@ -179,6 +181,77 @@ function render() {
 
 function banner(msg, ok) {
   document.getElementById('banner').innerHTML = `<div class="banner ${ok ? 'ok' : 'err'}">${esc(msg)}</div>`;
+}
+
+/** A blank form for something in neither wiki list at all — see docs/ADMIN.md. */
+function renderNewForm() {
+  current = null;
+  document.getElementById('detail').innerHTML = `
+    <div id="banner"></div>
+    <h2 style="margin:0 0 2px">Add a new thing</h2>
+    <p class="note">For something genuinely absent from Wikipedia and Wikivoyage — not a
+      correction to an existing record. Duplicates (same name + state) are refused.</p>
+
+    <fieldset>
+      <legend>Record</legend>
+      <div class="grid2">
+        ${field('name', 'Name', '')}
+        ${select('state', 'State', META.states[0], META.states)}
+        ${field('location', 'Location', '')}
+        ${field('town', 'Town', '')}
+        ${select('category', 'Category', 'oddity', META.categories)}
+        ${select('status', 'Status', 'standing', META.statuses)}
+        ${field('builtYear', 'Built year', '', 'number')}
+        ${field('heightM', 'Height (m)', '', 'number')}
+      </div>
+      ${field('sizeRaw', 'Size, as text (if height alone doesn\'t capture it)', '')}
+      <label for="f-notes">Notes</label><textarea id="f-notes"></textarea>
+    </fieldset>
+
+    <fieldset>
+      <legend>Location</legend>
+      <div class="grid2">
+        ${field('lat', 'Latitude', '', 'number')}
+        ${field('lng', 'Longitude', '', 'number')}
+        ${select('precision', 'Precision', 'exact-verified', META.precisions)}
+        ${field('coordSource', 'Coordinate source (URL)', '')}
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend>Save</legend>
+      <label for="f-why">Why (required — how do you know this belongs here?)</label>
+      <textarea id="f-why"></textarea>
+      <label for="f-source">Source (optional URL)</label>
+      <input id="f-source">
+      <button id="create-btn">Add &amp; rebuild</button>
+    </fieldset>
+
+    <div id="log"></div>
+  `;
+  document.getElementById('create-btn').addEventListener('click', createThing);
+}
+
+async function createThing() {
+  const why = document.getElementById('f-why').value.trim();
+  if (!why) { banner('A reason is required.', false); return; }
+  const body = { why, source: document.getElementById('f-source').value.trim() || null };
+  for (const f of META.additionFields) {
+    const el = document.getElementById('f-' + f);
+    if (el) body[f] = el.value;
+  }
+  const btn = document.getElementById('create-btn');
+  btn.disabled = true; btn.textContent = 'Adding…';
+  try {
+    const res = await api('POST', '/api/things', body);
+    await load(res.thing.id);
+    document.getElementById('log').textContent = res.log;
+    banner(`Added "${res.thing.name}" (id ${res.thing.id}) and rebuilt.`, true);
+    search(document.getElementById('search').value);
+  } catch (e) {
+    banner('Failed: ' + e.message, false);
+    btn.disabled = false; btn.textContent = 'Add & rebuild';
+  }
 }
 
 async function saveRecord() {
@@ -212,6 +285,7 @@ async function uploadPhoto(photoData) {
     author: document.getElementById('f-author').value.trim(),
     licence: document.getElementById('f-licence').value.trim(),
     licenceUrl: document.getElementById('f-licenceUrl').value.trim(),
+    sourceUrl: document.getElementById('f-sourceUrl').value.trim(),
   };
   if (!body.author) { banner('Name a photographer/credit, even if it\'s you.', false); return; }
   const btn = document.getElementById('photo-btn');
@@ -233,6 +307,7 @@ document.getElementById('search').addEventListener('input', (e) => {
   clearTimeout(searchTimer);
   searchTimer = setTimeout(() => search(e.target.value), 150);
 });
+document.getElementById('new-btn').addEventListener('click', renderNewForm);
 
 (async function init() {
   META = await api('GET', '/api/meta');

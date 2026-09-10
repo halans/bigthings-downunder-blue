@@ -18,7 +18,9 @@ npm run admin
 
 Opens on `http://127.0.0.1:8098`. Search for a thing, edit its fields, save — it writes to
 `data/overrides.json` and re-runs the build for you, so the dataset and both pages are up to date
-before you've switched back to the browser tab.
+before you've switched back to the browser tab. The "＋ Add new thing" button does the same for a
+record that doesn't exist yet at all — see [Adding a brand-new record](#adding-a-brand-new-record)
+below.
 
 **This is not part of the app.** It's a plain Node HTTP server (`src/admin-server.js`) bound
 explicitly to `127.0.0.1`, serving one static page (`src/admin-ui.html`). Nothing in `web/`,
@@ -89,6 +91,18 @@ coordinate with a better one: to correct an already-exact pin, keep `precision` 
 
 `id` is generated for you from `state` + `name` + `location`, same as every other record.
 
+### Adding a brand-new record
+
+The admin UI's "＋ Add new thing" button writes exactly an `additions[]` entry like the one above,
+then rebuilds and confirms the record actually appears — same "loud failure, not a buried warning"
+rule as everything else here. Its form only exposes: `name`, `state`, `location`, `town`, `lat`,
+`lng`, `precision`, `coordSource`, `builtYear`, `heightM`, `sizeRaw`, `category`, `status`,
+`notes` — a slightly different field set from a correction's `set` (no `id`, no `stateName` or
+`blurb`, plus `heightM`/`sizeRaw` which corrections don't use). Only `name`, `state`, and `why` are
+required; leave the rest blank and fill them in later with a correction once you know more. It
+refuses to create a record that already exists — same `state` + slugified `name` as a real
+record — so a rename or a fact you got wrong belongs on the existing card, not a new one.
+
 ### `removals` — delete a duplicate
 
 ```json
@@ -126,7 +140,7 @@ Instead:
          "author": "Your Name",
          "licence": "All rights reserved",
          "licenceUrl": null,
-         "filePage": null
+         "filePage": "https://your-site.example/gallery/big-whatever"
        }
      }
    }
@@ -134,12 +148,16 @@ Instead:
 
    `licence` can be whatever you want — `"All rights reserved"` if it's just yours, or
    `"CC BY-SA 4.0"` to match the dataset's own licence if you're happy sharing it that way.
+   `filePage`, if set, is where the card's "via ⟨site⟩" link points — your own portfolio, a gallery
+   page, wherever the photo can actually be seen in context. Leave it `null` and the card just
+   names the photographer with no "via" clause; it never claims Wikimedia Commons for a photo that
+   isn't from there.
 
 3. Point the record at it with a correction: `"set": { "image": "custom:big-whatever-mine.jpg" }`.
 
-The admin UI's photo upload does exactly these three steps from a file picker — resizing or
-optimising the image yourself first is worth doing since, unlike the Commons pipeline, nothing
-here does it for you.
+The admin UI's photo upload does exactly these three steps from a file picker, with a "Photo's own
+page (optional)" field for `filePage` — resizing or optimising the image yourself first is worth
+doing since, unlike the Commons pipeline, nothing here does it for you.
 
 `src/build-web.js` and `src/build-about.js` both read `data/image-credits.json` (Commons) and
 `data/custom-photos.json` (yours) through one shared helper, `src/image-credits.js`, so a custom
