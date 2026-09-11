@@ -3,18 +3,13 @@
   "downloads": [
     {
       "file": "bigthings.json",
-      "url": "https://pub.hyperagent.com/api/published/pbf01M21H2A62_SKTBJCQ5TMVMP4E1/bigthings.json",
+      "url": "https://github.com/halans/bigthings-downunder-blue/blob/master/data/bigthings.json",
       "blurb": "The whole dataset — every record with its coordinates, precision tier, per-row sources and any correction applied to it."
     },
     {
-      "file": "bigthings-au.geojson",
-      "url": "https://pub.hyperagent.com/api/published/pbf01M21H2RJ0_NC65QAB14J2KS5N1/bigthings-au.geojson",
-      "blurb": "GeoJSON, for dropping straight into QGIS, Felt, or any other map."
-    },
-    {
-      "file": "australian-big-things.zip",
-      "url": "https://pub.hyperagent.com/api/published/pbf01M21H2X39_H8W6ZCZ6XV820CRX/australian-big-things.zip",
-      "blurb": "The network-complete bundle: cached upstream sources with checksums, the built web app, all 284 photographs, the tests and the docs. About 27 MB."
+      "file": "Github repository",
+      "url": "https://github.com/halans/bigthings-downunder-blue",
+      "blurb": "Github repository for the project, including the code used to generate the dataset and the website."
     }
   ]
 }
