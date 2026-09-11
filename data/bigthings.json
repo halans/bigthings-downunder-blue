@@ -630,11 +630,11 @@
    ]
   },
   {
-   "id": "fbb3624ee7",
+   "id": "d6aaff87e4",
    "name": "Alan Davidson's Balls",
    "state": "NSW",
    "stateName": "New South Wales",
-   "location": "Wyoming",
+   "location": "Central Coast",
    "town": "Wyoming",
    "lat": -33.402652,
    "lng": 151.352143,
@@ -661,8 +661,8 @@
    "osmId": null,
    "addedManually": true,
    "correction": {
-    "why": "Catalogued by Land of the Bigs, which publishes a mapped position for it.",
-    "source": "https://landofthebigs.com/alan-davidsons-balls-wyoming-nsw/"
+    "why": "Central Coast",
+    "source": null
    },
    "sources": [
     {
@@ -1554,11 +1554,11 @@
    ]
   },
   {
-   "id": "d33683ee13",
+   "id": "a91987dc5a",
    "name": "Big Diplodocus",
    "state": "NSW",
    "stateName": "New South Wales",
-   "location": "Somersby",
+   "location": "Central Coast",
    "town": "Somersby",
    "lat": -33.365,
    "lng": 151.285,
@@ -1589,7 +1589,11 @@
      "page": "Australia's big things",
      "url": "https://en.wikivoyage.org/wiki/Australia%27s_big_things"
     }
-   ]
+   ],
+   "correction": {
+    "why": "Central Coast",
+    "source": null
+   }
   },
   {
    "id": "cd024714ef",
@@ -2884,11 +2888,11 @@
    ]
   },
   {
-   "id": "ae3321c9cd",
+   "id": "78baa8fb8f",
    "name": "Daryl Somersby the Croc",
    "state": "NSW",
    "stateName": "New South Wales",
-   "location": "Somersby",
+   "location": "Central Coast",
    "town": "Somersby",
    "lat": -33.418404,
    "lng": 151.243244,
@@ -2915,8 +2919,8 @@
    "osmId": null,
    "addedManually": true,
    "correction": {
-    "why": "Catalogued by Land of the Bigs under big-animals, big-crocodiles, which publishes a mapped position for it.",
-    "source": "https://landofthebigs.com/daryl-somersby-the-crocodile-somersby-nsw/"
+    "why": "Central Coast",
+    "source": null
    },
    "sources": [
     {
@@ -3236,11 +3240,11 @@
    ]
   },
   {
-   "id": "069ec014c8",
+   "id": "826b6cc7f4",
    "name": "Lizzo the Lizard",
    "state": "NSW",
    "stateName": "New South Wales",
-   "location": "Somersby",
+   "location": "Central Coast",
    "town": "Somersby",
    "lat": -33.417505,
    "lng": 151.277852,
@@ -3267,8 +3271,8 @@
    "osmId": null,
    "addedManually": true,
    "correction": {
-    "why": "Catalogued by Land of the Bigs under big-animals, big-reptiles, which publishes a mapped position for it.",
-    "source": "https://landofthebigs.com/lizzo-the-lizard-somersby-nsw/"
+    "why": "Central Coast",
+    "source": null
    },
    "sources": [
     {
@@ -3322,11 +3326,11 @@
    ]
   },
   {
-   "id": "7f3732b643",
+   "id": "31f25299a4",
    "name": "Ploddy the Dinosaur",
    "state": "NSW",
    "stateName": "New South Wales",
-   "location": "Somersby",
+   "location": "Central Coast",
    "town": "Somersby",
    "lat": -33.425268,
    "lng": 151.277099,
@@ -3353,24 +3357,17 @@
    "image": "Ploddy.jpg",
    "wikipediaArticle": null,
    "wikidata": null,
-   "osmId": "node/4740828055",
+   "osmId": null,
    "sources": [
     {
      "source": "wikipedia",
      "page": "Big things (Australia)",
      "url": "https://en.wikipedia.org/wiki/Big_things_(Australia)"
-    },
-    {
-     "source": "openstreetmap",
-     "page": "node/4740828055",
-     "url": "https://www.openstreetmap.org/node/4740828055"
     }
    ],
-   "coordMatch": {
-    "kind": "name-exact",
-    "confidence": "high",
-    "why": "core name \"ploddy dinosaur\" matches exactly, 6.7 km from the town point",
-    "osmName": "Ploddy the Dinosaur"
+   "correction": {
+    "why": "Central Coast",
+    "source": null
    }
   },
   {
@@ -4301,11 +4298,11 @@
    ]
   },
   {
-   "id": "540b212a1d",
+   "id": "db05f58216",
    "name": "The Big Flower",
    "state": "NSW",
    "stateName": "New South Wales",
-   "location": "Ourimbah",
+   "location": "Central Coast",
    "town": "Ourimbah",
    "lat": -33.346199,
    "lng": 151.36852,
@@ -4332,8 +4329,8 @@
    "osmId": null,
    "addedManually": true,
    "correction": {
-    "why": "Catalogued by Land of the Bigs, which publishes a mapped position for it.",
-    "source": "https://landofthebigs.com/big-flower-ourimbah-nsw/"
+    "why": "Central Coast",
+    "source": null
    },
    "sources": [
     {
@@ -6431,11 +6428,11 @@
    ]
   },
   {
-   "id": "808171b955",
+   "id": "264f9d8df7",
    "name": "The Clam",
    "state": "NSW",
    "stateName": "New South Wales",
-   "location": "Long Jetty",
+   "location": "Central Coast",
    "town": "Long Jetty",
    "lat": -33.352127,
    "lng": 151.480787,
@@ -6462,8 +6459,8 @@
    "osmId": null,
    "addedManually": true,
    "correction": {
-    "why": "Catalogued by Land of the Bigs under big-sea-creatures, which publishes a mapped position for it.",
-    "source": "https://landofthebigs.com/the-clam-long-jetty-nsw/"
+    "why": "Central Coast",
+    "source": null
    },
    "sources": [
     {

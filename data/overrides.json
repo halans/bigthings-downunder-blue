@@ -382,6 +382,149 @@
    },
    "why": "Photo updated, replacing whatever (if anything) was there.",
    "source": null
+  },
+  {
+   "match": {
+    "id": "d33683ee13"
+   },
+   "set": {
+    "name": "Big Diplodocus",
+    "state": "NSW",
+    "location": "Central Coast",
+    "town": "Somersby",
+    "lat": -33.365,
+    "lng": 151.285,
+    "precision": "town",
+    "coordSource": "https://en.wikipedia.org/wiki/Somersby%2C_New_South_Wales",
+    "category": "fauna",
+    "status": "standing",
+    "stateName": "New South Wales"
+   },
+   "why": "Central Coast",
+   "source": null
+  },
+  {
+   "match": {
+    "id": "ae3321c9cd"
+   },
+   "set": {
+    "name": "Daryl Somersby the Croc",
+    "state": "NSW",
+    "location": "Central Coast",
+    "town": "Somersby",
+    "lat": -33.418404,
+    "lng": 151.243244,
+    "precision": "exact-verified",
+    "coordSource": "https://landofthebigs.com/daryl-somersby-the-crocodile-somersby-nsw/",
+    "category": "fauna",
+    "status": "standing",
+    "stateName": "New South Wales"
+   },
+   "why": "Central Coast",
+   "source": null
+  },
+  {
+   "match": {
+    "id": "069ec014c8"
+   },
+   "set": {
+    "name": "Lizzo the Lizard",
+    "state": "NSW",
+    "location": "Central Coast",
+    "town": "Somersby",
+    "lat": -33.417505,
+    "lng": 151.277852,
+    "precision": "exact-verified",
+    "coordSource": "https://landofthebigs.com/lizzo-the-lizard-somersby-nsw/",
+    "category": "fauna",
+    "status": "standing",
+    "stateName": "New South Wales"
+   },
+   "why": "Central Coast",
+   "source": null
+  },
+  {
+   "match": {
+    "id": "7f3732b643"
+   },
+   "set": {
+    "name": "Ploddy the Dinosaur",
+    "state": "NSW",
+    "location": "Central Coast",
+    "town": "Somersby",
+    "lat": -33.425268,
+    "lng": 151.277099,
+    "precision": "exact-osm",
+    "coordSource": "https://www.openstreetmap.org/node/4740828055",
+    "builtYear": 1963,
+    "builtRaw": "1963",
+    "category": "fauna",
+    "status": "standing",
+    "notes": "Situated in the Australian Reptile Park and commissioned by the Park's founder, Eric Worrell. The concrete structure is based on the shape of a Diplodocus; it is 30 metres long and weighs almost 100 tonnes.",
+    "stateName": "New South Wales"
+   },
+   "why": "Central Coast",
+   "source": null
+  },
+  {
+   "match": {
+    "id": "808171b955"
+   },
+   "set": {
+    "name": "The Clam",
+    "state": "NSW",
+    "location": "Central Coast",
+    "town": "Long Jetty",
+    "lat": -33.352127,
+    "lng": 151.480787,
+    "precision": "exact-verified",
+    "coordSource": "https://landofthebigs.com/the-clam-long-jetty-nsw/",
+    "category": "seafood",
+    "status": "standing",
+    "stateName": "New South Wales"
+   },
+   "why": "Central Coast",
+   "source": null
+  },
+  {
+   "match": {
+    "id": "540b212a1d"
+   },
+   "set": {
+    "name": "The Big Flower",
+    "state": "NSW",
+    "location": "Central Coast",
+    "town": "Ourimbah",
+    "lat": -33.346199,
+    "lng": 151.36852,
+    "precision": "exact-verified",
+    "coordSource": "https://landofthebigs.com/big-flower-ourimbah-nsw/",
+    "category": "oddity",
+    "status": "standing",
+    "stateName": "New South Wales"
+   },
+   "why": "Central Coast",
+   "source": null
+  },
+  {
+   "match": {
+    "id": "fbb3624ee7"
+   },
+   "set": {
+    "name": "Alan Davidson's Balls",
+    "state": "NSW",
+    "location": "Central Coast",
+    "town": "Wyoming",
+    "lat": -33.402652,
+    "lng": 151.352143,
+    "precision": "exact-verified",
+    "coordSource": "https://landofthebigs.com/alan-davidsons-balls-wyoming-nsw/",
+    "category": "sport-and-leisure",
+    "status": "standing",
+    "stateName": "New South Wales"
+   },
+   "why": "Central Coast",
+   "source": null
   }
  ],
  "additions": [
