@@ -26,6 +26,9 @@ const esc = (s) => String(s == null ? '' : s)
   .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
   .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
 
+/** A deep link to a thing's card on the map — index.html understands #thing=<id>. */
+const mapLink = (t) => `index.html#thing=${esc(t.id)}`;
+
 /** Plain text (no markup) version of a superlative, for JSON-LD answer text. */
 const describePlain = (t) => (t ? `${t.name} at ${t.location || t.stateName}` : 'unknown');
 
@@ -97,7 +100,7 @@ function shot(thing, credits) {
   return `<figure class="shot">
       <img src="${esc(src)}" alt="${esc(thing.name)}, ${esc(place)}" loading="lazy">
       <figcaption>
-        <b>${esc(thing.name)}</b>
+        <a class="shotname" href="${esc(mapLink(thing))}" title="View ${esc(thing.name)} on the map"><b>${esc(thing.name)}</b></a>
         <span class="place">${esc(place)}, ${esc(thing.state)}</span>
         <span class="by">Photo: ${authorHtml} · ${licence}</span>
       </figcaption>
@@ -167,11 +170,11 @@ function generate() {
     const src = t.correction.source
       ? `<p class="src"><a href="${esc(t.correction.source)}" target="_blank" rel="noopener noreferrer">Source</a></p>`
       : '';
-    return `<div class="fix"><h4>${esc(t.name)} <span style="font-size:12px;color:var(--ink-soft)">${esc(t.state)}</span></h4><p>${esc(why)}</p>${src}</div>`;
+    return `<div class="fix"><h4><a href="${esc(mapLink(t))}" title="View ${esc(t.name)} on the map">${esc(t.name)}</a> <span style="font-size:12px;color:var(--ink-soft)">${esc(t.state)}</span></h4><p>${esc(why)}</p>${src}</div>`;
   }).join('');
 
   /* ---- superlatives, computed not typed ---- */
-  const describe = (t) => (t ? `<strong>${esc(t.name)}</strong> at ${esc(t.location || t.stateName)}` : 'unknown');
+  const describe = (t) => (t ? `<a href="${esc(mapLink(t))}" title="View ${esc(t.name)} on the map"><strong>${esc(t.name)}</strong></a> at ${esc(t.location || t.stateName)}` : 'unknown');
   const withYear = things.filter((t) => t.builtYear);
   const oldest = [...withYear].sort((a, b) => a.builtYear - b.builtYear)[0];
   const newest = [...withYear].sort((a, b) => b.builtYear - a.builtYear)[0];

@@ -77,6 +77,8 @@ img{max-width:100%;display:block}
 .shot figcaption{padding:8px 10px 9px;font-size:11.5px;line-height:1.3}
 /* Each part on its own line, or the place runs straight into "Photo:". */
 .shot figcaption b{display:block;font-size:13px;line-height:1.2;margin-bottom:2px}
+.shot figcaption a.shotname{display:block;color:var(--ink);text-decoration:none}
+.shot figcaption a.shotname:hover b{text-decoration:underline}
 .shot figcaption .place{display:block;color:var(--ink-soft);margin-bottom:4px}
 .shot figcaption .by{display:block;color:var(--ink-soft);font-size:10px;line-height:1.35}
 .shot figcaption .by a{color:var(--ink-soft)}
@@ -116,6 +118,8 @@ strong{font-weight:700}
 .fixes{display:grid;grid-template-columns:repeat(auto-fit,minmax(268px,1fr));gap:12px;margin:18px 0 0}
 .fix{background:var(--paper);border:2px solid var(--ink);border-radius:13px;padding:14px 15px;box-shadow:0 2px 0 var(--ink)}
 .fix h4{margin:0 0 6px;font-family:Caprasimo,Inter,sans-serif;font-weight:400;font-size:17px;line-height:1.15;color:var(--earth)}
+.fix h4 a{color:inherit;text-decoration:none}
+.fix h4 a:hover{text-decoration:underline}
 .fix p{font-size:13px;line-height:1.5;margin:0 0 8px;max-width:none}
 .fix .src{font-size:11px}
 
