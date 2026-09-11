@@ -168,13 +168,13 @@ function generate() {
   const fixes = showcase.slice(0, 6).map((t) => {
     const why = t.correction.why.length > 300 ? `${t.correction.why.slice(0, 300)}…` : t.correction.why;
     const src = t.correction.source
-      ? `<p class="src"><a href="${esc(t.correction.source)}" target="_blank" rel="noopener noreferrer">Source</a></p>`
+      ? `<a href="${esc(t.correction.source)}" target="_blank" rel="noopener noreferrer">Source - </a>`
       : '';
-    return `<div class="fix"><h4><a href="${esc(mapLink(t))}" title="View ${esc(t.name)} on the map">${esc(t.name)}</a> <span style="font-size:12px;color:var(--ink-soft)">${esc(t.state)}</span></h4><p>${esc(why)}</p>${src}</div>`;
+    return `<div class="fix"><h4><a href="${esc(mapLink(t))}" title="View ${esc(t.name)} on the map">${esc(t.name)}</a> <span style="font-size:12px;color:var(--ink-soft)">${esc(t.state)}</span></h4><p>${esc(why)}</p><p class="src"> ${src} <a href="${esc(mapLink(t))}" title="View ${esc(t.name)} on the map">Map</a></p></div>`;
   }).join('');
 
   /* ---- superlatives, computed not typed ---- */
-  const describe = (t) => (t ? `<a href="${esc(mapLink(t))}" title="View ${esc(t.name)} on the map"><strong>${esc(t.name)}</strong></a> at ${esc(t.location || t.stateName)}` : 'unknown');
+  const describe = (t) => (t ? `<strong>${esc(t.name)}</strong> at ${esc(t.location || t.stateName)}` : 'unknown');
   const withYear = things.filter((t) => t.builtYear);
   const oldest = [...withYear].sort((a, b) => a.builtYear - b.builtYear)[0];
   const newest = [...withYear].sort((a, b) => b.builtYear - a.builtYear)[0];
