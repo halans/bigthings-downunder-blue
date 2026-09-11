@@ -43,8 +43,8 @@ const PRECISION_COPY = [
 /** The famous ones, for the photo strip. First match wins, in this order. */
 const STRIP_WANTED = [
   ['Big Banana', 'NSW'],
-  ['The Big Merino', 'NSW'],
   ['The Big Lobster', 'SA'],
+  ['The Big Merino', 'NSW'],
   ['The Big Pineapple', 'QLD'],
   ['The Big Golden Guitar', 'NSW'],
   ['The Giant Koala', 'VIC'],
