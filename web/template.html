@@ -500,6 +500,14 @@ function placeLabel(t) {
   return t.town || String(t.location || '').split(',')[0].trim() || t.stateName;
 }
 
+/** Location line for the details panel: shows both Location and Town when they differ. */
+function where(t) {
+  const loc = String(t.location || '').trim();
+  const town = String(t.town || '').trim();
+  if (loc && town && !loc.toLowerCase().includes(town.toLowerCase())) return `${loc}, ${town}`;
+  return loc || town;
+}
+
 const markers = new Map();
 for (const t of THINGS) {
   if (t.lat == null) continue;
@@ -780,7 +788,7 @@ function openDetail(id, pan) {
     <div class="dbody">
       ${heroSrc ? photoCredit(t.image) : ''}
       <h2>${esc(t.name)}</h2>
-      <p class="dwhere">${esc(t.location || t.town || '')}${t.location ? ', ' : ''}${esc(t.stateName)}</p>
+      <p class="dwhere">${esc(where(t))}${where(t) ? ', ' : ''}${esc(t.stateName)}</p>
       <div class="badges">
         <span class="badge" style="background:${c.colour};color:#fff;border-color:#1b1a17">${c.emoji} ${esc(c.label)}</span>
         ${isGone(t) ? `<span class="badge gone">💀 ${esc(STATUS_LABEL[t.status])}</span>` : ''}
