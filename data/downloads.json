@@ -7,6 +7,11 @@
       "blurb": "The whole dataset — every record with its coordinates, precision tier, per-row sources and any correction applied to it."
     },
     {
+      "file": "bigthings-au.geojson",
+      "url": "https://github.com/halans/bigthings-downunder-blue/blob/master/data/bigthings-au.geojson",
+      "blurb": "GeoJSON, for dropping straight into QGIS, Felt, or any other map."
+    },
+    {
       "file": "Github repository",
       "url": "https://github.com/halans/bigthings-downunder-blue",
       "blurb": "Github repository for the project, including the code used to generate the dataset and the website."
