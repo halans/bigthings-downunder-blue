@@ -1,6 +1,6 @@
 # Photo credits
 
-279 photographs, vendored from Wikimedia Commons at 480px wide on 2026-09-09.
+278 photographs, vendored from Wikimedia Commons at 480px wide on 2026-09-09.
 
 Every one is reproduced under a free licence. Most require attribution, so the
 photographer and licence are named here, on each photo in the app, and in
@@ -11,7 +11,7 @@ under the licence its author chose; the dataset itself is CC BY-SA 4.0.
 
 ## Licences used
 
-- CC BY-SA 4.0 — 133 photos
+- CC BY-SA 4.0 — 132 photos
 - CC BY-SA 3.0 — 61 photos
 - Public domain — 31 photos
 - CC BY 3.0 — 16 photos
@@ -214,7 +214,6 @@ under the licence its author chose; the dataset itself is CC BY-SA 4.0.
 | The Big Mango (QLD) | Amos T Fairchild | [CC BY-SA 3.0](http://creativecommons.org/licenses/by-sa/3.0/) | [Big mango.jpg](https://commons.wikimedia.org/wiki/File:Big_mango.jpg) |
 | The Big Marlin (QLD) | SaidSwans | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0) | [Bigmarlin.png](https://commons.wikimedia.org/wiki/File:Bigmarlin.png) |
 | The Big Marron (WA) | BrisbanePom | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0) | [The Big Marron.jpg](https://commons.wikimedia.org/wiki/File:The_Big_Marron.jpg) |
-| The Big Merino (NSW) | C76mb | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0) | [Big Merino.jpg](https://commons.wikimedia.org/wiki/File:Big_Merino.jpg) |
 | The Big Miner (QLD) | Fishieman15 at English Wikipedia | [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0) | [The Big Miner in Rubyvale.jpg](https://commons.wikimedia.org/wiki/File:The_Big_Miner_in_Rubyvale.jpg) |
 | The Big Miner's Lamp (NSW) | Sol bot | Public domain | [BigMinersLamp (cr).jpg](https://commons.wikimedia.org/wiki/File:BigMinersLamp_(cr).jpg) |
 | The Big Motorcycle (NSW) | Aliceinthealice | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0) | [The big motorcycle at Mooball, New South Wales 02.jpg](https://commons.wikimedia.org/wiki/File:The_big_motorcycle_at_Mooball,_New_South_Wales_02.jpg) |

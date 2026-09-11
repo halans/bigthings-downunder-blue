@@ -4938,7 +4938,7 @@
    "state": "NSW",
    "stateName": "New South Wales",
    "location": "Goulburn",
-   "town": null,
+   "town": "Goulburn",
    "lat": -34.7726,
    "lng": 149.691,
    "precision": "exact-article",
@@ -4961,7 +4961,7 @@
    "statusEvidence": "On 26 May 2007, Rambo (as the Merino is locally known) was relocated by low-loader to a new home within sight of the highway.",
    "notes": "A sculpture of a merino ram, built in 1985. Goulburn and The Big Merino were bypassed by the Hume Highway in 1992, leading to a reduction in visitor numbers. On 26 May 2007, Rambo (as the Merino is locally known) was relocated by low-loader to a new home within sight of the highway.",
    "blurb": "One of the more impressive Big Things, this giant Merino sheep ram stands 15 meters tall and has a gift shop inside (selling merino wool products, of course), an observatory inside the head, and what are almost certainly Australia's largest testicles behind. Add in the location right off the Hume Highway and the pies at Trappers Bakery next door, and few travelers heading from Sydney to Canberra or Melbourne can escape its woolly charms.",
-   "image": "Big Merino.jpg",
+   "image": "custom:the-big-merino-f3fe6f.jpeg",
    "wikipediaArticle": "Big Merino",
    "wikidata": "Q4906010",
    "osmId": "way/1015373563",
@@ -4981,7 +4981,11 @@
      "page": "way/1015373563",
      "url": "https://www.openstreetmap.org/way/1015373563"
     }
-   ]
+   ],
+   "correction": {
+    "why": "Photo updated, replacing whatever (if anything) was there.",
+    "source": null
+   }
   },
   {
    "id": "93477b04bc",
