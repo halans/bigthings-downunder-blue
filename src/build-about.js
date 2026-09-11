@@ -168,7 +168,7 @@ function generate() {
   const fixes = showcase.slice(0, 6).map((t) => {
     const why = t.correction.why.length > 300 ? `${t.correction.why.slice(0, 300)}…` : t.correction.why;
     const src = t.correction.source
-      ? `<a href="${esc(t.correction.source)}" target="_blank" rel="noopener noreferrer">Source - </a>`
+      ? `<a href="${esc(t.correction.source)}" target="_blank" rel="noopener noreferrer">Source</a> - `
       : '';
     return `<div class="fix"><h4><a href="${esc(mapLink(t))}" title="View ${esc(t.name)} on the map">${esc(t.name)}</a> <span style="font-size:12px;color:var(--ink-soft)">${esc(t.state)}</span></h4><p>${esc(why)}</p><p class="src"> ${src} <a href="${esc(mapLink(t))}" title="View ${esc(t.name)} on the map">Map</a></p></div>`;
   }).join('');
