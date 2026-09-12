@@ -77,16 +77,23 @@ npm run dev
 
 ## How it decides what to post
 
-- **Selection** (`pickThing`): cycles through every thing that has a photo, a map coordinate, and
-  isn't marked demolished/removed, without repeating one until the whole set has had a turn — then
-  starts over. State is a plain list of already-posted ids in KV, key `cycle`.
+- **Selection** (`pickThing`): cycles through every thing that has a map coordinate, isn't marked
+  demolished/removed, and has *something* to post beyond its name and place — a photo, a `blurb`,
+  or `notes` — without repeating one until the whole set has had a turn, then starts over. State is
+  a plain list of already-posted ids in KV, key `cycle`. Of 476 things in the dataset today, 315
+  qualify — 274 have a photo, and another 41 have no photo but do have a blurb or notes worth
+  posting on their own.
 - **Caption** (`buildCaption`): `Name — Town, State`, then the thing's `blurb` (or `notes` if it
   has no blurb) trimmed to fit Bluesky's 300-grapheme limit, then the map link
   (`https://bigthings.downunder.blue/#thing=<id>`) on its own line, turned into a clickable link
   via a `facet` — Bluesky doesn't auto-linkify plain text.
-- **Alt text** (`altText`): names the photographer and licence, the same credit the map card
-  itself carries — this project takes photo attribution seriously (see the main repo's
-  `docs/ADMIN.md`), and there's no reason that should stop at the edge of the map.
+- **Photo is optional** (`run`): a thing with no `image` field just posts as text. So does one
+  whose image fails to fetch or upload for any reason (a 404, Commons hiccuping, whatever) — that
+  failure is logged and swallowed rather than losing the whole day's post over a missing photo.
+- **Alt text** (`altText`): only relevant when there is a photo — names the photographer and
+  licence, the same credit the map card itself carries. This project takes photo attribution
+  seriously (see the main repo's `docs/ADMIN.md`), and there's no reason that should stop at the
+  edge of the map.
 - **Idempotency**: `alreadyPostedToday` checks/sets a `lastDate` key in KV first, so a cron retry
   (or a stray extra invocation) on the same UTC day is a no-op rather than a duplicate post.
 
@@ -94,8 +101,9 @@ npm run dev
 
 - The link in the post opens the live map (a single-page app), not a per-thing page — there's no
   server-rendered route per thing, so Bluesky's own link-preview card will show the site's generic
-  title/image, not this specific thing's. The photo is still posted directly as an image embed, so
-  the post itself looks right either way; it's only the link-card underneath that's generic.
+  title/image, not this specific thing's. When there's a photo it's posted directly as an image
+  embed regardless, so the post itself looks right either way; it's only the link-card underneath
+  that's generic. A text-only post (no photo for this thing) has no image at all beyond that card.
 - Demolished/removed things are excluded from the daily rotation by design (`isGone()` in
   `src/index.js`) — posting "here's a great big thing" about something that no longer exists felt
   like the wrong default. Delete that filter if you'd rather include them (the map's own honesty

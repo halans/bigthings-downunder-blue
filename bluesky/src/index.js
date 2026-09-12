@@ -91,9 +91,14 @@ async function alreadyPostedToday(env) {
  * Cycles through every eligible thing before repeating any of them, tracked
  * as a plain list of already-posted ids in KV. Starts a fresh cycle (and
  * picks from the reset pool) once everything has had a turn.
+ *
+ * A photo is nice but not required — a text-only post still works (see
+ * run()) — but *something* to say beyond the bare name and place is: a
+ * thing with neither a photo nor a blurb/notes would post as just
+ * "Name — Place" plus the link, which isn't worth a day's slot.
  */
 async function pickThing(env, things) {
-  const eligible = things.filter((t) => t.lat != null && t.image && !isGone(t));
+  const eligible = things.filter((t) => t.lat != null && !isGone(t) && (t.image || t.blurb || t.notes));
   const raw = await env.POSTED.get('cycle');
   const state = raw ? JSON.parse(raw) : { ids: [] };
   let pool = eligible.filter((t) => !state.ids.includes(t.id));
@@ -130,9 +135,9 @@ async function createPost(session, text, facets, blob, alt) {
     $type: 'app.bsky.feed.post',
     text,
     createdAt: new Date().toISOString(),
-    embed: { $type: 'app.bsky.embed.images', images: [{ image: blob, alt }] },
   };
   if (facets) record.facets = facets;
+  if (blob) record.embed = { $type: 'app.bsky.embed.images', images: [{ image: blob, alt }] };
   const res = await fetch(`${BSKY}/com.atproto.repo.createRecord`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${session.accessJwt}` },
@@ -153,20 +158,34 @@ async function run(env, { force } = {}) {
   const allCredits = { ...credits, ...custom };
 
   const thing = await pickThing(env, dataset.things);
-  const imgMeta = allCredits[thing.image];
-  const imgUrl = `${SITE}/${imgMeta ? imgMeta.local : `img/${thing.image}`}`;
-  const imgRes = await fetch(imgUrl);
-  if (!imgRes.ok) throw new Error(`image fetch failed: ${imgUrl} → ${imgRes.status}`);
-  const imgBytes = new Uint8Array(await imgRes.arrayBuffer());
-  const mimeType = imgRes.headers.get('content-type') || 'image/jpeg';
-
   const session = await login(env);
-  const blob = await uploadBlob(session, imgBytes, mimeType);
+
+  // A photo makes a better post, but it's optional — see pickThing()'s
+  // comment. If this thing has no image at all, or fetching/uploading it
+  // fails for any reason (a 404, Commons hiccuping, whatever), fall back to
+  // a text-only post rather than losing the whole day's slot over a photo.
+  let blob = null;
+  let alt = null;
+  if (thing.image) {
+    try {
+      const imgMeta = allCredits[thing.image];
+      const imgUrl = `${SITE}/${imgMeta ? imgMeta.local : `img/${thing.image}`}`;
+      const imgRes = await fetch(imgUrl);
+      if (!imgRes.ok) throw new Error(`image fetch failed: ${imgUrl} → ${imgRes.status}`);
+      const imgBytes = new Uint8Array(await imgRes.arrayBuffer());
+      const mimeType = imgRes.headers.get('content-type') || 'image/jpeg';
+      blob = await uploadBlob(session, imgBytes, mimeType);
+      alt = altText(thing, allCredits);
+    } catch (e) {
+      console.error(`no photo for "${thing.name}", posting text-only: ${e.message}`);
+    }
+  }
+
   const { text, link } = buildCaption(thing);
   const facets = buildFacets(text, link);
-  await createPost(session, text, facets, blob, altText(thing, allCredits));
+  await createPost(session, text, facets, blob, alt);
 
-  return { posted: thing.name, id: thing.id };
+  return { posted: thing.name, id: thing.id, withImage: !!blob };
 }
 
 export default {
