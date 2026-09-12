@@ -12,15 +12,9 @@ this repository are derived from it.
     "sources": [ { "name": "…", "url": "…", "licence": "…" } ],
     "stats": { "total": 477, "mapped": 477, "byPrecision": {}, "byState": {}, "…": {} }
   },
-  "things": [ … ],
-  "chargers": [ [-33.865, 151.209], … ]
+  "things": [ … ]
 }
 ```
-
-`chargers` is every OSM-mapped EV charging point as a `[lat, lng]` pair, at 5dp — the raw
-material both `evChargerNearby` (below) and the map's own "Show EV chargers" overlay are built
-from. `[]` if `npm run fetch:ev` was never run; see
-[BUILDING.md](BUILDING.md#stage-4d--ev-charger-proximity-srcfetch-ev-chargersjs).
 
 ## Record schema
 

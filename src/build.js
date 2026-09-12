@@ -509,10 +509,6 @@ if (require.main === module) {
   fs.mkdirSync(DATA, { recursive: true });
   const rows = build();
   const s = stats(rows);
-  // Rounded to 5dp (~1m) rather than the fetcher's 6dp: plenty for a map
-  // marker, and it's ~1600 points repeated in both bigthings.json and every
-  // page that embeds it, so shaving digits here isn't free elsewhere.
-  const chargers = loadEvChargers().map((c) => [N.round(c.lat, 5), N.round(c.lng, 5)]);
   fs.writeFileSync(path.join(DATA, 'bigthings.json'), JSON.stringify({
     meta: {
       generated: new Date().toISOString().slice(0, 10),
@@ -527,7 +523,6 @@ if (require.main === module) {
       stats: s,
     },
     things: rows,
-    chargers,
   }, null, 1));
   console.log(JSON.stringify(s, null, 2));
 }

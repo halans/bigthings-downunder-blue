@@ -372,8 +372,6 @@ const DATA = __DATA__;
 const CREDITS = __CREDITS__;
 /** Australia's coastline and state borders, for the continent-view basemap. */
 const OUTLINE = __OUTLINE__;
-/** [lat,lng] pairs for every OSM-mapped EV charger — [] if that optional harvest was never run. */
-const EV_CHARGERS = __EV_CHARGERS__;
 const THINGS = DATA.things;
 const META = DATA.meta;
 
@@ -399,7 +397,7 @@ const isFuzzy = (t) => t.precision === 'town';
 /* ---------------- state ---------------- */
 const F = {
   q:'', states:new Set(), cats:new Set(), eras:new Set(),
-  hideGone:false, exactOnly:false,
+  hideGone:false, exactOnly:false, evOnly:false,
 };
 let trip = [];
 let selected = null;
@@ -514,24 +512,6 @@ const cluster = L.markerClusterGroup({
 });
 map.addLayer(cluster);
 
-/**
- * EV chargers: a plain (unclustered) canvas layer, off by default. Canvas
- * keeps ~1,600 circle markers cheap to draw — no per-marker DOM node, unlike
- * the divIcon pins above. [] (the optional harvest was never run) just means
- * an empty layer and no switch offered for it — see buildFilters().
- */
-const chargerRenderer = L.canvas({ padding:0.5 });
-const chargerLayer = L.layerGroup(EV_CHARGERS.map(([lat, lng]) => L.circleMarker([lat, lng], {
-  renderer:chargerRenderer, radius:4, weight:1, color:'#1f6b3a', fillColor:'#2f7d52', fillOpacity:.85,
-}).bindTooltip('EV charger', { direction:'top', offset:[0,-4] })));
-let showEvChargers = false;
-function setEvChargers(on) {
-  showEvChargers = on;
-  const cb = document.getElementById('evswitch');
-  if (cb) cb.checked = on;
-  if (on) chargerLayer.addTo(map); else map.removeLayer(chargerLayer);
-}
-
 function iconFor(t) {
   const c = cat(t.category);
   const cls = ['pin', isFuzzy(t) ? 'fuzzy' : '', isGone(t) ? 'gone' : '', selected === t.id ? 'sel' : ''].filter(Boolean).join(' ');
@@ -570,6 +550,7 @@ function matches(t) {
   if (F.eras.size && !F.eras.has(t.era)) return false;
   if (F.hideGone && isGone(t)) return false;
   if (F.exactOnly && isFuzzy(t)) return false;
+  if (F.evOnly && !t.evChargerNearby) return false;
   if (F.q) {
     const q = F.q.toLowerCase();
     const hay = [t.name, t.location, t.town, t.stateName, t.state, t.notes, t.blurb, cat(t.category).label]
@@ -661,8 +642,8 @@ function shareView() {
   if (F.eras.size) p.set('eras', [...F.eras].join(','));
   if (F.hideGone) p.set('hideGone', '1');
   if (F.exactOnly) p.set('exactOnly', '1');
+  if (F.evOnly) p.set('ev', '1');
   if (mapEl.classList.contains('labels-on')) p.set('labels', '1');
-  if (showEvChargers) p.set('ev', '1');
   const c = map.getCenter();
   p.set('lat', c.lat.toFixed(4)); p.set('lng', c.lng.toFixed(4)); p.set('zoom', map.getZoom().toFixed(2));
   const url = `${location.origin}${location.pathname}#${p.toString()}`;
@@ -749,12 +730,12 @@ function buildFilters() {
   dlab.appendChild(dcb); dlab.appendChild(document.createTextNode('🏷️ Show place names: appear once you zoom into an area'));
   dg.appendChild(dlab);
 
-  if (EV_CHARGERS.length) {
+  if (THINGS.some((t) => t.evChargerNearby)) {
     const elab = document.createElement('label'); elab.className = 'switch';
     const ecb = document.createElement('input'); ecb.type = 'checkbox'; ecb.id = 'evswitch';
-    ecb.addEventListener('change', () => setEvChargers(ecb.checked));
+    ecb.addEventListener('change', () => { F.evOnly = ecb.checked; refresh(false); });
     elab.appendChild(ecb);
-    elab.appendChild(document.createTextNode(`🔌 Show EV chargers: ${EV_CHARGERS.length.toLocaleString()} mapped by OpenStreetMap`));
+    elab.appendChild(document.createTextNode('🔌 EV charging nearby: only show things within 500 m of a charger'));
     dg.appendChild(elab);
   }
 
@@ -1216,7 +1197,7 @@ document.getElementById('randombtn').addEventListener('click', spin);
 document.getElementById('mrandom').addEventListener('click', spin);
 
 document.getElementById('resetbtn').addEventListener('click', () => {
-  F.q = ''; F.states.clear(); F.cats.clear(); F.eras.clear(); F.hideGone = false; F.exactOnly = false;
+  F.q = ''; F.states.clear(); F.cats.clear(); F.eras.clear(); F.hideGone = false; F.exactOnly = false; F.evOnly = false;
   document.getElementById('q').value = '';
   document.querySelectorAll('.chip').forEach((c) => c.setAttribute('aria-pressed','false'));
   document.querySelectorAll('.switch input').forEach((c) => { c.checked = false; });
@@ -1292,7 +1273,7 @@ if (hashHasView) {
   if (hashHideGone) { F.hideGone = true; document.getElementById('switch-hideGone').checked = true; }
   if (hashExactOnly) { F.exactOnly = true; document.getElementById('switch-exactOnly').checked = true; }
   if (hashLabels) { mapEl.classList.add('labels-on'); document.getElementById('labelswitch').checked = true; }
-  if (hashEv && EV_CHARGERS.length) setEvChargers(true);
+  if (hashEv && document.getElementById('evswitch')) { F.evOnly = true; document.getElementById('evswitch').checked = true; }
   refresh(false);
   if (Number.isFinite(hashLat) && Number.isFinite(hashLng)) {
     map.setView([hashLat, hashLng], Number.isFinite(hashZoom) ? hashZoom : map.getZoom());
