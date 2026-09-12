@@ -29,7 +29,8 @@
   },
   "dependencies": {},
   "scripts": {
-    "fetch": "node src/fetch-coords.js && node src/fetch-places.js && node src/fetch-osm-attractions.js",
+    "fetch": "node src/fetch-coords.js && node src/fetch-places.js && node src/fetch-osm-attractions.js && node src/fetch-ev-chargers.js",
+    "fetch:ev": "node src/fetch-ev-chargers.js",
     "extract": "node src/extract-wikipedia.js && node src/extract-wikivoyage.js",
     "build": "npm run extract && node src/build.js && node src/build-web.js && node src/build-about.js",
     "rebuild": "npm run fetch && npm run build",

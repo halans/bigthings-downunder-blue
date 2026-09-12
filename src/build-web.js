@@ -30,7 +30,7 @@ const FIELDS = [
   'precision', 'coordSource', 'builtYear', 'builtCirca', 'builtRaw', 'era',
   'heightM', 'lengthM', 'sizeMaxM', 'sizeKind', 'sizeRaw', 'category',
   'status', 'statusEvidence', 'notes', 'blurb', 'image', 'wikipediaArticle',
-  'sources', 'correction', 'coordMatch', 'addedManually',
+  'sources', 'correction', 'coordMatch', 'addedManually', 'evChargerNearby',
 ];
 
 function slim(dataset) {

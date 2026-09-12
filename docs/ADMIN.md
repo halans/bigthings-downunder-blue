@@ -56,7 +56,8 @@ Open `data/overrides.json`. It has three arrays:
   either works, but `id` is simpler to get right.
 - **`set`** is any subset of the record's fields — `name`, `state`, `location`, `town`, `lat`,
   `lng`, `precision`, `coordSource`, `builtYear`, `builtRaw`, `category`, `status`, `notes`,
-  `blurb`, `image`, and so on. Only the fields you list change; everything else is untouched.
+  `blurb`, `image`, `evChargerNearby`, and so on. Only the fields you list change; everything else
+  is untouched.
 - **`why`** is required in spirit (the admin UI enforces it; nothing stops you skipping it by
   hand, but don't). **`source`** should be a URL wherever you're asserting a fact rather than a
   judgement call.
@@ -70,6 +71,21 @@ Open `data/overrides.json`. It has three arrays:
 good coordinate being accidentally downgraded. It does **not** block replacing one exact
 coordinate with a better one: to correct an already-exact pin, keep `precision` as
 `exact-verified` (the standard tag for "a human checked this"), not `town`.
+
+### Flagging an EV charger nearby
+
+`evChargerNearby` is normally computed automatically at build time — see
+[BUILDING.md](BUILDING.md#stage-4d--ev-charger-proximity-srcfetch-ev-chargersjs) — from an
+Overpass harvest of OSM charging stations. The admin UI's checkbox is for the case OSM hasn't
+caught up yet: check it and save, and `applyOverrides()` sets `evChargerNearby: true` on the
+record regardless of what the OSM harvest finds.
+
+It's one-directional by design: unchecking the box and saving does **not** write `false`. The
+automatic check re-runs on every build and will set the flag back to `true` the moment a charger
+*is* mapped nearby, so a manual `false` would only ever last until the next `npm run fetch:ev` —
+worse, it'd sit in `overrides.json` as a correction that looks meaningful but does nothing. If you
+need to suppress a flag OSM gets wrong, edit `data/overrides.json` directly (or the record's
+`evChargerNearby` won't reappear only for as long as OSM doesn't have one there either).
 
 ### `additions` — a thing that isn't in either wiki list at all
 

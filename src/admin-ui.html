@@ -69,7 +69,7 @@ async function search(q) {
   document.getElementById('rows').innerHTML = rows.map((t) => `
     <div class="row" data-id="${esc(t.id)}">
       <b>${esc(t.name)}</b>
-      <span>${esc(t.town || t.location || '')}, ${esc(t.state)} · ${esc(t.precision)}${t.image ? ' · 📷' : ''}</span>
+      <span>${esc(t.town || t.location || '')}, ${esc(t.state)} · ${esc(t.precision)}${t.image ? ' · 📷' : ''}${t.evChargerNearby ? ' · 🔌' : ''}</span>
     </div>`).join('') || '<div class="empty">No matches.</div>';
   document.querySelectorAll('.row').forEach((el) => el.addEventListener('click', () => load(el.dataset.id)));
 }
@@ -130,6 +130,18 @@ function render() {
         ${select('precision', 'Precision', t.precision, META.precisions)}
         ${field('coordSource', 'Coordinate source (URL)', t.coordSource)}
       </div>
+    </fieldset>
+
+    <fieldset>
+      <legend>EV charging</legend>
+      <label style="display:flex;align-items:center;gap:7px;font-weight:600;font-size:13.5px">
+        <input type="checkbox" id="f-evChargerNearby" style="width:auto" ${t.evChargerNearby ? 'checked' : ''}>
+        🔌 EV charger within walking distance (500 m)
+      </label>
+      <p class="note">Auto-detected from OpenStreetMap charging stations where the data exists — this box is
+        pre-checked when that's already true. Check it yourself to confirm one OSM doesn't have mapped yet;
+        saving records that as a correction. Unchecking it here doesn't do anything (see docs/ADMIN.md) — it
+        would just get re-detected on the next build if OSM does have one nearby.</p>
     </fieldset>
 
     <fieldset>
@@ -275,6 +287,10 @@ async function saveRecord() {
     const el = document.getElementById('f-' + f);
     if (el) body[f] = el.value;
   }
+  // A checkbox, not a text field: .value on a checkbox is always "on"
+  // regardless of checked state, so it needs .checked read explicitly and
+  // is deliberately left out of META.editableFields (see admin-server.js).
+  if (document.getElementById('f-evChargerNearby').checked) body.evChargerNearby = true;
   const btn = document.getElementById('save-btn');
   btn.disabled = true; btn.textContent = 'Saving…';
   try {

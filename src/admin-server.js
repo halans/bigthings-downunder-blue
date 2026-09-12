@@ -81,6 +81,7 @@ function searchThings(query) {
   return rows.slice(0, 60).map((t) => ({
     id: t.id, name: t.name, state: t.state, town: t.town, location: t.location,
     lat: t.lat, lng: t.lng, precision: t.precision, status: t.status, image: t.image,
+    evChargerNearby: t.evChargerNearby || false,
     hasOverride: false,
   }));
 }
@@ -334,6 +335,14 @@ const server = http.createServer(async (req, res) => {
         set[f] = (f === 'lat' || f === 'lng' || f === 'builtYear') ? Number(body[f]) : body[f];
       }
       if (set.state && !set.stateName) set.stateName = STATE_NAMES[set.state];
+      // A checkbox, not a text field — kept out of editableFields so the
+      // generic string-coercion loop above never reads a checkbox's .value
+      // (always the literal string "on", regardless of checked state). Only
+      // ever written as true: applyEvChargers() in build.js re-derives it
+      // from OSM data on every build and will set it true again the moment a
+      // charger is actually mapped nearby, so sending an explicit `false`
+      // here would achieve nothing but noise in overrides.json.
+      if (body.evChargerNearby) set.evChargerNearby = true;
       upsertCorrection(id, set, body.why, body.source);
       const log = rebuild();
       return send(res, 200, { ok: true, log });

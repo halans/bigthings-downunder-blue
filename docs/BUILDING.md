@@ -25,6 +25,7 @@ npm run match      # build → match → build: try to upgrade town-level pins
 npm run discover   # harvest the community catalogues (network), then rebuild
 npm run rebuild    # re-fetch every upstream source, then build
 npm run fetch      # stage 1 only
+npm run fetch:ev   # refresh cache/ev-chargers.json only (stage 4d, optional)
 npm test           # the test suite
 npm run verify     # checksum the cache, then run the tests
 npm run serve      # http://localhost:8099
@@ -218,6 +219,19 @@ Two traps it documents:
   Douglas–Peucker simplification.
 - Google Fonts content-negotiates on User-Agent. A research UA is served legacy TTF, which made
   `web/vendor/` 1.6 MB; a browser UA is served woff2, which brings it to 467 KB.
+
+## Stage 4d — EV charger proximity (`src/fetch-ev-chargers.js`)
+
+Optional, and independent of everything above: `npm run fetch:ev` harvests every
+`amenity=charging_station` node/way/relation in Australia from Overpass into
+`cache/ev-chargers.json` (~1,600 points as of this writing). `build.js`'s `applyEvChargers()`
+then flags any thing within 500 m (walking distance) of one of them with `evChargerNearby:
+true` — a straight-line haversine check, bounding-box-filtered first so it stays cheap however
+large the charger set grows. The card shows it as a 🔌 badge.
+
+If `cache/ev-chargers.json` was never fetched, this step silently does nothing — the flag is
+never set, not falsely set. Refresh it independently of everything else with `npm run fetch:ev`,
+since charging infrastructure changes far faster than sculpture locations.
 
 ## Stage 5 — generate the pages (`src/build-web.js`, `src/build-about.js`)
 

@@ -46,6 +46,16 @@ const inState = (c, state) => inBox(c, STATE_BBOX[state] || AU_BBOX);
 
 function readJSON(p) { return JSON.parse(fs.readFileSync(p, 'utf8')); }
 
+function haversineKm(aLat, aLng, bLat, bLng) {
+  const R = 6371;
+  const dLat = ((bLat - aLat) * Math.PI) / 180;
+  const dLng = ((bLng - aLng) * Math.PI) / 180;
+  const la1 = (aLat * Math.PI) / 180;
+  const la2 = (bLat * Math.PI) / 180;
+  const h = Math.sin(dLat / 2) ** 2 + Math.cos(la1) * Math.cos(la2) * Math.sin(dLng / 2) ** 2;
+  return 2 * R * Math.asin(Math.sqrt(h));
+}
+
 /** OSM name → candidate elements, filtered to plausible novelty features. */
 function buildOsmIndex(osm) {
   const NOISE = /\b(creek|river|hill|lake|dam|bridge|road|street|beach|bay|island|park|reserve|forest|swamp|springs?|flat|ridge|rock|point|tree|gully|paddock|mine|station|camp|lookout|walk|track|trail|falls?|desert|plain|valley|bend|crossing|landing|waterhole|billabong|junction)\b/i;
@@ -281,6 +291,7 @@ function build() {
   applyRemovals(out);
   applyOsmMatches(out);
   applyVerifiedCoords(out);
+  applyEvChargers(out);
   out.sort((a, b) => a.state.localeCompare(b.state) || a.name.localeCompare(b.name));
   return out;
 }
@@ -341,6 +352,31 @@ function applyVerifiedCoords(rows) {
     if (!row.sources.some((s) => s.url && s.url === v.source)) {
       row.sources.push({ source: 'verified', page: v.sourceName || 'independent lookup', url: v.source || null });
     }
+  }
+}
+
+/**
+ * Flag things with a public EV charger within walking distance (500 m), from
+ * an Overpass harvest of amenity=charging_station
+ * (src/fetch-ev-chargers.js → cache/ev-chargers.json). Optional: if that
+ * cache was never fetched, this silently sets nothing.
+ */
+function applyEvChargers(rows) {
+  const p = path.join(CACHE, 'ev-chargers.json');
+  if (!fs.existsSync(p)) return;
+  const chargers = readJSON(p);
+  const WALK_KM = 0.5;
+  for (const row of rows) {
+    if (row.lat == null) continue;
+    // Cheap bounding-box reject before the trig, since this runs for every
+    // (thing, charger) pair — a few hundred things times a few thousand
+    // chargers is fine unfiltered, but there is no reason to pay for it.
+    const latPad = WALK_KM / 111;
+    const lngPad = WALK_KM / (111 * Math.cos((row.lat * Math.PI) / 180) || 1);
+    const near = chargers.some((c) => Math.abs(c.lat - row.lat) <= latPad
+      && Math.abs(c.lng - row.lng) <= lngPad
+      && haversineKm(row.lat, row.lng, c.lat, c.lng) <= WALK_KM);
+    if (near) row.evChargerNearby = true;
   }
 }
 
@@ -457,6 +493,7 @@ function stats(rows) {
     withHeight: rows.filter((r) => r.heightM).length,
     withAnySize: rows.filter((r) => r.sizeMaxM).length,
     withImage: rows.filter((r) => r.image).length,
+    withEvCharger: rows.filter((r) => r.evChargerNearby).length,
   };
 }
 

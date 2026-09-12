@@ -162,6 +162,7 @@ a{color:var(--sky)}
 .badge{border:1.5px solid var(--ink);border-radius:999px;padding:3px 9px;font-size:11px;font-weight:700;background:var(--cream-2)}
 .badge.warn{background:#ffe9c9}
 .badge.gone{background:#e9e6e0;color:#5f5b53}
+.badge.ev{background:#dff5e6;color:#1f6b3a}
 .facts{display:grid;grid-template-columns:auto 1fr;gap:6px 12px;font-size:13px;margin:0 0 14px}
 .facts dt{font-weight:700;color:var(--ink-soft)}
 .facts dd{margin:0;font-variant-numeric:tabular-nums}
@@ -798,6 +799,7 @@ function openDetail(id, pan) {
         ${isGone(t) ? `<span class="badge gone">💀 ${esc(STATUS_LABEL[t.status])}</span>` : ''}
         ${t.status === 'relocated' ? '<span class="badge warn">🚚 moved</span>' : ''}
         ${t.status === 'replaced' ? '<span class="badge warn">🔧 rebuilt</span>' : ''}
+        ${t.evChargerNearby ? '<span class="badge ev" title="An EV charger has been mapped within 500 m">🔌 EV charging nearby</span>' : ''}
         <span class="${pb.cls}">${pb.text}</span>
       </div>
       ${t.correction ? `<div class="corrected"><b>${t.addedManually ? 'Added from outside the wiki lists.' : 'We corrected the source.'}</b> ${esc(t.correction.why)}${t.correction.source ? ` <a href="${t.correction.source}" target="_blank" rel="noopener noreferrer">Source</a>` : ''}</div>` : ''}

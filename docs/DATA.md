@@ -52,6 +52,7 @@ this repository are derived from it.
 | `correction` | object \| null | `{ why, source }` when a curated override touched this row. |
 | `addedManually` | boolean? | Present on rows absent from both wiki lists — a curated addition or a discovery. |
 | `sourceCategories` | string[]? | The community catalogue's own subject categories, when it had them. |
+| `evChargerNearby` | boolean? | `true` only when an OSM-mapped EV charger sits within 500 m (walking distance). Optional: absent entirely if `cache/ev-chargers.json` was never fetched (`npm run fetch:ev`). See [BUILDING.md](BUILDING.md#stage-4d--ev-charger-proximity-srcfetch-ev-chargersjs). |
 
 ## Coordinate precision
 

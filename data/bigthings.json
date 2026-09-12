@@ -77,7 +77,8 @@
    "withYear": 176,
    "withHeight": 43,
    "withAnySize": 141,
-   "withImage": 290
+   "withImage": 290,
+   "withEvCharger": 77
   }
  },
  "things": [
@@ -213,7 +214,8 @@
     "confidence": "high",
     "why": "Notes and item description confirm the Big Coins are at the Royal Australian Mint, 62-114 Denison Street, Deakin ACT. Nominatim returned -35.3188980, 149.0930096 for the Royal Australian Mint.",
     "osmName": "Nominatim — Royal Australian Mint, Denison Street, Deakin ACT"
-   }
+   },
+   "evChargerNearby": true
   },
   {
    "id": "12b7e16e3e",
@@ -363,7 +365,8 @@
     "confidence": "medium",
     "why": "Garema Place is a pedestrian plaza in Civic, Canberra; the batch record uses 'Garema Place' as the town field which matches the sculpture's location. Geocoded to the plaza centroid.",
     "osmName": "Nominatim — Garema Place, City, North Canberra ACT"
-   }
+   },
+   "evChargerNearby": true
   },
   {
    "id": "874f86566b",
@@ -496,7 +499,8 @@
     "confidence": "medium",
     "why": "single-token name matched on an OSM artwork 0.3 km away",
     "osmName": "A is for Alexander, B is for Bunyip, C is for Canberra"
-   }
+   },
+   "evChargerNearby": true
   },
   {
    "id": "77d84f9a2c",
@@ -804,7 +808,8 @@
      "page": "node/7234369675",
      "url": "https://www.openstreetmap.org/node/7234369675"
     }
-   ]
+   ],
+   "evChargerNearby": true
   },
   {
    "id": "0d23000d3d",
@@ -1084,7 +1089,8 @@
    "correction": {
     "why": "Photo updated, replacing whatever (if anything) was there.",
     "source": null
-   }
+   },
+   "evChargerNearby": true
   },
   {
    "id": "ed182cae38",
@@ -1319,7 +1325,8 @@
     "confidence": "high",
     "why": "Cunningham's Bananas and Tomatoes fruit shop on Pacific Hwy, south end of Coffs Harbour (address confirmed as 393 Pacific Hwy S by BigThingsOfOz blog and MapQuest). Nominatim found the specific business.",
     "osmName": "Nominatim — Cunninghams Bananas, Pacific Highway, Coffs Harbour NSW 2450"
-   }
+   },
+   "evChargerNearby": true
   },
   {
    "id": "816dee4577",
@@ -1373,7 +1380,8 @@
     "confidence": "high",
     "why": "Notes say 'located at the former Bodalla Cheese factory on the Princes Highway'. Nominatim returns a named OSM entry for Bodalla Cheese Factory at 52 Princes Highway. Closed as of 2013 per notes.",
     "osmName": "Nominatim – Bodalla Cheese Factory, 52 Princes Highway, Bodalla NSW 2545"
-   }
+   },
+   "evChargerNearby": true
   },
   {
    "id": "35aa6d3618",
@@ -1421,7 +1429,8 @@
      "page": "node/12635054150",
      "url": "https://www.openstreetmap.org/node/12635054150"
     }
-   ]
+   ],
+   "evChargerNearby": true
   },
   {
    "id": "b324a3e8ee",
@@ -1639,7 +1648,8 @@
      "page": "https://www.aussiebigthings.com.au/explore/big-dog-on-tuckerbox",
      "url": "https://www.aussiebigthings.com.au/explore/big-dog-on-tuckerbox"
     }
-   ]
+   ],
+   "evChargerNearby": true
   },
   {
    "id": "8e22b70087",
@@ -1897,7 +1907,8 @@
      "page": "Australia's big things",
      "url": "https://en.wikivoyage.org/wiki/Australia%27s_big_things"
     }
-   ]
+   ],
+   "evChargerNearby": true
   },
   {
    "id": "c4a7c2ca7b",
@@ -2108,7 +2119,8 @@
      "page": "Australia's big things",
      "url": "https://en.wikivoyage.org/wiki/Australia%27s_big_things"
     }
-   ]
+   ],
+   "evChargerNearby": true
   },
   {
    "id": "1a39ddcea6",
@@ -2289,7 +2301,8 @@
      "page": "Australia's big things",
      "url": "https://en.wikivoyage.org/wiki/Australia%27s_big_things"
     }
-   ]
+   ],
+   "evChargerNearby": true
   },
   {
    "id": "18c3ee68ca",
@@ -2972,7 +2985,8 @@
      "page": "https://landofthebigs.com/dirrawuhn-the-big-goanna-lismore-nsw/",
      "url": "https://landofthebigs.com/dirrawuhn-the-big-goanna-lismore-nsw/"
     }
-   ]
+   ],
+   "evChargerNearby": true
   },
   {
    "id": "d0f51c9344",
@@ -3015,7 +3029,8 @@
      "page": "https://landofthebigs.com/discobolus-sydney-olympic-park-nsw/",
      "url": "https://landofthebigs.com/discobolus-sydney-olympic-park-nsw/"
     }
-   ]
+   ],
+   "evChargerNearby": true
   },
   {
    "id": "a14c5f482d",
@@ -3304,9 +3319,9 @@
    "sizeKind": "dimensions",
    "dimsM": [
     4.8,
-    30
+    2
    ],
-   "sizeRaw": "4.8 × 30 m",
+   "sizeRaw": "4.8 × 2 m",
    "category": "fauna",
    "status": "standing",
    "statusEvidence": null,
@@ -3550,7 +3565,8 @@
    "correction": {
     "why": "Photo updated, replacing whatever (if anything) was there.",
     "source": null
-   }
+   },
+   "evChargerNearby": true
   },
   {
    "id": "9851fb3de5",
@@ -3693,7 +3709,8 @@
     "confidence": "high",
     "why": "Notes confirm the Big Beer Can is above the entrance to the Grand Hotel. Nominatim found Grand Hotel at Marshall Street, Cobar: -31.4980750, 145.8375881.",
     "osmName": "Nominatim — Grand Hotel, Marshall Street, Cobar NSW"
-   }
+   },
+   "evChargerNearby": true
   },
   {
    "id": "0c3d25576f",
@@ -3905,7 +3922,8 @@
      "page": "Australia's big things",
      "url": "https://en.wikivoyage.org/wiki/Australia%27s_big_things"
     }
-   ]
+   ],
+   "evChargerNearby": true
   },
   {
    "id": "fe2b98dc0c",
@@ -4086,7 +4104,8 @@
      "page": "https://landofthebigs.com/big-cauliflower-waterloo-nsw/",
      "url": "https://landofthebigs.com/big-cauliflower-waterloo-nsw/"
     }
-   ]
+   ],
+   "evChargerNearby": true
   },
   {
    "id": "a7d06dfbc5",
@@ -4347,7 +4366,8 @@
      "page": "node/1450459205",
      "url": "https://www.openstreetmap.org/node/1450459205"
     }
-   ]
+   ],
+   "evChargerNearby": true
   },
   {
    "id": "f0be7dbbb4",
@@ -4630,7 +4650,8 @@
     "confidence": "medium",
     "why": "Newcastle Herald article from installation (2015) specifically states '92 Darby Street, between The Hop Factory and the Euro Patisserie'. Nominatim geocode of Darby Street, Cooks Hill, Newcastle NSW.",
     "osmName": "Newcastle Herald 2015 – 'installed over the curved-shaped bench at 92 Darby Street, between The Hop Factory and the Euro Patisserie'"
-   }
+   },
+   "evChargerNearby": true
   },
   {
    "id": "caa43cce36",
@@ -4716,7 +4737,8 @@
      "page": "node/11445032635",
      "url": "https://www.openstreetmap.org/node/11445032635"
     }
-   ]
+   ],
+   "evChargerNearby": true
   },
   {
    "id": "0f5f902692",
@@ -4940,7 +4962,8 @@
    "correction": {
     "why": "Photo updated, replacing whatever (if anything) was there.",
     "source": null
-   }
+   },
+   "evChargerNearby": true
   },
   {
    "id": "93477b04bc",
@@ -5112,7 +5135,8 @@
     "confidence": "high",
     "why": "The Big Orange Goblin grain-silo sculpture stands at the entrance to the Grifter Brewing Co brewery at 1/391-397 Enmore Rd, Marrickville. Address confirmed by official brewery website and Destination NSW.",
     "osmName": "Destination NSW — The Grifter Brewing Co, 1/391-397 Enmore Road Marrickville NSW 2204"
-   }
+   },
+   "evChargerNearby": true
   },
   {
    "id": "7ade1271da",
@@ -5341,7 +5365,8 @@
     "confidence": "high",
     "why": "Inside the Narrandera Destination and Discovery Hub at 24 Cadell Street (Newell Highway). Address confirmed by NSW Government tourism page and Visit Narrandera. Geocoded by Nominatim to Narrandera Visitor Information Centre on Cadell Street.",
     "osmName": "NSW Government — Narrandera Visitor Information Centre, Newell Highway (24 Cadell St), Narrandera NSW 2700"
-   }
+   },
+   "evChargerNearby": true
   },
   {
    "id": "ec10764442",
@@ -6072,7 +6097,8 @@
      "page": "Australia's big things",
      "url": "https://en.wikivoyage.org/wiki/Australia%27s_big_things"
     }
-   ]
+   ],
+   "evChargerNearby": true
   },
   {
    "id": "48933b6fb6",
@@ -6253,7 +6279,8 @@
     "confidence": "medium",
     "why": "Big Wine Bottle (1998, 7x1.5m) is located at the Hunter Valley Gardens, Pokolbin. The neck forms a chimney for an open fire.",
     "osmName": "OpenStreetMap — Hunter Valley Gardens, Cessnock NSW"
-   }
+   },
+   "evChargerNearby": true
   },
   {
    "id": "0412e6047c",
@@ -6512,7 +6539,8 @@
      "page": "https://landofthebigs.com/the-giant-cootamundra-nsw/",
      "url": "https://landofthebigs.com/the-giant-cootamundra-nsw/"
     }
-   ]
+   ],
+   "evChargerNearby": true
   },
   {
    "id": "007c3b93f7",
@@ -7066,7 +7094,8 @@
     "confidence": "medium",
     "why": "Notes confirm the Big Books were installed as part of a 2018 renovation of the Alice Springs Public Library. Nominatim geocode of Alice Springs Library, Gregory Terrace, Alice Springs NT 0870.",
     "osmName": "Nominatim – Alice Springs Library, Gregory Terrace, Alice Springs NT (notes: part of 2018 library renovation)"
-   }
+   },
+   "evChargerNearby": true
   },
   {
    "id": "110fdafef9",
@@ -8267,7 +8296,8 @@
      "page": "Big things (Australia)",
      "url": "https://en.wikipedia.org/wiki/Big_things_(Australia)"
     }
-   ]
+   ],
+   "evChargerNearby": true
   },
   {
    "id": "7a720978d0",
@@ -8481,7 +8511,8 @@
      "page": "Big things (Australia)",
      "url": "https://en.wikipedia.org/wiki/Big_things_(Australia)"
     }
-   ]
+   ],
+   "evChargerNearby": true
   },
   {
    "id": "bd961862ad",
@@ -8632,7 +8663,8 @@
     "confidence": "medium",
     "why": "Notes confirm 'Shell petrol station on the corner of Dougall Street and Roe Street (Bruce Highway)'. Nominatim found Dougall Street, Miriam Vale at -24.3295018, 151.5600052. Street intersection placed, not the specific station.",
     "osmName": "Nominatim — Dougall Street, Miriam Vale QLD"
-   }
+   },
+   "evChargerNearby": true
   },
   {
    "id": "60ae98f300",
@@ -8967,7 +8999,8 @@
      "page": "Australia's big things",
      "url": "https://en.wikivoyage.org/wiki/Australia%27s_big_things"
     }
-   ]
+   ],
+   "evChargerNearby": true
   },
   {
    "id": "29b2fb66c2",
@@ -9016,7 +9049,8 @@
     "confidence": "medium",
     "why": "single-token name matched on an OSM artwork 0.2 km away",
     "osmName": "Kronosaurus Korner"
-   }
+   },
+   "evChargerNearby": true
   },
   {
    "id": "40e373fa1e",
@@ -9302,7 +9336,8 @@
     "confidence": "high",
     "why": "Known locally as the Big Ram (not Big Merino). Exact GPS from Monument Australia: -24.422375, 145.459345. Located in Ram Park on Shamrock Street, Blackall.",
     "osmName": "Monument Australia — The Big Ram, Shamrock Street, Ram Park, Blackall QLD 4472"
-   }
+   },
+   "evChargerNearby": true
   },
   {
    "id": "82ee8a3f1c",
@@ -9912,7 +9947,8 @@
      "page": "https://landofthebigs.com/blue-perspective-southport-qld/",
      "url": "https://landofthebigs.com/blue-perspective-southport-qld/"
     }
-   ]
+   ],
+   "evChargerNearby": true
   },
   {
    "id": "3dce37b769",
@@ -10868,7 +10904,8 @@
      "page": "node/3548947274",
      "url": "https://www.openstreetmap.org/node/3548947274"
     }
-   ]
+   ],
+   "evChargerNearby": true
   },
   {
    "id": "edca7505d3",
@@ -11004,7 +11041,8 @@
      "page": "Big things (Australia)",
      "url": "https://en.wikipedia.org/wiki/Big_things_(Australia)"
     }
-   ]
+   ],
+   "evChargerNearby": true
   },
   {
    "id": "9ae65458f3",
@@ -11202,7 +11240,8 @@
     "confidence": "medium",
     "why": "Big Hose (2025) by Tony Albert and Nell is installed at GOMA, Stanley Place, South Bank. OSM has the GOMA building; the hose is within/around the gallery precinct.",
     "osmName": "OpenStreetMap way 24228971 — Gallery of Modern Art"
-   }
+   },
+   "evChargerNearby": true
   },
   {
    "id": "8eeffc41d1",
@@ -11892,7 +11931,8 @@
      "page": "node/12630123171",
      "url": "https://www.openstreetmap.org/node/12630123171"
     }
-   ]
+   ],
+   "evChargerNearby": true
   },
   {
    "id": "d643271bc5",
@@ -13352,7 +13392,8 @@
      "page": "Big things (Australia)",
      "url": "https://en.wikipedia.org/wiki/Big_things_(Australia)"
     }
-   ]
+   ],
+   "evChargerNearby": true
   },
   {
    "id": "3e3ce84578",
@@ -13395,7 +13436,8 @@
      "page": "https://landofthebigs.com/bertha-the-bunyip-murray-bridge-sa/",
      "url": "https://landofthebigs.com/bertha-the-bunyip-murray-bridge-sa/"
     }
-   ]
+   ],
+   "evChargerNearby": true
   },
   {
    "id": "f55baea4e0",
@@ -13476,7 +13518,8 @@
      "page": "https://www.aussiebigthings.com.au/explore/big-goanna",
      "url": "https://www.aussiebigthings.com.au/explore/big-goanna"
     }
-   ]
+   ],
+   "evChargerNearby": true
   },
   {
    "id": "ddaea22b6b",
@@ -13600,7 +13643,8 @@
      "page": "Big things (Australia)",
      "url": "https://en.wikipedia.org/wiki/Big_things_(Australia)"
     }
-   ]
+   ],
+   "evChargerNearby": true
   },
   {
    "id": "a0af7869cf",
@@ -13892,7 +13936,8 @@
      "page": "Australia's big things",
      "url": "https://en.wikivoyage.org/wiki/Australia%27s_big_things"
     }
-   ]
+   ],
+   "evChargerNearby": true
   },
   {
    "id": "8d1bfab99b",
@@ -14297,7 +14342,8 @@
     "confidence": "medium",
     "why": "single-token name matched on an OSM artwork 0.5 km away",
     "osmName": "The Big Kangaroo - Rooey II"
-   }
+   },
+   "evChargerNearby": true
   },
   {
    "id": "0556100d53",
@@ -14604,7 +14650,8 @@
     "confidence": "high",
     "why": "core name \"pigeon\" matches exactly, 0.0 km from the town point",
     "osmName": "Pigeon"
-   }
+   },
+   "evChargerNearby": true
   },
   {
    "id": "3dcdb39bb2",
@@ -14647,7 +14694,8 @@
      "page": "https://landofthebigs.com/the-big-praying-mantids-mt-gambier-sa/",
      "url": "https://landofthebigs.com/the-big-praying-mantids-mt-gambier-sa/"
     }
-   ]
+   ],
+   "evChargerNearby": true
   },
   {
    "id": "0073e06bd4",
@@ -14813,7 +14861,8 @@
     "confidence": "medium",
     "why": "Giant Santa (16m, built 1960s) is mounted on the Market Tower on the Grote Street frontage of Adelaide Central Market. Only displayed seasonally at Christmas.",
     "osmName": "OpenStreetMap — Adelaide Central Markets, Market Plaza Arcade, Adelaide SA 5000"
-   }
+   },
+   "evChargerNearby": true
   },
   {
    "id": "838a76fa84",
@@ -14994,7 +15043,8 @@
      "page": "node/1858643686",
      "url": "https://www.openstreetmap.org/node/1858643686"
     }
-   ]
+   ],
+   "evChargerNearby": true
   },
   {
    "id": "5f1b90cd92",
@@ -15655,7 +15705,8 @@
      "page": "Big things (Australia)",
      "url": "https://en.wikipedia.org/wiki/Big_things_(Australia)"
     }
-   ]
+   ],
+   "evChargerNearby": true
   },
   {
    "id": "d04e93ca40",
@@ -15693,7 +15744,8 @@
      "page": "Big things (Australia)",
      "url": "https://en.wikipedia.org/wiki/Big_things_(Australia)"
     }
-   ]
+   ],
+   "evChargerNearby": true
   },
   {
    "id": "28ba7f23e4",
@@ -16455,7 +16507,8 @@
      "page": "Australia's big things",
      "url": "https://en.wikivoyage.org/wiki/Australia%27s_big_things"
     }
-   ]
+   ],
+   "evChargerNearby": true
   },
   {
    "id": "b1c27a3b6b",
@@ -16897,7 +16950,8 @@
      "page": "Big things (Australia)",
      "url": "https://en.wikipedia.org/wiki/Big_things_(Australia)"
     }
-   ]
+   ],
+   "evChargerNearby": true
   },
   {
    "id": "dfb36fa94d",
@@ -17021,7 +17075,8 @@
      "page": "node/11445032635",
      "url": "https://www.openstreetmap.org/node/11445032635"
     }
-   ]
+   ],
+   "evChargerNearby": true
   },
   {
    "id": "485b76471e",
@@ -17281,7 +17336,8 @@
      "page": "Big things (Australia)",
      "url": "https://en.wikipedia.org/wiki/Big_things_(Australia)"
     }
-   ]
+   ],
+   "evChargerNearby": true
   },
   {
    "id": "555bc65d95",
@@ -17411,7 +17467,8 @@
     "confidence": "high",
     "why": "Notes confirm 'Gold Rush Golf on the Western Highway (M8) on the eastern side of Ballarat'. Nominatim found the venue at -37.5639130, 143.9369267.",
     "osmName": "Nominatim — Gold Rush Indoor and Outdoor Mini Golf, Western Highway, Warrenheip VIC"
-   }
+   },
+   "evChargerNearby": true
   },
   {
    "id": "33a09128da",
@@ -17460,7 +17517,8 @@
     "confidence": "high",
     "why": "Notes confirm location as Luna Park, 18 Lower Esplanade, St Kilda VIC 3182. Nominatim confirmed the exact venue.",
     "osmName": "Nominatim — Luna Park, 18 Lower Esplanade, St Kilda VIC 3182"
-   }
+   },
+   "evChargerNearby": true
   },
   {
    "id": "327b509938",
@@ -17629,7 +17687,8 @@
      "page": "Australia's big things",
      "url": "https://en.wikivoyage.org/wiki/Australia%27s_big_things"
     }
-   ]
+   ],
+   "evChargerNearby": true
   },
   {
    "id": "43e4489caf",
@@ -17823,7 +17882,8 @@
      "page": "Australia's big things",
      "url": "https://en.wikivoyage.org/wiki/Australia%27s_big_things"
     }
-   ]
+   ],
+   "evChargerNearby": true
   },
   {
    "id": "dc68ba7a63",
@@ -17909,7 +17969,8 @@
      "page": "Big things (Australia)",
      "url": "https://en.wikipedia.org/wiki/Big_things_(Australia)"
     }
-   ]
+   ],
+   "evChargerNearby": true
   },
   {
    "id": "2e186dd7eb",
@@ -17995,7 +18056,8 @@
      "page": "Big things (Australia)",
      "url": "https://en.wikipedia.org/wiki/Big_things_(Australia)"
     }
-   ]
+   ],
+   "evChargerNearby": true
   },
   {
    "id": "3b88bdae01",
@@ -18206,7 +18268,8 @@
      "page": "node/4744287214",
      "url": "https://www.openstreetmap.org/node/4744287214"
     }
-   ]
+   ],
+   "evChargerNearby": true
   },
   {
    "id": "6ecb0fd3f3",
@@ -18244,7 +18307,8 @@
      "page": "Big things (Australia)",
      "url": "https://en.wikipedia.org/wiki/Big_things_(Australia)"
     }
-   ]
+   ],
+   "evChargerNearby": true
   },
   {
    "id": "b747bfd974",
@@ -18372,7 +18436,8 @@
    "correction": {
     "why": "A well-known piece of civic public art in Melbourne's Bourke Street Mall outside the GPO, not roadside novelty advertising.",
     "source": "https://citycollection.melbourne.vic.gov.au/the-public-purse/"
-   }
+   },
+   "evChargerNearby": true
   },
   {
    "id": "9479432327",
@@ -18463,7 +18528,8 @@
      "page": "https://landofthebigs.com/the-big-bandicoot-hamilton-vic/",
      "url": "https://landofthebigs.com/the-big-bandicoot-hamilton-vic/"
     }
-   ]
+   ],
+   "evChargerNearby": true
   },
   {
    "id": "2329b37777",
@@ -18696,7 +18762,8 @@
      "page": "Big things (Australia)",
      "url": "https://en.wikipedia.org/wiki/Big_things_(Australia)"
     }
-   ]
+   ],
+   "evChargerNearby": true
   },
   {
    "id": "c06b08dacb",
@@ -19010,7 +19077,8 @@
      "page": "Big things (Australia)",
      "url": "https://en.wikipedia.org/wiki/Big_things_(Australia)"
     }
-   ]
+   ],
+   "evChargerNearby": true
   },
   {
    "id": "d5526bf39d",
@@ -19048,7 +19116,8 @@
      "page": "Big things (Australia)",
      "url": "https://en.wikipedia.org/wiki/Big_things_(Australia)"
     }
-   ]
+   ],
+   "evChargerNearby": true
   },
   {
    "id": "dae5b94dc1",
@@ -19129,7 +19198,8 @@
      "page": "Big things (Australia)",
      "url": "https://en.wikipedia.org/wiki/Big_things_(Australia)"
     }
-   ]
+   ],
+   "evChargerNearby": true
   },
   {
    "id": "5609af6b17",
@@ -19301,7 +19371,8 @@
      "page": "https://landofthebigs.com/big-octopus-lakes-entrance-vic/",
      "url": "https://landofthebigs.com/big-octopus-lakes-entrance-vic/"
     }
-   ]
+   ],
+   "evChargerNearby": true
   },
   {
    "id": "71b6e98a05",
@@ -19390,7 +19461,8 @@
      "page": "https://landofthebigs.com/the-big-pie-hamilton-vic/",
      "url": "https://landofthebigs.com/the-big-pie-hamilton-vic/"
     }
-   ]
+   ],
+   "evChargerNearby": true
   },
   {
    "id": "4cce6ce794",
@@ -19967,7 +20039,8 @@
      "page": "https://landofthebigs.com/the-golden-dragon-lotus-bendigo-vic/",
      "url": "https://landofthebigs.com/the-golden-dragon-lotus-bendigo-vic/"
     }
-   ]
+   ],
+   "evChargerNearby": true
   },
   {
    "id": "cd8e88132c",
@@ -20016,7 +20089,8 @@
     "confidence": "medium",
     "why": "Notes explicitly state 'Located at 57 Hovell St' and that it 'sits atop a bakery and spins'. Nominatim geocode of 57-61 Hovell Street, Wodonga VIC 3690.",
     "osmName": "Nominatim – 57-61 Hovell Street, Wodonga VIC (from notes: 'Located at 57 Hovell St')"
-   }
+   },
+   "evChargerNearby": true
   },
   {
    "id": "c258c18474",
@@ -20999,7 +21073,8 @@
      "page": "Big things (Australia)",
      "url": "https://en.wikipedia.org/wiki/Big_things_(Australia)"
     }
-   ]
+   ],
+   "evChargerNearby": true
   },
   {
    "id": "e1128cef6d",
@@ -21130,7 +21205,8 @@
      "page": "node/11166886740",
      "url": "https://www.openstreetmap.org/node/11166886740"
     }
-   ]
+   ],
+   "evChargerNearby": true
   },
   {
    "id": "4b912bfc72",
@@ -21179,7 +21255,8 @@
     "confidence": "medium",
     "why": "Notes confirm 'situated on Murat Road next to the petrol station'. Nominatim found Murat Road, Exmouth at -21.9364776, 114.1295122. Specific petrol station not pinpointed.",
     "osmName": "Nominatim — Murat Road, Exmouth WA"
-   }
+   },
+   "evChargerNearby": true
   },
   {
    "id": "03ee0389d3",
@@ -21364,7 +21441,8 @@
      "page": "Big things (Australia)",
      "url": "https://en.wikipedia.org/wiki/Big_things_(Australia)"
     }
-   ]
+   ],
+   "evChargerNearby": true
   },
   {
    "id": "163c8ae2ca",
