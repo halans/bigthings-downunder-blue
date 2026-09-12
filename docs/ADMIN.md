@@ -58,13 +58,23 @@ Open `data/overrides.json`. It has three arrays:
   `lng`, `precision`, `coordSource`, `builtYear`, `builtRaw`, `category`, `status`, `notes`,
   `blurb`, `image`, `evChargerNearby`, and so on. Only the fields you list change; everything else
   is untouched.
-- **`why`** is required in spirit (the admin UI enforces it; nothing stops you skipping it by
-  hand, but don't). **`source`** should be a URL wherever you're asserting a fact rather than a
-  judgement call.
+- **`why`** is required in spirit (the admin UI enforces it, unless `silent` is set — see below;
+  nothing stops you skipping it by hand, but don't). **`source`** should be a URL wherever you're
+  asserting a fact rather than a judgement call.
 - If you save more than once against the same `id` — by hand or via the UI — merge into the
   *same* entry rather than adding a second one; the UI does this for you. `why` isn't a log: the
   most recent one is what's kept, so if you're editing something a second time for an unrelated
   reason, write a `why` that still makes sense for everything currently in `set`.
+
+**`silent` — fix a field without a public note.** Every correction normally puts a "we corrected
+the source" banner on the card, quoting `why` and linking `source`. Add `"silent": true` to skip
+that for a minor edit (a category or built-year tweak, a typo) that isn't worth telling the reader
+about — `set` is still applied exactly the same way, `applyOverrides()` in `src/build.js` just
+never sets the record's `correction` field, so the card renders as if nothing happened. `why` is
+still accepted and worth writing (it's this file's own note to whoever edits it next) but the
+admin UI won't demand one when its "Minor edit" box is checked. The same "most recent wins" rule
+applies to `silent` itself: saving a follow-up correction on the same `id` without `silent` set
+makes it public again, quoting whatever `why` that save carried.
 
 **The precision guard.** If a record already has an "exact-\*" precision, a correction that sets
 `precision: "town"` has its `lat`/`lng`/`precision`/`coordSource` silently dropped — this stops a

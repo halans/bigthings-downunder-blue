@@ -99,18 +99,30 @@ function existingCorrection(id) {
   return (o.corrections || []).find((c) => c.match && c.match.id === id) || null;
 }
 
-/** Add or merge a correction for `id`. Every write needs a `why` — no exceptions. */
-function upsertCorrection(id, set, why, source) {
-  if (!why || !why.trim()) throw new Error('a reason ("why") is required for every manual correction');
+/**
+ * Add or merge a correction for `id`. A `why` is required for every write —
+ * no exceptions — UNLESS `silent` is set: a silent correction (see
+ * docs/ADMIN.md) applies its `set` fields without ever putting a "we
+ * corrected the source" banner on the card, for a minor edit (a category or
+ * built-year tweak, say) that isn't worth telling the reader about. `why` is
+ * still accepted for a silent correction — it's just this file's own note to
+ * whoever edits it next, not something anyone reading the card will see.
+ */
+function upsertCorrection(id, set, why, source, { silent } = {}) {
+  if (!silent && (!why || !why.trim())) throw new Error('a reason ("why") is required for every manual correction');
   const o = loadOverrides();
   o.corrections = o.corrections || [];
   const idx = o.corrections.findIndex((c) => c.match && c.match.id === id);
+  const cleanWhy = why && why.trim() ? why.trim() : null;
   if (idx >= 0) {
     o.corrections[idx].set = { ...o.corrections[idx].set, ...set };
-    o.corrections[idx].why = why;
+    o.corrections[idx].why = cleanWhy;
     if (source) o.corrections[idx].source = source;
+    if (silent) o.corrections[idx].silent = true; else delete o.corrections[idx].silent;
   } else {
-    o.corrections.push({ match: { id }, set, why, source: source || null });
+    const entry = { match: { id }, set, why: cleanWhy, source: source || null };
+    if (silent) entry.silent = true;
+    o.corrections.push(entry);
   }
   writeJSON(path.join(DATA, 'overrides.json'), o);
 }
@@ -343,7 +355,7 @@ const server = http.createServer(async (req, res) => {
       // charger is actually mapped nearby, so sending an explicit `false`
       // here would achieve nothing but noise in overrides.json.
       if (body.evChargerNearby) set.evChargerNearby = true;
-      upsertCorrection(id, set, body.why, body.source);
+      upsertCorrection(id, set, body.why, body.source, { silent: !!body.silent });
       const log = rebuild();
       return send(res, 200, { ok: true, log });
     }

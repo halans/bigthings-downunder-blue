@@ -93,7 +93,7 @@ function render() {
   const { thing: t, override } = current;
   const detail = document.getElementById('detail');
   const overrideNote = override
-    ? `<div class="existing"><b>Already manually edited.</b> ${esc(override.why)}${override.source ? ` — <a href="${esc(override.source)}" target="_blank">source</a>` : ''}<br>Saving below updates this same correction rather than adding another.</div>`
+    ? `<div class="existing"><b>Already manually edited${override.silent ? ' (silently — no note shown on the card)' : ''}.</b> ${override.why ? esc(override.why) : '<i>no reason recorded</i>'}${override.source ? ` — <a href="${esc(override.source)}" target="_blank">source</a>` : ''}<br>Saving below updates this same correction rather than adding another.</div>`
     : '';
 
   detail.innerHTML = `
@@ -146,8 +146,17 @@ function render() {
 
     <fieldset>
       <legend>Save this correction</legend>
-      <label for="f-why">Why (required — every manual edit needs a reason)</label>
-      <textarea id="f-why">${esc(override ? override.why : '')}</textarea>
+      <label style="display:flex;align-items:center;gap:7px;font-weight:600;font-size:13.5px;margin-top:0">
+        <input type="checkbox" id="f-silent" style="width:auto" ${override && override.silent ? 'checked' : ''}>
+        🤫 Minor edit — don't show a correction note on the card
+      </label>
+      <p class="note">For a small fix (category, built year, a typo) that isn't worth a "we
+        corrected the source" banner on the card. The fields you changed above are saved either
+        way — this only controls whether a reader sees a note about it. A reason below is still
+        kept in <code>data/overrides.json</code> for whoever edits this next, but isn't required
+        when this is checked.</p>
+      <label for="f-why">Why<span id="why-required"> (required — every manual edit needs a reason)</span></label>
+      <textarea id="f-why">${esc(override ? override.why || '' : '')}</textarea>
       <label for="f-source">Source (optional URL)</label>
       <input id="f-source" value="${esc(override ? override.source || '' : '')}">
       <button id="save-btn">Save &amp; rebuild</button>
@@ -184,6 +193,10 @@ function render() {
 
   document.getElementById('save-btn').addEventListener('click', saveRecord);
   document.getElementById('remove-btn').addEventListener('click', removeRecord);
+  const silentBox = document.getElementById('f-silent');
+  const whyRequired = document.getElementById('why-required');
+  whyRequired.hidden = silentBox.checked;
+  silentBox.addEventListener('change', () => { whyRequired.hidden = silentBox.checked; });
 
   let photoData = null;
   const fileInput = document.getElementById('f-photofile');
@@ -280,15 +293,16 @@ async function createThing() {
 
 async function saveRecord() {
   const t = current.thing;
+  const silent = document.getElementById('f-silent').checked;
   const why = document.getElementById('f-why').value.trim();
-  if (!why) { banner('A reason is required.', false); return; }
-  const body = { why, source: document.getElementById('f-source').value.trim() || null };
+  if (!silent && !why) { banner('A reason is required — or check "Minor edit" to skip it.', false); return; }
+  const body = { why, source: document.getElementById('f-source').value.trim() || null, silent };
   for (const f of META.editableFields) {
     const el = document.getElementById('f-' + f);
     if (el) body[f] = el.value;
   }
-  // A checkbox, not a text field: .value on a checkbox is always "on"
-  // regardless of checked state, so it needs .checked read explicitly and
+  // Checkboxes, not text fields: .value on a checkbox is always "on"
+  // regardless of checked state, so each needs .checked read explicitly and
   // is deliberately left out of META.editableFields (see admin-server.js).
   if (document.getElementById('f-evChargerNearby').checked) body.evChargerNearby = true;
   const btn = document.getElementById('save-btn');

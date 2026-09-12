@@ -474,7 +474,12 @@ function applyOverrides(rows) {
         delete set.lat; delete set.lng; delete set.precision; delete set.coordSource;
       }
       Object.assign(row, set);
-      row.correction = { why: c.why, source: c.source || null };
+      // A "silent" correction (see docs/ADMIN.md) fixes a field without
+      // telling the reader anything happened — for a minor edit like a
+      // category or built-year tweak that doesn't warrant a "we corrected
+      // the source" banner on the card. Its `why` is for this file's own
+      // audit trail only.
+      if (!c.silent) row.correction = { why: c.why, source: c.source || null };
       if (set.state) row.id = stableId(row.state, row.name, row.location);
       // era is derived from builtYear, not stored independently — a
       // correction that sets one without the other left `era` stuck at
