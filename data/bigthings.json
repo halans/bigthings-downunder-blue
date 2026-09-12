@@ -1,16 +1,16 @@
 {
  "meta": {
-  "generated": "2026-09-11",
+  "generated": "2026-09-12",
   "claimedNationalTotal": 1075,
   "claimedTotalSource": "Clarke, A. (2023). Making a Mark… Journal of Australian Studies 47(2), cited by Wikipedia",
   "sources": [
    {
-    "name": "Wikipedia — Big things (Australia)",
+    "name": "Wikipedia: Big things (Australia)",
     "url": "https://en.wikipedia.org/wiki/Big_things_(Australia)",
     "licence": "CC BY-SA 4.0"
    },
    {
-    "name": "Wikivoyage — Australia's big things",
+    "name": "Wikivoyage: Australia's big things",
     "url": "https://en.wikivoyage.org/wiki/Australia%27s_big_things",
     "licence": "CC BY-SA 4.0"
    },
@@ -26,20 +26,20 @@
    }
   ],
   "stats": {
-   "total": 476,
-   "mapped": 476,
-   "exact": 313,
+   "total": 477,
+   "mapped": 477,
+   "exact": 314,
    "byPrecision": {
     "exact-osm": 78,
     "town": 163,
-    "exact-verified": 182,
+    "exact-verified": 183,
     "exact-article": 20,
     "exact-wikivoyage": 27,
     "exact-inline": 6
    },
    "byState": {
     "ACT": 12,
-    "NSW": 139,
+    "NSW": 140,
     "NT": 24,
     "QLD": 115,
     "SA": 42,
@@ -49,18 +49,18 @@
    },
    "byCategory": {
     "fruit-and-veg": 62,
-    "food-and-drink": 36,
+    "food-and-drink": 35,
     "people-and-culture": 53,
     "fauna": 150,
     "sport-and-leisure": 22,
-    "sculpture": 6,
-    "oddity": 63,
+    "sculpture": 7,
+    "oddity": 64,
     "seafood": 39,
     "tools-and-industry": 26,
     "machinery-and-transport": 19
    },
    "byStatus": {
-    "standing": 436,
+    "standing": 437,
     "demolished": 11,
     "relocated": 12,
     "replaced": 2,
@@ -69,15 +69,15 @@
    "byEra": {
     "revival (2000s–2014)": 45,
     "late century (1985–1999)": 44,
-    "unknown": 302,
-    "modern (2015+)": 37,
-    "pioneer (pre-1970)": 9,
+    "unknown": 301,
+    "modern (2015+)": 38,
+    "pioneer (pre-1970)": 10,
     "boom (1970s–early 80s)": 39
    },
-   "withYear": 174,
+   "withYear": 176,
    "withHeight": 43,
    "withAnySize": 141,
-   "withImage": 289
+   "withImage": 290
   }
  },
  "things": [
@@ -704,7 +704,7 @@
    "osmId": null,
    "addedManually": true,
    "correction": {
-    "why": "Brett Whiteley's sculpture (two giant matches, one burnt) at the Art Gallery of NSW forecourt — commissioned fine art, not roadside novelty advertising.",
+    "why": "Brett Whiteley's sculpture (two giant matches, one burnt) at the Art Gallery of NSW forecourt: commissioned fine art, not roadside novelty advertising.",
     "source": "https://www.artgallery.nsw.gov.au/art/watch-listen-read/read/once-again/"
    },
    "sources": [
@@ -5291,39 +5291,39 @@
    ]
   },
   {
-   "id": "52d660b199",
+   "id": "d417b33a02",
    "name": "The Big Pine Cones",
    "state": "NSW",
    "stateName": "New South Wales",
-   "location": "Caves Beach",
+   "location": "Lake Macquarie",
    "town": "Caves Beach",
-   "lat": -33.109123,
-   "lng": 151.628106,
+   "lat": -33.1101178,
+   "lng": 151.6465413,
    "precision": "exact-verified",
-   "coordSource": "https://landofthebigs.com/big-pine-cones-caves-beach-nsw/",
-   "builtYear": null,
+   "coordSource": "https://www.openstreetmap.org/search?lat=-33.110162&lon=151.646674",
+   "builtYear": 2019,
    "builtCirca": false,
-   "builtRaw": null,
-   "era": "unknown",
+   "builtRaw": "2019",
+   "era": "modern (2015+)",
    "heightM": null,
    "lengthM": null,
    "sizeMaxM": null,
    "sizeKind": "unknown",
    "dimsM": [],
    "sizeRaw": null,
-   "category": "food-and-drink",
+   "category": "sculpture",
    "status": "standing",
    "statusEvidence": null,
    "notes": null,
-   "blurb": null,
+   "blurb": "Large welded steel sculptures created by artist Kelly-Ann Lees, located in Stuart Chalmers ParkThe 1.4 x 1.5-meter steel sculptures reference the fallen seed cones from the area's towering Norfolk Island pine trees.",
    "image": null,
    "wikipediaArticle": null,
    "wikidata": null,
    "osmId": null,
    "addedManually": true,
    "correction": {
-    "why": "Catalogued by Land of the Bigs, which publishes a mapped position for it.",
-    "source": "https://landofthebigs.com/big-pine-cones-caves-beach-nsw/"
+    "why": "Updated location",
+    "source": "https://www.lakemac.com.au/My-area/Public-art/Caves-Beach-Norfolk/Kelly-Ann-Lees-Norfolk"
    },
    "sources": [
     {
@@ -5469,7 +5469,7 @@
    "osmId": null,
    "addedManually": true,
    "correction": {
-    "why": "Margrete Erling's 2015 ANZAC Centenary commission, per its own blurb — commemorative fine art, not roadside novelty advertising.",
+    "why": "Margrete Erling's 2015 ANZAC Centenary commission, per its own blurb: commemorative fine art, not roadside novelty advertising.",
     "source": null
    },
    "sources": [
@@ -6434,10 +6434,10 @@
    "stateName": "New South Wales",
    "location": "Central Coast",
    "town": "Long Jetty",
-   "lat": -33.352127,
-   "lng": 151.480787,
+   "lat": -33.3518309,
+   "lng": 151.4907201,
    "precision": "exact-verified",
-   "coordSource": "https://landofthebigs.com/the-clam-long-jetty-nsw/",
+   "coordSource": "https://www.openstreetmap.org/search?query=-33.3518309%2C+151.4907201",
    "builtYear": null,
    "builtCirca": false,
    "builtRaw": null,
@@ -6459,7 +6459,7 @@
    "osmId": null,
    "addedManually": true,
    "correction": {
-    "why": "Central Coast",
+    "why": "Local visit",
     "source": null
    },
    "sources": [
@@ -6686,6 +6686,49 @@
    ]
   },
   {
+   "id": "7d995beb49",
+   "name": "The Long Jetty",
+   "state": "NSW",
+   "stateName": "New South Wales",
+   "location": "Central Coast",
+   "town": "Long Jetty",
+   "lat": -33.352281,
+   "lng": 151.484371,
+   "precision": "exact-verified",
+   "coordSource": "https://www.openstreetmap.org/way/219098080#map=18/-33.352281/151.484371",
+   "builtYear": 1915,
+   "builtCirca": false,
+   "builtRaw": null,
+   "era": "pioneer (pre-1970)",
+   "heightM": null,
+   "lengthM": null,
+   "sizeMaxM": null,
+   "sizeKind": "unknown",
+   "dimsM": [],
+   "sizeRaw": "351m long",
+   "category": "oddity",
+   "status": "standing",
+   "statusEvidence": null,
+   "notes": "The Long Jetty is appropriately named as it is an extremely long jetty spanning out over the shallow waters of Tuggerah Lake.",
+   "blurb": null,
+   "image": "custom:the-long-jetty-33340b.jpeg",
+   "wikipediaArticle": null,
+   "wikidata": null,
+   "osmId": null,
+   "addedManually": true,
+   "correction": {
+    "why": "Photo updated, replacing whatever (if anything) was there.",
+    "source": null
+   },
+   "sources": [
+    {
+     "source": "independent reporting",
+     "page": "https://www.lovecentralcoast.com/the-long-jetty",
+     "url": "https://www.lovecentralcoast.com/the-long-jetty"
+    }
+   ]
+  },
+  {
    "id": "40ad9323a5",
    "name": "The World's Biggest Sundial",
    "state": "NSW",
@@ -6858,7 +6901,7 @@
    "osmId": null,
    "addedManually": true,
    "correction": {
-    "why": "Tony Albert's commissioned war memorial in Hyde Park, Sydney, honouring Aboriginal and Torres Strait Islander service personnel — fine/commemorative art, not roadside novelty advertising.",
+    "why": "Tony Albert's commissioned war memorial in Hyde Park, Sydney, honouring Aboriginal and Torres Strait Islander service personnel: fine/commemorative art, not roadside novelty advertising.",
     "source": null
    },
    "sources": [
@@ -9742,7 +9785,7 @@
     }
    ],
    "correction": {
-    "why": "Wikipedia files the Big Triceratops in its New South Wales table and spells the town 'Ballendean'. Ballandean is in Queensland, in the Granite Belt near Stanthorpe — the article's own neighbouring rows (Big Apple, Thulimbah) are Queensland Granite Belt entries. Corrected state and spelling.",
+    "why": "Wikipedia files the Big Triceratops in its New South Wales table and spells the town 'Ballendean'. Ballandean is in Queensland, in the Granite Belt near Stanthorpe; the article's own neighbouring rows (Big Apple, Thulimbah) are Queensland Granite Belt entries. Corrected state and spelling.",
     "source": "https://en.wikipedia.org/wiki/Ballandean,_Queensland"
    }
   },
@@ -11193,7 +11236,7 @@
     }
    ],
    "correction": {
-    "why": "Created by artists Tony Albert and Nell, per its own notes — commissioned art, not roadside novelty advertising.",
+    "why": "Created by artists Tony Albert and Nell, per its own notes: commissioned art, not roadside novelty advertising.",
     "source": null
    },
    "coordMatch": {
@@ -14595,7 +14638,7 @@
     }
    ],
    "correction": {
-    "why": "A mirrored stainless-steel sculpture by South Australian artist Paul Sloan in Rundle Mall, per its own notes — commissioned public art, not roadside novelty advertising.",
+    "why": "A mirrored stainless-steel sculpture by South Australian artist Paul Sloan in Rundle Mall, per its own notes: commissioned public art, not roadside novelty advertising.",
     "source": null
    },
    "coordMatch": {
@@ -20623,7 +20666,7 @@
     }
    ],
    "correction": {
-    "why": "Was pinned on the Nullarbor Plain, ~1,200 km from where it stands. The Location cell reads 'Forrest Highway, just north of Bunbury'; the place geocoder stripped the road type and matched Forrest, Western Australia — a real locality near the South Australian border. Fergus stands beside the Forrest Highway at Eaton, just north of Bunbury, which Nominatim places at -33.3194, 115.7281. The geocoder now tries road-derived place names last, so this class of error cannot recur.",
+    "why": "Was pinned on the Nullarbor Plain, ~1,200 km from where it stands. The Location cell reads 'Forrest Highway, just north of Bunbury'; the place geocoder stripped the road type and matched Forrest, Western Australia, a real locality near the South Australian border. Fergus stands beside the Forrest Highway at Eaton, just north of Bunbury, which Nominatim places at -33.3194, 115.7281. The geocoder now tries road-derived place names last, so this class of error cannot recur.",
     "source": "https://nominatim.openstreetmap.org/search?q=Forrest+Highway+Eaton+Western+Australia"
    },
    "coordMatch": {

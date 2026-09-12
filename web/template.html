@@ -91,6 +91,7 @@ a{color:var(--sky)}
 .pillbtn:active{transform:translateY(2px);box-shadow:none}
 .pillbtn.hot{background:var(--sun)}
 .pillbtn.trip{background:var(--euc);color:#fff}
+.iconbtn:disabled,.pillbtn:disabled{opacity:.55;cursor:not-allowed}
 .credits{font-size:10.5px;color:var(--ink-soft);padding:0 14px 12px;line-height:1.5}
 .credits a{color:var(--ink-soft)}
 
@@ -105,6 +106,7 @@ a{color:var(--sky)}
 .pin.fuzzy{border-style:dashed;opacity:.94}
 .pin.gone{filter:grayscale(.85);opacity:.72}
 .pin.sel{outline:3px solid var(--sun);outline-offset:2px;z-index:900!important}
+.youarehere{width:16px;height:16px;border-radius:50%;background:var(--sky);border:3px solid #fff;box-shadow:0 0 0 4px rgba(42,127,191,.35),0 2px 6px rgba(0,0,0,.35)}
 .clus{
   background:var(--paper);border:2.5px solid var(--ink);border-radius:50%;
   display:grid;place-items:center;font-weight:700;font-family:Caprasimo,Inter,sans-serif;
@@ -301,6 +303,7 @@ a{color:var(--sky)}
       <button class="pillbtn hot" id="randombtn">🎲 Spin &amp; drive</button>
       <button class="pillbtn trip" id="tripbtn">🚗 Road trip <span id="tripcount"></span></button>
       <button class="pillbtn" id="statsbtn">📊 Superlatives</button>
+      <button class="pillbtn" id="locatebtn">📍 Locate me</button>
       <button class="pillbtn" id="resetbtn">↺ Reset</button>
     </div>
     <p class="credits" id="credits"></p>
@@ -315,6 +318,7 @@ a{color:var(--sky)}
     <div id="fabs">
       <button class="iconbtn" id="mtrip" aria-label="Road trip">🚗<span class="cnt" id="mtripcount" hidden>0</span></button>
       <button class="iconbtn" id="mrandom" aria-label="Random big thing">🎲</button>
+      <button class="iconbtn" id="mlocate" aria-label="Locate me">📍</button>
       <button class="iconbtn" id="mfilter" aria-label="Filters">⚙️</button>
     </div>
     <div id="mapnote"></div>
@@ -662,14 +666,14 @@ function buildFilters() {
   const dlab = document.createElement('label'); dlab.className = 'switch';
   const dcb = document.createElement('input'); dcb.type = 'checkbox';
   dcb.addEventListener('change', () => mapEl.classList.toggle('labels-on', dcb.checked));
-  dlab.appendChild(dcb); dlab.appendChild(document.createTextNode('🏷️ Show place names — appear once you zoom into an area'));
+  dlab.appendChild(dcb); dlab.appendChild(document.createTextNode('🏷️ Show place names: appear once you zoom into an area'));
   dg.appendChild(dlab); wrap.appendChild(dg);
 
   const g = document.createElement('div'); g.className = 'fgroup';
   g.innerHTML = '<p class="flabel"><span>Honesty settings</span></p>';
   const opts = [
-    ['hideGone','Hide the dead ones — demolished, removed, or gone from their spot'],
-    ['exactOnly','Only pinpointed pins — hide the ones placed at their town’s centre'],
+    ['hideGone','Hide the dead ones: demolished, removed, or gone from their spot'],
+    ['exactOnly','Only pinpointed pins: hide the ones placed at their town’s centre'],
   ];
   for (const [key, text] of opts) {
     const lab = document.createElement('label'); lab.className = 'switch';
@@ -737,7 +741,7 @@ function howPlaced(t) {
   if (m.kind === 'researched') {
     const host = t.coordSource ? (() => { try { return new URL(t.coordSource).hostname.replace('www.', ''); } catch (e) { return null; } })() : null;
     const conf = m.confidence === 'high' ? 'located from a source naming the sculpture itself' : 'located from a street address or the venue it stands at';
-    return host ? `independently researched — ${conf}, via ${host}.` : `independently researched — ${conf}.`;
+    return host ? `independently researched: ${conf}, via ${host}.` : `independently researched: ${conf}.`;
   }
   const matched = m.osmName ? ` Matched OpenStreetMap’s “${m.osmName}”.` : '';
   return `${m.why || m.kind}.${matched}`;
@@ -798,7 +802,7 @@ function openDetail(id, pan) {
       </div>
       ${t.correction ? `<div class="corrected"><b>${t.addedManually ? 'Added from outside the wiki lists.' : 'We corrected the source.'}</b> ${esc(t.correction.why)}${t.correction.source ? ` <a href="${t.correction.source}" target="_blank" rel="noopener noreferrer">Source</a>` : ''}</div>` : ''}
       ${t.coordMatch ? `<p class="howfound">How this pin was placed: ${esc(howPlaced(t))}</p>` : ''}
-      ${t.precision === 'town' ? `<p class="howfound">This pin sits at the centre of ${esc(t.town || t.location || 'the town')}, not on the sculpture — the sources give a town, not a point.</p>` : ''}
+      ${t.precision === 'town' ? `<p class="howfound">This pin sits at the centre of ${esc(t.town || t.location || 'the town')}, not on the sculpture: the sources give a town, not a point.</p>` : ''}
       <dl class="facts">${facts.map(([k,v]) => `<dt>${k}</dt><dd>${v}</dd>`).join('')}</dl>
       ${t.blurb ? `<p class="prose voice">${esc(t.blurb)}</p>` : ''}
       ${t.notes ? `<p class="prose">${esc(t.notes)}</p>` : ''}
@@ -884,7 +888,7 @@ function renderTrip() {
   const ts = tripThings();
   const body = document.getElementById('tripbody');
   if (!ts.length) {
-    body.innerHTML = `<p class="empty">No stops yet. Open any big thing and hit <b>“Add to road trip”</b>, then come back — we'll chain them up and total the distance.<br><br>Or hit <b>🎲 Spin &amp; drive</b> for a random one.</p>`;
+    body.innerHTML = `<p class="empty">No stops yet. Open any big thing and hit <b>“Add to road trip”</b>, then come back: we'll chain them up and total the distance.<br><br>Or hit <b>🎲 Spin &amp; drive</b> for a random one.</p>`;
     return;
   }
   const legs = tripLegs();
@@ -895,7 +899,7 @@ function renderTrip() {
   body.innerHTML = `
     <div class="tripsum">
       <b>${ts.length} stops · ${Math.round(total).toLocaleString()} km</b><br>
-      Roughly ${hours < 1 ? '<1' : Math.round(hours)} hour${Math.round(hours) === 1 ? '' : 's'} of driving as the crow drives —
+      Roughly ${hours < 1 ? '<1' : Math.round(hours)} hour${Math.round(hours) === 1 ? '' : 's'} of driving as the crow drives:
       straight-line distance at 80 km/h, so treat it as a lower bound on a real road route.
       ${gone ? `<br>⚠️ ${gone} of these ${gone === 1 ? 'is' : 'are'} demolished or gone. Bold choice.` : ''}
       ${fuzzy ? `<br>📍 ${fuzzy} ${fuzzy === 1 ? 'stop is' : 'stops are'} pinned to the town, not the sculpture.` : ''}
@@ -947,18 +951,18 @@ function renderStats() {
 
   document.getElementById('statbody').innerHTML = `
     <div class="statgrid">
-      ${card('Mapped here', THINGS.length, `Every one placed on the map. Amy Clarke's census counted ${META.claimedNationalTotal.toLocaleString()} in Australia — this is the verifiable subset.`)}
+      ${card('Mapped here', THINGS.length, `Every one placed on the map. Amy Clarke's census counted ${META.claimedNationalTotal.toLocaleString()} in Australia: this is the verifiable subset.`)}
       ${card('Australia vs Canada', '1,075 : 1,250', 'The same census counted 1,250 Big Things in Canada, so Australia is not even the world leader at its own signature obsession.')}
       ${card('Still standing', standing.length, `${dead.length} have been demolished or removed.`)}
-      ${biggest ? card('Biggest, any axis', `${biggest.sizeMaxM} m`, `${esc(biggest.name)}, ${esc(biggest.location||'')} — ${isGone(biggest) ? 'demolished' : 'still there'}. The source doesn't say which axis, so we don't call it a height.`) : ''}
-      ${tallest ? card('Tallest', `${tallest.heightM} m`, `${esc(tallest.name)}, ${esc(tallest.location||'')} (${tallest.state}) — measured as a height by the source.`) : ''}
-      ${longest ? card('Longest', `${longest.lengthM} m`, `${esc(longest.name)}, ${esc(longest.location||'')} — ${isGone(longest) ? 'now demolished' : 'still there'}`) : ''}
+      ${biggest ? card('Biggest, any axis', `${biggest.sizeMaxM} m`, `${esc(biggest.name)}, ${esc(biggest.location||'')}, ${isGone(biggest) ? 'demolished' : 'still there'}. The source doesn't say which axis, so we don't call it a height.`) : ''}
+      ${tallest ? card('Tallest', `${tallest.heightM} m`, `${esc(tallest.name)}, ${esc(tallest.location||'')} (${tallest.state}), measured as a height by the source.`) : ''}
+      ${longest ? card('Longest', `${longest.lengthM} m`, `${esc(longest.name)}, ${esc(longest.location||'')}, ${isGone(longest) ? 'now demolished' : 'still there'}`) : ''}
       ${oldest ? card('Oldest', oldest.builtYear, `${esc(oldest.name)}, ${esc(oldest.location||'')} (${oldest.state})`) : ''}
       ${newest ? card('Newest', newest.builtYear, `${esc(newest.name)}, ${esc(newest.location||'')} (${newest.state})`) : ''}
-      ${card('Biggest hoarder', perCapita[0][0], `${perCapita[0][1]} big things — ahead of ${perCapita[1][0]} on ${perCapita[1][1]}.`)}
+      ${card('Biggest hoarder', perCapita[0][0], `${perCapita[0][1]} big things, ahead of ${perCapita[1][0]} on ${perCapita[1][1]}.`)}
       ${topDead ? card('Most careless', topDead[0], `${topDead[1]} big things lost to demolition, fire or removal.`) : ''}
       ${topDupe && topDupe[1] > 1 ? card('Most copied', `×${topDupe[1]}`, `Australia has ${topDupe[1]} things called “${esc(topDupe[0])}”.`) : ''}
-      ${card('Precisely placed', `${Math.round(THINGS.filter((t) => !isFuzzy(t)).length / THINGS.length * 100)}%`, `The rest sit at their town's centre — filter them out with “only pinpointed pins”.`)}
+      ${card('Precisely placed', `${Math.round(THINGS.filter((t) => !isFuzzy(t)).length / THINGS.length * 100)}%`, `The rest sit at their town's centre: filter them out with “only pinpointed pins”.`)}
     </div>
     <h3 style="margin:22px 0 8px;font-size:17px">Big things by state</h3>
     ${bars(byState, (k) => k)}
@@ -967,8 +971,8 @@ function renderStats() {
     <p style="font-size:12px;color:var(--ink-soft);margin-top:18px;line-height:1.55">
       The national figure is Amy Clarke's, from
       <a href="https://doi.org/10.1080/14443058.2022.2144928" target="_blank" rel="noopener noreferrer">“Making a Mark: Displays of Regional and National Identity in the Big Things of Australia and Canada”</a>,
-      <em>Journal of Australian Studies</em> 47(2), 2023 — published online in November 2022. It is a census of Australia alone — the paper's
-      companion count for Canada is 1,250 — and it is not a published list, which is why this map can show
+      <em>Journal of Australian Studies</em> 47(2), 2023, published online in November 2022. It is a census of Australia alone
+      (the paper's companion count for Canada is 1,250) and it is not a published list, which is why this map can show
       ${THINGS.length} rather than all ${META.claimedNationalTotal.toLocaleString()}.
     </p>
     <p style="font-size:12px;color:var(--ink-soft);margin-top:12px;line-height:1.55">
@@ -1027,6 +1031,83 @@ document.getElementById('statsbtn').addEventListener('click', () => { renderStat
 document.getElementById('mtrip').addEventListener('click', () => { renderTrip(); openSheet('tripsheet'); });
 document.getElementById('tripopt').addEventListener('click', optimiseTrip);
 document.getElementById('tripclear').addEventListener('click', () => { trip = []; drawTrip(); renderTrip(); updateTripCounts(); });
+
+/* ---------------- locate me ---------------- */
+const meIcon = L.divIcon({ className:'', html:'<div class="youarehere"></div>', iconSize:[16,16], iconAnchor:[8,8] });
+let meMarker = null;
+let meCircle = null;
+
+function setLocateBusy(busy) {
+  const btn = document.getElementById('locatebtn');
+  btn.disabled = busy;
+  btn.textContent = busy ? '📍 Locating…' : '📍 Locate me';
+  document.getElementById('mlocate').disabled = busy;
+}
+
+/** Everything currently on the map, ordered by straight-line distance from [lat,lng]. */
+function byDistanceFrom(lat, lng) {
+  return THINGS.filter(matches).filter((t) => t.lat != null)
+    .map((t) => ({ t, d:haversine([lat, lng], [t.lat, t.lng]) }))
+    .sort((a, b) => a.d - b.d);
+}
+
+function showNearby(lat, lng) {
+  const NEARBY_KM = 25;
+  const ranked = byDistanceFrom(lat, lng);
+  const within = ranked.filter((r) => r.d <= NEARBY_KM);
+  const results = (within.length ? within : ranked).slice(0, 15);
+  document.getElementById('listtitle').textContent = !ranked.length ? 'Nothing matches your filters'
+    : within.length ? `${within.length} within ${NEARBY_KM} km`
+    : `Nearest ${results.length} (none within ${NEARBY_KM} km)`;
+  const body = document.getElementById('listbody');
+  if (!results.length) { body.innerHTML = `<p class="empty">Nothing matches your current filters.</p>`; openSheet('listsheet'); return; }
+  body.innerHTML = results.map(({ t, d }) => `
+    <button class="resultrow" data-go="${t.id}">
+      <span class="em">${cat(t.category).emoji}</span>
+      <span style="flex:1;min-width:0">
+        <span class="nm">${esc(t.name)}${isGone(t) ? ' 💀' : ''}</span><br>
+        <span class="lc">${esc(t.location || t.town || '')}, ${t.state} · ${d < 1 ? Math.round(d * 1000) + ' m' : Math.round(d) + ' km'}</span>
+      </span>
+    </button>`).join('');
+  body.querySelectorAll('[data-go]').forEach((b) => b.addEventListener('click', () => openDetail(b.dataset.go, true)));
+  openSheet('listsheet');
+}
+
+function showLocateError(message) {
+  document.getElementById('listtitle').textContent = 'Location unavailable';
+  document.getElementById('listbody').innerHTML = `<p class="empty">${esc(message)}</p>`;
+  openSheet('listsheet');
+}
+
+function doLocate() {
+  setLocateBusy(true);
+  map.locate({ enableHighAccuracy:true, timeout:10000, maximumAge:60000 });
+}
+document.getElementById('locatebtn').addEventListener('click', doLocate);
+document.getElementById('mlocate').addEventListener('click', doLocate);
+
+map.on('locationfound', (e) => {
+  setLocateBusy(false);
+  if (meMarker) map.removeLayer(meMarker);
+  if (meCircle) map.removeLayer(meCircle);
+  meMarker = L.marker(e.latlng, { icon:meIcon, zIndexOffset:1000, interactive:false }).addTo(map);
+  if (e.accuracy) {
+    meCircle = L.circle(e.latlng, { radius:e.accuracy, color:'#2a7fbf', weight:1, fillColor:'#2a7fbf', fillOpacity:.08, interactive:false }).addTo(map);
+  }
+  map.setView(e.latlng, Math.max(map.getZoom(), 11), { animate:true });
+  showNearby(e.latlng.lat, e.latlng.lng);
+});
+map.on('locationerror', (e) => {
+  setLocateBusy(false);
+  // GeolocationPositionError codes, per the spec Leaflet passes through: 1
+  // permission denied, 2 position unavailable, 3 timed out.
+  const byCode = {
+    1: 'Location access was denied. Allow location access for this site in your browser settings to see big things near you.',
+    2: "Your device couldn't work out where it is. Try again in a moment.",
+    3: 'Finding your location took too long. Try again.',
+  };
+  showLocateError(byCode[e.code] || 'Could not get your location.');
+});
 
 function spin() {
   const pool = visible.length ? visible : THINGS;
@@ -1092,7 +1173,7 @@ document.getElementById('counts').innerHTML = [
   `<span class="count"><b>${s.total}</b> mapped</span>`,
   `<span class="count"><b>${s.exact}</b> pinpointed</span>`,
   `<span class="count"><b>${(s.byStatus.demolished||0) + (s.byStatus.removed||0)}</b> lost</span>`,
-  `<span class="count" id="claimchip" title="Clarke (2023) counted ${META.claimedNationalTotal.toLocaleString()} Big Things in Australia — and 1,250 in Canada.">of <b>${META.claimedNationalTotal.toLocaleString()}</b> claimed</span>`,
+  `<span class="count" id="claimchip" title="Clarke (2023) counted ${META.claimedNationalTotal.toLocaleString()} Big Things in Australia, and 1,250 in Canada.">of <b>${META.claimedNationalTotal.toLocaleString()}</b> claimed</span>`,
 ].join('');
 buildFilters();
 refresh(false);

@@ -1,5 +1,5 @@
 {
- "_readme": "Hand-curated corrections applied on top of the harvested sources. Each entry must carry a `why` and, where it asserts a fact, a `source`. Keys match the `match` block against the built record; `set` fields overwrite. Keep this file small and defensible — it is the only place in the pipeline where a human overrides the open data.",
+ "_readme": "Hand-curated corrections applied on top of the harvested sources. Each entry must carry a `why` and, where it asserts a fact, a `source`. Keys match the `match` block against the built record; `set` fields overwrite. Keep this file small and defensible: it is the only place in the pipeline where a human overrides the open data.",
  "corrections": [
   {
    "match": {
@@ -16,7 +16,7 @@
     "precision": "town",
     "coordSource": "https://en.wikipedia.org/wiki/Ballandean,_Queensland"
    },
-   "why": "Wikipedia files the Big Triceratops in its New South Wales table and spells the town 'Ballendean'. Ballandean is in Queensland, in the Granite Belt near Stanthorpe — the article's own neighbouring rows (Big Apple, Thulimbah) are Queensland Granite Belt entries. Corrected state and spelling.",
+   "why": "Wikipedia files the Big Triceratops in its New South Wales table and spells the town 'Ballendean'. Ballandean is in Queensland, in the Granite Belt near Stanthorpe; the article's own neighbouring rows (Big Apple, Thulimbah) are Queensland Granite Belt entries. Corrected state and spelling.",
    "source": "https://en.wikipedia.org/wiki/Ballandean,_Queensland"
   },
   {
@@ -131,7 +131,7 @@
     "town": "Eaton",
     "coordSource": "https://nominatim.openstreetmap.org/search?q=Forrest+Highway+Eaton+Western+Australia"
    },
-   "why": "Was pinned on the Nullarbor Plain, ~1,200 km from where it stands. The Location cell reads 'Forrest Highway, just north of Bunbury'; the place geocoder stripped the road type and matched Forrest, Western Australia — a real locality near the South Australian border. Fergus stands beside the Forrest Highway at Eaton, just north of Bunbury, which Nominatim places at -33.3194, 115.7281. The geocoder now tries road-derived place names last, so this class of error cannot recur.",
+   "why": "Was pinned on the Nullarbor Plain, ~1,200 km from where it stands. The Location cell reads 'Forrest Highway, just north of Bunbury'; the place geocoder stripped the road type and matched Forrest, Western Australia, a real locality near the South Australian border. Fergus stands beside the Forrest Highway at Eaton, just north of Bunbury, which Nominatim places at -33.3194, 115.7281. The geocoder now tries road-derived place names last, so this class of error cannot recur.",
    "source": "https://nominatim.openstreetmap.org/search?q=Forrest+Highway+Eaton+Western+Australia"
   },
   {
@@ -243,7 +243,7 @@
     "image": "custom:yininmadyemi-88f5c1.jpeg",
     "category": "sculpture"
    },
-   "why": "Tony Albert's commissioned war memorial in Hyde Park, Sydney, honouring Aboriginal and Torres Strait Islander service personnel — fine/commemorative art, not roadside novelty advertising.",
+   "why": "Tony Albert's commissioned war memorial in Hyde Park, Sydney, honouring Aboriginal and Torres Strait Islander service personnel: fine/commemorative art, not roadside novelty advertising.",
    "source": null
   },
   {
@@ -267,7 +267,7 @@
     "builtRaw": " 1968, 1991",
     "image": "custom:almost-once-c2e6b6.jpeg"
    },
-   "why": "Brett Whiteley's sculpture (two giant matches, one burnt) at the Art Gallery of NSW forecourt — commissioned fine art, not roadside novelty advertising.",
+   "why": "Brett Whiteley's sculpture (two giant matches, one burnt) at the Art Gallery of NSW forecourt: commissioned fine art, not roadside novelty advertising.",
    "source": "https://www.artgallery.nsw.gov.au/art/watch-listen-read/read/once-again/"
   },
   {
@@ -277,7 +277,7 @@
    "set": {
     "category": "sculpture"
    },
-   "why": "Margrete Erling's 2015 ANZAC Centenary commission, per its own blurb — commemorative fine art, not roadside novelty advertising.",
+   "why": "Margrete Erling's 2015 ANZAC Centenary commission, per its own blurb: commemorative fine art, not roadside novelty advertising.",
    "source": null
   },
   {
@@ -287,7 +287,7 @@
    "set": {
     "category": "sculpture"
    },
-   "why": "Created by artists Tony Albert and Nell, per its own notes — commissioned art, not roadside novelty advertising.",
+   "why": "Created by artists Tony Albert and Nell, per its own notes: commissioned art, not roadside novelty advertising.",
    "source": null
   },
   {
@@ -297,7 +297,7 @@
    "set": {
     "category": "sculpture"
    },
-   "why": "A mirrored stainless-steel sculpture by South Australian artist Paul Sloan in Rundle Mall, per its own notes — commissioned public art, not roadside novelty advertising.",
+   "why": "A mirrored stainless-steel sculpture by South Australian artist Paul Sloan in Rundle Mall, per its own notes: commissioned public art, not roadside novelty advertising.",
    "source": null
   },
   {
@@ -525,6 +525,59 @@
    },
    "why": "Central Coast",
    "source": null
+  },
+  {
+   "match": {
+    "id": "52d660b199"
+   },
+   "set": {
+    "name": "The Big Pine Cones",
+    "state": "NSW",
+    "location": "Lake Macquarie",
+    "town": "Caves Beach",
+    "lat": -33.1101178,
+    "lng": 151.6465413,
+    "precision": "exact-verified",
+    "coordSource": "https://www.openstreetmap.org/search?lat=-33.110162&lon=151.646674",
+    "builtYear": 2019,
+    "builtRaw": "2019",
+    "category": "sculpture",
+    "status": "standing",
+    "blurb": "Large welded steel sculptures created by artist Kelly-Ann Lees, located in Stuart Chalmers ParkThe 1.4 x 1.5-meter steel sculptures reference the fallen seed cones from the area's towering Norfolk Island pine trees.",
+    "stateName": "New South Wales"
+   },
+   "why": "Updated location",
+   "source": "https://www.lakemac.com.au/My-area/Public-art/Caves-Beach-Norfolk/Kelly-Ann-Lees-Norfolk"
+  },
+  {
+   "match": {
+    "id": "264f9d8df7"
+   },
+   "set": {
+    "name": "The Clam",
+    "state": "NSW",
+    "location": "Central Coast",
+    "town": "Long Jetty",
+    "lat": -33.3518309,
+    "lng": 151.4907201,
+    "precision": "exact-verified",
+    "coordSource": "https://www.openstreetmap.org/search?query=-33.3518309%2C+151.4907201",
+    "category": "seafood",
+    "status": "standing",
+    "stateName": "New South Wales"
+   },
+   "why": "Local visit",
+   "source": null
+  },
+  {
+   "match": {
+    "id": "7d995beb49"
+   },
+   "set": {
+    "image": "custom:the-long-jetty-33340b.jpeg"
+   },
+   "why": "Photo updated, replacing whatever (if anything) was there.",
+   "source": null
   }
  ],
  "additions": [
@@ -571,6 +624,23 @@
    "category": "oddity",
    "status": "standing",
    "notes": "Yininmadyemi, Thou didst let fall, is a significant artwork by Aboriginal artist Tony Albert to acknowledge Aboriginal and Torres Strait Islander men and women who served in the nation’s military."
+  },
+  {
+   "name": "The Long Jetty",
+   "state": "NSW",
+   "why": "It's long",
+   "source": "https://www.lovecentralcoast.com/the-long-jetty",
+   "location": "Central Coast",
+   "town": "Long Jetty",
+   "lat": -33.352281,
+   "lng": 151.484371,
+   "precision": "exact-verified",
+   "coordSource": "https://www.openstreetmap.org/way/219098080#map=18/-33.352281/151.484371",
+   "builtYear": 1915,
+   "sizeRaw": "351m long",
+   "category": "oddity",
+   "status": "standing",
+   "notes": "The Long Jetty is appropriately named as it is an extremely long jetty spanning out over the shallow waters of Tuggerah Lake."
   }
  ],
  "removals": [
@@ -579,14 +649,14 @@
     "name": "Big Aboriginal Hunter",
     "state": "NT"
    },
-   "why": "Duplicate. This row came from Wikivoyage's 'Big Aboriginal Hunter' bullet, which is the same sculpture as Wikipedia's 'The Anmatjere Man' — Mark Egan's 2005 figure above the Aileron Roadhouse on the Stuart Highway. Dedup missed it because the two lists name it differently and Wikivoyage gave no address. Keeping the Wikipedia row, which carries the fuller notes.",
+   "why": "Duplicate. This row came from Wikivoyage's 'Big Aboriginal Hunter' bullet, which is the same sculpture as Wikipedia's 'The Anmatjere Man', Mark Egan's 2005 figure above the Aileron Roadhouse on the Stuart Highway. Dedup missed it because the two lists name it differently and Wikivoyage gave no address. Keeping the Wikipedia row, which carries the fuller notes.",
    "source": "https://en.wikipedia.org/wiki/Big_things_(Australia)"
   },
   {
    "match": {
     "id": "0a1d142f1a"
    },
-   "why": "Duplicate of The Big Redback (id 9ccd7ad6e0) — same sculpture at Eight Mile Plains, Brisbane. This row is the bare Wikipedia entry with no photo or notes; the fuller, corrected record is kept.",
+   "why": "Duplicate of The Big Redback (id 9ccd7ad6e0): same sculpture at Eight Mile Plains, Brisbane. This row is the bare Wikipedia entry with no photo or notes; the fuller, corrected record is kept.",
    "source": null
   },
   {

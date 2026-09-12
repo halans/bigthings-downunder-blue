@@ -154,7 +154,7 @@ function renderStats(dataset) {
     'By state', ...Object.entries(s.byState).sort((a, b) => b[1] - a[1]).map(([k, v]) => `  ${pad(k)}${v}`),
     '', 'By category', ...Object.entries(s.byCategory).sort((a, b) => b[1] - a[1]).map(([k, v]) => `  ${pad(k)}${v}`),
     '', 'By status', ...Object.entries(s.byStatus).sort((a, b) => b[1] - a[1]).map(([k, v]) => `  ${pad(k)}${v}`),
-    '', 'Sources', ...dataset.meta.sources.map((x) => `  ${x.name} — ${x.licence}`),
+    '', 'Sources', ...dataset.meta.sources.map((x) => `  ${x.name}, ${x.licence}`),
   ];
   return out.join('\n');
 }

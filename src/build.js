@@ -470,8 +470,8 @@ if (require.main === module) {
       claimedNationalTotal: 1075,
       claimedTotalSource: 'Clarke, A. (2023). Making a Mark… Journal of Australian Studies 47(2), cited by Wikipedia',
       sources: [
-        { name: 'Wikipedia — Big things (Australia)', url: 'https://en.wikipedia.org/wiki/Big_things_(Australia)', licence: 'CC BY-SA 4.0' },
-        { name: "Wikivoyage — Australia's big things", url: 'https://en.wikivoyage.org/wiki/Australia%27s_big_things', licence: 'CC BY-SA 4.0' },
+        { name: 'Wikipedia: Big things (Australia)', url: 'https://en.wikipedia.org/wiki/Big_things_(Australia)', licence: 'CC BY-SA 4.0' },
+        { name: "Wikivoyage: Australia's big things", url: 'https://en.wikivoyage.org/wiki/Australia%27s_big_things', licence: 'CC BY-SA 4.0' },
         { name: 'OpenStreetMap via Overpass API', url: 'https://www.openstreetmap.org/', licence: 'ODbL 1.0' },
         { name: 'Wikimedia Commons (images)', url: 'https://commons.wikimedia.org/', licence: 'various free licences' },
       ],

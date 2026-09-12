@@ -19,8 +19,8 @@ const { loadImageCredits } = require('./image-credits');
 
 const ROOT = path.join(__dirname, '..');
 
-const TITLE = 'Big Things — what this is, and how honest it is';
-const DESCRIPTION = "A mapped dataset of Australia's giant novelty roadside sculptures, built from open data — including where it is uncertain, what it gets wrong, and what we corrected.";
+const TITLE = 'Big Things: what this is, and how honest it is';
+const DESCRIPTION = "A mapped dataset of Australia's giant novelty roadside sculptures, built from open data, including where it is uncertain, what it gets wrong, and what we corrected.";
 
 const esc = (s) => String(s == null ? '' : s)
   .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
@@ -32,6 +32,9 @@ const mapLink = (t) => `index.html#thing=${esc(t.id)}`;
 /** Plain text (no markup) version of a superlative, for JSON-LD answer text. */
 const describePlain = (t) => (t ? `${t.name} at ${t.location || t.stateName}` : 'unknown');
 
+/** Same superlative, with its name linked to the map — for on-page answers. */
+const describeLinked = (t) => `<a href="${esc(mapLink(t))}" title="View ${esc(t.name)} on the map">${esc(t.name)}</a> at ${esc(t.location || t.stateName)}`;
+
 /** Human labels for the precision tiers, in the order they should be read. */
 const PRECISION_COPY = [
   ['exact-article', 'The sculpture has its own Wikipedia article, with coordinates'],
@@ -39,7 +42,7 @@ const PRECISION_COPY = [
   ['exact-osm', 'Matched to an OpenStreetMap feature near the right town'],
   ['exact-verified', 'Researched individually against councils, operators and OSM'],
   ['exact-inline', 'A coordinate written inline in the source table'],
-  ['town', 'The town’s centre — <strong>not</strong> the sculpture'],
+  ['town', 'The town’s centre, <strong>not</strong> the sculpture'],
   ['none', 'Could not be placed at all'],
 ];
 
@@ -168,9 +171,9 @@ function generate() {
   const fixes = showcase.slice(0, 6).map((t) => {
     const why = t.correction.why.length > 300 ? `${t.correction.why.slice(0, 300)}…` : t.correction.why;
     const src = t.correction.source
-      ? `<a href="${esc(t.correction.source)}" target="_blank" rel="noopener noreferrer">Source</a> - `
+      ? `<a href="${esc(t.correction.source)}" style="text-decoration: none" target="_blank" rel="noopener noreferrer">Source</a> | `
       : '';
-    return `<div class="fix"><h4><a href="${esc(mapLink(t))}" title="View ${esc(t.name)} on the map">${esc(t.name)}</a> <span style="font-size:12px;color:var(--ink-soft)">${esc(t.state)}</span></h4><p>${esc(why)}</p><p class="src"> ${src} <a href="${esc(mapLink(t))}" title="View ${esc(t.name)} on the map">Map</a></p></div>`;
+    return `<div class="fix"><h4><a href="${esc(mapLink(t))}" title="View ${esc(t.name)} on the map">${esc(t.name)}</a> <span style="font-size:12px;color:var(--ink-soft)">${esc(t.state)}</span></h4><p>${esc(why)}</p><p class="src"> ${src} <a href="${esc(mapLink(t))}" style="text-decoration: none" title="View ${esc(t.name)} on the map">Map<span style="display: inline-block; font-size:16px;rotate: 15deg;">&#x1F4CD;</span></a></p></div>`;
   }).join('');
 
   /* ---- superlatives, computed not typed ---- */
@@ -189,7 +192,7 @@ function generate() {
     </div>`).join('')
     + `<div class="src-card">
       <h4><a href="https://landofthebigs.com/" target="_blank" rel="noopener noreferrer">Land of the Bigs</a> &amp; <a href="https://www.aussiebigthings.com.au/" target="_blank" rel="noopener noreferrer">Aussie Big Things</a></h4>
-      <p>Community catalogues that enumerate far more than the wikis do. Facts only — a name, a place, a coordinate — cited per row.</p>
+      <p>Community catalogues that enumerate far more than the wikis do. Facts only (a name, a place, a coordinate), cited per row.</p>
       <span class="lic">facts only, cited</span>
     </div>`;
 
@@ -203,21 +206,26 @@ function generate() {
   }).join('');
 
   const footerSources = (dataset.meta.sources || [])
-    .map((src) => `<a href="${esc(src.url)}" target="_blank" rel="noopener noreferrer">${esc(src.name.replace(/ —.*$/, ''))}</a>`)
+    .map((src) => `<a href="${esc(src.url)}" target="_blank" rel="noopener noreferrer">${esc(src.name.replace(/:.*$/, ''))}</a>`)
     .join(' · ');
 
   /* ---- structured data — the same superlatives above, as answer-engine-readable Q&A ---- */
   const site = SEO.loadSite();
   const faqs = [
-    ['How many big things are in Australia?', `A 2023 academic census counted ${dataset.meta.claimedNationalTotal.toLocaleString()} big things in Australia, but that figure comes from a census, not a published list — nobody has ever named all of them in one place.`],
+    ['How many big things are in Australia?', `A 2023 academic census counted ${dataset.meta.claimedNationalTotal.toLocaleString()} big things in Australia, but that figure comes from a census, not a published list: nobody has ever named all of them in one place.`],
     ['How many big things does this map show, and how accurate are the locations?', `This map shows ${s.total.toLocaleString()} of the claimed ${dataset.meta.claimedNationalTotal.toLocaleString()}. ${s.exact.toLocaleString()} (${exactPct}%) are placed at the sculpture itself; the rest sit at their town's centre because that is all the sources give.`],
-    ['What is the oldest big thing in Australia?', oldest ? `The oldest is ${describePlain(oldest)}, built in ${oldest.builtYear}.` : null],
-    ['What is the newest big thing in Australia?', newest ? `The newest is ${describePlain(newest)}, built in ${newest.builtYear}.` : null],
-    ['What is the biggest big thing in Australia?', biggest ? `The largest along any single axis is ${describePlain(biggest)}, at ${biggest.sizeMaxM} m.` : null],
-    ['What is the tallest big thing in Australia?', tallest ? `The tallest, measured as a height by its own source, is ${describePlain(tallest)}, at ${tallest.heightM} m.` : null],
+    ['What is the oldest big thing in Australia?', oldest ? `The oldest is ${describePlain(oldest)}, built in ${oldest.builtYear}.` : null, oldest ? `The oldest is ${describeLinked(oldest)}, built in ${oldest.builtYear}.` : null],
+    ['What is the newest big thing in Australia?', newest ? `The newest is ${describePlain(newest)}, built in ${newest.builtYear}.` : null, newest ? `The newest is ${describeLinked(newest)}, built in ${newest.builtYear}.` : null],
+    ['What is the biggest big thing in Australia?', biggest ? `The largest along any single axis is ${describePlain(biggest)}, at ${biggest.sizeMaxM} m.` : null, biggest ? `The largest along any single axis is ${describeLinked(biggest)}, at ${biggest.sizeMaxM} m.` : null],
+    ['What is the tallest big thing in Australia?', tallest ? `The tallest, measured as a height by its own source, is ${describePlain(tallest)}, at ${tallest.heightM} m.` : null, tallest ? `The tallest, measured as a height by its own source, is ${describeLinked(tallest)}, at ${tallest.heightM} m.` : null],
     ['How many big things have been demolished or removed?', `${lost} of the ${s.total.toLocaleString()} mapped here are recorded as demolished or removed, and are kept on the map rather than deleted.`],
     ['Is there an official list of Australia\'s big things?', 'No. There is no official register. This dataset is assembled from Wikipedia, Wikivoyage, OpenStreetMap and two independent community catalogues, cross-checked against each other, with every correction recorded and cited.'],
   ].filter(([, a]) => a);
+
+  // Google's structured-data guidelines require FAQPage markup to reflect
+  // content actually on the page — so the schema below is a restatement of
+  // this block, not a source for facts that exist only in JSON-LD.
+  const faqHtml = faqs.map(([q, a, html]) => `<div class="qa"><h3>${esc(q)}</h3><p>${html || esc(a)}</p></div>`).join('');
 
   const faqPage = {
     '@type': 'FAQPage',
@@ -255,6 +263,7 @@ function generate() {
     .replace(/__TALLEST__/g, tallest ? `${describe(tallest)} at ${tallest.heightM} m` : 'unknown')
     .replace(/__SOURCES__/g, sourceCards)
     .replace(/__DOWNLOADS__/g, downloads)
+    .replace(/__FAQ__/g, faqHtml)
     .replace(/__FOOTER_SOURCES__/g, footerSources)
     .replace(/__PHOTOS__/g, String(photoCount))
     .replace(/__CLAIMED__/g, dataset.meta.claimedNationalTotal.toLocaleString())

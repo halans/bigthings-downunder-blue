@@ -21,7 +21,7 @@ const { loadImageCredits } = require('./image-credits');
 
 const ROOT = path.join(__dirname, '..');
 
-const TITLE = "Big Things — a map of Australia's giant roadside sculptures";
+const TITLE = "Big Things: a map of Australia's giant roadside sculptures";
 const DESCRIPTION = "An interactive map of Australia's Big Things: giant novelty sculptures, fibreglass fruit and enormous fauna, built from open data.";
 
 /** Fields the app actually reads. Keeps the inlined payload lean. */

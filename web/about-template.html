@@ -123,6 +123,12 @@ strong{font-weight:700}
 .fix p{font-size:13px;line-height:1.5;margin:0 0 8px;max-width:none}
 .fix .src{font-size:11px}
 
+/* FAQ */
+.qa-list{margin:18px 0 0}
+.qa{margin:0 0 20px}
+.qa h3{margin:0 0 4px;font-size:16.5px}
+.qa p{margin:0;max-width:66ch}
+
 /* source cards */
 .sources{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;margin:18px 0 0}
 .src-card{background:var(--paper);border:2px solid var(--ink);border-radius:13px;padding:14px 15px}
@@ -208,7 +214,7 @@ footer h3{font-family:Caprasimo,Inter,sans-serif;font-weight:400;color:var(--sun
     The tradition starts with the <strong>Big Scotsman</strong> in Adelaide in 1963 and the
     <strong>Big Banana</strong> at Coffs Harbour a year later, and runs through six decades of
     towns advertising themselves at scale: a prawn, a merino, a mango, a bogan. Emerging at the
-    same time as America's roadside giants, but with a different accent — where the United
+    same time as America's roadside giants, but with a different accent: where the United
     States built to sell, Australia built substantially to amuse itself.
   </p>
   <p class="pullquote">The joke is the point. That is why the country has so many.</p>
@@ -227,7 +233,7 @@ footer h3{font-family:Caprasimo,Inter,sans-serif;font-weight:400;color:var(--sun
   </p>
   <p>
     Two things worth knowing. The title mentions Canada because the same paper counts
-    <strong>1,250 there</strong> — Australia is not even the world leader at its own signature
+    <strong>1,250 there</strong>. Australia is not even the world leader at its own signature
     obsession. And the figure is a <em>census</em>, not a published list: nobody hands you the
     1,075 rows. Which is exactly why this map shows __TOTAL__ and says so on the front.
   </p>
@@ -237,8 +243,8 @@ footer h3{font-family:Caprasimo,Inter,sans-serif;font-weight:400;color:var(--sun
   <h2>How honest is it?</h2>
   <p class="standfirst">Every pin tells you how precisely it is placed, because most sources give a town, not a point.</p>
   <p>
-    This is the central problem of mapping Big Things. Wikipedia's tables name the town — "Robertson",
-    "Ballina" — not the sculpture's position. A map that silently drops a few hundred town centroids
+    This is the central problem of mapping Big Things. Wikipedia's tables name the town ("Robertson",
+    "Ballina"), not the sculpture's position. A map that silently drops a few hundred town centroids
     onto the continent looks authoritative and is lying to you about where the Big Potato is.
   </p>
   <p>So instead, each record carries a precision tier, and the map shows it in plain words on the card:</p>
@@ -254,8 +260,8 @@ footer h3{font-family:Caprasimo,Inter,sans-serif;font-weight:400;color:var(--sun
   <h3>What the map won't do</h3>
   <ul>
     <li>It won't invent a coordinate. If a source couldn't place something, it stays at town level.</li>
-    <li>It won't claim a height the source didn't give. The Giant Worm was 250 m <em>long</em> — a
-        walk-through tunnel, not a tower — so it is filed under "biggest, any axis", never "tallest".</li>
+    <li>It won't claim a height the source didn't give. The Giant Worm was 250 m <em>long</em> (a
+        walk-through tunnel, not a tower), so it is filed under "biggest, any axis", never "tallest".</li>
     <li>It won't guess between two candidates. Where a name matched two different objects more than
         500 m apart, the matcher refuses and the pin stays honest.</li>
   </ul>
@@ -280,7 +286,7 @@ footer h3{font-family:Caprasimo,Inter,sans-serif;font-weight:400;color:var(--sun
   __BY_CATEGORY__
   <p>
     The oldest here is __OLDEST__. The newest is __NEWEST__. The largest along any axis is
-    __BIGGEST__ — and the tallest, measured as a height by its own source, is __TALLEST__.
+    __BIGGEST__, and the tallest, measured as a height by its own source, is __TALLEST__.
   </p>
 </div></section>
 
@@ -292,7 +298,7 @@ footer h3{font-family:Caprasimo,Inter,sans-serif;font-weight:400;color:var(--sun
   <p>
     __PHOTOS__ photographs come from Wikimedia Commons, each under its own free licence and each
     credited to its photographer on the card. That is a licence condition for the CC BY and CC BY-SA
-    files, which are most of them — and for several versions of this app it wasn't being met, which
+    files, which are most of them. For several versions of this app it wasn't being met, which
     was a breach rather than an oversight.
   </p>
   <p>
@@ -317,6 +323,12 @@ $ bigthings --stats</code></pre>
     from cached sources with no network, and __PHOTOS__ photographs, the fonts and Leaflet itself all
     ship from this domain rather than someone else's.
   </p>
+</div></section>
+
+<section id="faq"><div class="wrap">
+  <h2>Common questions</h2>
+  <p class="standfirst">The same facts the rest of this page makes the case for, asked straight.</p>
+  <div class="qa-list">__FAQ__</div>
 </div></section>
 
 <footer><div class="wrap">

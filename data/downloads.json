@@ -4,7 +4,7 @@
     {
       "file": "bigthings.json",
       "url": "https://github.com/halans/bigthings-downunder-blue/blob/master/data/bigthings.json",
-      "blurb": "The whole dataset — every record with its coordinates, precision tier, per-row sources and any correction applied to it."
+      "blurb": "The whole dataset: every record with its coordinates, precision tier, per-row sources and any correction applied to it."
     },
     {
       "file": "bigthings-au.geojson",

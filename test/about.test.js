@@ -10,12 +10,14 @@ const fs = require('fs');
 const path = require('path');
 const { test, eq, ok } = require('./run');
 const A = require('../src/build-about');
+const { loadImageCredits } = require('../src/image-credits');
 
 const ROOT = path.join(__dirname, '..');
 const dataset = JSON.parse(fs.readFileSync(path.join(ROOT, 'data', 'bigthings.json'), 'utf8'));
 const stats = dataset.meta.stats;
-const creditsPath = path.join(ROOT, 'data', 'image-credits.json');
-const credits = fs.existsSync(creditsPath) ? JSON.parse(fs.readFileSync(creditsPath, 'utf8')).images : {};
+// Same loader the generator uses, so a custom (non-Commons) photo like
+// data/custom-photos.json's Big Banana is covered too.
+const credits = loadImageCredits();
 
 const html = A.generate();
 
@@ -98,7 +100,7 @@ test('the superlatives quoted in prose are the real extremes', () => {
 test('the corrections shown are real, sourced overrides', () => {
   const curated = dataset.things.filter((t) => t.correction && t.correction.why && !t.addedManually);
   ok(curated.length >= 5, `expected several curated corrections, got ${curated.length}`);
-  const cards = [...html.matchAll(/<div class="fix"><h4>([^<]+)/g)].map((m) => m[1].trim());
+  const cards = [...html.matchAll(/<div class="fix"><h4><a[^>]*>([^<]+)<\/a>/g)].map((m) => m[1].trim());
   ok(cards.length >= 3, 'correction cards rendered');
   for (const name of cards) {
     ok(curated.some((t) => t.name === name), `"${name}" is a real corrected record`);
