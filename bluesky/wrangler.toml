@@ -1,0 +1,14 @@
+name = "bigthings-bluesky-poster"
+main = "src/index.js"
+compatibility_date = "2024-09-23"
+
+# 22:00 UTC = 8am AEST / 9am AEDT — adjust to whenever you want the post to
+# land. Cron is always UTC; Cloudflare has no per-trigger timezone setting.
+[triggers]
+crons = ["0 22 * * *"]
+
+# Create with: wrangler kv namespace create POSTED
+# then paste the returned id below.
+[[kv_namespaces]]
+binding = "POSTED"
+id = "REPLACE_WITH_KV_NAMESPACE_ID"

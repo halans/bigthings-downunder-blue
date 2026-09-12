@@ -1,0 +1,14 @@
+{
+  "name": "bigthings-bluesky-poster",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Cloudflare Worker: posts one random Big Thing to Bluesky daily.",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "tail": "wrangler tail"
+  },
+  "devDependencies": {
+    "wrangler": "^4.0.0"
+  }
+}
