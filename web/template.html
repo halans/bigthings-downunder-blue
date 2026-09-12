@@ -133,6 +133,11 @@ a{color:var(--sky)}
   border:1.5px solid var(--ink);border-radius:9px;padding:5px 9px;font-size:11px;font-weight:600;
   pointer-events:none;max-width:min(60%,320px)
 }
+#toast{
+  position:absolute;top:14px;left:50%;transform:translateX(-50%);z-index:1100;
+  background:var(--ink);color:#fff;border-radius:10px;padding:8px 14px;font-size:12.5px;font-weight:600;
+  max-width:min(88%,420px);text-align:center;word-break:break-word;box-shadow:0 6px 18px -6px rgba(0,0,0,.5)
+}
 
 /* ---------- detail panel ---------- */
 #detail{
@@ -323,6 +328,7 @@ a{color:var(--sky)}
       <button class="iconbtn" id="mfilter" aria-label="Filters">⚙️</button>
     </div>
     <div id="mapnote"></div>
+    <div id="toast" role="status" hidden></div>
 
     <section id="detail" aria-live="polite" aria-label="Big thing details">
       <button class="dclose" id="dclose" aria-label="Close details">✕</button>
@@ -366,6 +372,8 @@ const DATA = __DATA__;
 const CREDITS = __CREDITS__;
 /** Australia's coastline and state borders, for the continent-view basemap. */
 const OUTLINE = __OUTLINE__;
+/** [lat,lng] pairs for every OSM-mapped EV charger — [] if that optional harvest was never run. */
+const EV_CHARGERS = __EV_CHARGERS__;
 const THINGS = DATA.things;
 const META = DATA.meta;
 
@@ -401,10 +409,25 @@ let selected = null;
  * pre-applies the state filter. Read once at load — nothing here listens for
  * hashchange, since every in-app navigation already updates F/selected
  * directly and syncHash() keeps the address bar in step with it.
+ *
+ * The rest (cats/eras/hideGone/exactOnly/labels/ev/lat/lng/zoom) only ever
+ * come from a "Share this view" link (see shareView()) — normal browsing
+ * never writes them, so their absence here is the overwhelmingly common case.
  */
 const initialHash = new URLSearchParams(location.hash.slice(1));
 const hashThing = initialHash.get('thing');
 const hashStates = (initialHash.get('state') || '').split(',').map((s) => s.trim().toUpperCase()).filter(Boolean);
+const hashCats = (initialHash.get('cats') || '').split(',').map((s) => s.trim()).filter(Boolean);
+const hashEras = (initialHash.get('eras') || '').split(',').map((s) => s.trim()).filter(Boolean);
+const hashHideGone = initialHash.get('hideGone') === '1';
+const hashExactOnly = initialHash.get('exactOnly') === '1';
+const hashLabels = initialHash.get('labels') === '1';
+const hashEv = initialHash.get('ev') === '1';
+const hashLat = parseFloat(initialHash.get('lat'));
+const hashLng = parseFloat(initialHash.get('lng'));
+const hashZoom = parseFloat(initialHash.get('zoom'));
+const hashHasView = hashCats.length || hashEras.length || hashHideGone || hashExactOnly || hashLabels || hashEv
+  || (Number.isFinite(hashLat) && Number.isFinite(hashLng));
 
 /* ---------------- map ---------------- */
 const PHONE = window.matchMedia('(max-width:860px)').matches;
@@ -490,6 +513,24 @@ const cluster = L.markerClusterGroup({
   },
 });
 map.addLayer(cluster);
+
+/**
+ * EV chargers: a plain (unclustered) canvas layer, off by default. Canvas
+ * keeps ~1,600 circle markers cheap to draw — no per-marker DOM node, unlike
+ * the divIcon pins above. [] (the optional harvest was never run) just means
+ * an empty layer and no switch offered for it — see buildFilters().
+ */
+const chargerRenderer = L.canvas({ padding:0.5 });
+const chargerLayer = L.layerGroup(EV_CHARGERS.map(([lat, lng]) => L.circleMarker([lat, lng], {
+  renderer:chargerRenderer, radius:4, weight:1, color:'#1f6b3a', fillColor:'#2f7d52', fillOpacity:.85,
+}).bindTooltip('EV charger', { direction:'top', offset:[0,-4] })));
+let showEvChargers = false;
+function setEvChargers(on) {
+  showEvChargers = on;
+  const cb = document.getElementById('evswitch');
+  if (cb) cb.checked = on;
+  if (on) chargerLayer.addTo(map); else map.removeLayer(chargerLayer);
+}
 
 function iconFor(t) {
   const c = cat(t.category);
@@ -604,6 +645,44 @@ function syncHash() {
   if (location.hash) history.replaceState(null, '', base);
 }
 
+/**
+ * A link that reproduces everything currently on screen — filters, display
+ * switches and the map's own position, not just the one card syncHash() puts
+ * in the address bar for normal browsing. Deliberately a separate, explicit
+ * action rather than folded into syncHash(): that one stays minimal on
+ * purpose (see its own comment), so the address bar doesn't turn into a
+ * wall of params while someone is just browsing.
+ */
+function shareView() {
+  const p = new URLSearchParams();
+  if (selected) p.set('thing', selected);
+  if (F.states.size) p.set('state', [...F.states].join(','));
+  if (F.cats.size) p.set('cats', [...F.cats].join(','));
+  if (F.eras.size) p.set('eras', [...F.eras].join(','));
+  if (F.hideGone) p.set('hideGone', '1');
+  if (F.exactOnly) p.set('exactOnly', '1');
+  if (mapEl.classList.contains('labels-on')) p.set('labels', '1');
+  if (showEvChargers) p.set('ev', '1');
+  const c = map.getCenter();
+  p.set('lat', c.lat.toFixed(4)); p.set('lng', c.lng.toFixed(4)); p.set('zoom', map.getZoom().toFixed(2));
+  const url = `${location.origin}${location.pathname}#${p.toString()}`;
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(url).then(
+      () => showToast('Link copied — paste it anywhere.'),
+      () => showToast(url, true),
+    );
+  } else showToast(url, true);
+}
+
+let toastTimer;
+function showToast(msg, isLink) {
+  const t = document.getElementById('toast');
+  t.textContent = isLink ? `Couldn't copy automatically — here's the link: ${msg}` : msg;
+  t.hidden = false;
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => { t.hidden = true; }, isLink ? 8000 : 2600);
+}
+
 /* ---------------- chips ---------------- */
 function chip(kind, value, label, extra) {
   const el = document.createElement('button');
@@ -665,10 +744,27 @@ function buildFilters() {
   const dg = document.createElement('div'); dg.className = 'fgroup';
   dg.innerHTML = '<p class="flabel"><span>Map display</span></p>';
   const dlab = document.createElement('label'); dlab.className = 'switch';
-  const dcb = document.createElement('input'); dcb.type = 'checkbox';
+  const dcb = document.createElement('input'); dcb.type = 'checkbox'; dcb.id = 'labelswitch';
   dcb.addEventListener('change', () => mapEl.classList.toggle('labels-on', dcb.checked));
   dlab.appendChild(dcb); dlab.appendChild(document.createTextNode('🏷️ Show place names: appear once you zoom into an area'));
-  dg.appendChild(dlab); wrap.appendChild(dg);
+  dg.appendChild(dlab);
+
+  if (EV_CHARGERS.length) {
+    const elab = document.createElement('label'); elab.className = 'switch';
+    const ecb = document.createElement('input'); ecb.type = 'checkbox'; ecb.id = 'evswitch';
+    ecb.addEventListener('change', () => setEvChargers(ecb.checked));
+    elab.appendChild(ecb);
+    elab.appendChild(document.createTextNode(`🔌 Show EV chargers: ${EV_CHARGERS.length.toLocaleString()} mapped by OpenStreetMap`));
+    dg.appendChild(elab);
+  }
+
+  const shareBtn = document.createElement('button');
+  shareBtn.className = 'pillbtn'; shareBtn.id = 'sharebtn'; shareBtn.style.marginTop = '10px';
+  shareBtn.textContent = '🔗 Share this view';
+  shareBtn.addEventListener('click', shareView);
+  dg.appendChild(shareBtn);
+
+  wrap.appendChild(dg);
 
   const g = document.createElement('div'); g.className = 'fgroup';
   g.innerHTML = '<p class="flabel"><span>Honesty settings</span></p>';
@@ -678,7 +774,7 @@ function buildFilters() {
   ];
   for (const [key, text] of opts) {
     const lab = document.createElement('label'); lab.className = 'switch';
-    const cb = document.createElement('input'); cb.type = 'checkbox';
+    const cb = document.createElement('input'); cb.type = 'checkbox'; cb.id = 'switch-' + key;
     cb.addEventListener('change', () => { F[key] = cb.checked; refresh(false); });
     lab.appendChild(cb); lab.appendChild(document.createTextNode(text));
     g.appendChild(lab);
@@ -1182,9 +1278,34 @@ refresh(false);
 updateTripCounts();
 
 /* ---------------- apply a direct link, if the URL asked for one ---------------- */
+if (hashHasView) {
+  // A "Share this view" link (see shareView()): restore every filter and
+  // display switch it saved, then the map's own position last, since
+  // refresh()'s own fit-to-results would otherwise fight it.
+  hashStates.filter((v) => STATES.includes(v)).forEach((v) => F.states.add(v));
+  hashCats.filter((v) => CATS[v]).forEach((v) => F.cats.add(v));
+  hashEras.filter((v) => ERAS.includes(v)).forEach((v) => F.eras.add(v));
+  document.querySelectorAll('.chip[data-kind]').forEach((c) => {
+    const set = c.dataset.kind === 'state' ? F.states : c.dataset.kind === 'cat' ? F.cats : F.eras;
+    if (set.has(c.dataset.value)) c.setAttribute('aria-pressed', 'true');
+  });
+  if (hashHideGone) { F.hideGone = true; document.getElementById('switch-hideGone').checked = true; }
+  if (hashExactOnly) { F.exactOnly = true; document.getElementById('switch-exactOnly').checked = true; }
+  if (hashLabels) { mapEl.classList.add('labels-on'); document.getElementById('labelswitch').checked = true; }
+  if (hashEv && EV_CHARGERS.length) setEvChargers(true);
+  refresh(false);
+  if (Number.isFinite(hashLat) && Number.isFinite(hashLng)) {
+    map.setView([hashLat, hashLng], Number.isFinite(hashZoom) ? hashZoom : map.getZoom());
+  }
+}
+// A specific card wins the initial focus either way — opening it pans/zooms
+// to it, which is the point, even on top of a shared view's own camera
+// position above.
 if (hashThing && THINGS.some((t) => t.id === hashThing)) {
   openDetail(hashThing, true);
-} else if (hashStates.length) {
+} else if (hashStates.length && !hashHasView) {
+  // The plain #state=NSW,QLD link predates "Share this view" and stays
+  // exactly as minimal as it always was.
   const validStates = hashStates.filter((s) => STATES.includes(s));
   if (validStates.length) {
     validStates.forEach((s) => F.states.add(s));

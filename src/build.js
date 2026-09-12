@@ -291,7 +291,7 @@ function build() {
   applyRemovals(out);
   applyOsmMatches(out);
   applyVerifiedCoords(out);
-  applyEvChargers(out);
+  applyEvChargers(out, loadEvChargers());
   out.sort((a, b) => a.state.localeCompare(b.state) || a.name.localeCompare(b.name));
   return out;
 }
@@ -356,15 +356,23 @@ function applyVerifiedCoords(rows) {
 }
 
 /**
- * Flag things with a public EV charger within walking distance (500 m), from
- * an Overpass harvest of amenity=charging_station
- * (src/fetch-ev-chargers.js → cache/ev-chargers.json). Optional: if that
- * cache was never fetched, this silently sets nothing.
+ * The Overpass harvest of amenity=charging_station
+ * (src/fetch-ev-chargers.js → cache/ev-chargers.json), or [] if that optional
+ * stage was never run. Read once and shared by applyEvChargers() (the
+ * per-thing proximity flag) and the map's own charger layer, so both stay in
+ * sync with a single fetch.
  */
-function applyEvChargers(rows) {
+function loadEvChargers() {
   const p = path.join(CACHE, 'ev-chargers.json');
-  if (!fs.existsSync(p)) return;
-  const chargers = readJSON(p);
+  return fs.existsSync(p) ? readJSON(p) : [];
+}
+
+/**
+ * Flag things with a public EV charger within walking distance (500 m).
+ * Optional: if the cache above is empty, this silently sets nothing.
+ */
+function applyEvChargers(rows, chargers) {
+  if (!chargers.length) return;
   const WALK_KM = 0.5;
   for (const row of rows) {
     if (row.lat == null) continue;
@@ -501,6 +509,10 @@ if (require.main === module) {
   fs.mkdirSync(DATA, { recursive: true });
   const rows = build();
   const s = stats(rows);
+  // Rounded to 5dp (~1m) rather than the fetcher's 6dp: plenty for a map
+  // marker, and it's ~1600 points repeated in both bigthings.json and every
+  // page that embeds it, so shaving digits here isn't free elsewhere.
+  const chargers = loadEvChargers().map((c) => [N.round(c.lat, 5), N.round(c.lng, 5)]);
   fs.writeFileSync(path.join(DATA, 'bigthings.json'), JSON.stringify({
     meta: {
       generated: new Date().toISOString().slice(0, 10),
@@ -515,6 +527,7 @@ if (require.main === module) {
       stats: s,
     },
     things: rows,
+    chargers,
   }, null, 1));
   console.log(JSON.stringify(s, null, 2));
 }

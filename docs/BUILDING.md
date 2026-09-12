@@ -233,6 +233,12 @@ If `cache/ev-chargers.json` was never fetched, this step silently does nothing �
 never set, not falsely set. Refresh it independently of everything else with `npm run fetch:ev`,
 since charging infrastructure changes far faster than sculpture locations.
 
+The same harvest is also carried through, at 5dp, as `data/bigthings.json`'s top-level
+`chargers` array — see [DATA.md](DATA.md) — which `build-web.js` embeds into the page as
+`EV_CHARGERS`. That's what the map's "Show EV chargers" switch draws: a plain (unclustered)
+canvas layer of ~1,600 small circle markers, off by default and never offered at all if
+`chargers` is empty.
+
 ## Stage 5 — generate the pages (`src/build-web.js`, `src/build-about.js`)
 
 Two HTML files from two templates, one each:

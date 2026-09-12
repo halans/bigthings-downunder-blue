@@ -564,10 +564,13 @@
     "coordSource": "https://www.openstreetmap.org/search?query=-33.3518309%2C+151.4907201",
     "category": "seafood",
     "status": "standing",
-    "stateName": "New South Wales"
+    "stateName": "New South Wales",
+    "evChargerNearby": true,
+    "image": "custom:the-clam-b5d389.jpg",
+    "notes": "EV Charging across the road at The Diggers"
    },
-   "why": "Local visit",
-   "source": null
+   "why": "Photo updated, replacing whatever (if anything) was there.",
+   "source": "https://www.plugshare.com/location/1980445"
   },
   {
    "match": {
@@ -623,6 +626,49 @@
     "stateName": "New South Wales"
    },
    "why": "Local visit",
+   "source": null
+  },
+  {
+   "match": {
+    "id": "db05f58216"
+   },
+   "set": {
+    "image": "custom:the-big-flower-fb20f3.jpg",
+    "name": "The Big Flower",
+    "state": "NSW",
+    "location": "Central Coast",
+    "town": "Ourimbah",
+    "lat": -33.346199,
+    "lng": 151.36852,
+    "precision": "exact-verified",
+    "coordSource": "https://landofthebigs.com/big-flower-ourimbah-nsw/",
+    "category": "oddity",
+    "status": "standing",
+    "stateName": "New South Wales"
+   },
+   "why": "Photo updated, replacing whatever (if anything) was there.",
+   "source": null
+  },
+  {
+   "match": {
+    "id": "d6aaff87e4"
+   },
+   "set": {
+    "image": "custom:alan-davidson-s-balls-990253.jpg",
+    "name": "Alan Davidson's Balls",
+    "state": "NSW",
+    "location": "Central Coast",
+    "town": "Wyoming",
+    "lat": -33.402652,
+    "lng": 151.352143,
+    "precision": "exact-verified",
+    "coordSource": "https://landofthebigs.com/alan-davidsons-balls-wyoming-nsw/",
+    "category": "sport-and-leisure",
+    "status": "standing",
+    "blurb": "Seven oversized cricket balls and stumps dotted around the picturesque Alan Davidson Oval",
+    "stateName": "New South Wales"
+   },
+   "why": "Photo updated, replacing whatever (if anything) was there.",
    "source": null
   }
  ],

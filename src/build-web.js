@@ -152,7 +152,7 @@ function buildJsonLd(dataset) {
 function generate() {
   const dataset = JSON.parse(fs.readFileSync(path.join(ROOT, 'data', 'bigthings.json'), 'utf8'));
   const template = fs.readFileSync(path.join(ROOT, 'web', 'template.html'), 'utf8');
-  for (const token of ['__DATA__', '__CREDITS__', '__OUTLINE__', '__TITLE__', '__DESCRIPTION__', '__SEO_META__']) {
+  for (const token of ['__DATA__', '__CREDITS__', '__OUTLINE__', '__EV_CHARGERS__', '__TITLE__', '__DESCRIPTION__', '__SEO_META__']) {
     if (!template.includes(token)) throw new Error(`template.html is missing the ${token} placeholder`);
   }
 
@@ -169,7 +169,8 @@ function generate() {
     .replace('__SEO_META__', seoMeta)
     .replace('__DATA__', inlineJson(slim(dataset)))
     .replace('__CREDITS__', inlineJson(creditMap(dataset)))
-    .replace('__OUTLINE__', outline);
+    .replace('__OUTLINE__', outline)
+    .replace('__EV_CHARGERS__', inlineJson(dataset.chargers || []));
 }
 
 /** Every photo, its photographer and its licence — for the bundle. */
