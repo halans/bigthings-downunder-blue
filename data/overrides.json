@@ -670,6 +670,31 @@
    },
    "why": "Photo updated, replacing whatever (if anything) was there.",
    "source": null
+  },
+  {
+   "match": {
+    "id": "375cce5794"
+   },
+   "set": {
+    "name": "The Big Orange Goblin",
+    "state": "NSW",
+    "location": "Marrickville",
+    "town": "Marrickville",
+    "lat": -33.9047,
+    "lng": 151.1677,
+    "precision": "exact-verified",
+    "coordSource": "https://www.sydney.com/destinations/sydney/inner-sydney/marrickville/food-and-drink/the-grifter-brewing-co",
+    "builtYear": 2025,
+    "builtRaw": "2025",
+    "category": "food-and-drink",
+    "status": "standing",
+    "notes": "Located in the Inner West at the heart of Sydney's \"Ale Trail”, this 30-tonne beer can is also a functioning grain silo used by The Grifter Brewing Co. The towering artwork is a realistic depiction of their best-selling beer: The Grifter Pale Ale, affectionately known as \"The Orange Goblin”.",
+    "stateName": "New South Wales",
+    "evChargerNearby": true
+   },
+   "why": null,
+   "source": null,
+   "silent": true
   }
  ],
  "additions": [

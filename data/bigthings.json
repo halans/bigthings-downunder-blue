@@ -48,8 +48,8 @@
     "WA": 30
    },
    "byCategory": {
-    "fruit-and-veg": 62,
-    "food-and-drink": 35,
+    "fruit-and-veg": 61,
+    "food-and-drink": 36,
     "people-and-culture": 53,
     "fauna": 148,
     "sport-and-leisure": 22,
@@ -5066,7 +5066,7 @@
     10
    ],
    "sizeRaw": "10 m (32.8 ft)",
-   "category": "fruit-and-veg",
+   "category": "food-and-drink",
    "status": "standing",
    "statusEvidence": null,
    "notes": "Located in the Inner West at the heart of Sydney's \"Ale Trail”, this 30-tonne beer can is also a functioning grain silo used by The Grifter Brewing Co. The towering artwork is a realistic depiction of their best-selling beer: The Grifter Pale Ale, affectionately known as \"The Orange Goblin”.",
@@ -5080,19 +5080,8 @@
      "source": "wikipedia",
      "page": "Big things (Australia)",
      "url": "https://en.wikipedia.org/wiki/Big_things_(Australia)"
-    },
-    {
-     "source": "verified",
-     "page": "Destination NSW — The Grifter Brewing Co, 1/391-397 Enmore Road Marrickville NSW 2204",
-     "url": "https://www.sydney.com/destinations/sydney/inner-sydney/marrickville/food-and-drink/the-grifter-brewing-co"
     }
    ],
-   "coordMatch": {
-    "kind": "researched",
-    "confidence": "high",
-    "why": "The Big Orange Goblin grain-silo sculpture stands at the entrance to the Grifter Brewing Co brewery at 1/391-397 Enmore Rd, Marrickville. Address confirmed by official brewery website and Destination NSW.",
-    "osmName": "Destination NSW — The Grifter Brewing Co, 1/391-397 Enmore Road Marrickville NSW 2204"
-   },
    "evChargerNearby": true
   },
   {
