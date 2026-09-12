@@ -26,20 +26,20 @@
    }
   ],
   "stats": {
-   "total": 476,
-   "mapped": 476,
-   "exact": 314,
+   "total": 475,
+   "mapped": 475,
+   "exact": 313,
    "byPrecision": {
     "exact-osm": 78,
     "town": 162,
-    "exact-verified": 183,
+    "exact-verified": 182,
     "exact-article": 20,
     "exact-wikivoyage": 27,
     "exact-inline": 6
    },
    "byState": {
     "ACT": 12,
-    "NSW": 139,
+    "NSW": 138,
     "NT": 24,
     "QLD": 115,
     "SA": 42,
@@ -51,7 +51,7 @@
     "fruit-and-veg": 62,
     "food-and-drink": 35,
     "people-and-culture": 53,
-    "fauna": 149,
+    "fauna": 148,
     "sport-and-leisure": 22,
     "sculpture": 7,
     "oddity": 64,
@@ -60,7 +60,7 @@
     "machinery-and-transport": 19
    },
    "byStatus": {
-    "standing": 436,
+    "standing": 435,
     "demolished": 11,
     "relocated": 12,
     "replaced": 2,
@@ -69,7 +69,7 @@
    "byEra": {
     "revival (2000s–2014)": 45,
     "late century (1985–1999)": 44,
-    "unknown": 300,
+    "unknown": 299,
     "modern (2015+)": 38,
     "pioneer (pre-1970)": 10,
     "boom (1970s–early 80s)": 39
@@ -2855,49 +2855,6 @@
      "source": "Land of the Bigs",
      "page": "https://landofthebigs.com/charlie-the-chicken-charlestown-nsw/",
      "url": "https://landofthebigs.com/charlie-the-chicken-charlestown-nsw/"
-    }
-   ]
-  },
-  {
-   "id": "78baa8fb8f",
-   "name": "Daryl Somersby the Croc",
-   "state": "NSW",
-   "stateName": "New South Wales",
-   "location": "Central Coast",
-   "town": "Somersby",
-   "lat": -33.418404,
-   "lng": 151.243244,
-   "precision": "exact-verified",
-   "coordSource": "https://landofthebigs.com/daryl-somersby-the-crocodile-somersby-nsw/",
-   "builtYear": null,
-   "builtCirca": false,
-   "builtRaw": null,
-   "era": "unknown",
-   "heightM": null,
-   "lengthM": null,
-   "sizeMaxM": null,
-   "sizeKind": "unknown",
-   "dimsM": [],
-   "sizeRaw": null,
-   "category": "fauna",
-   "status": "standing",
-   "statusEvidence": null,
-   "notes": null,
-   "blurb": null,
-   "image": null,
-   "wikipediaArticle": null,
-   "wikidata": null,
-   "osmId": null,
-   "addedManually": true,
-   "correction": {
-    "why": "Central Coast",
-    "source": null
-   },
-   "sources": [
-    {
-     "source": "Land of the Bigs",
-     "page": "https://landofthebigs.com/daryl-somersby-the-crocodile-somersby-nsw/",
-     "url": "https://landofthebigs.com/daryl-somersby-the-crocodile-somersby-nsw/"
     }
    ]
   },
