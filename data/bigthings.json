@@ -32,9 +32,9 @@
    "byPrecision": {
     "exact-osm": 78,
     "town": 162,
-    "exact-verified": 182,
+    "exact-verified": 183,
     "exact-article": 20,
-    "exact-wikivoyage": 27,
+    "exact-wikivoyage": 26,
     "exact-inline": 6
    },
    "byState": {
@@ -657,15 +657,15 @@
    "category": "sport-and-leisure",
    "status": "standing",
    "statusEvidence": null,
-   "notes": null,
-   "blurb": "Seven oversized cricket balls and stumps dotted around the picturesque Alan Davidson Oval",
+   "notes": "(has seen better days)",
+   "blurb": "Seven oversized cricket balls and stumps dotted around the picturesque Alan Davidson Oval, honouring Alan Davidson, the legendary Australian Test cricketer and all-rounder who grew up in the Gosford area.",
    "image": "custom:alan-davidson-s-balls-990253.jpg",
    "wikipediaArticle": null,
    "wikidata": null,
    "osmId": null,
    "addedManually": true,
    "correction": {
-    "why": "Photo updated, replacing whatever (if anything) was there.",
+    "why": "Central Coast",
     "source": null
    },
    "sources": [
@@ -5909,8 +5909,8 @@
    "state": "NSW",
    "stateName": "New South Wales",
    "location": "Adaminaby",
-   "town": null,
-   "lat": -35.997272,
+   "town": "Adaminaby",
+   "lat": -35.9972978,
    "lng": 148.774539,
    "precision": "exact-article",
    "coordSource": "https://en.wikipedia.org/wiki/Big_Trout",
@@ -5930,8 +5930,8 @@
    "category": "seafood",
    "status": "standing",
    "statusEvidence": null,
-   "notes": "Designed by Andy Lomnici, the Big Trout is located in the town of Adaminaby, near Lake Eucumbene in the Snowy Mountains. It was built from fibreglass over a steel frame, completed in 1973, and repaired and repainted in 2023.",
-   "blurb": null,
+   "notes": "(one of two in NSW)",
+   "blurb": "Designed by Andy Lomnici, the Big Trout is located in the town of Adaminaby, near Lake Eucumbene in the Snowy Mountains. It was built from fibreglass over a steel frame, completed in 1973, and repaired and repainted in 2023.",
    "image": "Adaminaby Big Trout.jpg",
    "wikipediaArticle": "Big Trout",
    "wikidata": "Q4906612",
@@ -5952,7 +5952,11 @@
      "page": "node/1541562525",
      "url": "https://www.openstreetmap.org/node/1541562525"
     }
-   ]
+   ],
+   "correction": {
+    "why": "Fixed location: near Lake Eucumbene in the Snowy Mountains, matching its own blurb, not on the NSW/VIC border further west. The longitude in the first save of this correction was 144.774539, a transposed digit (should be 148) that landed the pin ~350 km away; corrected to 148.774539, confirmed against OSM node 1541562525 (historic=monument, name=\"The Big Trout\", surveyed), which sits within a few metres of it. That same OSM node had also been wrongly attached to the separate \"Big Trout\" record at Harrietville, VIC (id dc68ba7a63) — see that record's own correction.",
+    "source": "https://www.openstreetmap.org/node/1541562525"
+   }
   },
   {
    "id": "6bb8e36f75",
@@ -5960,9 +5964,9 @@
    "state": "NSW",
    "stateName": "New South Wales",
    "location": "Oberon",
-   "town": null,
-   "lat": -35.997272,
-   "lng": 148.774539,
+   "town": "Oberon",
+   "lat": -33.7062708,
+   "lng": 149.8716201,
    "precision": "exact-wikivoyage",
    "coordSource": "https://en.wikivoyage.org/wiki/Australia%27s_big_things",
    "builtYear": null,
@@ -6000,7 +6004,11 @@
      "page": "node/1541562525",
      "url": "https://www.openstreetmap.org/node/1541562525"
     }
-   ]
+   ],
+   "correction": {
+    "why": "Fix location",
+    "source": null
+   }
   },
   {
    "id": "a3f4e05101",
@@ -6642,8 +6650,8 @@
    "category": "oddity",
    "status": "standing",
    "statusEvidence": null,
-   "notes": "The Long Jetty is appropriately named as it is an extremely long jetty spanning out over the shallow waters of Tuggerah Lake.",
-   "blurb": null,
+   "notes": "(that's a 700m return walk!)",
+   "blurb": "The Long Jetty Wharf has a a suburb named after it, and is appropriately named as it is an extremely long jetty spanning out over the shallow waters of Tuggerah Lake.",
    "image": "custom:the-long-jetty-33340b.jpeg",
    "wikipediaArticle": null,
    "wikidata": null,
@@ -17839,10 +17847,10 @@
    "stateName": "Victoria",
    "location": "Harrietville",
    "town": null,
-   "lat": -35.997272,
-   "lng": 148.774539,
-   "precision": "exact-wikivoyage",
-   "coordSource": "https://en.wikivoyage.org/wiki/Australia%27s_big_things",
+   "lat": -36.852035,
+   "lng": 147.079682,
+   "precision": "exact-verified",
+   "coordSource": "https://nominatim.openstreetmap.org/search?q=10+Stony+Creek+Road+Harrietville+Victoria",
    "builtYear": null,
    "builtCirca": false,
    "builtRaw": null,
@@ -17861,7 +17869,7 @@
    "image": "Big Trout.jpg",
    "wikipediaArticle": null,
    "wikidata": null,
-   "osmId": "node/1541562525",
+   "osmId": null,
    "sources": [
     {
      "source": "wikipedia",
@@ -17872,13 +17880,12 @@
      "source": "wikivoyage",
      "page": "Australia's big things",
      "url": "https://en.wikivoyage.org/wiki/Australia%27s_big_things"
-    },
-    {
-     "source": "openstreetmap",
-     "page": "node/1541562525",
-     "url": "https://www.openstreetmap.org/node/1541562525"
     }
-   ]
+   ],
+   "correction": {
+    "why": "Wikivoyage's own listed coordinate for this row was wrong by ~350 km: it matched OSM node 1541562525 (\"The Big Trout\", a surveyed monument) within a few metres — which is Adaminaby, NSW's Big Trout, not this one. Its own notes give a specific address, 10 Stony Creek Road, Harrietville VIC, which Nominatim places at -36.852035, 147.079682 — used here instead. Dropped the openstreetmap source and osmId, since that OSM node is a different, real object at a real place, not this one.",
+    "source": "https://nominatim.openstreetmap.org/search?q=10+Stony+Creek+Road+Harrietville+Victoria"
+   }
   },
   {
    "id": "5702d79d8d",
