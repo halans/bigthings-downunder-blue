@@ -668,7 +668,7 @@
     "id": "d6aaff87e4"
    },
    "set": {
-    "image": "custom:alan-davidson-s-balls-990253.jpg",
+    "image": "custom:alan-davidson-s-balls-d4e75c.jpg",
     "name": "Alan Davidson's Balls",
     "state": "NSW",
     "location": "Central Coast",
@@ -684,8 +684,7 @@
     "notes": "(has seen better days)"
    },
    "why": "Photo updated, replacing whatever (if anything) was there.",
-   "source": null,
-   "silent": true
+   "source": null
   },
   {
    "match": {
@@ -767,8 +766,16 @@
     "coordSource": "https://nominatim.openstreetmap.org/search?q=10+Stony+Creek+Road+Harrietville+Victoria",
     "osmId": null,
     "sources": [
-     { "source": "wikipedia", "page": "Big things (Australia)", "url": "https://en.wikipedia.org/wiki/Big_things_(Australia)" },
-     { "source": "wikivoyage", "page": "Australia's big things", "url": "https://en.wikivoyage.org/wiki/Australia%27s_big_things" }
+     {
+      "source": "wikipedia",
+      "page": "Big things (Australia)",
+      "url": "https://en.wikipedia.org/wiki/Big_things_(Australia)"
+     },
+     {
+      "source": "wikivoyage",
+      "page": "Australia's big things",
+      "url": "https://en.wikivoyage.org/wiki/Australia%27s_big_things"
+     }
     ]
    },
    "why": "Wikivoyage's own listed coordinate for this row was wrong by ~350 km: it matched OSM node 1541562525 (\"The Big Trout\", a surveyed monument) within a few metres — which is Adaminaby, NSW's Big Trout, not this one. Its own notes give a specific address, 10 Stony Creek Road, Harrietville VIC, which Nominatim places at -36.852035, 147.079682 — used here instead. Dropped the openstreetmap source and osmId, since that OSM node is a different, real object at a real place, not this one.",
