@@ -75,8 +75,8 @@
     "boom (1970s–early 80s)": 39
    },
    "withYear": 177,
-   "withHeight": 44,
-   "withAnySize": 142,
+   "withHeight": 43,
+   "withAnySize": 141,
    "withImage": 293,
    "withEvCharger": 87
   }
@@ -5475,13 +5475,11 @@
    "builtCirca": false,
    "builtRaw": null,
    "era": "late century (1985–1999)",
-   "heightM": 1998,
+   "heightM": null,
    "lengthM": null,
-   "sizeMaxM": 1998,
-   "sizeKind": "height",
-   "dimsM": [
-    1998
-   ],
+   "sizeMaxM": null,
+   "sizeKind": "unknown",
+   "dimsM": [],
    "sizeRaw": null,
    "category": "oddity",
    "status": "standing",
