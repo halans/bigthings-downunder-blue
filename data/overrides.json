@@ -353,10 +353,22 @@
     "id": "f8cebeb62b"
    },
    "set": {
-    "image": "custom:the-big-pencil-dd7917.jpeg"
+    "image": "custom:the-big-pencil-dd7917.jpeg",
+    "name": "The Big Pencil",
+    "state": "NSW",
+    "location": "Newcastle",
+    "town": "Newcastle",
+    "lat": -32.921461,
+    "lng": 151.792706,
+    "precision": "exact-verified",
+    "coordSource": "https://landofthebigs.com/big-pencil-newcastle-nsw/",
+    "category": "people-and-culture",
+    "status": "standing",
+    "stateName": "New South Wales"
    },
    "why": "Photo updated, replacing whatever (if anything) was there.",
-   "source": null
+   "source": null,
+   "silent": true
   },
   {
    "match": {
@@ -780,6 +792,256 @@
    },
    "why": "Wikivoyage's own listed coordinate for this row was wrong by ~350 km: it matched OSM node 1541562525 (\"The Big Trout\", a surveyed monument) within a few metres — which is Adaminaby, NSW's Big Trout, not this one. Its own notes give a specific address, 10 Stony Creek Road, Harrietville VIC, which Nominatim places at -36.852035, 147.079682 — used here instead. Dropped the openstreetmap source and osmId, since that OSM node is a different, real object at a real place, not this one.",
    "source": "https://nominatim.openstreetmap.org/search?q=10+Stony+Creek+Road+Harrietville+Victoria"
+  },
+  {
+   "match": {
+    "id": "a5dd5240d9"
+   },
+   "set": {
+    "name": "The Big Teapot",
+    "state": "NSW",
+    "location": "Blue Mountains",
+    "town": "Leura",
+    "lat": -33.714237,
+    "lng": 150.330951,
+    "precision": "exact-verified",
+    "coordSource": "https://landofthebigs.com/big-teapot-leura-nsw/",
+    "category": "fauna",
+    "status": "standing",
+    "stateName": "New South Wales"
+   },
+   "why": null,
+   "source": null,
+   "silent": true
+  },
+  {
+   "match": {
+    "id": "0cea0ceb63"
+   },
+   "set": {
+    "name": "Big Fruit Bowl",
+    "state": "NSW",
+    "location": "Blue Mountains",
+    "town": "Bilpin",
+    "lat": -33.498177,
+    "lng": 150.522031,
+    "precision": "town",
+    "coordSource": "https://en.wikipedia.org/wiki/Bilpin%2C_New_South_Wales",
+    "category": "fruit-and-veg",
+    "status": "standing",
+    "stateName": "New South Wales"
+   },
+   "why": null,
+   "source": null,
+   "silent": true
+  },
+  {
+   "match": {
+    "id": "126cfe6966"
+   },
+   "set": {
+    "name": "The Bilpin Apple Pie",
+    "state": "NSW",
+    "location": "Blue Mountains",
+    "town": "Bilpin",
+    "lat": -33.521352,
+    "lng": 150.452764,
+    "precision": "exact-verified",
+    "coordSource": "https://landofthebigs.com/bilpin-apple-pie-bilpin-nsw/",
+    "category": "fruit-and-veg",
+    "status": "standing",
+    "stateName": "New South Wales"
+   },
+   "why": null,
+   "source": null,
+   "silent": true
+  },
+  {
+   "match": {
+    "id": "06cc0feea1"
+   },
+   "set": {
+    "name": "Big Miners Lantern",
+    "state": "NSW",
+    "location": "Blue Mountains",
+    "town": "Lithgow",
+    "lat": -33.480068,
+    "lng": 150.157987,
+    "precision": "exact-wikivoyage",
+    "coordSource": "https://en.wikivoyage.org/wiki/Australia%27s_big_things",
+    "category": "tools-and-industry",
+    "status": "standing",
+    "stateName": "New South Wales",
+    "evChargerNearby": true
+   },
+   "why": null,
+   "source": null,
+   "silent": true
+  },
+  {
+   "match": {
+    "id": "93477b04bc"
+   },
+   "set": {
+    "name": "The Big Miner's Lamp",
+    "state": "NSW",
+    "location": "Blue Mountains",
+    "town": "Bowenfels",
+    "lat": -33.516667,
+    "lng": 150.116667,
+    "precision": "town",
+    "coordSource": "https://en.wikipedia.org/wiki/Bowenfels",
+    "category": "tools-and-industry",
+    "status": "standing",
+    "notes": "Depicts a safety lamp.",
+    "stateName": "New South Wales"
+   },
+   "why": null,
+   "source": null,
+   "silent": true
+  },
+  {
+   "match": {
+    "id": "40ad9323a5"
+   },
+   "set": {
+    "name": "The World's Biggest Sundial",
+    "state": "NSW",
+    "location": "Hunter Valley",
+    "town": "Singleton",
+    "lat": -32.5648,
+    "lng": 151.1597,
+    "precision": "exact-verified",
+    "coordSource": "https://singletonhuntervalley.com.au/tourism/singleton-sundial/",
+    "builtYear": 1987,
+    "builtRaw": "1987",
+    "category": "people-and-culture",
+    "status": "standing",
+    "notes": "A 25 ft sundial presented as a gift from Lemington Mine, to honour the occasion of the Australian Bicentenary. At the time of its creation, it was recognised by the Guinness Book of World Records as the world's largest sundial, and still lays claim to being the largest one-piece sundial in the Southern hemisphere.",
+    "stateName": "New South Wales"
+   },
+   "why": null,
+   "source": null,
+   "silent": true
+  },
+  {
+   "match": {
+    "id": "d80e9e1543"
+   },
+   "set": {
+    "name": "The Big Wine Bottle",
+    "state": "NSW",
+    "location": "Hunter Valley",
+    "town": "Pokolbin",
+    "lat": -32.775256,
+    "lng": 151.294686,
+    "precision": "exact-verified",
+    "coordSource": "https://nominatim.openstreetmap.org/search?q=Hunter+Valley+Gardens",
+    "category": "food-and-drink",
+    "status": "standing",
+    "notes": "Located at the Hunter Valley Gardens. The neck forms a chimney for an open fire contained within.",
+    "stateName": "New South Wales",
+    "evChargerNearby": true
+   },
+   "why": null,
+   "source": null,
+   "silent": true
+  },
+  {
+   "match": {
+    "id": "0f5f902692"
+   },
+   "set": {
+    "name": "The Big Kookaburra",
+    "state": "NSW",
+    "location": "Hunter Valley",
+    "town": "Kurri Kurri",
+    "lat": -32.819327,
+    "lng": 151.480187,
+    "precision": "exact-osm",
+    "coordSource": "https://www.openstreetmap.org/node/6743784237",
+    "builtYear": 2009,
+    "builtRaw": "2009",
+    "category": "fauna",
+    "status": "standing",
+    "notes": "Sculpture by Chris Fussell. It is located in Rotary Park.",
+    "stateName": "New South Wales"
+   },
+   "why": null,
+   "source": null,
+   "silent": true
+  },
+  {
+   "match": {
+    "id": "48933b6fb6"
+   },
+   "set": {
+    "name": "The Big UGG Boots",
+    "state": "NSW",
+    "location": "Hunter Valley",
+    "town": "Thornton",
+    "lat": -32.79308,
+    "lng": 151.63725,
+    "precision": "exact-wikivoyage",
+    "coordSource": "https://en.wikivoyage.org/wiki/Australia%27s_big_things",
+    "builtYear": 2015,
+    "builtRaw": "20 April 2015",
+    "category": "sport-and-leisure",
+    "status": "standing",
+    "notes": "Mortels Sheepskin Factory is home to The Big UGG Boots. These big UGG boots are 13 times the size of a women's AUS/US size 8 UGG boot. The Big UGG Boots are located in the Lower Hunter Region of NSW, Newcastle end of the M1.",
+    "stateName": "New South Wales"
+   },
+   "why": null,
+   "source": null,
+   "silent": true
+  },
+  {
+   "match": {
+    "id": "1a39ddcea6"
+   },
+   "set": {
+    "name": "Big Mosquito",
+    "state": "NSW",
+    "location": "Hunter Valley",
+    "town": "Hexham",
+    "lat": -32.8387,
+    "lng": 151.6891,
+    "precision": "exact-verified",
+    "coordSource": "https://nominatim.openstreetmap.org/search?q=Hexham+Bowling+Club+NSW+Australia&format=json",
+    "builtYear": 1993,
+    "builtRaw": "1993",
+    "category": "fauna",
+    "status": "standing",
+    "notes": "\"Ozzie the Mozzie\" at the Hexham Bowling Club is modelled on the locally abundant mosqiuto species Aedes alternans, commonly known as the Hexham grey. It includes illuminated eyes which switch on at night.",
+    "stateName": "New South Wales"
+   },
+   "why": null,
+   "source": null,
+   "silent": true
+  },
+  {
+   "match": {
+    "id": "0c3d25576f"
+   },
+   "set": {
+    "name": "The Big Beer Can",
+    "state": "NSW",
+    "location": "Newcastle",
+    "town": "Newcastle",
+    "lat": -32.9414,
+    "lng": 151.7012,
+    "precision": "exact-verified",
+    "coordSource": "https://nominatim.openstreetmap.org/search?q=Kotara+Bowling+Club+Newcastle+NSW+Australia&format=json",
+    "builtYear": 2026,
+    "builtRaw": "2026",
+    "category": "food-and-drink",
+    "status": "standing",
+    "notes": "The Good Folk Big Danny's Wedge Beer can is located in Kotara Bowling Club Newcastle NSW",
+    "stateName": "New South Wales"
+   },
+   "why": null,
+   "source": null,
+   "silent": true
   }
  ],
  "additions": [
@@ -843,6 +1105,23 @@
    "category": "oddity",
    "status": "standing",
    "notes": "The Long Jetty is appropriately named as it is an extremely long jetty spanning out over the shallow waters of Tuggerah Lake."
+  },
+  {
+   "name": "The Big Red Chair",
+   "state": "NSW",
+   "why": "The Big Red Chair is a whimsical, oversized chair located within the Hunter Valley Gardens (Story Book Garden) in Pokolbin.",
+   "source": "https://www.huntervalleygardens.com.au/attractions/gardens/storybook-garden/",
+   "location": "Hunter Valley",
+   "town": "Pokolbin",
+   "lat": -32.775256,
+   "lng": 151.294686,
+   "precision": "exact-verified",
+   "coordSource": "https://nominatim.openstreetmap.org/search?q=Hunter+Valley+Gardens",
+   "builtYear": 1998,
+   "heightM": 1998,
+   "category": "oddity",
+   "status": "standing",
+   "notes": "Located at the Hunter Valley Gardens. "
   }
  ],
  "removals": [
@@ -880,6 +1159,20 @@
     "id": "78baa8fb8f"
    },
    "why": "Not a roadside big thing",
+   "source": null
+  },
+  {
+   "match": {
+    "id": "e17b88ee2c"
+   },
+   "why": "Duplicate",
+   "source": null
+  },
+  {
+   "match": {
+    "id": "e45323dc28"
+   },
+   "why": "duplicate",
    "source": null
   }
  ]

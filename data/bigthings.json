@@ -1,6 +1,6 @@
 {
  "meta": {
-  "generated": "2026-09-12",
+  "generated": "2026-09-13",
   "claimedNationalTotal": 1075,
   "claimedTotalSource": "Clarke, A. (2023). Making a Mark… Journal of Australian Studies 47(2), cited by Wikipedia",
   "sources": [
@@ -26,20 +26,20 @@
    }
   ],
   "stats": {
-   "total": 475,
-   "mapped": 475,
-   "exact": 313,
+   "total": 474,
+   "mapped": 474,
+   "exact": 314,
    "byPrecision": {
     "exact-osm": 78,
-    "town": 162,
-    "exact-verified": 183,
+    "town": 160,
+    "exact-verified": 184,
     "exact-article": 20,
     "exact-wikivoyage": 26,
     "exact-inline": 6
    },
    "byState": {
     "ACT": 12,
-    "NSW": 138,
+    "NSW": 137,
     "NT": 24,
     "QLD": 115,
     "SA": 42,
@@ -49,18 +49,18 @@
    },
    "byCategory": {
     "fruit-and-veg": 61,
-    "food-and-drink": 36,
-    "people-and-culture": 53,
+    "food-and-drink": 35,
+    "people-and-culture": 52,
     "fauna": 148,
     "sport-and-leisure": 22,
     "sculpture": 7,
-    "oddity": 64,
+    "oddity": 65,
     "seafood": 39,
     "tools-and-industry": 26,
     "machinery-and-transport": 19
    },
    "byStatus": {
-    "standing": 435,
+    "standing": 434,
     "demolished": 11,
     "relocated": 12,
     "replaced": 2,
@@ -68,17 +68,17 @@
    },
    "byEra": {
     "revival (2000s–2014)": 45,
-    "late century (1985–1999)": 44,
-    "unknown": 299,
+    "late century (1985–1999)": 45,
+    "unknown": 297,
     "modern (2015+)": 38,
     "pioneer (pre-1970)": 10,
     "boom (1970s–early 80s)": 39
    },
-   "withYear": 176,
-   "withHeight": 43,
-   "withAnySize": 141,
+   "withYear": 177,
+   "withHeight": 44,
+   "withAnySize": 142,
    "withImage": 293,
-   "withEvCharger": 78
+   "withEvCharger": 87
   }
  },
  "things": [
@@ -1147,44 +1147,6 @@
    }
   },
   {
-   "id": "e45323dc28",
-   "name": "Big Bottle",
-   "state": "NSW",
-   "stateName": "New South Wales",
-   "location": "Pokolbin",
-   "town": "Pokolbin",
-   "lat": -32.798333,
-   "lng": 151.284444,
-   "precision": "town",
-   "coordSource": "https://en.wikipedia.org/wiki/Pokolbin%2C_New_South_Wales",
-   "builtYear": null,
-   "builtCirca": false,
-   "builtRaw": null,
-   "era": "unknown",
-   "heightM": null,
-   "lengthM": null,
-   "sizeMaxM": null,
-   "sizeKind": "unknown",
-   "dimsM": [],
-   "sizeRaw": null,
-   "category": "food-and-drink",
-   "status": "standing",
-   "statusEvidence": null,
-   "notes": null,
-   "blurb": null,
-   "image": null,
-   "wikipediaArticle": null,
-   "wikidata": null,
-   "osmId": null,
-   "sources": [
-    {
-     "source": "wikivoyage",
-     "page": "Australia's big things",
-     "url": "https://en.wikivoyage.org/wiki/Australia%27s_big_things"
-    }
-   ]
-  },
-  {
    "id": "9004823580",
    "name": "Big Bowl",
    "state": "NSW",
@@ -1782,11 +1744,11 @@
    }
   },
   {
-   "id": "0cea0ceb63",
+   "id": "14cca5615e",
    "name": "Big Fruit Bowl",
    "state": "NSW",
    "stateName": "New South Wales",
-   "location": "Bilpin",
+   "location": "Blue Mountains",
    "town": "Bilpin",
    "lat": -33.498177,
    "lng": 150.522031,
@@ -2084,12 +2046,12 @@
    ]
   },
   {
-   "id": "06cc0feea1",
+   "id": "484b8de066",
    "name": "Big Miners Lantern",
    "state": "NSW",
    "stateName": "New South Wales",
-   "location": "Lithgow",
-   "town": null,
+   "location": "Blue Mountains",
+   "town": "Lithgow",
    "lat": -33.480068,
    "lng": 150.157987,
    "precision": "exact-wikivoyage",
@@ -2123,11 +2085,11 @@
    "evChargerNearby": true
   },
   {
-   "id": "1a39ddcea6",
+   "id": "b3c476eb1c",
    "name": "Big Mosquito",
    "state": "NSW",
    "stateName": "New South Wales",
-   "location": "Hexham",
+   "location": "Hunter Valley",
    "town": "Hexham",
    "lat": -32.8387,
    "lng": 151.6891,
@@ -2162,19 +2124,8 @@
      "source": "wikivoyage",
      "page": "Australia's big things",
      "url": "https://en.wikivoyage.org/wiki/Australia%27s_big_things"
-    },
-    {
-     "source": "verified",
-     "page": "Nominatim — Hexham Bowling Club, Maitland Road, Hexham NSW",
-     "url": "https://nominatim.openstreetmap.org/search?q=Hexham+Bowling+Club+NSW+Australia&format=json"
     }
-   ],
-   "coordMatch": {
-    "kind": "researched",
-    "confidence": "high",
-    "why": "Notes confirm 'Ozzie the Mozzie at the Hexham Bowling Club'. Nominatim found Hexham Bowling Club at Maitland Road: -32.8387110, 151.6890935.",
-    "osmName": "Nominatim — Hexham Bowling Club, Maitland Road, Hexham NSW"
-   }
+   ]
   },
   {
    "id": "312ec70b76",
@@ -2424,44 +2375,6 @@
    "dimsM": [],
    "sizeRaw": null,
    "category": "oddity",
-   "status": "standing",
-   "statusEvidence": null,
-   "notes": null,
-   "blurb": null,
-   "image": null,
-   "wikipediaArticle": null,
-   "wikidata": null,
-   "osmId": null,
-   "sources": [
-    {
-     "source": "wikivoyage",
-     "page": "Australia's big things",
-     "url": "https://en.wikivoyage.org/wiki/Australia%27s_big_things"
-    }
-   ]
-  },
-  {
-   "id": "e17b88ee2c",
-   "name": "Big Sundial",
-   "state": "NSW",
-   "stateName": "New South Wales",
-   "location": "Singleton",
-   "town": "Singleton",
-   "lat": -32.566667,
-   "lng": 151.169722,
-   "precision": "town",
-   "coordSource": "https://en.wikipedia.org/wiki/Singleton%2C_New_South_Wales",
-   "builtYear": null,
-   "builtCirca": false,
-   "builtRaw": null,
-   "era": "unknown",
-   "heightM": null,
-   "lengthM": null,
-   "sizeMaxM": null,
-   "sizeKind": "unknown",
-   "dimsM": [],
-   "sizeRaw": null,
-   "category": "people-and-culture",
    "status": "standing",
    "statusEvidence": null,
    "notes": null,
@@ -3670,11 +3583,11 @@
    "evChargerNearby": true
   },
   {
-   "id": "0c3d25576f",
+   "id": "b0e3a01262",
    "name": "The Big Beer Can",
    "state": "NSW",
    "stateName": "New South Wales",
-   "location": "Newcastle NSW",
+   "location": "Newcastle",
    "town": "Newcastle",
    "lat": -32.9414,
    "lng": 151.7012,
@@ -3709,19 +3622,8 @@
      "source": "wikivoyage",
      "page": "Australia's big things",
      "url": "https://en.wikivoyage.org/wiki/Australia%27s_big_things"
-    },
-    {
-     "source": "verified",
-     "page": "Nominatim — Kotara Bowling Club, 2 Howell Street, Kotara NSW",
-     "url": "https://nominatim.openstreetmap.org/search?q=Kotara+Bowling+Club+Newcastle+NSW+Australia&format=json"
     }
-   ],
-   "coordMatch": {
-    "kind": "researched",
-    "confidence": "high",
-    "why": "Notes confirm 'located in Kotara Bowling Club Newcastle NSW'. Nominatim found Kotara Bowling Club at 2 Howell Street, Kotara at -32.9413730, 151.7011940. Note: The suburb is Kotara, not Newcastle city centre.",
-    "osmName": "Nominatim — Kotara Bowling Club, 2 Howell Street, Kotara NSW"
-   }
+   ]
   },
   {
    "id": "1dcaab2a78",
@@ -4698,12 +4600,12 @@
    "evChargerNearby": true
   },
   {
-   "id": "0f5f902692",
+   "id": "1c963a2346",
    "name": "The Big Kookaburra",
    "state": "NSW",
    "stateName": "New South Wales",
-   "location": "Kurri Kurri",
-   "town": null,
+   "location": "Hunter Valley",
+   "town": "Kurri Kurri",
    "lat": -32.819327,
    "lng": 151.480187,
    "precision": "exact-osm",
@@ -4923,11 +4825,11 @@
    "evChargerNearby": true
   },
   {
-   "id": "93477b04bc",
+   "id": "895d889d70",
    "name": "The Big Miner's Lamp",
    "state": "NSW",
    "stateName": "New South Wales",
-   "location": "Bowenfels",
+   "location": "Blue Mountains",
    "town": "Bowenfels",
    "lat": -33.516667,
    "lng": 150.116667,
@@ -5182,8 +5084,8 @@
    "stateName": "New South Wales",
    "location": "Newcastle",
    "town": "Newcastle",
-   "lat": -32.920757,
-   "lng": 151.785589,
+   "lat": -32.921461,
+   "lng": 151.792706,
    "precision": "exact-verified",
    "coordSource": "https://landofthebigs.com/big-pencil-newcastle-nsw/",
    "builtYear": null,
@@ -5207,8 +5109,8 @@
    "osmId": null,
    "addedManually": true,
    "correction": {
-    "why": "Photo updated, replacing whatever (if anything) was there.",
-    "source": null
+    "why": "Catalogued by Land of the Bigs, which publishes a mapped position for it.",
+    "source": "https://landofthebigs.com/big-pencil-newcastle-nsw/"
    },
    "sources": [
     {
@@ -5559,6 +5461,52 @@
    ]
   },
   {
+   "id": "0a2a433fe6",
+   "name": "The Big Red Chair",
+   "state": "NSW",
+   "stateName": "New South Wales",
+   "location": "Hunter Valley",
+   "town": "Pokolbin",
+   "lat": -32.775256,
+   "lng": 151.294686,
+   "precision": "exact-verified",
+   "coordSource": "https://nominatim.openstreetmap.org/search?q=Hunter+Valley+Gardens",
+   "builtYear": 1998,
+   "builtCirca": false,
+   "builtRaw": null,
+   "era": "late century (1985–1999)",
+   "heightM": 1998,
+   "lengthM": null,
+   "sizeMaxM": 1998,
+   "sizeKind": "height",
+   "dimsM": [
+    1998
+   ],
+   "sizeRaw": null,
+   "category": "oddity",
+   "status": "standing",
+   "statusEvidence": null,
+   "notes": "Located at the Hunter Valley Gardens. ",
+   "blurb": null,
+   "image": null,
+   "wikipediaArticle": null,
+   "wikidata": null,
+   "osmId": null,
+   "addedManually": true,
+   "correction": {
+    "why": "The Big Red Chair is a whimsical, oversized chair located within the Hunter Valley Gardens (Story Book Garden) in Pokolbin.",
+    "source": "https://www.huntervalleygardens.com.au/attractions/gardens/storybook-garden/"
+   },
+   "sources": [
+    {
+     "source": "independent reporting",
+     "page": "https://www.huntervalleygardens.com.au/attractions/gardens/storybook-garden/",
+     "url": "https://www.huntervalleygardens.com.au/attractions/gardens/storybook-garden/"
+    }
+   ],
+   "evChargerNearby": true
+  },
+  {
    "id": "2cda4730be",
    "name": "The Big Rocket",
    "state": "NSW",
@@ -5861,11 +5809,11 @@
    }
   },
   {
-   "id": "a5dd5240d9",
+   "id": "c3f793dae7",
    "name": "The Big Teapot",
    "state": "NSW",
    "stateName": "New South Wales",
-   "location": "Leura",
+   "location": "Blue Mountains",
    "town": "Leura",
    "lat": -33.714237,
    "lng": 150.330951,
@@ -6055,12 +6003,12 @@
    "evChargerNearby": true
   },
   {
-   "id": "48933b6fb6",
+   "id": "9fc915c8ef",
    "name": "The Big UGG Boots",
    "state": "NSW",
    "stateName": "New South Wales",
-   "location": "Thornton",
-   "town": null,
+   "location": "Hunter Valley",
+   "town": "Thornton",
    "lat": -32.79308,
    "lng": 151.63725,
    "precision": "exact-wikivoyage",
@@ -6184,11 +6132,11 @@
    ]
   },
   {
-   "id": "d80e9e1543",
+   "id": "422a1c9648",
    "name": "The Big Wine Bottle",
    "state": "NSW",
    "stateName": "New South Wales",
-   "location": "Pokolbin",
+   "location": "Hunter Valley",
    "town": "Pokolbin",
    "lat": -32.775256,
    "lng": 151.294686,
@@ -6221,19 +6169,8 @@
      "source": "wikipedia",
      "page": "Big things (Australia)",
      "url": "https://en.wikipedia.org/wiki/Big_things_(Australia)"
-    },
-    {
-     "source": "verified",
-     "page": "OpenStreetMap — Hunter Valley Gardens, Cessnock NSW",
-     "url": "https://nominatim.openstreetmap.org/search?q=Hunter+Valley+Gardens"
     }
    ],
-   "coordMatch": {
-    "kind": "researched",
-    "confidence": "medium",
-    "why": "Big Wine Bottle (1998, 7x1.5m) is located at the Hunter Valley Gardens, Pokolbin. The neck forms a chimney for an open fire.",
-    "osmName": "OpenStreetMap — Hunter Valley Gardens, Cessnock NSW"
-   },
    "evChargerNearby": true
   },
   {
@@ -6324,11 +6261,11 @@
    ]
   },
   {
-   "id": "126cfe6966",
+   "id": "8dedc5a4a1",
    "name": "The Bilpin Apple Pie",
    "state": "NSW",
    "stateName": "New South Wales",
-   "location": "Bilpin",
+   "location": "Blue Mountains",
    "town": "Bilpin",
    "lat": -33.521352,
    "lng": 150.452764,
@@ -6670,11 +6607,11 @@
    ]
   },
   {
-   "id": "40ad9323a5",
+   "id": "04e74ecda0",
    "name": "The World's Biggest Sundial",
    "state": "NSW",
    "stateName": "New South Wales",
-   "location": "Singleton",
+   "location": "Hunter Valley",
    "town": "Singleton",
    "lat": -32.5648,
    "lng": 151.1597,
@@ -6704,19 +6641,8 @@
      "source": "wikipedia",
      "page": "Big things (Australia)",
      "url": "https://en.wikipedia.org/wiki/Big_things_(Australia)"
-    },
-    {
-     "source": "verified",
-     "page": "Singleton Hunter Valley Tourism — Rose Point Park, Ryan Avenue, Singleton NSW 2330",
-     "url": "https://singletonhuntervalley.com.au/tourism/singleton-sundial/"
     }
-   ],
-   "coordMatch": {
-    "kind": "researched",
-    "confidence": "high",
-    "why": "Address confirmed by Singleton Council website and tourism pages as Rose Point Park, Ryan Avenue, Singleton. Nominatim returned Rose Point Park Playground at this coordinate.",
-    "osmName": "Singleton Hunter Valley Tourism — Rose Point Park, Ryan Avenue, Singleton NSW 2330"
-   }
+   ]
   },
   {
    "id": "8996cac859",
@@ -8328,7 +8254,8 @@
      "page": "Australia's big things",
      "url": "https://en.wikivoyage.org/wiki/Australia%27s_big_things"
     }
-   ]
+   ],
+   "evChargerNearby": true
   },
   {
    "id": "2108eea378",
@@ -13653,7 +13580,8 @@
     "confidence": "medium",
     "why": "Notes confirm ant was relocated from the closed Poochera Roadhouse into the town park. Poochera is a very small town; coordinate is town centre area on Eyre Highway SA. Specific park location within town not pinpointed.",
     "osmName": "Nominatim – Poochera, South Australia (notes: 'relocated into the town park')"
-   }
+   },
+   "evChargerNearby": true
   },
   {
    "id": "21a50312b4",
@@ -13734,7 +13662,8 @@
      "page": "Big things (Australia)",
      "url": "https://en.wikipedia.org/wiki/Big_things_(Australia)"
     }
-   ]
+   ],
+   "evChargerNearby": true
   },
   {
    "id": "c755dae57d",
@@ -14153,7 +14082,8 @@
      "page": "node/7092653230",
      "url": "https://www.openstreetmap.org/node/7092653230"
     }
-   ]
+   ],
+   "evChargerNearby": true
   },
   {
    "id": "e58c058a91",
@@ -16033,7 +15963,8 @@
      "page": "Australia's big things",
      "url": "https://en.wikivoyage.org/wiki/Australia%27s_big_things"
     }
-   ]
+   ],
+   "evChargerNearby": true
   },
   {
    "id": "20770b1e9b",
@@ -20418,7 +20349,8 @@
      "page": "Australia's big things",
      "url": "https://en.wikivoyage.org/wiki/Australia%27s_big_things"
     }
-   ]
+   ],
+   "evChargerNearby": true
   },
   {
    "id": "2fe3fb5ad2",
@@ -20946,7 +20878,8 @@
     "confidence": "high",
     "why": "Notes confirm 'situated in the carpark of the Eucla roadhouse, Eyre Highway'. Nominatim found Eucla Roadhouse at -31.6772582, 128.8840773.",
     "osmName": "Nominatim — Eucla Roadhouse, Eucla Telegraph Station Road, Eucla WA"
-   }
+   },
+   "evChargerNearby": true
   },
   {
    "id": "32f31223db",
@@ -20989,7 +20922,8 @@
      "page": "Australia's big things",
      "url": "https://en.wikivoyage.org/wiki/Australia%27s_big_things"
     }
-   ]
+   ],
+   "evChargerNearby": true
   },
   {
    "id": "037f508fdc",

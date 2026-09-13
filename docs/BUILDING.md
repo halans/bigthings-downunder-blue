@@ -223,14 +223,24 @@ Two traps it documents:
 ## Stage 4d — EV charger proximity (`src/fetch-ev-chargers.js`)
 
 Optional, and independent of everything above: `npm run fetch:ev` harvests every
-`amenity=charging_station` node/way/relation in Australia from Overpass into
-`cache/ev-chargers.json` (~1,600 points as of this writing). `build.js`'s `applyEvChargers()`
-then flags any thing within 500 m (walking distance) of one of them with `evChargerNearby:
-true` — a straight-line haversine check, bounding-box-filtered first so it stays cheap however
-large the charger set grows. The card shows it as a 🔌 badge.
+`amenity=charging_station` node/way/relation in Australia from Overpass, merges in every
+operational point from [Open Charge Map](https://openchargemap.org/) if `OCM_API_KEY` is set (see
+`.env.example`), and writes the deduped result to `cache/ev-chargers.json` (~2,200 points as of
+this writing — OSM alone has ~1,600; OCM adds roughly 40% more that aren't within 75 m of an
+existing OSM point, since the two are independently, incompletely mapped). `build.js`'s
+`applyEvChargers()` then flags any thing within 500 m (walking distance) of one of them with
+`evChargerNearby: true` — a straight-line haversine check, bounding-box-filtered first so it
+stays cheap however large the charger set grows. The card shows it as a 🔌 badge.
 
-If `cache/ev-chargers.json` was never fetched, this step silently does nothing — the flag is
-never set, not falsely set. Refresh it independently of everything else with `npm run fetch:ev`,
+Open Charge Map is optional at fetch time, not build time: without `OCM_API_KEY`, this step just
+falls back to OSM alone, exactly as it worked before OCM support existed — nothing downstream
+knows or cares which source(s) a point came from. A free key is at
+https://openchargemap.org/site/developerinfo; put it in a `.env` file at the repo root
+(`OCM_API_KEY=...`, gitignored, loaded via Node's built-in `process.loadEnvFile()` — no dependency
+needed) or export it as a normal environment variable.
+
+If `cache/ev-chargers.json` was never fetched at all, this step silently does nothing — the flag
+is never set, not falsely set. Refresh it independently of everything else with `npm run fetch:ev`,
 since charging infrastructure changes far faster than sculpture locations.
 
 The map surfaces this as a filter, not an overlay: a "🔌 EV charging nearby" switch under
