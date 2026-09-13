@@ -1042,6 +1042,31 @@
    "why": null,
    "source": null,
    "silent": true
+  },
+  {
+   "match": {
+    "id": "0a2a433fe6"
+   },
+   "set": {
+    "image": "custom:the-big-red-chair-29a690.jpeg",
+    "name": "The Big Red Chair",
+    "state": "NSW",
+    "location": "Hunter Valley",
+    "town": "Pokolbin",
+    "lat": -32.775256,
+    "lng": 151.294686,
+    "precision": "exact-verified",
+    "coordSource": "https://nominatim.openstreetmap.org/search?q=Hunter+Valley+Gardens",
+    "builtYear": 1998,
+    "category": "oddity",
+    "status": "standing",
+    "notes": "Located at the Hunter Valley Gardens. ",
+    "stateName": "New South Wales",
+    "evChargerNearby": true
+   },
+   "why": "Photo updated, replacing whatever (if anything) was there.",
+   "source": null,
+   "silent": true
   }
  ],
  "additions": [

@@ -77,7 +77,7 @@
    "withYear": 177,
    "withHeight": 43,
    "withAnySize": 141,
-   "withImage": 293,
+   "withImage": 294,
    "withEvCharger": 87
   }
  },
@@ -5486,7 +5486,7 @@
    "statusEvidence": null,
    "notes": "Located at the Hunter Valley Gardens. ",
    "blurb": null,
-   "image": null,
+   "image": "custom:the-big-red-chair-29a690.jpeg",
    "wikipediaArticle": null,
    "wikidata": null,
    "osmId": null,
