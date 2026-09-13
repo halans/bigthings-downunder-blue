@@ -1089,6 +1089,30 @@
    "why": "Photo updated, replacing whatever (if anything) was there.",
    "source": null,
    "silent": true
+  },
+  {
+   "match": {
+    "id": "c097727bfb"
+   },
+   "set": {
+    "name": "Big Banana",
+    "state": "QLD",
+    "location": "North Mackay",
+    "lat": -21.125095,
+    "lng": 149.191777,
+    "precision": "exact-osm",
+    "coordSource": "https://www.openstreetmap.org/node/2966929721",
+    "builtYear": 1987,
+    "builtRaw": "1987",
+    "category": "fruit-and-veg",
+    "status": "standing",
+    "notes": " ",
+    "stateName": "Queensland",
+    "blurb": "The funnier QLD version of the Big Banana"
+   },
+   "why": null,
+   "source": null,
+   "silent": true
   }
  ],
  "additions": [
