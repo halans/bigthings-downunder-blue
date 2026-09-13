@@ -1067,6 +1067,28 @@
    "why": "Photo updated, replacing whatever (if anything) was there.",
    "source": null,
    "silent": true
+  },
+  {
+   "match": {
+    "id": "826b6cc7f4"
+   },
+   "set": {
+    "image": "custom:lizzo-the-lizard-e3b6a5.jpeg",
+    "name": "Lizzo the Lizard",
+    "state": "NSW",
+    "location": "Central Coast",
+    "town": "Somersby",
+    "lat": -33.417505,
+    "lng": 151.277852,
+    "precision": "exact-verified",
+    "coordSource": "https://landofthebigs.com/lizzo-the-lizard-somersby-nsw/",
+    "category": "fauna",
+    "status": "standing",
+    "stateName": "New South Wales"
+   },
+   "why": "Photo updated, replacing whatever (if anything) was there.",
+   "source": null,
+   "silent": true
   }
  ],
  "additions": [

@@ -77,7 +77,7 @@
    "withYear": 177,
    "withHeight": 43,
    "withAnySize": 141,
-   "withImage": 294,
+   "withImage": 295,
    "withEvCharger": 87
   }
  },
@@ -3108,7 +3108,7 @@
    "statusEvidence": null,
    "notes": null,
    "blurb": null,
-   "image": null,
+   "image": "custom:lizzo-the-lizard-e3b6a5.jpeg",
    "wikipediaArticle": null,
    "wikidata": null,
    "osmId": null,
