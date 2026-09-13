@@ -404,9 +404,11 @@ let selected = null;
 
 /**
  * Direct links: #thing=<id> opens one card, #state=NSW or #state=NSW,QLD
- * pre-applies the state filter. Read once at load — nothing here listens for
- * hashchange, since every in-app navigation already updates F/selected
- * directly and syncHash() keeps the address bar in step with it.
+ * pre-applies the state filter, #q=<term> pre-fills the search box (and
+ * everything a search implies — the matching-results sheet, the filtered
+ * pins). Read once at load — nothing here listens for hashchange, since
+ * every in-app navigation already updates F/selected directly and
+ * syncHash() keeps the address bar in step with it.
  *
  * The rest (cats/eras/hideGone/exactOnly/labels/ev/lat/lng/zoom) only ever
  * come from a "Share this view" link (see shareView()) — normal browsing
@@ -414,6 +416,7 @@ let selected = null;
  */
 const initialHash = new URLSearchParams(location.hash.slice(1));
 const hashThing = initialHash.get('thing');
+const hashQ = (initialHash.get('q') || '').trim();
 const hashStates = (initialHash.get('state') || '').split(',').map((s) => s.trim().toUpperCase()).filter(Boolean);
 const hashCats = (initialHash.get('cats') || '').split(',').map((s) => s.trim()).filter(Boolean);
 const hashEras = (initialHash.get('eras') || '').split(',').map((s) => s.trim()).filter(Boolean);
@@ -424,7 +427,7 @@ const hashEv = initialHash.get('ev') === '1';
 const hashLat = parseFloat(initialHash.get('lat'));
 const hashLng = parseFloat(initialHash.get('lng'));
 const hashZoom = parseFloat(initialHash.get('zoom'));
-const hashHasView = hashCats.length || hashEras.length || hashHideGone || hashExactOnly || hashLabels || hashEv
+const hashHasView = Boolean(hashQ) || hashCats.length || hashEras.length || hashHideGone || hashExactOnly || hashLabels || hashEv
   || (Number.isFinite(hashLat) && Number.isFinite(hashLng));
 
 /* ---------------- map ---------------- */
@@ -637,6 +640,7 @@ function syncHash() {
 function shareView() {
   const p = new URLSearchParams();
   if (selected) p.set('thing', selected);
+  if (F.q) p.set('q', F.q);
   if (F.states.size) p.set('state', [...F.states].join(','));
   if (F.cats.size) p.set('cats', [...F.cats].join(','));
   if (F.eras.size) p.set('eras', [...F.eras].join(','));
@@ -1274,6 +1278,14 @@ if (hashHasView) {
   if (hashExactOnly) { F.exactOnly = true; document.getElementById('switch-exactOnly').checked = true; }
   if (hashLabels) { mapEl.classList.add('labels-on'); document.getElementById('labelswitch').checked = true; }
   if (hashEv && document.getElementById('evswitch')) { F.evOnly = true; document.getElementById('evswitch').checked = true; }
+  if (hashQ) {
+    document.getElementById('q').value = hashQ;
+    F.q = hashQ;
+    // Same rule the live search box uses: a real query opens the matches
+    // sheet, an empty one wouldn't (moot here since hashQ is already
+    // non-empty, but kept for the same reasoning as its live counterpart).
+    if (hashQ.length > 1) document.getElementById('listsheet').classList.add('open');
+  }
   refresh(false);
   if (Number.isFinite(hashLat) && Number.isFinite(hashLng)) {
     map.setView([hashLat, hashLng], Number.isFinite(hashZoom) ? hashZoom : map.getZoom());
