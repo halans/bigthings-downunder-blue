@@ -77,7 +77,7 @@
    "withYear": 179,
    "withHeight": 43,
    "withAnySize": 141,
-   "withImage": 295,
+   "withImage": 296,
    "withEvCharger": 90
   }
  },
@@ -5824,9 +5824,9 @@
    "category": "machinery-and-transport",
    "status": "standing",
    "statusEvidence": null,
-   "notes": "The above-waterline outer casing of the decommissioned Oberon-class submarine HMAS Otway (launched 1966, decommissioned 1994), displayed full-scale in Germanton Park at the corner of Albury and Raymond Streets. Purchased for the town with a $100,000 gift from Gundula Holbrook, widow of WWI submarine commander Norman Holbrook VC, and dedicated 7–8 June 1997. Holbrook is known nationally as 'the Submarine Town'.",
-   "blurb": null,
-   "image": null,
+   "notes": "Not a Big Thing, just a big thing.",
+   "blurb": "The above-waterline outer casing of the decommissioned Oberon-class submarine HMAS Otway (launched 1966, decommissioned 1994), displayed full-scale in Germanton Park at the corner of Albury and Raymond Streets. Purchased for the town with a $100,000 gift from Gundula Holbrook, widow of WWI submarine commander Norman Holbrook VC, and dedicated 7–8 June 1997. Holbrook is known nationally as 'the Submarine Town'.",
+   "image": "custom:the-big-submarine-hmas-otway-32c79f.jpg",
    "wikipediaArticle": null,
    "wikidata": null,
    "osmId": null,
