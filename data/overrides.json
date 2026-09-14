@@ -1299,6 +1299,24 @@
    "category": "fauna",
    "status": "standing",
    "notes": "A snail sculpture by artist Peter Hill, installed January 2018 to mark the start of Bremer Bay's native snail trail on Wellstead Road, opposite the dive shop and hardware store."
+  },
+  {
+   "name": "The Big Submarine (HMAS Otway)",
+   "state": "NSW",
+   "why": "Requested addition; a well-documented large-scale civic attraction absent from both wiki Big Things lists.",
+   "source": "https://en.wikipedia.org/wiki/HMAS_Otway_(S_59)",
+   "location": "Holbrook",
+   "town": "Holbrook",
+   "lat": -35.7183,
+   "lng": 147.317096,
+   "precision": "exact-osm",
+   "coordSource": "https://www.openstreetmap.org/way/170610484",
+   "builtYear": 1997,
+   "builtRaw": "1997",
+   "sizeRaw": "90 m long",
+   "category": "machinery-and-transport",
+   "status": "standing",
+   "notes": "The above-waterline outer casing of the decommissioned Oberon-class submarine HMAS Otway (launched 1966, decommissioned 1994), displayed full-scale in Germanton Park at the corner of Albury and Raymond Streets. Purchased for the town with a $100,000 gift from Gundula Holbrook, widow of WWI submarine commander Norman Holbrook VC, and dedicated 7–8 June 1997. Holbrook is known nationally as 'the Submarine Town'."
   }
  ],
  "removals": [

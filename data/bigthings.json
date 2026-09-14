@@ -26,11 +26,11 @@
    }
   ],
   "stats": {
-   "total": 476,
-   "mapped": 476,
-   "exact": 317,
+   "total": 477,
+   "mapped": 477,
+   "exact": 318,
    "byPrecision": {
-    "exact-osm": 79,
+    "exact-osm": 80,
     "town": 159,
     "exact-verified": 187,
     "exact-article": 20,
@@ -39,7 +39,7 @@
    },
    "byState": {
     "ACT": 12,
-    "NSW": 138,
+    "NSW": 139,
     "NT": 24,
     "QLD": 115,
     "SA": 42,
@@ -57,10 +57,10 @@
     "oddity": 66,
     "seafood": 39,
     "tools-and-industry": 26,
-    "machinery-and-transport": 19
+    "machinery-and-transport": 20
    },
    "byStatus": {
-    "standing": 436,
+    "standing": 437,
     "demolished": 11,
     "relocated": 12,
     "replaced": 2,
@@ -68,17 +68,17 @@
    },
    "byEra": {
     "revival (2000s–2014)": 45,
-    "late century (1985–1999)": 45,
+    "late century (1985–1999)": 46,
     "unknown": 298,
     "modern (2015+)": 39,
     "pioneer (pre-1970)": 10,
     "boom (1970s–early 80s)": 39
    },
-   "withYear": 178,
+   "withYear": 179,
    "withHeight": 43,
    "withAnySize": 141,
    "withImage": 295,
-   "withEvCharger": 89
+   "withEvCharger": 90
   }
  },
  "things": [
@@ -5799,6 +5799,50 @@
      "url": "https://landofthebigs.com/big-strawberry-luddenham-nsw/"
     }
    ]
+  },
+  {
+   "id": "99d87b188f",
+   "name": "The Big Submarine (HMAS Otway)",
+   "state": "NSW",
+   "stateName": "New South Wales",
+   "location": "Holbrook",
+   "town": "Holbrook",
+   "lat": -35.7183,
+   "lng": 147.317096,
+   "precision": "exact-osm",
+   "coordSource": "https://www.openstreetmap.org/way/170610484",
+   "builtYear": 1997,
+   "builtCirca": false,
+   "builtRaw": "1997",
+   "era": "late century (1985–1999)",
+   "heightM": null,
+   "lengthM": null,
+   "sizeMaxM": null,
+   "sizeKind": "unknown",
+   "dimsM": [],
+   "sizeRaw": "90 m long",
+   "category": "machinery-and-transport",
+   "status": "standing",
+   "statusEvidence": null,
+   "notes": "The above-waterline outer casing of the decommissioned Oberon-class submarine HMAS Otway (launched 1966, decommissioned 1994), displayed full-scale in Germanton Park at the corner of Albury and Raymond Streets. Purchased for the town with a $100,000 gift from Gundula Holbrook, widow of WWI submarine commander Norman Holbrook VC, and dedicated 7–8 June 1997. Holbrook is known nationally as 'the Submarine Town'.",
+   "blurb": null,
+   "image": null,
+   "wikipediaArticle": null,
+   "wikidata": null,
+   "osmId": null,
+   "addedManually": true,
+   "correction": {
+    "why": "Requested addition; a well-documented large-scale civic attraction absent from both wiki Big Things lists.",
+    "source": "https://en.wikipedia.org/wiki/HMAS_Otway_(S_59)"
+   },
+   "sources": [
+    {
+     "source": "independent reporting",
+     "page": "https://en.wikipedia.org/wiki/HMAS_Otway_(S_59)",
+     "url": "https://en.wikipedia.org/wiki/HMAS_Otway_(S_59)"
+    }
+   ],
+   "evChargerNearby": true
   },
   {
    "id": "71d189db08",
