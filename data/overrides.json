@@ -1113,6 +1113,35 @@
    "why": null,
    "source": null,
    "silent": true
+  },
+  {
+   "match": {
+    "id": "a814ba34e1"
+   },
+   "set": {
+    "location": "Thallon",
+    "town": "Thallon",
+    "lat": -28.636036,
+    "lng": 148.869072,
+    "precision": "exact-osm",
+    "coordSource": "https://www.openstreetmap.org/node/13093169011",
+    "notes": "The wombat depicted is a northern hairy-nosed wombat, which is critically endangered. Officially named William the Hairy-Nosed Wombat, the sculpture stands in Thallon's town park on Pine Street, next to the town's ANZAC memorial."
+   },
+   "why": "Location cell only read 'Thallon ()', an empty qualifier with no town field set. Confirmed against an OpenStreetMap node explicitly tagged tourism=artwork, description='Wombat', sitting a few metres from a separately tagged historic=memorial/war_memorial node — matching reporting that places William beside Thallon's ANZAC memorial in the town park. The prior inline coordinate was already within about 15 m of this node.",
+   "source": "https://www.openstreetmap.org/node/13093169011"
+  },
+  {
+   "match": {
+    "id": "dfb36fa94d"
+   },
+   "set": {
+    "lat": -38.209772,
+    "lng": 146.129194,
+    "precision": "exact-verified",
+    "coordSource": "https://nominatim.openstreetmap.org/search?q=Spud+Shed+Trafalgar+VIC&format=json"
+   },
+   "why": "Location cell and precision were town-level ('On Princes Highway between Trafalgar and Yarragon'). The row's own notes name the exact site, 'The Spud Shed' at the corner of Princes Hwy and Rankins Rd; Nominatim/OSM maps a shop node named 'Spud Shed' at that address, giving an exact point instead of the Trafalgar town centroid. Note this sculpture is sometimes wrongly associated with Thorpdale, VIC (also a well-known potato-growing town, home of the Thorpdale Potato Festival) — the actual site is the Spud Shed roadside stall between Trafalgar and Yarragon.",
+   "source": "https://nominatim.openstreetmap.org/search?q=Spud+Shed+Trafalgar+VIC&format=json"
   }
  ],
  "additions": [
