@@ -1084,7 +1084,8 @@
     "coordSource": "https://landofthebigs.com/lizzo-the-lizard-somersby-nsw/",
     "category": "fauna",
     "status": "standing",
-    "stateName": "New South Wales"
+    "stateName": "New South Wales",
+    "blurb": "At the Australian Reptile Park's entrance"
    },
    "why": "Photo updated, replacing whatever (if anything) was there.",
    "source": null,
@@ -1221,6 +1222,55 @@
    "category": "oddity",
    "status": "standing",
    "notes": "Located at the Hunter Valley Gardens. "
+  },
+  {
+   "name": "The Big Root",
+   "state": "VIC",
+   "why": "Named in ABC News' roundup of obscure Australian Big Things; absent from both wiki lists.",
+   "source": "https://www.abc.net.au/news/2018-02-21/the-big-root-and-10-more-obscure-australian-big-things/9415936",
+   "location": "Nowa Nowa",
+   "town": "Nowa Nowa",
+   "lat": -37.716667,
+   "lng": 148.1,
+   "precision": "town",
+   "coordSource": "https://en.wikipedia.org/wiki/Nowa_Nowa",
+   "sizeRaw": "7 m wide, 4 m tall",
+   "category": "oddity",
+   "status": "standing",
+   "notes": "A polished eucalyptus tree root, estimated 250–300 years old, that grew wide rather than deep after failing to penetrate an underlying limestone shelf. Hand-polished over 12 months with a dentistry drill by the late Jack Ramsdell; displayed in a purpose-built wooden pyramid behind a local café."
+  },
+  {
+   "name": "Big Blue (The Big Blue Horse)",
+   "state": "NSW",
+   "why": "Named in Destination NSW's attraction listings; absent from both wiki lists.",
+   "source": "https://www.nsw.gov.au/visiting-and-exploring-nsw/locations-and-attractions/big-blue",
+   "location": "Scone",
+   "town": "Scone",
+   "lat": -32.083333,
+   "lng": 150.85,
+   "precision": "town",
+   "coordSource": "https://en.wikipedia.org/wiki/Scone,_New_South_Wales",
+   "sizeRaw": "2.2 m",
+   "category": "fauna",
+   "status": "standing",
+   "notes": "A draught-horse sculpture made from blue string by sculptor Nick Adams, standing at the Hunter Warbirds Museum, Walter Pye Avenue, Scone. Built in two sections that visitors can walk between."
+  },
+  {
+   "name": "The Big Snail",
+   "state": "WA",
+   "why": "Named in Tourism WA's Big Things roundup; absent from both wiki lists.",
+   "source": "https://www.westernaustralia.com/us/plan-my-trip/planning-tools/travel-stories/big-things-western-australia",
+   "location": "Bremer Bay",
+   "town": "Bremer Bay",
+   "lat": -34.394,
+   "lng": 119.376,
+   "precision": "town",
+   "coordSource": "https://en.wikipedia.org/wiki/Bremer_Bay,_Western_Australia",
+   "builtYear": 2018,
+   "sizeRaw": "2.6 m, 700 kg",
+   "category": "fauna",
+   "status": "standing",
+   "notes": "A snail sculpture by artist Peter Hill, installed January 2018 to mark the start of Bremer Bay's native snail trail on Wellstead Road, opposite the dive shop and hardware store."
   }
  ],
  "removals": [
