@@ -26,13 +26,13 @@
    }
   ],
   "stats": {
-   "total": 477,
-   "mapped": 477,
-   "exact": 315,
+   "total": 476,
+   "mapped": 476,
+   "exact": 317,
    "byPrecision": {
     "exact-osm": 79,
-    "town": 162,
-    "exact-verified": 185,
+    "town": 159,
+    "exact-verified": 187,
     "exact-article": 20,
     "exact-wikivoyage": 26,
     "exact-inline": 5
@@ -44,13 +44,13 @@
     "QLD": 115,
     "SA": 42,
     "TAS": 27,
-    "VIC": 88,
+    "VIC": 87,
     "WA": 31
    },
    "byCategory": {
     "fruit-and-veg": 61,
     "food-and-drink": 35,
-    "people-and-culture": 52,
+    "people-and-culture": 51,
     "fauna": 150,
     "sport-and-leisure": 22,
     "sculpture": 7,
@@ -60,7 +60,7 @@
     "machinery-and-transport": 19
    },
    "byStatus": {
-    "standing": 437,
+    "standing": 436,
     "demolished": 11,
     "relocated": 12,
     "replaced": 2,
@@ -69,7 +69,7 @@
    "byEra": {
     "revival (2000s–2014)": 45,
     "late century (1985–1999)": 45,
-    "unknown": 299,
+    "unknown": 298,
     "modern (2015+)": 39,
     "pioneer (pre-1970)": 10,
     "boom (1970s–early 80s)": 39
@@ -78,7 +78,7 @@
    "withHeight": 43,
    "withAnySize": 141,
    "withImage": 295,
-   "withEvCharger": 87
+   "withEvCharger": 89
   }
  },
  "things": [
@@ -16561,44 +16561,6 @@
    ]
   },
   {
-   "id": "a65d6c2e3b",
-   "name": "Big Cigarette",
-   "state": "VIC",
-   "stateName": "Victoria",
-   "location": "Myrtleford",
-   "town": "Myrtleford",
-   "lat": -36.55,
-   "lng": 146.716667,
-   "precision": "town",
-   "coordSource": "https://en.wikipedia.org/wiki/Myrtleford",
-   "builtYear": null,
-   "builtCirca": false,
-   "builtRaw": null,
-   "era": "unknown",
-   "heightM": null,
-   "lengthM": null,
-   "sizeMaxM": null,
-   "sizeKind": "unknown",
-   "dimsM": [],
-   "sizeRaw": null,
-   "category": "people-and-culture",
-   "status": "standing",
-   "statusEvidence": null,
-   "notes": null,
-   "blurb": null,
-   "image": null,
-   "wikipediaArticle": null,
-   "wikidata": null,
-   "osmId": null,
-   "sources": [
-    {
-     "source": "wikivoyage",
-     "page": "Australia's big things",
-     "url": "https://en.wikivoyage.org/wiki/Australia%27s_big_things"
-    }
-   ]
-  },
-  {
    "id": "ee8c9b38c3",
    "name": "Big Coffee Cup",
    "state": "VIC",
@@ -16733,10 +16695,10 @@
    "stateName": "Victoria",
    "location": "Fish Creek",
    "town": "Fish Creek",
-   "lat": -38.683333,
-   "lng": 146.083333,
-   "precision": "town",
-   "coordSource": "https://en.wikipedia.org/wiki/Fish_Creek%2C_Victoria",
+   "lat": -38.694529,
+   "lng": 146.082703,
+   "precision": "exact-verified",
+   "coordSource": "https://nominatim.openstreetmap.org/search?q=Fish+Creek+Hotel+Victoria&format=json",
    "builtYear": null,
    "builtCirca": false,
    "builtRaw": null,
@@ -16750,7 +16712,7 @@
    "category": "seafood",
    "status": "standing",
    "statusEvidence": null,
-   "notes": "Positioned on the roof of the Fishy Pub.",
+   "notes": "A 20-foot mullet sculpture by Venus Bay artist Colin Suggett, mounted on the roof of the Fish Creek Hotel (1939), an Art Deco pub known locally as the 'Fishy Pub' or 'Fisho Pub'.",
    "blurb": null,
    "image": "Big Dead Fish.jpg",
    "wikipediaArticle": null,
@@ -16762,7 +16724,12 @@
      "page": "Big things (Australia)",
      "url": "https://en.wikipedia.org/wiki/Big_things_(Australia)"
     }
-   ]
+   ],
+   "correction": {
+    "why": "Only town-level precision. Notes already named the site as 'the Fishy Pub'; confirmed this is the local nickname for the Fish Creek Hotel, whose OSM building/amenity=pub node gives an exact point instead of the town centroid.",
+    "source": "https://arena.gov.au/blog/fish-creek-hotel/"
+   },
+   "evChargerNearby": true
   },
   {
    "id": "b6b39f6986",
@@ -18944,10 +18911,10 @@
    "stateName": "Victoria",
    "location": "Fish Creek",
    "town": "Fish Creek",
-   "lat": -38.683333,
-   "lng": 146.083333,
-   "precision": "town",
-   "coordSource": "https://en.wikipedia.org/wiki/Fish_Creek%2C_Victoria",
+   "lat": -38.693386,
+   "lng": 146.081379,
+   "precision": "exact-verified",
+   "coordSource": "https://nominatim.openstreetmap.org/search?q=7+Falls+Road+Fish+Creek+VIC&format=json",
    "builtYear": null,
    "builtCirca": false,
    "builtRaw": null,
@@ -18973,7 +18940,12 @@
      "page": "Big things (Australia)",
      "url": "https://en.wikipedia.org/wiki/Big_things_(Australia)"
     }
-   ]
+   ],
+   "correction": {
+    "why": "Only town-level precision despite the row's own notes already giving a street address, '7 Falls Rd, Fish Creek VIC 3959'; geocoded that address directly via Nominatim instead of using the Fish Creek town centroid.",
+    "source": "https://nominatim.openstreetmap.org/search?q=7+Falls+Road+Fish+Creek+VIC&format=json"
+   },
+   "evChargerNearby": true
   },
   {
    "id": "f121d918ee",

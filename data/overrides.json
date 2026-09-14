@@ -1143,6 +1143,34 @@
    },
    "why": "Location cell and precision were town-level ('On Princes Highway between Trafalgar and Yarragon'). The row's own notes name the exact site, 'The Spud Shed' at the corner of Princes Hwy and Rankins Rd; Nominatim/OSM maps a shop node named 'Spud Shed' at that address, giving an exact point instead of the Trafalgar town centroid. Note this sculpture is sometimes wrongly associated with Thorpdale, VIC (also a well-known potato-growing town, home of the Thorpdale Potato Festival) — the actual site is the Spud Shed roadside stall between Trafalgar and Yarragon.",
    "source": "https://nominatim.openstreetmap.org/search?q=Spud+Shed+Trafalgar+VIC&format=json"
+  },
+  {
+   "match": {
+    "id": "450463a598"
+   },
+   "set": {
+    "name": "Big Dead Fish",
+    "lat": -38.694529,
+    "lng": 146.082703,
+    "precision": "exact-verified",
+    "coordSource": "https://nominatim.openstreetmap.org/search?q=Fish+Creek+Hotel+Victoria&format=json",
+    "notes": "A 20-foot mullet sculpture by Venus Bay artist Colin Suggett, mounted on the roof of the Fish Creek Hotel (1939), an Art Deco pub known locally as the 'Fishy Pub' or 'Fisho Pub'."
+   },
+   "why": "Only town-level precision. Notes already named the site as 'the Fishy Pub'; confirmed this is the local nickname for the Fish Creek Hotel, whose OSM building/amenity=pub node gives an exact point instead of the town centroid.",
+   "source": "https://arena.gov.au/blog/fish-creek-hotel/"
+  },
+  {
+   "match": {
+    "id": "4197497d3d"
+   },
+   "set": {
+    "lat": -38.693386,
+    "lng": 146.081379,
+    "precision": "exact-verified",
+    "coordSource": "https://nominatim.openstreetmap.org/search?q=7+Falls+Road+Fish+Creek+VIC&format=json"
+   },
+   "why": "Only town-level precision despite the row's own notes already giving a street address, '7 Falls Rd, Fish Creek VIC 3959'; geocoded that address directly via Nominatim instead of using the Fish Creek town centroid.",
+   "source": "https://nominatim.openstreetmap.org/search?q=7+Falls+Road+Fish+Creek+VIC&format=json"
   }
  ],
  "additions": [
@@ -1322,6 +1350,13 @@
     "id": "e45323dc28"
    },
    "why": "duplicate",
+   "source": null
+  },
+  {
+   "match": {
+    "id": "a65d6c2e3b"
+   },
+   "why": "Duplicate of 'Big Smoke, also known as the Big Cigarette' (id bec4869e91): both name the same 25 m chimney stack at the old Tobacco Co-operative of Victoria on Myrtleford-Yackandandah Rd. This row is the bare, town-level Wikivoyage entry with no notes; the fuller, address-verified record is kept.",
    "source": null
   }
  ]
