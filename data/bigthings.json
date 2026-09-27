@@ -1,6 +1,6 @@
 {
  "meta": {
-  "generated": "2026-09-14",
+  "generated": "2026-09-27",
   "claimedNationalTotal": 1075,
   "claimedTotalSource": "Clarke, A. (2023). Making a Mark… Journal of Australian Studies 47(2), cited by Wikipedia",
   "sources": [
@@ -26,20 +26,20 @@
    }
   ],
   "stats": {
-   "total": 477,
-   "mapped": 477,
-   "exact": 318,
+   "total": 478,
+   "mapped": 478,
+   "exact": 319,
    "byPrecision": {
     "exact-osm": 80,
     "town": 159,
-    "exact-verified": 187,
+    "exact-verified": 188,
     "exact-article": 20,
     "exact-wikivoyage": 26,
     "exact-inline": 5
    },
    "byState": {
     "ACT": 12,
-    "NSW": 139,
+    "NSW": 140,
     "NT": 24,
     "QLD": 115,
     "SA": 42,
@@ -56,11 +56,11 @@
     "sculpture": 7,
     "oddity": 66,
     "seafood": 39,
-    "tools-and-industry": 26,
+    "tools-and-industry": 27,
     "machinery-and-transport": 20
    },
    "byStatus": {
-    "standing": 437,
+    "standing": 438,
     "demolished": 11,
     "relocated": 12,
     "replaced": 2,
@@ -69,16 +69,16 @@
    "byEra": {
     "revival (2000s–2014)": 45,
     "late century (1985–1999)": 46,
-    "unknown": 298,
+    "unknown": 299,
     "modern (2015+)": 39,
     "pioneer (pre-1970)": 10,
     "boom (1970s–early 80s)": 39
    },
    "withYear": 179,
-   "withHeight": 43,
-   "withAnySize": 141,
-   "withImage": 296,
-   "withEvCharger": 90
+   "withHeight": 44,
+   "withAnySize": 142,
+   "withImage": 300,
+   "withEvCharger": 92
   }
  },
  "things": [
@@ -2348,6 +2348,52 @@
    }
   },
   {
+   "id": "3331577c0d",
+   "name": "Big Red Hooks",
+   "state": "NSW",
+   "stateName": "New South Wales",
+   "location": "Newcastle",
+   "town": "Newcastle",
+   "lat": -32.925809,
+   "lng": 151.771589,
+   "precision": "exact-verified",
+   "coordSource": "https://www.google.com/maps/place/32°55'32.9%22S+151°46'20.0%22E/@-32.9258089,151.7715893,208m/",
+   "builtYear": null,
+   "builtCirca": false,
+   "builtRaw": null,
+   "era": "unknown",
+   "heightM": 3,
+   "lengthM": null,
+   "sizeMaxM": 3,
+   "sizeKind": "height",
+   "dimsM": [
+    3
+   ],
+   "sizeRaw": null,
+   "category": "tools-and-industry",
+   "status": "standing",
+   "statusEvidence": null,
+   "notes": "At the Newcastle Museum, hooks used to carry 60-tonne ladles full of molten iron in the local steel mill",
+   "blurb": null,
+   "image": "custom:big-red-hooks-0eb498.jpeg",
+   "wikipediaArticle": null,
+   "wikidata": null,
+   "osmId": null,
+   "addedManually": true,
+   "correction": {
+    "why": "Photo updated, replacing whatever (if anything) was there.",
+    "source": null
+   },
+   "sources": [
+    {
+     "source": "independent reporting",
+     "page": "curated addition",
+     "url": null
+    }
+   ],
+   "evChargerNearby": true
+  },
+  {
    "id": "38b4848c77",
    "name": "Big Rubik's Cube",
    "state": "NSW",
@@ -4054,10 +4100,10 @@
    "stateName": "New South Wales",
    "location": "Newcastle",
    "town": "Newcastle",
-   "lat": -32.927556,
-   "lng": 151.76569,
+   "lat": -32.9276252,
+   "lng": 151.767925,
    "precision": "exact-verified",
-   "coordSource": "https://landofthebigs.com/big-doc-martens-newcastle-nsw/",
+   "coordSource": "https://www.google.com/maps/place/515+Hunter+St,+Newcastle+NSW+2300/@-32.9276252,151.767925",
    "builtYear": null,
    "builtCirca": false,
    "builtRaw": null,
@@ -4071,9 +4117,9 @@
    "category": "people-and-culture",
    "status": "standing",
    "statusEvidence": null,
-   "notes": null,
+   "notes": "Rather small Big Thing...",
    "blurb": null,
-   "image": null,
+   "image": "custom:the-big-doc-martens-dfb4a6.jpeg",
    "wikipediaArticle": null,
    "wikidata": null,
    "osmId": null,
@@ -4088,7 +4134,8 @@
      "page": "https://landofthebigs.com/big-doc-martens-newcastle-nsw/",
      "url": "https://landofthebigs.com/big-doc-martens-newcastle-nsw/"
     }
-   ]
+   ],
+   "evChargerNearby": true
   },
   {
    "id": "3c1b65601c",
@@ -4531,7 +4578,7 @@
    "statusEvidence": null,
    "notes": "Located on Darby St, this fully operational pair of headphones was designed by Mark Tisdell and built in collaboration with Tom Ireland (fabrication and design detailing), Sean Bell (graphics), Adrian Garner (electrical engineering), Brad Phillips and Rhian Leek (architectural design), with the support of the Darby Street Traders Group.",
    "blurb": null,
-   "image": null,
+   "image": "custom:the-big-headphones-e040da.jpeg",
    "wikipediaArticle": null,
    "wikidata": null,
    "osmId": null,
@@ -4547,6 +4594,10 @@
      "url": "https://www.newcastleherald.com.au/story/3079500/headphones-to-bring-the-bass-to-darby-street/"
     }
    ],
+   "correction": {
+    "why": "Photo updated, replacing whatever (if anything) was there.",
+    "source": null
+   },
    "coordMatch": {
     "kind": "researched",
     "confidence": "medium",
@@ -5189,14 +5240,14 @@
    "statusEvidence": null,
    "notes": null,
    "blurb": "Large welded steel sculptures created by artist Kelly-Ann Lees, located in Stuart Chalmers ParkThe 1.4 x 1.5-meter steel sculptures reference the fallen seed cones from the area's towering Norfolk Island pine trees.",
-   "image": null,
+   "image": "custom:the-big-pine-cones-0af443.jpeg",
    "wikipediaArticle": null,
    "wikidata": null,
    "osmId": null,
    "addedManually": true,
    "correction": {
-    "why": "Updated location",
-    "source": "https://www.lakemac.com.au/My-area/Public-art/Caves-Beach-Norfolk/Kelly-Ann-Lees-Norfolk"
+    "why": "Photo updated, replacing whatever (if anything) was there.",
+    "source": null
    },
    "sources": [
     {

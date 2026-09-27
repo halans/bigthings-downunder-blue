@@ -1198,6 +1198,59 @@
    "why": null,
    "source": null,
    "silent": true
+  },
+  {
+   "match": {
+    "id": "c04f7ae03a"
+   },
+   "set": {
+    "image": "custom:the-big-headphones-e040da.jpeg"
+   },
+   "why": "Photo updated, replacing whatever (if anything) was there.",
+   "source": null
+  },
+  {
+   "match": {
+    "id": "97c5332ec8"
+   },
+   "set": {
+    "image": "custom:the-big-doc-martens-dfb4a6.jpeg",
+    "name": "The Big Doc Martens",
+    "state": "NSW",
+    "location": "Newcastle",
+    "town": "Newcastle",
+    "lat": -32.9276252,
+    "lng": 151.767925,
+    "precision": "exact-verified",
+    "coordSource": "https://www.google.com/maps/place/515+Hunter+St,+Newcastle+NSW+2300/@-32.9276252,151.767925",
+    "category": "people-and-culture",
+    "status": "standing",
+    "notes": "Rather small Big Thing...",
+    "stateName": "New South Wales"
+   },
+   "why": null,
+   "source": null,
+   "silent": true
+  },
+  {
+   "match": {
+    "id": "d417b33a02"
+   },
+   "set": {
+    "image": "custom:the-big-pine-cones-0af443.jpeg"
+   },
+   "why": "Photo updated, replacing whatever (if anything) was there.",
+   "source": null
+  },
+  {
+   "match": {
+    "id": "3331577c0d"
+   },
+   "set": {
+    "image": "custom:big-red-hooks-0eb498.jpeg"
+   },
+   "why": "Photo updated, replacing whatever (if anything) was there.",
+   "source": null
   }
  ],
  "additions": [
@@ -1344,6 +1397,22 @@
    "category": "machinery-and-transport",
    "status": "standing",
    "notes": "The above-waterline outer casing of the decommissioned Oberon-class submarine HMAS Otway (launched 1966, decommissioned 1994), displayed full-scale in Germanton Park at the corner of Albury and Raymond Streets. Purchased for the town with a $100,000 gift from Gundula Holbrook, widow of WWI submarine commander Norman Holbrook VC, and dedicated 7–8 June 1997. Holbrook is known nationally as 'the Submarine Town'."
+  },
+  {
+   "name": "Big Red Hooks",
+   "state": "NSW",
+   "why": "Big red hooks used to attract visitors to the Newcastle Museum",
+   "source": null,
+   "location": "Newcastle",
+   "town": "Newcastle",
+   "lat": -32.9258089,
+   "lng": 151.7715893,
+   "precision": "exact-verified",
+   "coordSource": "https://www.google.com/maps/place/32°55'32.9%22S+151°46'20.0%22E/@-32.9258089,151.7715893,208m/",
+   "heightM": 3,
+   "category": "tools-and-industry",
+   "status": "standing",
+   "notes": "At the Newcastle Museum, hooks used to carry 60-tonne ladles full of molten iron in the local steel mill"
   }
  ],
  "removals": [
