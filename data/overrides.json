@@ -1251,6 +1251,28 @@
    },
    "why": "Photo updated, replacing whatever (if anything) was there.",
    "source": null
+  },
+  {
+   "match": {
+    "id": "312ec70b76"
+   },
+   "set": {
+    "name": "Big Motorbike",
+    "state": "NSW",
+    "location": "Homebush",
+    "town": "Homebush",
+    "lat": -33.866241,
+    "lng": 151.094184,
+    "precision": "exact-wikivoyage",
+    "coordSource": "https://en.wikivoyage.org/wiki/Australia%27s_big_things",
+    "category": "machinery-and-transport",
+    "status": "relocated",
+    "notes": "Moved to Mooball, NSW",
+    "stateName": "New South Wales"
+   },
+   "why": "Relocated to Mooball",
+   "source": null,
+   "silent": true
   }
  ],
  "additions": [

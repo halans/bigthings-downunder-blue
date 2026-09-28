@@ -1,6 +1,6 @@
 {
  "meta": {
-  "generated": "2026-09-27",
+  "generated": "2026-09-28",
   "claimedNationalTotal": 1075,
   "claimedTotalSource": "Clarke, A. (2023). Making a Mark… Journal of Australian Studies 47(2), cited by Wikipedia",
   "sources": [
@@ -60,9 +60,9 @@
     "machinery-and-transport": 20
    },
    "byStatus": {
-    "standing": 438,
+    "standing": 437,
     "demolished": 11,
-    "relocated": 12,
+    "relocated": 13,
     "replaced": 2,
     "removed": 15
    },
@@ -2176,7 +2176,7 @@
    "state": "NSW",
    "stateName": "New South Wales",
    "location": "Homebush",
-   "town": null,
+   "town": "Homebush",
    "lat": -33.866241,
    "lng": 151.094184,
    "precision": "exact-wikivoyage",
@@ -2192,9 +2192,9 @@
    "dimsM": [],
    "sizeRaw": null,
    "category": "machinery-and-transport",
-   "status": "standing",
+   "status": "relocated",
    "statusEvidence": null,
-   "notes": null,
+   "notes": "Moved to Mooball, NSW",
    "blurb": null,
    "image": null,
    "wikipediaArticle": null,
