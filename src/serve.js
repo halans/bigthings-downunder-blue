@@ -58,8 +58,15 @@ const server = http.createServer((req, res) => {
 
   fs.readFile(full, (err, data) => {
     if (err) {
-      res.writeHead(404, { 'Content-Type': 'text/plain; charset=utf-8' });
-      return res.end(`not found: ${rel}`);
+      // Mirror Cloudflare Pages: serve the site's own 404.html, with a 404.
+      return fs.readFile(path.join(ROOT_DIR, '404.html'), (err404, page) => {
+        if (err404) {
+          res.writeHead(404, { 'Content-Type': 'text/plain; charset=utf-8' });
+          return res.end(`not found: ${rel}`);
+        }
+        res.writeHead(404, { 'Content-Type': MIME['.html'], 'Cache-Control': 'no-cache' });
+        res.end(page);
+      });
     }
     res.writeHead(200, {
       'Content-Type': MIME[path.extname(full).toLowerCase()] || 'application/octet-stream',

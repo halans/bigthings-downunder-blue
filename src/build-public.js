@@ -1,13 +1,14 @@
 'use strict';
 /**
- * Assemble public/ — web/index.html and web/about.html plus their assets,
+ * Assemble public/ — web/index.html, about.html and credits.html plus their assets,
  * packaged as a normal static site ready to deploy as-is to Cloudflare Pages
  * (or any static host).
  *
  * The build already loads zero third-party assets (see standalone.test.js) —
  * everything is self-hosted — so this step is just gathering the pieces:
- * copy the two generated pages, copy img/ and vendor/ verbatim (every path
- * inside them is already relative), and add the deploy-only extras that
+ * copy the three generated pages and the static 404.html, copy img/ and vendor/
+ * verbatim (every path inside them is already relative), and add the
+ * deploy-only extras that
  * belong in a site root rather than in web/ (_headers, robots.txt,
  * sitemap.xml).
  *
@@ -18,6 +19,7 @@ const fs = require('fs');
 const path = require('path');
 const W = require('./build-web');
 const A = require('./build-about');
+const C = require('./build-credits');
 const SEO = require('./seo');
 
 const ROOT = path.join(__dirname, '..');
@@ -38,6 +40,7 @@ function sitemapXml(siteUrl, lastmod) {
   const urls = [
     { loc: `${siteUrl}/`, priority: '1.0' },
     { loc: `${siteUrl}/about.html`, priority: '0.8' },
+    { loc: `${siteUrl}/credits.html`, priority: '0.3' },
   ];
   const entries = urls.map((u) => `  <url>\n    <loc>${u.loc}</loc>\n    <lastmod>${lastmod}</lastmod>\n    <priority>${u.priority}</priority>\n  </url>`).join('\n');
   return `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${entries}\n</urlset>\n`;
@@ -61,6 +64,13 @@ function main() {
   const about = A.generate();
   fs.writeFileSync(path.join(PUBLIC, 'about.html'), about);
 
+  const credits = C.generate();
+  fs.writeFileSync(path.join(PUBLIC, 'credits.html'), credits);
+
+  // Without a top-level 404.html, Cloudflare Pages assumes a single-page app
+  // and answers every unknown URL with index.html and a 200.
+  fs.copyFileSync(path.join(WEB, '404.html'), path.join(PUBLIC, '404.html'));
+
   copyDir(path.join(WEB, 'img'), path.join(PUBLIC, 'img'));
   copyDir(path.join(WEB, 'vendor'), path.join(PUBLIC, 'vendor'));
 
@@ -71,10 +81,10 @@ function main() {
   fs.writeFileSync(path.join(PUBLIC, 'robots.txt'), robotsTxt(siteUrl));
   fs.writeFileSync(path.join(PUBLIC, 'sitemap.xml'), sitemapXml(siteUrl, dataset.meta.generated));
 
-  for (const [name, html] of [['index.html', map], ['about.html', about]]) {
+  for (const [name, html] of [['index.html', map], ['about.html', about], ['credits.html', credits]]) {
     console.log(`wrote public/${name} — ${(html.length / 1024).toFixed(0)} KB`);
   }
-  console.log('copied img/ and vendor/ into public/, wrote public/_headers, robots.txt, sitemap.xml');
+  console.log('copied 404.html, img/ and vendor/ into public/, wrote public/_headers, robots.txt, sitemap.xml');
 }
 
 if (require.main === module) main();

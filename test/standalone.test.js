@@ -65,6 +65,16 @@ test('every asset the build references exists on disk', () => {
   eq(missing, [], 'referenced local assets must be present');
 });
 
+test('the 404 page is self-hosted and its assets resolve from any depth', () => {
+  // Pages serves 404.html for a missing URL at any path, so a relative href
+  // would break one directory down. Root-relative only.
+  const html = fs.readFileSync(path.join(WEB, '404.html'), 'utf8');
+  const assets = loadedAssets(html);
+  ok(assets.length > 0, 'expected the 404 page to load the vendored fonts');
+  eq(assets.filter((u) => !/^\/[^/]/.test(u)), [], 'every 404 asset must be root-relative and local');
+  eq(assets.filter((u) => !fs.existsSync(path.join(WEB, u))), [], 'every 404 asset must exist on disk');
+});
+
 test('the vendored stylesheets reference only local files', () => {
   const dir = path.join(WEB, 'vendor');
   if (!fs.existsSync(dir)) return;
@@ -267,10 +277,23 @@ test('the photo credits document lists every shipped photo', () => {
   ok(md && md.length > 500, 'credits document generated');
   const dataset = JSON.parse(fs.readFileSync(path.join(ROOT, 'data', 'bigthings.json'), 'utf8'));
   const used = new Set(dataset.things.map((t) => t.image).filter(Boolean));
-  const listed = Object.keys(credits.images).filter((f) => used.has(f));
-  const absent = listed.filter((f) => !md.includes(f));
+  // Commons and custom alike — custom photos once went missing from this list.
+  const listed = Object.keys(allImages).filter((f) => used.has(f));
+  ok(listed.some((f) => f.startsWith('custom:')) || !Object.keys(allImages).some((f) => f.startsWith('custom:')), 'custom photos are in scope');
+  const absent = listed.filter((f) => !md.includes(f.replace(/^custom:/, '')));
   eq(absent, []);
   ok(/not covered by this repository/i.test(md), 'states that photos keep their own licences');
+});
+
+test('the credits page lists every shipped photo and loads only local assets', () => {
+  if (!hasImages) return;
+  const html = require('../src/build-credits').generate();
+  const dataset = JSON.parse(fs.readFileSync(path.join(ROOT, 'data', 'bigthings.json'), 'utf8'));
+  const used = [...new Set(dataset.things.map((t) => t.image).filter((f) => f && allImages[f]))];
+  eq(used.filter((f) => !html.includes(allImages[f].local)), [], 'every used photo appears on the page');
+  const assets = loadedAssets(html);
+  eq(assets.filter((u) => /^(https?:)?\/\//.test(u)), [], 'no external assets');
+  eq(assets.filter((u) => !fs.existsSync(path.join(WEB, u))), [], 'every asset exists on disk');
 });
 
 /* ---------- local filenames ---------- */

@@ -17,7 +17,7 @@
 const fs = require('fs');
 const path = require('path');
 const SEO = require('./seo');
-const { loadImageCredits } = require('./image-credits');
+const { loadImageCredits, photoCredits, displayFile } = require('./image-credits');
 
 const ROOT = path.join(__dirname, '..');
 
@@ -174,53 +174,44 @@ function generate() {
 
 /** Every photo, its photographer and its licence — for the bundle. */
 function creditsMarkdown() {
-  const p = path.join(ROOT, 'data', 'image-credits.json');
-  if (!fs.existsSync(p)) return null;
-  const manifest = JSON.parse(fs.readFileSync(p, 'utf8'));
-  const dataset = JSON.parse(fs.readFileSync(path.join(ROOT, 'data', 'bigthings.json'), 'utf8'));
-  const byFile = new Map();
-  for (const t of dataset.things) if (t.image) byFile.set(t.image, t);
-
-  const rows = Object.entries(manifest.images || {})
-    .filter(([file]) => byFile.has(file))
-    .sort((a, b) => byFile.get(a[0]).name.localeCompare(byFile.get(b[0]).name));
-
-  const byLicence = {};
-  for (const [, m] of rows) byLicence[m.licence || 'unstated'] = (byLicence[m.licence || 'unstated'] || 0) + 1;
+  if (!fs.existsSync(path.join(ROOT, 'data', 'image-credits.json'))) return null;
+  const pc = photoCredits();
+  const cell = (s) => String(s).replace(/\|/g, '\\|');
 
   const lines = [
     '# Photo credits',
     '',
-    `${rows.length} photographs, vendored from Wikimedia Commons at ${manifest.width}px wide on ${manifest.generated}.`,
+    `${pc.rows.length} photographs: ${pc.commonsCount} vendored from Wikimedia Commons at ${pc.width}px wide on ${pc.generated},`
+      + ` and ${pc.customCount} added by hand (\`data/custom-photos.json\`).`,
     '',
     'Every one is reproduced under a free licence. Most require attribution, so the',
-    'photographer and licence are named here, on each photo in the app, and in',
-    '`data/image-credits.json` alongside a checksum of the local copy.',
+    'photographer and licence are named here, on each photo in the app, on the site\'s',
+    '`credits.html`, and in `data/image-credits.json` / `data/custom-photos.json`.',
     '',
     '**The photographs are not covered by this repository\'s licence.** Each remains',
     'under the licence its author chose; the dataset itself is CC BY-SA 4.0.',
     '',
     '## Licences used',
     '',
-    ...Object.entries(byLicence).sort((a, b) => b[1] - a[1]).map(([l, n]) => `- ${l} — ${n} ${n === 1 ? 'photo' : 'photos'}`),
+    ...pc.licences.map(([l, n]) => `- ${l} — ${n} ${n === 1 ? 'photo' : 'photos'}`),
     '',
     '## Every photo',
     '',
     '| Big thing | Photographer | Licence | File |',
     '|---|---|---|---|',
-    ...rows.map(([file, m]) => {
-      const thing = byFile.get(file);
-      const author = (m.author || 'Unknown').replace(/\|/g, '\\|').slice(0, 60);
+    ...pc.rows.map(({ file, thing, credit: m }) => {
+      const author = cell(m.author || 'Unknown').slice(0, 60);
       const lic = m.licenceUrl ? `[${m.licence}](${m.licenceUrl})` : (m.licence || 'see file page');
-      return `| ${thing.name} (${thing.state}) | ${author} | ${lic} | [${file.replace(/\|/g, '\\|')}](${m.filePage}) |`;
+      const name = cell(displayFile(file));
+      return `| ${thing.name} (${thing.state}) | ${author} | ${lic} | ${m.filePage ? `[${name}](${m.filePage})` : name} |`;
     }),
     '',
   ];
-  if ((manifest.skipped || []).length) {
+  if (pc.skipped.length) {
     lines.push('## Not vendored', '',
       'These were referenced by the dataset but not shipped. A card without a photo is',
       'a better outcome than a file we cannot license.', '',
-      ...manifest.skipped.map((s) => `- \`${s.file}\` — ${s.why}`), '');
+      ...pc.skipped.map((s) => `- \`${s.file}\` — ${s.why}`), '');
   }
   return lines.join('\n');
 }

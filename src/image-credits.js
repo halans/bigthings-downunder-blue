@@ -24,4 +24,43 @@ function loadImageCredits() {
   return { ...readImages('image-credits.json'), ...readImages('custom-photos.json') };
 }
 
-module.exports = { loadImageCredits };
+/**
+ * Every photo the dataset actually uses, credited, sorted by big thing name —
+ * the rows behind both docs/IMAGE-CREDITS.md and the site's credits.html, so
+ * the two cannot list different photos. Unused entries are left out.
+ */
+function photoCredits() {
+  const commons = readImages('image-credits.json');
+  const custom = readImages('custom-photos.json');
+  const manifestPath = path.join(ROOT, 'data', 'image-credits.json');
+  const manifest = fs.existsSync(manifestPath) ? JSON.parse(fs.readFileSync(manifestPath, 'utf8')) : {};
+  const dataset = JSON.parse(fs.readFileSync(path.join(ROOT, 'data', 'bigthings.json'), 'utf8'));
+  const all = { ...commons, ...custom };
+
+  const rows = [];
+  for (const thing of dataset.things) {
+    const credit = thing.image && all[thing.image];
+    if (credit) rows.push({ file: thing.image, thing, credit, custom: thing.image in custom });
+  }
+  rows.sort((a, b) => a.thing.name.localeCompare(b.thing.name));
+
+  const byLicence = {};
+  for (const r of rows) {
+    const l = r.credit.licence || 'unstated';
+    byLicence[l] = (byLicence[l] || 0) + 1;
+  }
+  return {
+    rows,
+    licences: Object.entries(byLicence).sort((a, b) => b[1] - a[1]),
+    commonsCount: rows.filter((r) => !r.custom).length,
+    customCount: rows.filter((r) => r.custom).length,
+    width: manifest.width,
+    generated: manifest.generated,
+    skipped: manifest.skipped || [],
+  };
+}
+
+/** The name a reader sees for a photo file: Commons title, or the custom file's basename. */
+const displayFile = (file) => file.replace(/^custom:/, '');
+
+module.exports = { loadImageCredits, photoCredits, displayFile };

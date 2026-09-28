@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Not found · Big Things Down Under</title>
+<meta name="description" content="This page doesn't exist. The map of Australia's big things does.">
+<meta name="robots" content="noindex">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍌</text></svg>">
+<!-- Root-relative paths throughout: this page is served for any missing URL,
+     at any depth (/a/b/c), so vendor/fonts.css would resolve to /a/b/vendor/. -->
+<link rel="stylesheet" href="/vendor/fonts.css">
+<style>
+:root{
+  --ink:#1b1a17; --ink-soft:#4a463e; --cream:#fdf6e8; --paper:#fffdf7;
+  --earth:#c8452b; --sun:#f0a71c; --line:#e3d6bd;
+}
+*{box-sizing:border-box}
+body{
+  margin:0; min-height:100vh; display:flex; flex-direction:column;
+  background:var(--cream); color:var(--ink);
+  font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;
+  -webkit-font-smoothing:antialiased; line-height:1.6;
+}
+a{color:var(--earth)}
+.topbar{border-bottom:2px solid var(--ink);background:var(--cream)}
+.topbar .inner{max-width:1120px;margin:0 auto;padding:9px 24px;display:flex;align-items:center}
+.topbar .mark{font-family:Caprasimo,Inter,sans-serif;font-size:19px;color:var(--earth);text-decoration:none}
+main{flex:1;display:flex;align-items:center}
+.wrap{max-width:820px;margin:0 auto;padding:48px 24px}
+.code{
+  font-family:Caprasimo,Inter,sans-serif;font-size:clamp(96px,24vw,180px);line-height:.9;
+  color:var(--sun);-webkit-text-stroke:3px var(--ink);letter-spacing:2px;margin:0
+}
+h1{
+  font-family:Caprasimo,Inter,system-ui,sans-serif;font-weight:400;margin:14px 0 0;
+  font-size:clamp(30px,6vw,48px);line-height:1;color:var(--earth);text-wrap:balance
+}
+p{font-size:clamp(16px,2.4vw,18.5px);margin:16px 0 0;max-width:56ch}
+.cta{display:flex;gap:10px;flex-wrap:wrap;margin:28px 0 0}
+.btn{
+  display:inline-block;border:2px solid var(--ink);border-radius:13px;padding:12px 20px;
+  font-size:16px;font-weight:700;text-decoration:none;color:var(--ink);background:var(--cream);
+  box-shadow:0 2px 0 var(--ink);transition:transform .08s;white-space:nowrap;
+}
+.btn:active{transform:translateY(2px);box-shadow:none}
+.btn.hot{background:var(--sun)}
+@media (max-width:600px){
+  .topbar .inner{padding:8px 16px}
+  .wrap{padding:36px 16px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+
+<div class="topbar"><div class="inner">
+  <a class="mark" href="/">Big Things Down Under</a>
+</div></div>
+
+<main><div class="wrap">
+  <p class="code" aria-hidden="true">404</p>
+  <h1>This big thing doesn't exist.</h1>
+  <p>
+    Nothing is at this address. Some big things are demolished, moved or eaten by termites, but
+    they all stay on the map, so the one you want is probably still there.
+  </p>
+  <div class="cta">
+    <a class="btn hot" href="/">Open the map →</a>
+    <a class="btn" href="/about.html">About the project</a>
+  </div>
+</div></main>
+
+</body>
+</html>

@@ -186,28 +186,30 @@ coordinate, or attach a photo that isn't on Wikimedia Commons. See [docs/ADMIN.m
 
 ## Photographs and their licences
 
-284 photographs are vendored from Wikimedia Commons at 480px wide. The licence mix:
+300 photographs ship with the map: 278 vendored from Wikimedia Commons at 480px
+wide, and 22 added by hand (`data/custom-photos.json`, see [docs/ADMIN.md](docs/ADMIN.md)). The
+licence mix:
 
-- CC BY-SA 4.0 — 136 photos
-- CC BY-SA 3.0 — 61 photos
-- Public domain — 32 photos
+- CC BY-SA 4.0 — 150 photos
+- CC BY-SA 3.0 — 65 photos
+- Public domain — 31 photos
 - CC BY 3.0 — 16 photos
-- CC0 — 12 photos
+- CC0 — 11 photos
 - CC BY 4.0 — 6 photos
 - CC BY 2.0 — 5 photos
 - CC BY 2.5 au — 4 photos
 - CC BY-SA 2.0 — 3 photos
 - CC BY 2.5 — 3 photos
 - CC-BY-SA-3.0 — 3 photos
-- CC BY-SA 3.0 au — 1 photo
-- PD — 1 photo
 - CC BY-SA 2.5 — 1 photo
+- PD — 1 photo
+- CC BY-SA 3.0 au — 1 photo
 
 **Attribution is a licence condition, not a courtesy.** Most of these are CC BY or CC BY-SA,
 which require naming the author and the licence — and for several versions this app displayed
 them bare, which was a breach. Every photo now carries a credit line on its card, and
-[docs/IMAGE-CREDITS.md](docs/IMAGE-CREDITS.md) lists all 284 with photographer, licence and a
-link to the file page.
+[docs/IMAGE-CREDITS.md](docs/IMAGE-CREDITS.md) (and `credits.html` on the site) lists every one,
+Commons and custom, with photographer, licence and a link to the file page.
 
 **The photographs are not covered by this repository's licence.** Each stays under the licence
 its author chose; the dataset is CC BY-SA 4.0. `data/image-credits.json` records the licence,
@@ -239,7 +241,7 @@ Details in [`docs/BUILDING.md`](docs/BUILDING.md#stage-5c--seo-and-aeo-srcseojs)
 
 `npm run build:public` packages the map (already self-hosted and zero-network, per
 [`standalone.test.js`](docs/BUILDING.md#stage-5d--package-for-deployment-srcbuild-publicjs)) as a
-plain static site — `index.html`, `about.html`, `img/`, `vendor/`, `robots.txt`, `sitemap.xml` —
+plain static site — `index.html`, `about.html`, `credits.html`, `404.html`, `img/`, `vendor/`, `robots.txt`, `sitemap.xml` —
 under `public/`, ready to point any static host at. For Cloudflare Pages:
 
 ```bash

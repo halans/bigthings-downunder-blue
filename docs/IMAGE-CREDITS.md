@@ -1,18 +1,18 @@
 # Photo credits
 
-278 photographs, vendored from Wikimedia Commons at 480px wide on 2026-09-09.
+300 photographs: 278 vendored from Wikimedia Commons at 480px wide on 2026-09-09, and 22 added by hand (`data/custom-photos.json`).
 
 Every one is reproduced under a free licence. Most require attribution, so the
-photographer and licence are named here, on each photo in the app, and in
-`data/image-credits.json` alongside a checksum of the local copy.
+photographer and licence are named here, on each photo in the app, on the site's
+`credits.html`, and in `data/image-credits.json` / `data/custom-photos.json`.
 
 **The photographs are not covered by this repository's licence.** Each remains
 under the licence its author chose; the dataset itself is CC BY-SA 4.0.
 
 ## Licences used
 
-- CC BY-SA 4.0 — 132 photos
-- CC BY-SA 3.0 — 61 photos
+- CC BY-SA 4.0 — 150 photos
+- CC BY-SA 3.0 — 65 photos
 - Public domain — 31 photos
 - CC BY 3.0 — 16 photos
 - CC0 — 11 photos
@@ -31,10 +31,13 @@ under the licence its author chose; the dataset itself is CC BY-SA 4.0.
 | Big thing | Photographer | Licence | File |
 |---|---|---|---|
 | “Mr O’Doyle” the Crocodile in a Boat (QLD) | AnnabelleQ | [CC0](http://creativecommons.org/publicdomain/zero/1.0/deed.en) | [“Mr Doyle” the Big Crocodile in the Boat.jpg](https://commons.wikimedia.org/wiki/File:%E2%80%9CMr_Doyle%E2%80%9D_the_Big_Crocodile_in_the_Boat.jpg) |
+| Alan Davidson's Balls (NSW) | Halans Photography | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.en) | [alan-davidson-s-balls-d4e75c.jpg](https://halansphotography.com) |
+| Almost Once (NSW) | Halans Photography | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.en) | [almost-once-c2e6b6.jpeg](https://halansphotography.com) |
 | Anmatjere Woman and Child (NT) | MEGutsell | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0) | [Anmatjere - BIG Woman and Child (square).jpg](https://commons.wikimedia.org/wiki/File:Anmatjere_-_BIG_Woman_and_Child_(square).jpg) |
 | Another Big Pelican (SA) | Whoop90 | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0) | [Big Pelican Meningie.jpg](https://commons.wikimedia.org/wiki/File:Big_Pelican_Meningie.jpg) |
 | Banana the Bullock (QLD) | BrisbanePom | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0) | [Banana Bullock.jpg](https://commons.wikimedia.org/wiki/File:Banana_Bullock.jpg) |
 | Bert Bolle Barometer (WA) | BaroBert | [CC BY-SA 3.0](http://creativecommons.org/licenses/by-sa/3.0/) | [Bert Bolle Barometer, Denmark WA (cr).jpg](https://commons.wikimedia.org/wiki/File:Bert_Bolle_Barometer,_Denmark_WA_(cr).jpg) |
+| Big Acorns (ACT) | Halans Photography | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.en) | [big-acorns-4fa4d9.jpeg](https://halansphotography.com) |
 | Big Ant (NSW) | Bilby | [CC BY 3.0](https://creativecommons.org/licenses/by/3.0) | [Big Ant.jpg](https://commons.wikimedia.org/wiki/File:Big_Ant.jpg) |
 | Big Apple (NSW) | DemetersRest | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0) | [Tallong Big Apple.jpg](https://commons.wikimedia.org/wiki/File:Tallong_Big_Apple.jpg) |
 | Big Apple (NSW) | Mark Ollerenshaw from Australia | [CC BY 2.0](https://creativecommons.org/licenses/by/2.0) | [The Big Apple Yerrinbool.jpg](https://commons.wikimedia.org/wiki/File:The_Big_Apple_Yerrinbool.jpg) |
@@ -43,6 +46,7 @@ under the licence its author chose; the dataset itself is CC BY-SA 4.0.
 | Big Apple (VIC) | Bilby | [CC BY 3.0](https://creativecommons.org/licenses/by/3.0) | [Big Apple.jpg](https://commons.wikimedia.org/wiki/File:Big_Apple.jpg) |
 | Big Avocado (NSW) | BrisbanePom | Public domain | [Big Avocado.jpg](https://commons.wikimedia.org/wiki/File:Big_Avocado.jpg) |
 | Big Ayers Rock (NSW) | TheBustopher | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0) | [2014-05-07 11-43-52 P1640117.jpg](https://commons.wikimedia.org/wiki/File:2014-05-07_11-43-52_P1640117.jpg) |
+| Big Banana (NSW) | Halans Photography | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.en) | [big-banana-73147e.jpg](https://halansphotography.com) |
 | Big Banana (QLD) | JamesMudkip | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0) | [NorthMackayBigBanana2023.jpg](https://commons.wikimedia.org/wiki/File:NorthMackayBigBanana2023.jpg) |
 | Big Barramundi (NT) | MEGutsell | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0) | [Katherine - BIG Barramundi.jpg](https://commons.wikimedia.org/wiki/File:Katherine_-_BIG_Barramundi.jpg) |
 | Big Barrel (QLD) | Fishieman15 | [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0) | [The Big Barrel.jpg](https://commons.wikimedia.org/wiki/File:The_Big_Barrel.jpg) |
@@ -103,10 +107,12 @@ under the licence its author chose; the dataset itself is CC BY-SA 4.0.
 | Big Ned Kelly (Warrenheip) (VIC) | Whoop90 | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0) | [Ned Kelly.png](https://commons.wikimedia.org/wiki/File:Ned_Kelly.png) |
 | Big Parrot (VIC) | SteveEBear | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0) | [Big Parrot.jpg](https://commons.wikimedia.org/wiki/File:Big_Parrot.jpg) |
 | Big Rabbit Trap (NSW) | Mattinbgn | [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0) | [AlbertRabbitTrapHotel.JPG](https://commons.wikimedia.org/wiki/File:AlbertRabbitTrapHotel.JPG) |
+| Big Red Hooks (NSW) | Halans Photography | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.en) | [big-red-hooks-0eb498.jpeg](https://halansphotography.com) |
 | Big Rubik's Cube (NSW) | Rubyjoco | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0) | [The Big Rubik's Cube.jpg](https://commons.wikimedia.org/wiki/File:The_Big_Rubik%27s_Cube.jpg) |
 | Big Seat (VIC) | SteveEBear | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0) | [The big seat at arthurs seat.jpg](https://commons.wikimedia.org/wiki/File:The_big_seat_at_arthurs_seat.jpg) |
 | Big Strawberry (VIC) | Mattinbgn | [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0) | [KoonoomooBigStrawberry.JPG](https://commons.wikimedia.org/wiki/File:KoonoomooBigStrawberry.JPG) |
 | Big Swagman and Dog (NSW) | Krysti Giles | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0) | [The Big Dingo.jpg](https://commons.wikimedia.org/wiki/File:The_Big_Dingo.jpg) |
+| Big Swoop (ACT) | Halans Photography | [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/deed.en) | [big-swoop-cc05d4.jpeg](https://halansphotography.com) |
 | Big Tap (VIC) | Bilby | [CC BY 3.0](https://creativecommons.org/licenses/by/3.0) | [Big Tap wp.jpg](https://commons.wikimedia.org/wiki/File:Big_Tap_wp.jpg) |
 | Big Teepee (QLD) | Jennyleigh3 | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0) | [Big Teepee.png](https://commons.wikimedia.org/wiki/File:Big_Teepee.png) |
 | Big Tennis Racquet (NSW) | Elitism ( talk ) | [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0) | [Big Tennis Racquet Barellan 2009-10-03 (square).JPG](https://commons.wikimedia.org/wiki/File:Big_Tennis_Racquet_Barellan_2009-10-03_(square).JPG) |
@@ -127,6 +133,7 @@ under the licence its author chose; the dataset itself is CC BY-SA 4.0.
 | Giant Mushroom (ACT) | Stuart Edwards | Public domain | [Giant Mushroom Belconnen.jpg](https://commons.wikimedia.org/wiki/File:Giant_Mushroom_Belconnen.jpg) |
 | Giant Pocket Watch (VIC) | Camstar5414 | [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0) | [MCFobWatch.jpg](https://commons.wikimedia.org/wiki/File:MCFobWatch.jpg) |
 | King Neptune (WA) | Five Years | [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0) | [Atlanis Marine Park 2, 2012.jpg](https://commons.wikimedia.org/wiki/File:Atlanis_Marine_Park_2,_2012.jpg) |
+| Lizzo the Lizard (NSW) | Halans Photography | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.en) | [lizzo-the-lizard-e3b6a5.jpeg](https://halansphotography.com) |
 | Map the Miner (SA) | No machine-readable author provided. Peripitus assumed (base | Public domain | [Map the Miner at Kapunda South Australia.jpg](https://commons.wikimedia.org/wiki/File:Map_the_Miner_at_Kapunda_South_Australia.jpg) |
 | Matilda The Kangaroo (QLD) | Gotadollarmate | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0) | [BigThingMatilda.jpg](https://commons.wikimedia.org/wiki/File:BigThingMatilda.jpg) |
 | Ploddy the Dinosaur (NSW) | ARPMarketing | [CC0](http://creativecommons.org/publicdomain/zero/1.0/deed.en) | [Ploddy.jpg](https://commons.wikimedia.org/wiki/File:Ploddy.jpg) |
@@ -137,6 +144,7 @@ under the licence its author chose; the dataset itself is CC BY-SA 4.0.
 | The Big Ant (SA) | Unaimedplaya | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0) | [The Big Ant.JPG](https://commons.wikimedia.org/wiki/File:The_Big_Ant.JPG) |
 | The Big Apple (QLD) | Stuart Edwards | Public domain | [BigApple Thulimbah.jpg](https://commons.wikimedia.org/wiki/File:BigApple_Thulimbah.jpg) |
 | The Big Apple (VIC) | SteveEBear | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0) | [Big Apple Gladysdale.jpg](https://commons.wikimedia.org/wiki/File:Big_Apple_Gladysdale.jpg) |
+| The Big Axe (NSW) | Halans Photography | [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/deed.en) | [the-big-axe-9b70d6.jpeg](https://halansphotography.com) |
 | The Big Axe (TAS) | SteveEBear | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0) | [Big Axe.jpg](https://commons.wikimedia.org/wiki/File:Big_Axe.jpg) |
 | The Big Barramundi (QLD) | Kris Hamilton | Public domain | [Big Barra Normanton.JPG](https://commons.wikimedia.org/wiki/File:Big_Barra_Normanton.JPG) |
 | The Big Barramundi (QLD) | Andy & Anna Kelk from Melbourne, Australia | [CC BY 2.0](https://creativecommons.org/licenses/by/2.0) | [Big barra daintree.jpg](https://commons.wikimedia.org/wiki/File:Big_barra_daintree.jpg) |
@@ -175,6 +183,7 @@ under the licence its author chose; the dataset itself is CC BY-SA 4.0.
 | The Big Dice (SA) | Funnyface 6 | [CC BY 2.5 au](https://creativecommons.org/licenses/by/2.5/au/deed.en) | [Big Dice.JPG](https://commons.wikimedia.org/wiki/File:Big_Dice.JPG) |
 | The Big Dinosaur (NT) | kiniget | [CC0](http://creativecommons.org/publicdomain/zero/1.0/deed.en) | [Big Dinosaur Darwin.png](https://commons.wikimedia.org/wiki/File:Big_Dinosaur_Darwin.png) |
 | The Big Dinosaur (QLD) | Wikinalter | [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0) | [Ballandean triceratops.jpg](https://commons.wikimedia.org/wiki/File:Ballandean_triceratops.jpg) |
+| The Big Doc Martens (NSW) | Halans Photography | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.en) | [the-big-doc-martens-dfb4a6.jpeg](https://halansphotography.com) |
 | The Big Dolphin Fish (VIC) | SteveEBear | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0) | [Big fish tooradin.jpg](https://commons.wikimedia.org/wiki/File:Big_fish_tooradin.jpg) |
 | The Big Dunlop Tyre (SA) | SteveEBear | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0) | [Big Dunlop Tyre.jpg](https://commons.wikimedia.org/wiki/File:Big_Dunlop_Tyre.jpg) |
 | The Big Easel (QLD) | Fishieman15 at English Wikipedia | [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0) | [The Big Easel, Emerald.jpg](https://commons.wikimedia.org/wiki/File:The_Big_Easel,_Emerald.jpg) |
@@ -182,6 +191,7 @@ under the licence its author chose; the dataset itself is CC BY-SA 4.0.
 | The Big Emus (VIC) | SteveEBear | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0) | [Big emus.jpg](https://commons.wikimedia.org/wiki/File:Big_emus.jpg) |
 | The Big Eyed Scad (VIC) | SteveEBear | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0) | [Bigfishedenhope.jpg](https://commons.wikimedia.org/wiki/File:Bigfishedenhope.jpg) |
 | The Big Fish Windvane (VIC) | SteveEBear | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0) | [The Big Fish Windvane Fish Creek.jpg](https://commons.wikimedia.org/wiki/File:The_Big_Fish_Windvane_Fish_Creek.jpg) |
+| The Big Flower (NSW) | Halans Photography | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.en) | [the-big-flower-fb20f3.jpg](https://halansphotography.com) |
 | The Big Flywheel (TAS) | SteveEBear | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0) | [The Big Fly Wheel.jpg](https://commons.wikimedia.org/wiki/File:The_Big_Fly_Wheel.jpg) |
 | The Big Frog (TAS) | SteveEBear | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0) | [The big frog.jpg](https://commons.wikimedia.org/wiki/File:The_big_frog.jpg) |
 | The Big G (QLD) | Jimvam123987 | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0) | [Big G.jpg](https://commons.wikimedia.org/wiki/File:Big_G.jpg) |
@@ -195,6 +205,7 @@ under the licence its author chose; the dataset itself is CC BY-SA 4.0.
 | The Big Hat (NSW) | JulieMay54 | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0) | [Big Hat sculpture.jpg](https://commons.wikimedia.org/wiki/File:Big_Hat_sculpture.jpg) |
 | The Big Hat (SA) | ARBrennan | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0) | [The Big Hat SA.jpg](https://commons.wikimedia.org/wiki/File:The_Big_Hat_SA.jpg) |
 | The Big Hazelnuts (TAS) | SteveEBear | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0) | [The Big Nuts.jpg](https://commons.wikimedia.org/wiki/File:The_Big_Nuts.jpg) |
+| The Big Headphones (NSW) | Halans Photography | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.en) | [the-big-headphones-e040da.jpeg](https://halansphotography.com) |
 | The Big Hills Hoist (SA) | BowlCurtain | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0) | [Big Hills Hoist, O'Sullivan Beach, South Australia.jpg](https://commons.wikimedia.org/wiki/File:Big_Hills_Hoist,_O%27Sullivan_Beach,_South_Australia.jpg) |
 | The Big Honey Bee (TAS) | SteveEBear | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0) | [The Big Honey Bee.jpg](https://commons.wikimedia.org/wiki/File:The_Big_Honey_Bee.jpg) |
 | The Big Kangaroo (SA) | WikiWookie | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0) | [Rooey II Border Village.jpg](https://commons.wikimedia.org/wiki/File:Rooey_II_Border_Village.jpg) |
@@ -214,6 +225,7 @@ under the licence its author chose; the dataset itself is CC BY-SA 4.0.
 | The Big Mango (QLD) | Amos T Fairchild | [CC BY-SA 3.0](http://creativecommons.org/licenses/by-sa/3.0/) | [Big mango.jpg](https://commons.wikimedia.org/wiki/File:Big_mango.jpg) |
 | The Big Marlin (QLD) | SaidSwans | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0) | [Bigmarlin.png](https://commons.wikimedia.org/wiki/File:Bigmarlin.png) |
 | The Big Marron (WA) | BrisbanePom | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0) | [The Big Marron.jpg](https://commons.wikimedia.org/wiki/File:The_Big_Marron.jpg) |
+| The Big Merino (NSW) | Halans Photography | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.en) | [the-big-merino-f3fe6f.jpeg](https://halansphotography.com) |
 | The Big Miner (QLD) | Fishieman15 at English Wikipedia | [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0) | [The Big Miner in Rubyvale.jpg](https://commons.wikimedia.org/wiki/File:The_Big_Miner_in_Rubyvale.jpg) |
 | The Big Miner's Lamp (NSW) | Sol bot | Public domain | [BigMinersLamp (cr).jpg](https://commons.wikimedia.org/wiki/File:BigMinersLamp_(cr).jpg) |
 | The Big Motorcycle (NSW) | Aliceinthealice | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0) | [The big motorcycle at Mooball, New South Wales 02.jpg](https://commons.wikimedia.org/wiki/File:The_big_motorcycle_at_Mooball,_New_South_Wales_02.jpg) |
@@ -234,24 +246,30 @@ under the licence its author chose; the dataset itself is CC BY-SA 4.0.
 | The Big Peg (NSW) | JesterNoir | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0) | [The Big Peg.jpg](https://commons.wikimedia.org/wiki/File:The_Big_Peg.jpg) |
 | The Big Pelican (QLD) | Celcom at English Wikipedia | [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0) | [BigPelicanNoosaville.JPG](https://commons.wikimedia.org/wiki/File:BigPelicanNoosaville.JPG) |
 | The Big Pelican (SA) | Bilby | [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0) | [Big Pelican at Loxton.jpg](https://commons.wikimedia.org/wiki/File:Big_Pelican_at_Loxton.jpg) |
+| The Big Pencil (NSW) | Halans Photography | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.en) | [the-big-pencil-dd7917.jpeg](https://halansphotography.com) |
 | The Big Penguin (TAS) | Stuart Edwards | Public domain | [Penguin BigPenguin.jpg](https://commons.wikimedia.org/wiki/File:Penguin_BigPenguin.jpg) |
 | The Big Pheasant (VIC) | Bilby | [CC BY 3.0](https://creativecommons.org/licenses/by/3.0) | [Big Pheasant.jpg](https://commons.wikimedia.org/wiki/File:Big_Pheasant.jpg) |
 | The Big Photo Frame (TAS) | SteveEBear | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0) | [Big Photo Frame Stanley.jpg](https://commons.wikimedia.org/wiki/File:Big_Photo_Frame_Stanley.jpg) |
 | The Big Pick, Shovel and Sieve (QLD) | Fishieman15 at English Wikipedia | [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0) | [The Big Mining Tools.jpg](https://commons.wikimedia.org/wiki/File:The_Big_Mining_Tools.jpg) |
 | The Big Pie (QLD) | BrisbanePom | Public domain | [Yatala BigPie.jpg](https://commons.wikimedia.org/wiki/File:Yatala_BigPie.jpg) |
 | The Big Pigeon (SA) | BowlCurtain | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0) | [Big Pigeon.jpg](https://commons.wikimedia.org/wiki/File:Big_Pigeon.jpg) |
+| The Big Pine Cones (NSW) | Halans Photography | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.en) | [the-big-pine-cones-0af443.jpeg](https://halansphotography.com) |
 | The Big Pineapple (QLD) | Moondyne | [CC BY-SA 3.0](http://creativecommons.org/licenses/by-sa/3.0/) | [GiantPineappleNambour.jpg](https://commons.wikimedia.org/wiki/File:GiantPineappleNambour.jpg) |
 | The Big Pitchfork (TAS) | SteveEBear | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0) | [Big Pitchfork.jpg](https://commons.wikimedia.org/wiki/File:Big_Pitchfork.jpg) |
 | The Big Platypus (TAS) | Stuart Edwards | Public domain | [Latrobe BigPlatypus.jpg](https://commons.wikimedia.org/wiki/File:Latrobe_BigPlatypus.jpg) |
+| The Big Poppies (NSW) | Halans Photography | [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/deed.en) | [the-big-poppies-656556.jpeg](https://halansphotography.com) |
 | The Big Potato (NSW) | The original uploader was Celcom at English Wikipedia . | [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0) | [Big Potato in Robertson, NSW.jpg](https://commons.wikimedia.org/wiki/File:Big_Potato_in_Robertson,_NSW.jpg) |
 | The Big Powerful Owl (ACT) | giantowl | [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0) | [Giant Owl.jpg](https://commons.wikimedia.org/wiki/File:Giant_Owl.jpg) |
 | The Big Pram (VIC) | SteveEBear | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0) | [Big Pram Eaglehawk Vic.jpg](https://commons.wikimedia.org/wiki/File:Big_Pram_Eaglehawk_Vic.jpg) |
+| The Big Prawn (NSW) | Halans Photography | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.en) | [the-big-prawn-e61169.jpeg](https://halansphotography.com) |
 | The Big Prawn (WA) | Aliceinthealice | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0) | [The Big Prawn in Exmouth, Western Australia, 2024.jpg](https://commons.wikimedia.org/wiki/File:The_Big_Prawn_in_Exmouth,_Western_Australia,_2024.jpg) |
 | The Big Pumpkin (QLD) | Stuart Edwards | Public domain | [Beaudesert BigPumpkin.jpg](https://commons.wikimedia.org/wiki/File:Beaudesert_BigPumpkin.jpg) |
 | The Big Pumpkin (QLD) | BrisbanePom | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0) | [Big Pumpkin1.jpg](https://commons.wikimedia.org/wiki/File:Big_Pumpkin1.jpg) |
 | The Big Ram (SA) | derivative work: Bilby ( talk ) Big_ram_Karoonda.jpg : Scott | [CC BY-SA 3.0](http://creativecommons.org/licenses/by-sa/3.0/) | [Big Ram in Karoonda.jpg](https://commons.wikimedia.org/wiki/File:Big_Ram_in_Karoonda.jpg) |
 | The Big Raspberry (TAS) | SteveEBear | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0) | [Big Raspberry.jpg](https://commons.wikimedia.org/wiki/File:Big_Raspberry.jpg) |
+| The Big Red Chair (NSW) | Halans Photography | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.en) | [the-big-red-chair-29a690.jpeg](https://halansphotography.com) |
 | The Big Red Elephant (QLD) | Fishieman15 | [CC-BY-SA-3.0](https://creativecommons.org/licenses/by-sa/3.0/) | [The Big Red Elephant.jpg](https://en.wikipedia.org/wiki/File:The_Big_Red_Elephant.jpg) |
+| The Big Redback (QLD) | Halans Photography | [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/deed.en) | [the-big-redback-9cbc7b.jpeg](https://halansphotography.com) |
 | The Big Rig (QLD) | Fishieman15 | [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0) | [Big Rig Roma.jpg](https://commons.wikimedia.org/wiki/File:Big_Rig_Roma.jpg) |
 | The Big Rock Lobster (TAS) | BrisbanePom | [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0) | [Big Rock Lobster.jpg](https://commons.wikimedia.org/wiki/File:Big_Rock_Lobster.jpg) |
 | The Big Rocket (NSW) | JesterNoir | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0) | [The Big Rocket, Moree.jpg](https://commons.wikimedia.org/wiki/File:The_Big_Rocket,_Moree.jpg) |
@@ -277,6 +295,7 @@ under the licence its author chose; the dataset itself is CC BY-SA 4.0.
 | The Big Story Teller (VIC) | SteveEBear | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0) | [The Big Story Teller.jpg](https://commons.wikimedia.org/wiki/File:The_Big_Story_Teller.jpg) |
 | The Big Strawberry (QLD) | Gotadollarmate | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0) | [BigThingStrawberry (square).jpg](https://commons.wikimedia.org/wiki/File:BigThingStrawberry_(square).jpg) |
 | The Big Stubbie (NT) | WikiWookie | [CC BY 2.5](https://creativecommons.org/licenses/by/2.5) | [Big stubby Larrimah.jpg](https://commons.wikimedia.org/wiki/File:Big_stubby_Larrimah.jpg) |
+| The Big Submarine (HMAS Otway) (NSW) | Halans Photography | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.en) | [the-big-submarine-hmas-otway-32c79f.jpg](https://halansphotography.com) |
 | The Big Surveyors Tripod (QLD) | Mikalee747 | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0) | [Big Tripod.jpg](https://commons.wikimedia.org/wiki/File:Big_Tripod.jpg) |
 | The Big Swan (NSW) | Mattinbgn | [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0) | [DunedooSwanMotel (cropped).JPG](https://commons.wikimedia.org/wiki/File:DunedooSwanMotel_(cropped).JPG) |
 | The Big Tasmanian Devil (TAS) | BrisbanePom | [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0) | [Big Tassie Devil.jpg](https://commons.wikimedia.org/wiki/File:Big_Tassie_Devil.jpg) |
@@ -298,13 +317,16 @@ under the licence its author chose; the dataset itself is CC BY-SA 4.0.
 | The Big Wine Bottle (NSW) | Charlotte Nash | Public domain | [Big WineBottle Pokolbin.jpg](https://commons.wikimedia.org/wiki/File:Big_WineBottle_Pokolbin.jpg) |
 | The Big Wine Cask (NSW) | Mattinbgn | [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0) | [MourquongBigWineCask.JPG](https://commons.wikimedia.org/wiki/File:MourquongBigWineCask.JPG) |
 | The Big Yellow Motorcycle (TAS) | SteveEBear | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0) | [Big Yellow Motorcycle.jpg](https://commons.wikimedia.org/wiki/File:Big_Yellow_Motorcycle.jpg) |
+| The Clam (NSW) | Halans Photography | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.en) | [the-clam-b5d389.jpg](https://halansphotography.com) |
 | The Giant Jellyfish (NT) | BigsBardot | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0) | [The-Giant-Jellyfish.jpg](https://commons.wikimedia.org/wiki/File:The-Giant-Jellyfish.jpg) |
 | The Giant Jumping Crocodile (NT) | Chris Olszewski | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0) | [The Original Adelaide River Queen Jumping Crocodile Cruises, Northern Territory 01.jpg](https://commons.wikimedia.org/wiki/File:The_Original_Adelaide_River_Queen_Jumping_Crocodile_Cruises,_Northern_Territory_01.jpg) |
 | The Giant Koala (VIC) | Bilby | Public domain | [Giant Koala.jpg](https://commons.wikimedia.org/wiki/File:Giant_Koala.jpg) |
 | The Giant Ram (WA) | Nachoman-au | [CC BY-SA 3.0](http://creativecommons.org/licenses/by-sa/3.0/) | [Wagin Giant Ram, Western Australia.jpg](https://commons.wikimedia.org/wiki/File:Wagin_Giant_Ram,_Western_Australia.jpg) |
 | The Giant Worm (VIC) | Bilby | [CC BY 3.0](https://creativecommons.org/licenses/by/3.0) | [Giant Worm.jpg](https://commons.wikimedia.org/wiki/File:Giant_Worm.jpg) |
 | The Giant's Chair (VIC) | SteveEBear | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0) | [Giant Chair.jpg](https://commons.wikimedia.org/wiki/File:Giant_Chair.jpg) |
+| The Long Jetty (NSW) | Halans Photography | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.en) | [the-long-jetty-33340b.jpeg](https://halansphotography.com) |
 | The World's Biggest Sundial (NSW) | MartinRe at English Wikipedia | [CC BY-SA 3.0](http://creativecommons.org/licenses/by-sa/3.0/) | [LargeSundial.png](https://commons.wikimedia.org/wiki/File:LargeSundial.png) |
 | The World's Largest Rolling Pin (VIC) | SteveEBear | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0) | [Big Rolling Pin.jpg](https://commons.wikimedia.org/wiki/File:Big_Rolling_Pin.jpg) |
 | Wardandi Boodja (WA) | Jaydavey214 | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0) | [Wardandi Boodja.jpg](https://commons.wikimedia.org/wiki/File:Wardandi_Boodja.jpg) |
 | William the Wombat (QLD) | Jennyleigh3 | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0) | [William the wombat.png](https://commons.wikimedia.org/wiki/File:William_the_wombat.png) |
+| Yininmadyemi (NSW) | Halans Photography | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.en) | [yininmadyemi-88f5c1.jpeg](https://halansphotography.com) |
