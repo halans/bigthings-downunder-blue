@@ -1,6 +1,6 @@
 {
  "meta": {
-  "generated": "2026-09-28",
+  "generated": "2026-10-12",
   "claimedNationalTotal": 1075,
   "claimedTotalSource": "Clarke, A. (2023). Making a Mark… Journal of Australian Studies 47(2), cited by Wikipedia",
   "sources": [
@@ -26,14 +26,14 @@
    }
   ],
   "stats": {
-   "total": 478,
-   "mapped": 478,
-   "exact": 319,
+   "total": 479,
+   "mapped": 479,
+   "exact": 320,
    "byPrecision": {
     "exact-osm": 80,
     "town": 159,
     "exact-verified": 188,
-    "exact-article": 20,
+    "exact-article": 21,
     "exact-wikivoyage": 26,
     "exact-inline": 5
    },
@@ -45,13 +45,13 @@
     "SA": 42,
     "TAS": 27,
     "VIC": 87,
-    "WA": 31
+    "WA": 32
    },
    "byCategory": {
     "fruit-and-veg": 61,
     "food-and-drink": 35,
     "people-and-culture": 51,
-    "fauna": 150,
+    "fauna": 151,
     "sport-and-leisure": 22,
     "sculpture": 7,
     "oddity": 66,
@@ -60,7 +60,7 @@
     "machinery-and-transport": 20
    },
    "byStatus": {
-    "standing": 437,
+    "standing": 438,
     "demolished": 11,
     "relocated": 13,
     "replaced": 2,
@@ -70,15 +70,15 @@
     "revival (2000s–2014)": 45,
     "late century (1985–1999)": 46,
     "unknown": 299,
-    "modern (2015+)": 39,
+    "modern (2015+)": 40,
     "pioneer (pre-1970)": 10,
     "boom (1970s–early 80s)": 39
    },
-   "withYear": 179,
-   "withHeight": 44,
-   "withAnySize": 142,
+   "withYear": 180,
+   "withHeight": 45,
+   "withAnySize": 143,
    "withImage": 300,
-   "withEvCharger": 92
+   "withEvCharger": 93
   }
  },
  "things": [
@@ -20844,6 +20844,52 @@
      "url": "https://en.wikivoyage.org/wiki/Australia%27s_big_things"
     }
    ]
+  },
+  {
+   "id": "e293cfae3e",
+   "name": "The Big Carnaby's cockatoos",
+   "state": "WA",
+   "stateName": "Western Australia",
+   "location": "Moora",
+   "town": "Moora",
+   "lat": -30.6388,
+   "lng": 116.001494,
+   "precision": "exact-article",
+   "coordSource": "https://www.abc.net.au/news/2026-10-11/big-carnaby-cockatoo-sculpture-moora/107230254",
+   "builtYear": 2026,
+   "builtCirca": false,
+   "builtRaw": null,
+   "era": "modern (2015+)",
+   "heightM": 11.5,
+   "lengthM": null,
+   "sizeMaxM": 11.5,
+   "sizeKind": "height",
+   "dimsM": [
+    11.5
+   ],
+   "sizeRaw": "11.5",
+   "category": "fauna",
+   "status": "standing",
+   "statusEvidence": null,
+   "notes": "An 11.5-metre sculpture of two endangered Carnaby's cockatoos in the WA town of Moora to inspire conservation work, ensuring the longevity of the species.",
+   "blurb": null,
+   "image": null,
+   "wikipediaArticle": null,
+   "wikidata": null,
+   "osmId": null,
+   "addedManually": true,
+   "correction": {
+    "why": "Published article",
+    "source": "https://www.abc.net.au/news/2026-10-11/big-carnaby-cockatoo-sculpture-moora/107230254"
+   },
+   "sources": [
+    {
+     "source": "independent reporting",
+     "page": "https://www.abc.net.au/news/2026-10-11/big-carnaby-cockatoo-sculpture-moora/107230254",
+     "url": "https://www.abc.net.au/news/2026-10-11/big-carnaby-cockatoo-sculpture-moora/107230254"
+    }
+   ],
+   "evChargerNearby": true
   },
   {
    "id": "071adf8cd9",

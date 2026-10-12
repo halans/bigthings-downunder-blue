@@ -1435,6 +1435,24 @@
    "category": "tools-and-industry",
    "status": "standing",
    "notes": "At the Newcastle Museum, hooks used to carry 60-tonne ladles full of molten iron in the local steel mill"
+  },
+  {
+   "name": "The Big Carnaby's cockatoos",
+   "state": "WA",
+   "why": "Published article",
+   "source": "https://www.abc.net.au/news/2026-10-11/big-carnaby-cockatoo-sculpture-moora/107230254",
+   "location": "Moora",
+   "town": "Moora",
+   "lat": -30.6388002,
+   "lng": 116.0014943,
+   "precision": "exact-article",
+   "coordSource": "https://www.abc.net.au/news/2026-10-11/big-carnaby-cockatoo-sculpture-moora/107230254",
+   "builtYear": 2026,
+   "heightM": 11.5,
+   "sizeRaw": "11.5",
+   "category": "fauna",
+   "status": "standing",
+   "notes": "An 11.5-metre sculpture of two endangered Carnaby's cockatoos in the WA town of Moora to inspire conservation work, ensuring the longevity of the species."
   }
  ],
  "removals": [
