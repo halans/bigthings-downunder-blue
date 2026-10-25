@@ -1,6 +1,6 @@
 {
  "meta": {
-  "generated": "2026-10-12",
+  "generated": "2026-10-25",
   "claimedNationalTotal": 1075,
   "claimedTotalSource": "Clarke, A. (2023). Making a Mark… Journal of Australian Studies 47(2), cited by Wikipedia",
   "sources": [
@@ -26,12 +26,12 @@
    }
   ],
   "stats": {
-   "total": 479,
-   "mapped": 479,
+   "total": 480,
+   "mapped": 480,
    "exact": 320,
    "byPrecision": {
     "exact-osm": 80,
-    "town": 159,
+    "town": 160,
     "exact-verified": 188,
     "exact-article": 21,
     "exact-wikivoyage": 26,
@@ -41,7 +41,7 @@
     "ACT": 12,
     "NSW": 140,
     "NT": 24,
-    "QLD": 115,
+    "QLD": 116,
     "SA": 42,
     "TAS": 27,
     "VIC": 87,
@@ -51,7 +51,7 @@
     "fruit-and-veg": 61,
     "food-and-drink": 35,
     "people-and-culture": 51,
-    "fauna": 151,
+    "fauna": 152,
     "sport-and-leisure": 22,
     "sculpture": 7,
     "oddity": 66,
@@ -60,7 +60,7 @@
     "machinery-and-transport": 20
    },
    "byStatus": {
-    "standing": 438,
+    "standing": 439,
     "demolished": 11,
     "relocated": 13,
     "replaced": 2,
@@ -70,13 +70,13 @@
     "revival (2000s–2014)": 45,
     "late century (1985–1999)": 46,
     "unknown": 299,
-    "modern (2015+)": 40,
+    "modern (2015+)": 41,
     "pioneer (pre-1970)": 10,
     "boom (1970s–early 80s)": 39
    },
-   "withYear": 180,
-   "withHeight": 45,
-   "withAnySize": 143,
+   "withYear": 181,
+   "withHeight": 46,
+   "withAnySize": 144,
    "withImage": 300,
    "withEvCharger": 93
   }
@@ -2193,7 +2193,7 @@
    "sizeRaw": null,
    "category": "machinery-and-transport",
    "status": "relocated",
-   "statusEvidence": null,
+   "statusEvidence": "Moved to Mooball, NSW",
    "notes": "Moved to Mooball, NSW",
    "blurb": null,
    "image": null,
@@ -13101,6 +13101,51 @@
      "source": "Land of the Bigs",
      "page": "https://landofthebigs.com/the-big-wheelie-bin-helensvale-qld/",
      "url": "https://landofthebigs.com/the-big-wheelie-bin-helensvale-qld/"
+    }
+   ]
+  },
+  {
+   "id": "0a7332142a",
+   "name": "The Big Yabby",
+   "state": "QLD",
+   "stateName": "Queensland",
+   "location": "Windorah",
+   "town": "Windorah",
+   "lat": -25.4205,
+   "lng": 142.6544,
+   "precision": "town",
+   "coordSource": "https://en.wikipedia.org/wiki/Windorah",
+   "builtYear": 2026,
+   "builtCirca": false,
+   "builtRaw": null,
+   "era": "modern (2015+)",
+   "heightM": 4.6,
+   "lengthM": null,
+   "sizeMaxM": 4.6,
+   "sizeKind": "height",
+   "dimsM": [
+    4.6
+   ],
+   "sizeRaw": "4.6",
+   "category": "fauna",
+   "status": "standing",
+   "statusEvidence": null,
+   "notes": "A 4.6-metre yabby of bird wire and sheet metal, unveiled on Albert Street in Windorah in October 2026. Made by Toowoomba artist Jobella Bennett for Barcoo Shire Council in a state-funded $13,000 project.",
+   "blurb": null,
+   "image": null,
+   "wikipediaArticle": null,
+   "wikidata": null,
+   "osmId": null,
+   "addedManually": true,
+   "correction": {
+    "why": "Published article. The article places it on Albert Street but gives no coordinates, so the pin is the Windorah town point, not the sculpture.",
+    "source": "https://www.abc.net.au/news/2026-10-22/big-yabby-statue-windorah-outback-queensland/107286084"
+   },
+   "sources": [
+    {
+     "source": "independent reporting",
+     "page": "https://www.abc.net.au/news/2026-10-22/big-yabby-statue-windorah-outback-queensland/107286084",
+     "url": "https://www.abc.net.au/news/2026-10-22/big-yabby-statue-windorah-outback-queensland/107286084"
     }
    ]
   },

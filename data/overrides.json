@@ -1267,6 +1267,7 @@
     "coordSource": "https://en.wikivoyage.org/wiki/Australia%27s_big_things",
     "category": "machinery-and-transport",
     "status": "relocated",
+    "statusEvidence": "Moved to Mooball, NSW",
     "notes": "Moved to Mooball, NSW",
     "stateName": "New South Wales"
    },
@@ -1453,6 +1454,24 @@
    "category": "fauna",
    "status": "standing",
    "notes": "An 11.5-metre sculpture of two endangered Carnaby's cockatoos in the WA town of Moora to inspire conservation work, ensuring the longevity of the species."
+  },
+  {
+   "name": "The Big Yabby",
+   "state": "QLD",
+   "why": "Published article. The article places it on Albert Street but gives no coordinates, so the pin is the Windorah town point, not the sculpture.",
+   "source": "https://www.abc.net.au/news/2026-10-22/big-yabby-statue-windorah-outback-queensland/107286084",
+   "location": "Windorah",
+   "town": "Windorah",
+   "lat": -25.4205,
+   "lng": 142.6544,
+   "precision": "town",
+   "coordSource": "https://en.wikipedia.org/wiki/Windorah",
+   "builtYear": 2026,
+   "heightM": 4.6,
+   "sizeRaw": "4.6",
+   "category": "fauna",
+   "status": "standing",
+   "notes": "A 4.6-metre yabby of bird wire and sheet metal, unveiled on Albert Street in Windorah in October 2026. Made by Toowoomba artist Jobella Bennett for Barcoo Shire Council in a state-funded $13,000 project."
   }
  ],
  "removals": [
