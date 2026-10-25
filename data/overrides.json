@@ -1274,6 +1274,30 @@
    "why": "Relocated to Mooball",
    "source": null,
    "silent": true
+  },
+  {
+   "match": {
+    "id": "462be72b48"
+   },
+   "set": {
+    "name": "Big Thongs",
+    "state": "QLD",
+    "location": "Calen",
+    "town": "Calen",
+    "lat": -20.8985,
+    "lng": 148.7717,
+    "precision": "exact-verified",
+    "coordSource": "https://www.abc.net.au/news/2021-01-27/big-thongs-unveiled-at-calen-north-of-mackay/13088940",
+    "builtYear": 2021,
+    "builtRaw": "2021",
+    "category": "sport-and-leisure",
+    "status": "standing",
+    "blurb": "A pair of black-and-white thongs stands 2.5 metres high outside the Calen Pub, just off the Bruce Highway north of Mackay. Artist Lionel Knott made them from locally sourced mine conveyor-belt rubber, which he cut out with a Stanley knife over about four months. It was his first sculpture. The idea came over a few beers with publican Gavin \"Butto\" Butlin, after Knott returned from overseas in the same worn-out thongs. They were unveiled on Australia Day 2021 to give Calen a reason for tourists to pull off the highway. Knott says they're \"built to last, like a good old pair of Aussie thongs.\"",
+    "stateName": "Queensland"
+   },
+   "why": null,
+   "source": null,
+   "silent": true
   }
  ],
  "additions": [
