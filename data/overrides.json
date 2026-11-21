@@ -1496,6 +1496,25 @@
    "category": "fauna",
    "status": "standing",
    "notes": "A 4.6-metre yabby of bird wire and sheet metal, unveiled on Albert Street in Windorah in October 2026. Made by Toowoomba artist Jobella Bennett for Barcoo Shire Council in a state-funded $13,000 project."
+  },
+  {
+   "name": "The Big Fly Swat",
+   "state": "SA",
+   "why": "Published article (ABC News, 14 Nov 2026) on its official opening. Not on Wikipedia or Wikivoyage. The article gives no coordinates; the pin is the OpenStreetMap node for 'The Big Flyswat', which cites the same article, and sits in the described spot between the main street and the railway line.",
+   "source": "https://www.abc.net.au/news/2026-11-14/worlds-biggest-fly-swat-in-outback-kingoonya-sa/107314740",
+   "location": "Kingoonya",
+   "town": "Kingoonya",
+   "lat": -30.912666,
+   "lng": 135.318091,
+   "precision": "exact-osm",
+   "coordSource": "https://www.openstreetmap.org/node/14376822141",
+   "builtYear": 2026,
+   "builtRaw": "2026",
+   "heightM": 8,
+   "sizeRaw": "8 m (about one Stobie pole high)",
+   "category": "tools-and-industry",
+   "status": "standing",
+   "notes": "An 8-metre painted metal fly swat, with a fly on it whose eyes are red kitchen strainers, cemented in place between the main street and the railway line in Kingoonya, a town of about 13 people. Dreamed up on the porch of the Kingoonya Bush Hotel by Leesa Carty of the Kingoonya and Area Progress Association and former publican Johnny Brett, and funded by a $30,000 Outback Communities Authority grant. Officially opened in November 2026; locals say it is the world's biggest fly swat."
   }
  ],
  "removals": [

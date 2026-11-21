@@ -1,6 +1,6 @@
 {
  "meta": {
-  "generated": "2026-10-25",
+  "generated": "2026-11-21",
   "claimedNationalTotal": 1075,
   "claimedTotalSource": "Clarke, A. (2023). Making a Mark… Journal of Australian Studies 47(2), cited by Wikipedia",
   "sources": [
@@ -26,11 +26,11 @@
    }
   ],
   "stats": {
-   "total": 480,
-   "mapped": 480,
-   "exact": 320,
+   "total": 481,
+   "mapped": 481,
+   "exact": 321,
    "byPrecision": {
-    "exact-osm": 80,
+    "exact-osm": 81,
     "town": 160,
     "exact-verified": 188,
     "exact-article": 21,
@@ -42,7 +42,7 @@
     "NSW": 140,
     "NT": 24,
     "QLD": 116,
-    "SA": 42,
+    "SA": 43,
     "TAS": 27,
     "VIC": 87,
     "WA": 32
@@ -56,11 +56,11 @@
     "sculpture": 7,
     "oddity": 66,
     "seafood": 39,
-    "tools-and-industry": 27,
+    "tools-and-industry": 28,
     "machinery-and-transport": 20
    },
    "byStatus": {
-    "standing": 439,
+    "standing": 440,
     "demolished": 11,
     "relocated": 13,
     "replaced": 2,
@@ -70,13 +70,13 @@
     "revival (2000s–2014)": 45,
     "late century (1985–1999)": 46,
     "unknown": 299,
-    "modern (2015+)": 41,
+    "modern (2015+)": 42,
     "pioneer (pre-1970)": 10,
     "boom (1970s–early 80s)": 39
    },
-   "withYear": 181,
-   "withHeight": 46,
-   "withAnySize": 144,
+   "withYear": 182,
+   "withHeight": 47,
+   "withAnySize": 145,
    "withImage": 300,
    "withEvCharger": 93
   }
@@ -14204,6 +14204,51 @@
      "source": "wikivoyage",
      "page": "Australia's big things",
      "url": "https://en.wikivoyage.org/wiki/Australia%27s_big_things"
+    }
+   ]
+  },
+  {
+   "id": "0a2feb3f4d",
+   "name": "The Big Fly Swat",
+   "state": "SA",
+   "stateName": "South Australia",
+   "location": "Kingoonya",
+   "town": "Kingoonya",
+   "lat": -30.912666,
+   "lng": 135.318091,
+   "precision": "exact-osm",
+   "coordSource": "https://www.openstreetmap.org/node/14376822141",
+   "builtYear": 2026,
+   "builtCirca": false,
+   "builtRaw": "2026",
+   "era": "modern (2015+)",
+   "heightM": 8,
+   "lengthM": null,
+   "sizeMaxM": 8,
+   "sizeKind": "height",
+   "dimsM": [
+    8
+   ],
+   "sizeRaw": "8 m (about one Stobie pole high)",
+   "category": "tools-and-industry",
+   "status": "standing",
+   "statusEvidence": null,
+   "notes": "An 8-metre painted metal fly swat, with a fly on it whose eyes are red kitchen strainers, cemented in place between the main street and the railway line in Kingoonya, a town of about 13 people. Dreamed up on the porch of the Kingoonya Bush Hotel by Leesa Carty of the Kingoonya and Area Progress Association and former publican Johnny Brett, and funded by a $30,000 Outback Communities Authority grant. Officially opened in November 2026; locals say it is the world's biggest fly swat.",
+   "blurb": null,
+   "image": null,
+   "wikipediaArticle": null,
+   "wikidata": null,
+   "osmId": null,
+   "addedManually": true,
+   "correction": {
+    "why": "Published article (ABC News, 14 Nov 2026) on its official opening. Not on Wikipedia or Wikivoyage. The article gives no coordinates; the pin is the OpenStreetMap node for 'The Big Flyswat', which cites the same article, and sits in the described spot between the main street and the railway line.",
+    "source": "https://www.abc.net.au/news/2026-11-14/worlds-biggest-fly-swat-in-outback-kingoonya-sa/107314740"
+   },
+   "sources": [
+    {
+     "source": "independent reporting",
+     "page": "https://www.abc.net.au/news/2026-11-14/worlds-biggest-fly-swat-in-outback-kingoonya-sa/107314740",
+     "url": "https://www.abc.net.au/news/2026-11-14/worlds-biggest-fly-swat-in-outback-kingoonya-sa/107314740"
     }
    ]
   },
