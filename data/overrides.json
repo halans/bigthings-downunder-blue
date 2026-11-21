@@ -1496,6 +1496,22 @@
    "category": "fauna",
    "status": "standing",
    "notes": "A 4.6-metre yabby of bird wire and sheet metal, unveiled on Albert Street in Windorah in October 2026. Made by Toowoomba artist Jobella Bennett for Barcoo Shire Council in a state-funded $13,000 project."
+  },
+  {
+   "name": "Big Fly Swat",
+   "state": "SA",
+   "why": "Published articles (InDaily, 12 Nov 2026; The New Daily, 11 Nov 2026; ABC News, 14 Nov 2026). The articles give no street address or coordinates, so the pin is the Kingoonya town point, not the sculpture. No height is published.",
+   "source": "https://www.indailysa.com.au/news/just-in/2026/11/12/tiny-towns-big-fly-swat",
+   "location": "Kingoonya",
+   "town": "Kingoonya",
+   "lat": -30.916972,
+   "lng": 135.314671,
+   "precision": "town",
+   "coordSource": "https://en.wikipedia.org/wiki/Kingoonya",
+   "builtYear": 2026,
+   "category": "oddity",
+   "status": "standing",
+   "notes": "A blue steel fly swat topped with a fly made from recycled metal, officially launched in November 2026 in the outback railway settlement of Kingoonya, beside the sign for the caravan park, service station and cafe. Designed by Jethro Holmes of Wirrulla General Engineering in Streaky Bay, with the fly sculpted by a Streaky Bay sculptor. Locals paid for it from a community grant, inspired by the fly swats kept on the hotel's tables."
   }
  ],
  "removals": [
