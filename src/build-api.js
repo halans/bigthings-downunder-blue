@@ -44,6 +44,7 @@ function buildApi({ dataset, credits, siteUrl }) {
     type: 'FeatureCollection',
     features: things.filter((t) => t.lat != null && t.lng != null).map((t) => ({
       type: 'Feature',
+      id: t.id,
       geometry: { type: 'Point', coordinates: [t.lng, t.lat] },
       properties: t,
     })),

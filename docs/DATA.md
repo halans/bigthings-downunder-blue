@@ -220,14 +220,17 @@ scraping and no second lookup for photos. These are generated into `public/data/
 | URL | What |
 |---|---|
 | `/data/bigthings.json` | The full dataset: `meta` plus every record. |
-| `/data/bigthings-au.geojson` | The same records as GeoJSON points (records without coordinates are left out). |
+| `/data/bigthings-au.geojson` | The same records as GeoJSON points, each feature's `id` being the record `id` (records without coordinates are left out). |
 | `/data/version.json` | `generated`, `count`, `bytes`, `sha256` of `bigthings.json`. |
 
 Each record keeps its `image` key and gains two fields:
 
 - `imageUrl` — absolute URL of the photo, or `null`.
 - `imageCredit` — `{ author, licence, licenceUrl, filePage }`, or `null`. Photos are not covered
-  by the repository licence; **show the credit wherever you show the photo.**
+  by the repository licence; **show the credit wherever you show the photo.** `licenceUrl` is
+  `null` for public-domain photos, so declare it optional in your model (`URL?` in Swift) or the
+  whole file will fail to decode. `author`, `licence` and `filePage` are always present when
+  `imageCredit` is.
 
 To stay current, poll `/data/version.json` (about 150 bytes) and re-download `bigthings.json`
 only when `generated` or `sha256` differs. Or just request `bigthings.json` with

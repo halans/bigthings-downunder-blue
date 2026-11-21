@@ -67,6 +67,7 @@ test('buildApi geojson has one finite-coordinate feature per record with a lat',
   eq(g.features.length, 3);
   eq(g.features[0].geometry.coordinates, [153.5, -28.8]);
   for (const f of g.features) ok(f.geometry.coordinates.every(Number.isFinite), 'finite coordinates');
+  eq(g.features.map((f) => f.id), ['a', 'b', 'c'], 'feature id is the record id');
   eq(g.features[0].properties.imageUrl, 'https://example.test/img/big-prawn-aaaaaa.jpg');
 });
 
