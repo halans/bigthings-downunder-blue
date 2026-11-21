@@ -21,6 +21,7 @@ const W = require('./build-web');
 const A = require('./build-about');
 const C = require('./build-credits');
 const SEO = require('./seo');
+const { writeApi } = require('./build-api');
 
 const ROOT = path.join(__dirname, '..');
 const WEB = path.join(ROOT, 'web');
@@ -30,6 +31,10 @@ const HEADERS = `/vendor/*
   Cache-Control: public, max-age=604800, immutable
 /img/*
   Cache-Control: public, max-age=31536000, immutable
+/data/*
+  Cache-Control: public, max-age=0, must-revalidate
+/data/bigthings-au.geojson
+  Content-Type: application/geo+json
 `;
 
 function robotsTxt(siteUrl) {
@@ -76,6 +81,9 @@ function main() {
 
   fs.writeFileSync(path.join(PUBLIC, '_headers'), HEADERS);
 
+  // The app-facing dataset: /data/bigthings.json, bigthings-au.geojson, version.json.
+  const api = writeApi(PUBLIC);
+
   const { siteUrl } = SEO.loadSite();
   const dataset = JSON.parse(fs.readFileSync(path.join(ROOT, 'data', 'bigthings.json'), 'utf8'));
   fs.writeFileSync(path.join(PUBLIC, 'robots.txt'), robotsTxt(siteUrl));
@@ -85,8 +93,9 @@ function main() {
     console.log(`wrote public/${name} — ${(html.length / 1024).toFixed(0)} KB`);
   }
   console.log('copied 404.html, img/ and vendor/ into public/, wrote public/_headers, robots.txt, sitemap.xml');
+  console.log(`wrote public/data/ — ${api.version.count} records, bigthings.json ${(api.version.bytes / 1024).toFixed(0)} KB`);
 }
 
 if (require.main === module) main();
 
-module.exports = { main };
+module.exports = { main, HEADERS };

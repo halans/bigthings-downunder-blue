@@ -98,3 +98,31 @@ test('real data: every photographed record gets a url and an author; urls point 
     if (hasImg) ok(fs.existsSync(path.join(ROOT, 'web', new URL(t.imageUrl).pathname)), `${t.name}: ${t.imageUrl} missing from web/`);
   }
 });
+
+// --- writing into public/ -------------------------------------------------
+
+const os = require('os');
+const { writeApi } = require('../src/build-api');
+const { HEADERS } = require('../src/build-public');
+
+test('_headers revalidates /data/* and types the geojson', () => {
+  ok(/\/data\/\*\n\s+Cache-Control: public, max-age=0, must-revalidate/.test(HEADERS), '/data/* revalidate rule');
+  ok(/\/data\/bigthings-au\.geojson\n\s+Content-Type: application\/geo\+json/.test(HEADERS), 'geojson content-type rule');
+});
+
+test('writeApi writes three parseable files whose version matches the json on disk', () => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'bt-api-'));
+  try {
+    writeApi(dir);
+    for (const f of ['bigthings.json', 'bigthings-au.geojson', 'version.json']) {
+      JSON.parse(fs.readFileSync(path.join(dir, 'data', f), 'utf8'));
+    }
+    const raw = fs.readFileSync(path.join(dir, 'data', 'bigthings.json'));
+    const v = JSON.parse(fs.readFileSync(path.join(dir, 'data', 'version.json'), 'utf8'));
+    eq(v.bytes, raw.length);
+    eq(v.sha256, crypto.createHash('sha256').update(raw).digest('hex'));
+    eq(v.count, JSON.parse(raw).things.length);
+  } finally {
+    fs.rmSync(dir, { recursive: true, force: true });
+  }
+});

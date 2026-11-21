@@ -14,6 +14,12 @@
  */
 
 const crypto = require('crypto');
+const fs = require('fs');
+const path = require('path');
+const { loadImageCredits } = require('./image-credits');
+const SEO = require('./seo');
+
+const ROOT = path.join(__dirname, '..');
 
 /** A copy of `thing` plus imageUrl (absolute) and imageCredit; both null without a credited photo. */
 function enrichThing(thing, credits, siteUrl) {
@@ -51,4 +57,17 @@ function buildApi({ dataset, credits, siteUrl }) {
   return { json, geojson, version };
 }
 
-module.exports = { enrichThing, buildApi };
+/** Build from data/ and write <publicDir>/data/{bigthings.json,bigthings-au.geojson,version.json}. */
+function writeApi(publicDir) {
+  const dataset = JSON.parse(fs.readFileSync(path.join(ROOT, 'data', 'bigthings.json'), 'utf8'));
+  const { siteUrl } = SEO.loadSite();
+  const out = buildApi({ dataset, credits: loadImageCredits(), siteUrl });
+  const dir = path.join(publicDir, 'data');
+  fs.mkdirSync(dir, { recursive: true });
+  fs.writeFileSync(path.join(dir, 'bigthings.json'), out.json);
+  fs.writeFileSync(path.join(dir, 'bigthings-au.geojson'), out.geojson);
+  fs.writeFileSync(path.join(dir, 'version.json'), JSON.stringify(out.version, null, 2) + '\n');
+  return out;
+}
+
+module.exports = { enrichThing, buildApi, writeApi };
