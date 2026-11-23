@@ -1,6 +1,6 @@
 {
  "meta": {
-  "generated": "2026-11-21",
+  "generated": "2026-11-23",
   "claimedNationalTotal": 1075,
   "claimedTotalSource": "Clarke, A. (2023). Making a Mark… Journal of Australian Studies 47(2), cited by Wikipedia",
   "sources": [
@@ -30,9 +30,9 @@
    "mapped": 481,
    "exact": 321,
    "byPrecision": {
-    "exact-osm": 81,
+    "exact-verified": 189,
     "town": 160,
-    "exact-verified": 188,
+    "exact-osm": 80,
     "exact-article": 21,
     "exact-wikivoyage": 26,
     "exact-inline": 5
@@ -89,10 +89,10 @@
    "stateName": "Australian Capital Territory",
    "location": "National Arboretum Canberra in Molonglo Valley",
    "town": "National Arboretum Canberra",
-   "lat": -35.262487,
-   "lng": 149.145522,
-   "precision": "exact-osm",
-   "coordSource": "https://www.openstreetmap.org/node/9034545018",
+   "lat": -35.287194,
+   "lng": 149.0682389,
+   "precision": "exact-verified",
+   "coordSource": "https://maps.app.goo.gl/mNJaspyVkzQrx8Uu6",
    "builtYear": 2013,
    "builtCirca": false,
    "builtRaw": "2013",
@@ -120,7 +120,7 @@
     }
    ],
    "correction": {
-    "why": "Photo updated, replacing whatever (if anything) was there.",
+    "why": "Photo updated, location updated",
     "source": null
    }
   },

@@ -221,10 +221,10 @@
     "state": "ACT",
     "location": "National Arboretum Canberra in Molonglo Valley",
     "town": "National Arboretum Canberra",
-    "lat": -35.262487,
-    "lng": 149.145522,
-    "precision": "exact-osm",
-    "coordSource": "https://www.openstreetmap.org/node/9034545018",
+    "lat": -35.287194,
+    "lng": 149.0682389,
+    "precision": "exact-verified",
+    "coordSource": "https://maps.app.goo.gl/mNJaspyVkzQrx8Uu6",
     "builtYear": 2013,
     "builtRaw": "2013",
     "category": "fruit-and-veg",
@@ -232,7 +232,7 @@
     "notes": "The giant acorns are children's play equipment at the playground. Often referred to as the 'Acorn Park'.",
     "stateName": "Australian Capital Territory"
    },
-   "why": "Photo updated, replacing whatever (if anything) was there.",
+   "why": "Photo updated, location updated",
    "source": null
   },
   {
