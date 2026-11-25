@@ -13,6 +13,7 @@ npm test          # 171 tests
 npm run build     # rebuild the dataset and the web app from the cached sources
 npm run serve     # open the map at http://localhost:8099
 npm run serve:about     # the About/landing page
+npm run serve:app       # the short iPhone-app page (/app)
 npm run build:public    # package the map into public/ for static hosting
 npm run serve:public    # preview public/ exactly as a static host would serve it
 npm run admin     # local-only admin UI for manual corrections — see docs/ADMIN.md

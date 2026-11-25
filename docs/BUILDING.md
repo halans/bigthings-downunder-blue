@@ -250,12 +250,13 @@ It doesn't plot the ~1,600 chargers themselves — the flag on each thing is all
 
 ## Stage 5 — generate the pages (`src/build-web.js`, `src/build-about.js`)
 
-Two HTML files from two templates, one each:
+HTML files from templates, one each:
 
 | Generator | Template | Output |
 |---|---|---|
 | `build-web.js` | `web/template.html` | `web/index.html` |
 | `build-about.js` | `web/about-template.html` | `web/about.html` |
+| `build-app.js` | `web/app-template.html` | `web/app.html` (served at `/app`) |
 
 Everything is self-hosted — photos from `web/img/`, Leaflet and the fonts from `web/vendor/` —
 rather than hotlinked from Wikimedia Commons or pulled from a CDN. There used to be a second,
@@ -354,6 +355,10 @@ A 50-line zero-dependency runner. Seven suites:
 - **`discovery.test.js`** — the discovery pipeline, which is mostly a set of refusals. Every
   case is a mistake it actually made: the parenthesised nickname, the NSW/ACT enclave
   duplicate, the un-decoded HTML entity, the non-idempotent re-run.
+- **`app.test.js`** — the `/app` page: a short page about the iPhone app, which works offline where
+  the site does not. Figures are checked against the dataset, assets must be local, and it must link
+  back to the app's own page. The app link, the "coming soon" text and the store URL live in the
+  `app` block of `data/site.json`; set `storeUrl` when the app ships and the page swaps to a download button.
 - **`about.test.js`** — the About page's contract. It exists to stop the landing page drifting
   away from the data it describes: every headline figure, bar and superlative is checked against
   the dataset, the precision tiers must sum to the total, each correction card must be a real

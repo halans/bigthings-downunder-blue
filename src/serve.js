@@ -5,6 +5,7 @@
  *
  *   node src/serve.js            → http://localhost:8099/           (the map)
  *   node src/serve.js --about    → http://localhost:8099/about.html
+ *   node src/serve.js --app      → http://localhost:8099/app.html
  *   node src/serve.js --public   → http://localhost:8099/ (the public/ deploy bundle)
  *   node src/serve.js --port 9000
  *
@@ -43,11 +44,14 @@ const MIME = {
 const argv = process.argv.slice(2);
 const portFlag = argv.indexOf('--port');
 const port = portFlag >= 0 ? Number(argv[portFlag + 1]) : 8099;
-const landing = argv.includes('--about') ? '/about.html' : '/index.html';
+const landing = argv.includes('--about') ? '/about.html'
+  : argv.includes('--app') ? '/app.html' : '/index.html';
 
 const server = http.createServer((req, res) => {
   let rel = decodeURIComponent((req.url || '/').split('?')[0]);
   if (rel === '/') rel = landing;
+  // Mirror Cloudflare Pages' pretty URLs: /app serves app.html.
+  else if (!path.extname(rel) && fs.existsSync(path.join(ROOT_DIR, `${rel}.html`))) rel = `${rel}.html`;
 
   // Refuse to serve anything outside the served directory.
   const full = path.normalize(path.join(ROOT_DIR, rel));

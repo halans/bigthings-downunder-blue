@@ -1,6 +1,6 @@
 'use strict';
 /**
- * Assemble public/ — web/index.html, about.html and credits.html plus their assets,
+ * Assemble public/ — web/index.html, about.html, credits.html and app.html plus their assets,
  * packaged as a normal static site ready to deploy as-is to Cloudflare Pages
  * (or any static host).
  *
@@ -20,6 +20,7 @@ const path = require('path');
 const W = require('./build-web');
 const A = require('./build-about');
 const C = require('./build-credits');
+const P = require('./build-app');
 const SEO = require('./seo');
 const { writeApi } = require('./build-api');
 
@@ -45,6 +46,7 @@ function sitemapXml(siteUrl, lastmod) {
   const urls = [
     { loc: `${siteUrl}/`, priority: '1.0' },
     { loc: `${siteUrl}/about.html`, priority: '0.8' },
+    { loc: `${siteUrl}/app`, priority: '0.4' },
     { loc: `${siteUrl}/credits.html`, priority: '0.3' },
   ];
   const entries = urls.map((u) => `  <url>\n    <loc>${u.loc}</loc>\n    <lastmod>${lastmod}</lastmod>\n    <priority>${u.priority}</priority>\n  </url>`).join('\n');
@@ -72,6 +74,9 @@ function main() {
   const credits = C.generate();
   fs.writeFileSync(path.join(PUBLIC, 'credits.html'), credits);
 
+  const appPage = P.generate();
+  fs.writeFileSync(path.join(PUBLIC, 'app.html'), appPage);
+
   // Without a top-level 404.html, Cloudflare Pages assumes a single-page app
   // and answers every unknown URL with index.html and a 200.
   fs.copyFileSync(path.join(WEB, '404.html'), path.join(PUBLIC, '404.html'));
@@ -89,7 +94,7 @@ function main() {
   fs.writeFileSync(path.join(PUBLIC, 'robots.txt'), robotsTxt(siteUrl));
   fs.writeFileSync(path.join(PUBLIC, 'sitemap.xml'), sitemapXml(siteUrl, dataset.meta.generated));
 
-  for (const [name, html] of [['index.html', map], ['about.html', about], ['credits.html', credits]]) {
+  for (const [name, html] of [['index.html', map], ['about.html', about], ['credits.html', credits], ['app.html', appPage]]) {
     console.log(`wrote public/${name} — ${(html.length / 1024).toFixed(0)} KB`);
   }
   console.log('copied 404.html, img/ and vendor/ into public/, wrote public/_headers, robots.txt, sitemap.xml');

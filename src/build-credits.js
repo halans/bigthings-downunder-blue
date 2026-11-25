@@ -53,7 +53,8 @@ function generate() {
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>${SEO.escAttr(TITLE)}</title>
 <meta name="description" content="${SEO.escAttr(DESCRIPTION)}">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍌</text></svg>">
+<link rel="icon" type="image/png" href="img/app-icon-e9552e.png">
+<link rel="apple-touch-icon" href="img/app-icon-e9552e.png">
 ${seoMeta}
 <link rel="stylesheet" href="vendor/fonts.css">
 <style>

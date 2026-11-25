@@ -1,5 +1,12 @@
 {
-  "_readme": "Site-wide identity for canonical URLs, Open Graph/Twitter tags and JSON-LD, injected at build time by src/seo.js. Update siteUrl if the deployment domain ever changes.",
+  "_readme": "Site-wide identity for canonical URLs, Open Graph/Twitter tags and JSON-LD, injected at build time by src/seo.js. Update siteUrl if the deployment domain ever changes. The `app` block feeds /app (src/build-app.js): set storeUrl once the iOS app is on the App Store and the page switches from 'coming soon' to a download button.",
   "siteUrl": "https://bigthings.downunder.blue",
-  "shareImage": "img/og_default.jpg"
+  "shareImage": "img/og_default.jpg",
+  "app": {
+    "pageUrl": "https://halans.github.io/bigthings/",
+    "storeUrl": null,
+    "comingSoon": "Coming soon to the App Store",
+    "fineprint": "Free. No account, no ads, no tracking.",
+    "requires": "Requires iOS 27 or later."
+  }
 }
