@@ -1515,6 +1515,25 @@
    "category": "tools-and-industry",
    "status": "standing",
    "notes": "An 8-metre painted metal fly swat, with a fly on it whose eyes are red kitchen strainers, cemented in place between the main street and the railway line in Kingoonya, a town of about 13 people. Dreamed up on the porch of the Kingoonya Bush Hotel by Leesa Carty of the Kingoonya and Area Progress Association and former publican Johnny Brett, and funded by a $30,000 Outback Communities Authority grant. Officially opened in November 2026; locals say it is the world's biggest fly swat."
+  },
+  {
+   "name": "The Big Sultana",
+   "state": "VIC",
+   "why": "Published article (ABC News, 27 Oct 2026) on its unveiling as Australia's latest big thing; also covered by Over60. Not on Wikipedia or Wikivoyage, nor in any other dataset file. It falls outside the usual 10-day window but was missing from the dataset. The articles place it on the Mildura riverfront at Nowingi Place but give no coordinates, so the pin is the Mildura town point, not the sculpture.",
+   "source": "https://www.abc.net.au/news/2026-10-27/mildura-big-sultana-australias-latest-big-thing/107309216",
+   "location": "Nowingi Place, Mildura",
+   "town": "Mildura",
+   "lat": -34.18889,
+   "lng": 142.15833,
+   "precision": "town",
+   "coordSource": "https://en.wikipedia.org/wiki/Mildura",
+   "builtYear": 2026,
+   "builtRaw": "2026",
+   "heightM": 5.25,
+   "sizeRaw": "5.25 m",
+   "category": "fruit-and-veg",
+   "status": "standing",
+   "notes": "A fibreglass sultana about 5.25 m tall and 1,250 kg, commissioned by the Sunbeam dried-fruit brand to mark a century of dried fruit growing in the Sunraysia region. Took 13 weeks to build and was unveiled in October 2026 on Mildura's riverfront; planned to stay on display for at least 12 months before its future is reviewed."
   }
  ],
  "removals": [
